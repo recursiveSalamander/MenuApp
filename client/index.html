@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>menuApp</title>
+</head>
+<body ng-app="menuApp">
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="text-center">menuApp</h1>
+    </div>
+  </div>
+  <div ui-view></div>
+
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="./app.js"></script>
+  <script src="menuView/menuViewController.js"></script>
+  <script src="restaurantList/restaurantListController.js"></script>
+  <script src="services/factories.js"></script>
+</body>
+</html>
