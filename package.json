@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bllnd/MenuApp.git"
+    "url": "git+https://github.com/recursiveSalamander/MenuApp.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bllnd/MenuApp/issues"
+    "url": "https://github.com/recursiveSalamander/MenuApp/issues"
   },
-  "homepage": "https://github.com/bllnd/MenuApp#readme"
+  "homepage": "https://github.com/recursiveSalamander/MenuApp#readme"
 }
