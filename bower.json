@@ -1,8 +1,11 @@
 {
   "name": "MenuApp",
-  "homepage": "https://github.com/bllnd/MenuApp",
+  "homepage": "https://github.com/recursiveSalamander/MenuApp",
   "authors": [
-    "bllnd <bllnd@mac.com>"
+    "Nas Wahab <an83s84@gmail.com>",
+    "Hady Wahby <wahby.hady@gmail.com>",
+    "Andrew McDonald <andrew.o.macdonald@gmail.com>",
+    "Hyungki Park <hyungkip@gmail.com>"
   ],
   "description": "",
   "main": "",
