@@ -6,7 +6,7 @@
 
   - __Product Owner__: [Nas Wahab](https://github.com/bllnd)
   - __Scrum Master__: [Hyungki Park](https://github.com/hyungkip)
-  - __Development Team Members__: [Andy MacDonald](https://github.com/), [Hady Wahby](https://github.com/)
+  - __Development Team Members__: [Andy MacDonald](https://github.com/andrewomacdonald), [Hady Wahby](https://github.com/hwahby)
 
 ## Usage
 
