@@ -1,0 +1,7 @@
+client/lib
+
+node_modules/
+
+npm-debug.log
+
+server/db/config
