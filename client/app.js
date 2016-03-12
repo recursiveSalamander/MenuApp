@@ -3,13 +3,17 @@ angular.module('menuApp', [
 ])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
+    .state('search', {
+    url: '/search',
+    templateUrl: 'search/search.html'
+  })
   .state('menuView', {
     url: '/menuView',
     templateUrl: 'menuView/menuView.html'
   })
   .state('restaurantList', {
-    url: '/signin',
-    templateUrl: 'log/signin.html'
+    url: '/restaurantList',
+    templateUrl: 'restaurantList/restaurantList.html'
   })
-  // $urlRouterProvider.otherwise('/signin');
+  $urlRouterProvider.otherwise('/search');
 });
