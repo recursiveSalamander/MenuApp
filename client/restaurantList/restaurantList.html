@@ -1,10 +1,6 @@
 <div ng-controller="restaurantListController">
-  <div>The Menu</div>
-  <div>
-    <ul>
-      <li ng-repeat="">
-
-      </li>
-    </ul>
-  </div>
+  <h2>Restaurant Listings</h2>
+  <li class="restaurantList" ng-repeat="searchRestaurants in data">
+    <span>{{searchRestaurants.name}}{{searchRestaurants.location.formattedAddress}}</span>
+  </li>
 </div>

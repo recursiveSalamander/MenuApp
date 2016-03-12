@@ -1,8 +1,16 @@
 angular.module('menuApp')
 
 .controller('restaurantListController', function($window, $scope, menuAppFactory) {
-  $scope.searchRestaurants = function(location) {
-    menuAppFactory.getRestaurantList();
-  }
+  $scope.data = [];
 
+  $scope.searchRestaurants = function() {
+    menuAppFactory.getRestaurantList()
+    .then(function(data) {
+      console.log('++line 9 inside restaurantListController searchRestaurants',data);
+      $scope.data = data;
+    }).catch(function(err) {
+      console.log(err);
+    })
+  }
+  $scope.searchRestaurants();
 });
