@@ -3,7 +3,7 @@ module.exports = {
   getRestaurants: function(req, res) {
     var lat = req.latitude;
     var long = req.longitude;
-    var dummy = {
+    var dummy = [
       {
         "id": "548c7da0498ea6aa0e8e5a1d",
         "name": "sweetgreen",
@@ -14,7 +14,7 @@ module.exports = {
           "facebook": "291662151032213",
           "facebookUsername": "sweetgreenwilliamsburg",
           "facebookName": "sweetgreen"
-        },v
+        },
         "location": {
           "address": "162 N 4th St",
           "crossStreet": "at Bedford Ave",
@@ -192,7 +192,8 @@ module.exports = {
         "referralId": "v-1457810983",
         "venueChains": []
       }
-
+    ]
+    res.send(dummy);
   }
-  res.send(dummy);
+
 };
