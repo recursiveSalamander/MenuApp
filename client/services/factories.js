@@ -13,7 +13,18 @@ angular.module('menuApp')
     })
   }
 
+  var getMenu = function (restaurant) {
+    return $http({
+      method: 'GET',
+      url: '/api/restaurantList',
+      data: restaurant
+    })
+    .then(function (resp) {
+      return resp.data;
+    })
+  }
   return {
-    getRestaurantList: getRestaurantList
+    getRestaurantList: getRestaurantList,
+    getMenu: getMenu
   };
 });
