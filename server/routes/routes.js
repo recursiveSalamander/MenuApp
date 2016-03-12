@@ -6,5 +6,5 @@ module.exports = function(app, express) {
 
   app.use('/', express.static(__dirname + '/../../client'));
 
-  app.get('/api/restaurantList', restaurantController.getRestaurants);
+  app.get('/api/restaurantList', restaurantController.signin);
 };
