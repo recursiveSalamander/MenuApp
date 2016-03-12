@@ -5,7 +5,7 @@ var app = express();
 var db = require('./db/schema.js');
 
 // Routes
-// require('./routes/routes.js')(app, express);
+require('./routes/routes.js')(app, express);
 
 var port = process.env.PORT || 8000;
 
