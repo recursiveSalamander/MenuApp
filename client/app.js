@@ -1,5 +1,6 @@
 angular.module('menuApp', [
-  'ui.router'
+  'ui.router',
+  'btford.socket-io'
 ])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
