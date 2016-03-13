@@ -5,11 +5,11 @@ angular.module('menuApp', [
   $stateProvider
   .state('restaurantList', {
     url: '/restaurantList',
-    templateUrl: 'restaurantList/restaurantList.html'
+    templateUrl: '/restaurantList/restaurantList.html'
   })
   .state('menuView', {
     url: '/menuView',
-    templateUrl: 'menuView/menuView.html'
+    templateUrl: '/menuView/menuView.html'
   })
   $urlRouterProvider.otherwise('/restaurantList');
 });

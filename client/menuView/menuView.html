@@ -2,8 +2,9 @@
   <div>The Menu</div>
   <div>
     <ul>
-      <li ng-repeat="">
-
+      <li ng-repeat="menu in data">
+        <h3>{{menu.name}}</h3>
+        {{menu.entries}}
       </li>
     </ul>
   </div>
