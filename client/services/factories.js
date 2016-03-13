@@ -16,7 +16,7 @@ angular.module('menuApp')
   var getMenu = function (restaurant) {
     return $http({
       method: 'GET',
-      url: '/api/restaurantList',
+      url: '/api/menu',
       data: restaurant
     })
     .then(function (resp) {
