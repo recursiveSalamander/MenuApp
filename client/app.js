@@ -13,11 +13,11 @@ angular.module('menuApp', [
   })
   .state('signIn', {
     url: '/signIn',
-    templateUrl: '/signIn/signIn.html'
+    templateUrl: '/userAuth/signIn.html'
   })
   .state('signUp', {
     url: '/signUp',
-    templateUrl: '/signUp/signUp.html'
+    templateUrl: '/userAuth/signUp.html'
   })
   $urlRouterProvider.otherwise('/restaurantList');
 });
