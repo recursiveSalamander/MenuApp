@@ -3,7 +3,7 @@ var _ = require('lodash');
 var moment = require('moment');
 
 if(!process.env.CLIENTID){
-var config = require('../config.js');
+  var config = require('../config.js');
 };
 
 module.exports = {

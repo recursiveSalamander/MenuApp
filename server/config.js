@@ -4,7 +4,7 @@ module.exports = {
     clientSecret: 'ZALSI20DU5WOQURHUJGGYATCDHHZIJEQ0HZC12AW3FMS2LQG'
   },
   database: {
-    host      : 'mysqlcluster8.registeredsite.com',
+    domain      : 'mysqlcluster8.registeredsite.com',
     username  : 'hadywahby',
     password  : '!Qaz2wsx',
     database  : 'mksthesis',
