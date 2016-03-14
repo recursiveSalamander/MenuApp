@@ -5,7 +5,7 @@ angular.module('menuApp')
   var getRestaurantList = function (address) {
     return $http({
       method: 'GET',
-      url: '/api/restaurantList',
+      url: '/api/restaurants',
       data: address
     })
     .then(function (resp) {
