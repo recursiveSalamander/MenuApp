@@ -1,7 +1,6 @@
 <div ng-controller="restaurantListController">
   <h2>Restaurant Listings</h2>
   <li class="restaurantList" ng-repeat="displayRestaurants in data">
-    <span>{{displayRestaurants.name}}, {{displayRestaurants.formatted}},
-    {{displayRestaurants.contact.formattedPhone}}</span>
+    <span>{{displayRestaurants}}</span>
   </li>
 </div>
