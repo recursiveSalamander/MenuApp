@@ -1,7 +1,11 @@
 <div ng-controller="restaurantListController">
+  <form>
+    <input type="text" placeholder="Search..." required>
+    <input type="submit" value="Submit">
+  </form>
   <h2>Restaurant Listings</h2>
   <li class="restaurantList" ng-repeat="displayRestaurants in data">
     <span>{{displayRestaurants.name}}, {{displayRestaurants.formatted}},
-    {{displayRestaurants.contact.formattedPhone}}</span>
-  </li>
-</div>
+      {{displayRestaurants.contact.formattedPhone}}</span>
+    </li>
+  </div>
