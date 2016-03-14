@@ -30,6 +30,6 @@ angular.module('menuApp')
     console.log('Menu');
   }
 
-  $scope.displayRestaurants();
+  // $scope.displayRestaurants();
 });
 
