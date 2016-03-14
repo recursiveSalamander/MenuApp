@@ -10,6 +10,9 @@ if(!process.env.CLIENTID){
   var clientSecret = process.env.CLIENTSECRET;
 
 
+var clientID = config.foursquare.clientId || process.env.CLIENTID;
+var clientSecret = config.foursquare.clientSecret || process.env.CLIENTSECRET;
+
 module.exports = {
 
   getRestaurants: function(req, res) {
@@ -17,8 +20,9 @@ module.exports = {
     var long = req.longitude || '-118.49';
     var date = moment().format('YYYYMMDD');
 
-    var query = `https://api.foursquare.com/v2/venues/search?ll=${lat},${long}` +
+    var query = `https://api.foursquare.com/v2/venues/search?ll=${lat},${long}` + 
                 `&limit=50&categoryId=4bf58dd8d48988d1c4941735&client_id=${clientId} ` +
+                `&limit=50&categoryId=4bf58dd8d48988d1c4941735&client_id=${clientID} ` +
                 `&client_secret=${clientSecret}&v=${date}`;
 
     request(query, function(err, resp, body) {
