@@ -15,5 +15,10 @@ angular.module('menuApp')
       console.log(err);
     })
   }
+
+  $scope.getMenu = function() {
+    console.log('Menu');
+  }
+
   $scope.displayRestaurants();
 });

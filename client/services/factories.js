@@ -1,15 +1,15 @@
 angular.module('menuApp')
 
-.factory('mysocket', function(socketFactory){
-  return socketFactory();
-})
+// .factory('mysocket', function(socketFactory){
+//   return socketFactory();
+// })
 
-.factory('serverRequest', function(mysocket){
-  return {
-    getRestaurantList: getRestaurantList,
-    getMenu: getMenu
-  };
-})
+// .factory('serverRequest', function(mysocket){
+//   return {
+//     getRestaurantList: getRestaurantList,
+//     getMenu: getMenu
+//   };
+// })
 
 .factory('menuAppFactory', function($http) {
 
