@@ -3,9 +3,21 @@
   <div>
     <ul>
       <li ng-repeat="menu in data">
-        <h3>{{menu.name}}</h3>
-        {{menu.entries}}
-      </li>
+        <h2>{{menu.name}}</h2>
+        <ul>
+          <li ng-repeat="item in menu.entries.items">
+            <h3>{{item.name}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Entries count:{{item.entries.count}}</h3>
+            <ul ng-repeat="entry in item.entries.items" ng-init="prices=entry.prices" ng-init="options=entry.options" ng-init="additions=entry.additions">
+              <li><b>Name: {{entry.name}}</b></li>
+              <dl>Price: {{entry.price}}</dl>
+              <dl>Description: {{entry.description}}</dl>
+              <dl ng-if="prices.length > 1">NOTE: THERE ARE MORE THAN ONE PRICE IN PRICES ARRAY</dl>
+              <dl ng-if="options.length">NOTE: OPTIONS EXIST</dl>
+              <dl ng-if="additions.length">NOTE: ADDITIONS EXIST</dl>
+            </ul>
+          </li>
+        </ul>
+      </li>1
     </ul>
   </div>
 </div>
