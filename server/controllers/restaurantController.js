@@ -8,7 +8,11 @@ if(!process.env.CLIENTID){
 } else {
   var clientId = process.env.CLIENTID;
   var clientSecret = process.env.CLIENTSECRET;
+<<<<<<< HEAD
 
+=======
+};
+>>>>>>> [Deploy] Adjusting config vars for live deployment
 
 module.exports = {
 
@@ -18,7 +22,6 @@ module.exports = {
     var date = moment().format('YYYYMMDD');
     var query = `https://api.foursquare.com/v2/venues/search?ll=${lat},${long}` +
                 `&limit=50&categoryId=4bf58dd8d48988d1c4941735&client_id=${clientId} ` +
-                `&limit=50&categoryId=4bf58dd8d48988d1c4941735&client_id=${clientID} ` +
                 `&client_secret=${clientSecret}&v=${date}`;
 
     request(query, function(err, resp, body) {
