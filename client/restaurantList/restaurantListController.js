@@ -16,9 +16,20 @@ angular.module('menuApp')
     })
   }
 
+  $scope.locationInfo = function(){
+    navigator.geolocation.getCurrentPosition(function(position){
+      $scope.userLocation = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      };
+      console.log('++line 25 inside locationInfo in restaurantListCtrl',$scope.userLocation);
+    })
+  }
+
   $scope.getMenu = function() {
     console.log('Menu');
   }
 
   $scope.displayRestaurants();
 });
+
