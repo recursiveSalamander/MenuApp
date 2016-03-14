@@ -8,7 +8,7 @@ if(!process.env.CLIENTID){
 } else {
   var clientId = process.env.CLIENTID;
   var clientSecret = process.env.CLIENTSECRET;
-};
+
 
 module.exports = {
 
