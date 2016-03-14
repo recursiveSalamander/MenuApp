@@ -11,6 +11,7 @@ if(!process.env.CLIENTID){
   var clientSecret = process.env.CLIENTSECRET;
 }
 
+
 module.exports = {
 
   getRestaurants: function(req, res) {
