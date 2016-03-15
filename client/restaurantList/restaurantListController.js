@@ -52,9 +52,9 @@ angular.module('menuApp')
         var current_coords = {lat: thislat, lng: thislng};
         new google.maps.Map(document.getElementById('map'), {
           center: current_coords,
+          scrollwheel: false,
           zoom: 14
         });
-        infowindow = new google.maps.InfoWindow();
       });
     }
   }
