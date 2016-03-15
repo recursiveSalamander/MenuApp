@@ -1,6 +1,7 @@
-<div ng-controller="restaurantListController">
+
+<div ng-controller='restaurantListController'>
   <form>
-    <input type="text" placeholder="Search..." required>
+    <input style="width: 50%;" id="autocomplete" placeholder="Search..." required>
     <input type="submit" value="Submit">
   </form>
   <h2>Restaurant Listings</h2>
@@ -9,3 +10,4 @@
       {{displayRestaurants.contact.formattedPhone}}</span>
     </li>
   </div>
+<div id="map"></div>
