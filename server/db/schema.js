@@ -22,8 +22,8 @@ db.knex.schema.hasTable('users').then(function(exists){
   if(!exists){
     knex.schema.createTable('users', function(user){
       user.increments('id').primary();
-      user.string('first name', 30);
-      user.string('last name', 30);
+      user.string('first_name', 30);
+      user.string('last_name', 30);
       user.string('email', 30).unique();
       user.string('password', 30).unique();
       user.string('username', 30).unique();

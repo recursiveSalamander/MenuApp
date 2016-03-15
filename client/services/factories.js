@@ -1,16 +1,5 @@
 angular.module('menuApp')
 
-// .factory('mysocket', function(socketFactory){
-//   return socketFactory();
-// })
-
-// .factory('serverRequest', function(mysocket){
-//   return {
-//     getRestaurantList: getRestaurantList,
-//     getMenu: getMenu
-//   };
-// })
-
 .factory('menuAppFactory', function($http) {
 
   var getRestaurantList = function (address) {
@@ -40,7 +29,7 @@ angular.module('menuApp')
     getRestaurantList: getRestaurantList,
     getMenu: getMenu
   };
-});
+})
 
 
 .factory('Auth', function($http, $location, $window){

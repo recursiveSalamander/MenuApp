@@ -8,5 +8,5 @@ module.exports = function(app, express) {
 
   app.get('/api/restaurants', restaurantController.getRestaurants);
   app.get('/api/menu', menuController.getMenu);
-  app.get('/api/signin', userAuthController.signUp);
+  app.post('/api/signup', userAuthController.signup);
 };
