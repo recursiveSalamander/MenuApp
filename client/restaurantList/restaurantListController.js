@@ -16,15 +16,6 @@ angular.module('menuApp')
     })
   }
 
-  $scope.locationInfo = function(){
-    navigator.geolocation.getCurrentPosition(function(position){
-      $scope.userLocation = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-      };
-      console.log('++line 25 inside locationInfo in restaurantListCtrl',$scope.userLocation);
-    })
-  }
 
   $scope.getMenu = function(restaurantId) {
     // $state.go('menuView');
@@ -37,6 +28,37 @@ angular.module('menuApp')
     (document.getElementById("autocomplete")),
     {types: ["geocode"]});
 
-  $scope.displayRestaurants();
+  $scope.getLatLong = function() {
+    var address = document.getElementById('autocomplete').value;
+    var geocoder = new google.maps.Geocoder();
 
+    geocoder.geocode({address: address}, function(results, status){
+      $scope.latitude = results[0].geometry.location.lat();
+      $scope.longitude = results[0].geometry.location.long();
+    })
+
+  }
+
+  function initMap() {
+  // Create a map object and specify the DOM element for display.
+
+    if (navigator.geolocation) {
+      var thislat;
+      var thislng;
+      navigator.geolocation.getCurrentPosition(function(position) {
+        thislat = position.coords.latitude;
+        thislng = position.coords.longitude;
+
+        var current_coords = {lat: thislat, lng: thislng};
+        new google.maps.Map(document.getElementById('map'), {
+          center: current_coords,
+          scrollwheel: false,
+          zoom: 14
+        });
+      });
+    }
+  }
+
+  initMap();
+  // $scope.displayRestaurants();
 });
