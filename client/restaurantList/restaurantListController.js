@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.controller('restaurantListController', function($window, $scope, menuAppFactory) {
+.controller('restaurantListController', function($window, $scope, $state, menuAppFactory) {
   $scope.data = [];
 
   $scope.displayRestaurants = function() {
@@ -26,18 +26,17 @@ angular.module('menuApp')
     })
   }
 
-  $scope.getMenu = function() {
-    console.log('Menu');
+  $scope.getMenu = function(restaurantId) {
+    // $state.go('menuView');
+    console.log('++line 31 inside getMenu function in restaurantListCtrl',restaurantId);
+    menuAppFactory.getMenu(restaurantId)
+    .then($state.go('menuView'))
   }
-
-
 
   $scope.autocomplete = new google.maps.places.Autocomplete(
     (document.getElementById("autocomplete")),
     {types: ["geocode"]});
 
+  $scope.displayRestaurants();
 
-
-
-  // $scope.displayRestaurants();
 });

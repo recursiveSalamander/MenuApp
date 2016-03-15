@@ -25,12 +25,14 @@ angular.module('menuApp')
   }
 
   var getMenu = function (restaurant) {
+    console.log('++line28 inside getMenu in factories.js',restaurant);
     return $http({
       method: 'GET',
       url: '/api/menu',
       data: restaurant
     })
     .then(function (resp) {
+      console.log('++line 35 in post getMenu inside factories',resp.data);
       return resp.data;
     })
   }
