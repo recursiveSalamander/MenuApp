@@ -40,8 +40,6 @@ angular.module('menuApp')
   }
 
 
-  $scope.submit
-
   $scope.getMenu = function(restaurantId) {
     // $state.go('menuView');
     console.log('++line 31 inside getMenu function in restaurantListCtrl',restaurantId);
