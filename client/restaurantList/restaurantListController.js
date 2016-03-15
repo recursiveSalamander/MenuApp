@@ -26,8 +26,11 @@ angular.module('menuApp')
     })
   }
 
-  $scope.getMenu = function() {
-    $state.go('menuView');
+  $scope.getMenu = function(restaurantId) {
+    // $state.go('menuView');
+    console.log('++line 31 inside getMenu function in restaurantListCtrl',restaurantId);
+    menuAppFactory.getMenu(restaurantId)
+    .then($state.go('menuView'))
   }
 
   $scope.autocomplete = new google.maps.places.Autocomplete(
