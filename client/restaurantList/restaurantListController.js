@@ -33,8 +33,9 @@ angular.module('menuApp')
     var geocoder = new google.maps.Geocoder();
 
     geocoder.geocode({address: address}, function(results, status){
+      console.log(results[0].geometry);
       $scope.latitude = results[0].geometry.location.lat();
-      $scope.longitude = results[0].geometry.location.long();
+      $scope.longitude = results[0].geometry.location.lng();
     })
 
   }
