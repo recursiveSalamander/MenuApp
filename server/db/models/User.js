@@ -1,5 +1,5 @@
 var bookshelf = require('../schema.js').bookshelf;
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
 
 var User = bookshelf.Model.extend({
