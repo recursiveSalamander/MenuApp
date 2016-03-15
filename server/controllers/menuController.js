@@ -2,7 +2,7 @@ var request = require('request');
 var _ = require('lodash');
 var moment = require('moment');
 
-var config = require('../config.js');
+var config = require('../db/config/config.js');
 
 module.exports = {
 

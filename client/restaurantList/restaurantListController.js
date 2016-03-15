@@ -32,4 +32,3 @@ angular.module('menuApp')
 
   // $scope.displayRestaurants();
 });
-
