@@ -32,6 +32,7 @@ angular.module('menuApp')
       data: restaurant
     })
     .then(function (resp) {
+      console.log('++line 35 in post getMenu inside factories',resp.data);
       return resp.data;
     })
   }

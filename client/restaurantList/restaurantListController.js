@@ -37,6 +37,6 @@ angular.module('menuApp')
     (document.getElementById("autocomplete")),
     {types: ["geocode"]});
 
-  // $scope.displayRestaurants();
+  $scope.displayRestaurants();
 
 });

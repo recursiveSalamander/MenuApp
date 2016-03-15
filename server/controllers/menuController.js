@@ -6,9 +6,9 @@ var config = require('../db/config/config.js');
 
 module.exports = {
 
-  getMenu: function(req, res) {
+  getMenu: function(req, res,restaurantId) {
+    console.log('++line 11 inside getMenu in menuController.js',restaurantId);
     var restaurantId = req.body ? req.body.restaurant : '564e615c498e2597e77f0c39';
-    console.log('++line 11 inside getMenu in menuController.js',req.body);
     var date = moment().format('YYYYMMDD');
 
     var query = `https://api.foursquare.com/v2/venues/${restaurantId}/menu?` +
