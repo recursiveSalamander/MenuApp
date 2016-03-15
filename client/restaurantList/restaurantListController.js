@@ -30,5 +30,14 @@ angular.module('menuApp')
     console.log('Menu');
   }
 
+
+
+  $scope.autocomplete = new google.maps.places.Autocomplete(
+    (document.getElementById("autocomplete")),
+    {types: ["geocode"]});
+
+
+
+
   // $scope.displayRestaurants();
 });
