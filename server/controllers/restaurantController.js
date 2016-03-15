@@ -24,9 +24,8 @@ module.exports = {
 
     request(query, function(err, resp, body) {
       if (!err && resp.statusCode === 200) {
-        // console.log('++line 26 inside getRestaurants in restaurantCtrl',body);
         var data = JSON.parse(body).response.venues;
-
+        console.log('++line 28 inside getRestaurants in restaurantCtrl',data);
         data = _.filter(data, function(element) {
           return element.hasMenu;
         });

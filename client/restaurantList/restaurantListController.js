@@ -99,5 +99,5 @@ angular.module('menuApp')
   }
 
   initMap();
-  // $scope.displayRestaurants();
+  $scope.displayRestaurants();
 });
