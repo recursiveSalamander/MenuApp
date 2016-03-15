@@ -19,7 +19,8 @@ module.exports = {
     request(query, function(err, resp, body) {
       if (!err && resp.statusCode === 200) {
         var data = JSON.parse(body).response.menu.menus.items;
-
+        // console.log('++line 21 inside getMenu in menuController',resp);
+        console.log('++line 22 inside getMenu in menuController',resp);
         res.send(data);
       }
     });

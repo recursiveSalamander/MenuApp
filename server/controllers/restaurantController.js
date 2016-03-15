@@ -24,12 +24,13 @@ module.exports = {
 
     request(query, function(err, resp, body) {
       if (!err && resp.statusCode === 200) {
+        // console.log('++line 26 inside getRestaurants in restaurantCtrl',body);
         var data = JSON.parse(body).response.venues;
 
         data = _.filter(data, function(element) {
           return element.hasMenu;
         });
-        // console.log('++line 32 inside getRestaurants in restaurantCtrl',data);
+        // console.log('++line 33 inside getRestaurants in restaurantCtrl',data);
         res.send(data);
       }
     });
