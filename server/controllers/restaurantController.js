@@ -1,6 +1,7 @@
 var request = require('request');
 var _ = require('lodash');
 var moment = require('moment');
+
 if(!process.env.CLIENTID){
   var config = require('../db/config/config.js');
   var clientId = config.foursquare.clientId;
@@ -8,7 +9,8 @@ if(!process.env.CLIENTID){
 } else {
   var clientId = process.env.CLIENTID;
   var clientSecret = process.env.CLIENTSECRET;
-};
+}
+
 
 module.exports = {
 
