@@ -1,4 +1,6 @@
 <div ng-controller='restaurantListController'>
+  <div id="map"></div>
+
   <form ng-submit="getLatLong()">
     <input type="text" style="width: 50%;" id="autocomplete" placeholder="Search..." required>
     <input type="submit" value="Submit">
@@ -9,4 +11,3 @@
       {{displayRestaurants.contact.formattedPhone}}</span>
     </li>
   </div>
-<div id="map"></div>
