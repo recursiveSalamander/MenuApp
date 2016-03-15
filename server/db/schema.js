@@ -1,3 +1,4 @@
+var path = require('path');
 if(!process.env.DOMAIN){
   var config = require('./config/config.js')
 }
@@ -13,9 +14,10 @@ var knex = require('knex')({
 });
 
 var bookshelf = require('bookshelf')(knex);
-
 var db = bookshelf;
 
+
+//table containing information user enters when signing up
 db.knex.schema.hasTable('users').then(function(exists){
   if(!exists){
     knex.schema.createTable('users', function(user){
@@ -29,6 +31,6 @@ db.knex.schema.hasTable('users').then(function(exists){
       console.log('table has been created');
     })
   }
-})
+});
 
 module.exports.bookshelf = bookshelf;

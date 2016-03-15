@@ -41,3 +41,56 @@ angular.module('menuApp')
     getMenu: getMenu
   };
 });
+
+
+.factory('Auth', function($http, $location, $window){
+  var signin = function(user){
+    return $http({
+      method: 'POST',
+      url: 'api/users/signin',
+      data: user
+    })
+    .then(function(res){
+      token = res.data.token;
+      return res.data.token;
+    });
+  };
+
+  var signup = function(user){
+    return $http ({
+      method: 'POST',
+      url: 'api/users/signup',
+      data: user
+    })
+    .then(function(res){
+      return res.data.token;
+    });
+  };
+
+  var getToken = function(){
+    console.log('TOKEN!!!!')
+    return $window.localStorage.getItem('authentication');
+  }
+
+  var isAuth = function(){
+    return !!$window.localStoage.getItem('authentication');
+  }
+
+  var isSignedIn = function(){
+    return isAuth();
+  }
+
+  var signout = function(){
+    $window.localStorage.removeItem('authentication');
+    $location.path('/signup');
+  }
+
+  return {
+    signin: signin,
+    getToken: getToken,
+    signup: signup,
+    isAuth: isAuth,
+    isSignedIn: isSignedIn,
+    signout: signout
+  };
+})
