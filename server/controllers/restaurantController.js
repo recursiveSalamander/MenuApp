@@ -15,11 +15,11 @@ if(!process.env.CLIENTID){
 module.exports = {
 
   getRestaurants: function(req, res) {
-    var lat = req.body ? req.body.latitude : '34.02';
-    var long = req.body ? req.body.longitude : '-118.49';
+    var lat = req.body.latitude ? req.body.latitude : '34.02';
+    var long = req.body.longitude ? req.body.longitude : '-118.49';
     var date = moment().format('YYYYMMDD');
     var query = `https://api.foursquare.com/v2/venues/search?ll=${lat},${long}` +
-                `&limit=50&categoryId=4bf58dd8d48988d1c4941735&client_id=${clientId} ` +
+                `&limit=50&radius=12000&categoryId=4bf58dd8d48988d1c4941735&client_id=${clientId} ` +
                 `&client_secret=${clientSecret}&v=${date}`;
 
     request(query, function(err, resp, body) {
