@@ -1,14 +1,14 @@
 var bookshelf = require('../schema.js').bookshelf;
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
 
 var User = bookshelf.Model.extend({
 
   tableName: 'users',
 
-  // initialize: function(){
-  //   this.on('creating', this.hashPassword);
-  // },
+  initialize: function(){
+    this.on('creating', this.hashPassword);
+  },
 
   comparePassword: function(userEnteredPassword, callback){
     var savedPassword = this.get('password');
@@ -28,7 +28,7 @@ var User = bookshelf.Model.extend({
       .then(function(hash){
         this.set('password', hash);
       });
-  }
+    }
 })
 
 
