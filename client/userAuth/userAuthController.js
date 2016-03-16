@@ -2,7 +2,7 @@ angular.module('menuApp')
 
 .controller('userAuthController', function($window, $scope, Auth, $location) {
 
-  $scope.fart = function(){
+  $scope.signUp = function(){
     Auth.signup($scope.user)
       .then(function(token){
         $window.localStorage.setItem('authentication', token);
