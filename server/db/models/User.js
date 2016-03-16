@@ -5,7 +5,6 @@ var Promise = require('bluebird');
 var User = bookshelf.Model.extend({
 
   tableName: 'users',
-  hasTimestamps: true,
 
   initialize: function(){
     this.on('creating', this.hashPassword);
@@ -29,7 +28,7 @@ var User = bookshelf.Model.extend({
       .then(function(hash){
         this.set('password', hash);
       });
-  }
+    }
 })
 
 
