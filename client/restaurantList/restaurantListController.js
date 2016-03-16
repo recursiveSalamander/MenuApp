@@ -30,7 +30,7 @@ angular.module('menuApp')
   $scope.getLatLong = function() {
     var address = document.getElementById('autocomplete').value;
     var geocoder = new google.maps.Geocoder();
-    console.log('++line 31 in getLatLong inside restListCtrl');
+    console.log('++line 32 in getLatLong inside restListCtrl');
     geocoder.geocode({address: address}, function(results, status){
       console.log(results[0].geometry);
       $scope.latitude = results[0].geometry.location.lat();
@@ -42,7 +42,7 @@ angular.module('menuApp')
 
   $scope.restaurantMenu = function(restaurantId) {
     // $state.go('menuView');
-    console.log('++line 43 inside getMenu function in restaurantListCtrl',restaurantId);
+    console.log('++line 44 inside getMenu function in restaurantListCtrl',restaurantId);
     menuAppFactory.getMenu(restaurantId)
     // .then($state.go('menuView'))
   }
@@ -98,6 +98,6 @@ angular.module('menuApp')
 
   }
 
-  $scope.displayRestaurants();
+  // $scope.displayRestaurants();
   initMap();
 });

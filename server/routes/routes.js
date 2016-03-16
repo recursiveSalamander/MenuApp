@@ -1,4 +1,3 @@
-// var jsonParser = require('body-parser').json();
 var restaurantController = require('../controllers/restaurantController.js');
 var menuController = require('../controllers/menuController.js');
 var userAuthController = require('../controllers/userAuthController.js');
