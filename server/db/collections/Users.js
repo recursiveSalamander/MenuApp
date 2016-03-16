@@ -1,6 +1,6 @@
-var bookshelf = require('../db/schema.js').bookshelf;
+var bookshelf = require('../schema.js').bookshelf;
 var User = require('../models/User.js');
-var bcrypt = require('bcrypt-nodejs');
+var bcrypt = require('bcrypt');
 
 var Users = new bookshelf.Collection();
 
