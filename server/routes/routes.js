@@ -9,5 +9,5 @@ module.exports = function(app, express) {
 
   app.post('/api/restaurants', bodyParser, restaurantController.getRestaurants);
   app.get('/api/menu', bodyParser, menuController.getMenu);
-  app.post('/api/signup', bodyParser, userAuthController.signup);
+  app.post('/api/users/signup', bodyParser, userAuthController.signup);
 };
