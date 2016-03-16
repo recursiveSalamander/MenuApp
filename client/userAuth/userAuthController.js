@@ -13,4 +13,17 @@ angular.module('menuApp')
         console.log(error);
       });
     }
+
+  $scope.signIn = function(){
+    Auth.signin($scope.user)
+    .then(function(token){
+      if(token === undefined){
+        console.log('INCORRECT LOGIN');
+      } else {
+        $window.localStorage.setItem('authentication', token);
+        console.log('SUCCESS!!!!');
+      }
+    })
+  }
+
 })

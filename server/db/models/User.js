@@ -1,6 +1,6 @@
 var bookshelf = require('../schema.js').bookshelf;
-var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
+var bcrypt = require('bcrypt-nodejs');
 
 var User = bookshelf.Model.extend({
 
@@ -17,7 +17,7 @@ var User = bookshelf.Model.extend({
       if(err){
         throw err;
       } else {
-        callback(isMatch);
+        callback(null, isMatch);
       }
     });
   },
