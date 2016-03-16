@@ -4,16 +4,19 @@ angular.module('menuApp')
   $scope.data = [];
 
   $scope.displayRestaurants = function() {
-    menuAppFactory.getRestaurantList()
+    $scope.getLatLong();
+    var coordinatesInput = {
+      latitude: $scope.latitude,
+      longitude: $scope.longitude
+    }
+    console.log('COORDSINATES', coordinatesInput);
+    menuAppFactory.getRestaurantList(coordinatesInput)
     .then(function(data) {
       console.log('++line 9 inside restaurantListController searchRestaurants',data);
       data.forEach(function(value) {
         value.formatted = value.location.formattedAddress.join();
       })
       $scope.data = data;
-    })
-    .then(function(){
-      $scope.getLatLong();
     })
     .catch(function(err) {
       console.log(err);

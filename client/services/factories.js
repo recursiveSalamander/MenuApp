@@ -2,11 +2,11 @@ angular.module('menuApp')
 
 .factory('menuAppFactory', function($http) {
 
-  var getRestaurantList = function (address) {
+  var getRestaurantList = function (coordinates) {
     return $http({
       method: 'POST',
       url: '/api/restaurants',
-      data: {address:address}
+      data: coordinates
     })
     .then(function (resp) {
       return resp.data;
