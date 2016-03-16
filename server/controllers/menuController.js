@@ -7,9 +7,9 @@ var config = require('../db/config/config.js');
 module.exports = {
 
   getMenu: function(req, res) {
-    console.log(req);
-    console.log('++line 11 inside getMenu in menuController.js', req.body);
-    var restaurantId = req.body ? req.body.restaurant : '564e615c498e2597e77f0c39';
+    // console.log(req);
+    var restaurantId = req.body.restaurantId ? req.body.restaurantId : '';
+    console.log('++line 11 inside getMenu in menuController.js',restaurantId);
     var date = moment().format('YYYYMMDD');
 
     var query = `https://api.foursquare.com/v2/venues/${restaurantId}/menu?` +
@@ -19,7 +19,7 @@ module.exports = {
     request(query, function(err, resp, body) {
       if (!err && resp.statusCode === 200) {
         var data = JSON.parse(body).response.menu.menus.items;
-
+        // console.log('++line 22 inside getMenu in menuController',data);
         res.send(data);
       }
     });

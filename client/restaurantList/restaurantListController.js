@@ -9,7 +9,7 @@ angular.module('menuApp')
       latitude: $scope.latitude,
       longitude: $scope.longitude
     }
-    console.log('COORDSINATES', coordinatesInput);
+    console.log('COORDINATES', coordinatesInput);
     menuAppFactory.getRestaurantList(coordinatesInput)
     .then(function(data) {
       console.log('++line 9 inside restaurantListController searchRestaurants',data);
@@ -25,12 +25,10 @@ angular.module('menuApp')
 
   }
 
-
-
   $scope.getLatLong = function() {
     var address = document.getElementById('autocomplete').value;
     var geocoder = new google.maps.Geocoder();
-    console.log('HIII');
+    console.log('++line 32 in getLatLong inside restListCtrl');
     geocoder.geocode({address: address}, function(results, status){
       console.log(results[0].geometry);
       $scope.latitude = results[0].geometry.location.lat();
@@ -39,17 +37,16 @@ angular.module('menuApp')
 
   }
 
-
-  $scope.getMenu = function(restaurantId) {
-    // $state.go('menuView');
-    console.log('++line 31 inside getMenu function in restaurantListCtrl',restaurantId);
+  $scope.restaurantMenu = function(restaurantId) {
+    console.log('++line 42 inside restaurantMenu() in restaurantListCtrl',restaurantId);
+    $scope.restaurantId = restaurantId
+      $state.go('menuView', {'restaurantId': $scope.restaurantId});
     menuAppFactory.getMenu(restaurantId)
-    .then($state.go('menuView'))
+    .then(function(data) {
+      console.log('++line 45 inside restaurantMenu() in restaurantListCtrl', data);
+      $state.go('menuView', {menuData: data})
+    })
   }
-
-
-
-
 
   var autocomplete = new google.maps.places.Autocomplete(
     (document.getElementById("autocomplete")),
@@ -63,41 +60,42 @@ angular.module('menuApp')
       return;
     }
     if (place.geometry.viewport) {
-     $scope.map.fitBounds(place.geometry.viewport);
-   } else {
-     $scope.map.setCenter(place.geometry.location);
-     $scope.map.setZoom(17);  // Why 17? Because it looks good.
-   }
-  })
+      $scope.map.fitBounds(place.geometry.viewport);
+    } else {
+      $scope.map.setCenter(place.geometry.location);
+
+  $scope.map.setZoom(17);  // Why 17? Because it looks good.
+}
+})
   function initMap() {
-  // Create a map object and specify the DOM element for display.
+// Create a map object and specify the DOM element for display.
 
-    if (navigator.geolocation) {
-      var thislat;
-      var thislng;
-      navigator.geolocation.getCurrentPosition(function(position) {
-        thislat = position.coords.latitude;
-        thislng = position.coords.longitude;
-
-
-        var current_coords = {lat: thislat, lng: thislng};
-        makeMap(current_coords);
-      });
-
-      var makeMap = function(current_coords){
-        $scope.map = new google.maps.Map(document.getElementById('map'), {
-          center: current_coords,
-          scrollwheel: false,
-          zoom: 14
-        });
-      }
-
-    }
+if (navigator.geolocation) {
+  var thislat;
+  var thislng;
+  navigator.geolocation.getCurrentPosition(function(position) {
+    thislat = position.coords.latitude;
+    thislng = position.coords.longitude;
 
 
+    var current_coords = {lat: thislat, lng: thislng};
+    makeMap(current_coords);
+  });
 
+  var makeMap = function(current_coords){
+    $scope.map = new google.maps.Map(document.getElementById('map'), {
+      center: current_coords,
+      scrollwheel: false,
+      zoom: 14
+    });
   }
 
-  initMap();
-  // $scope.displayRestaurants();
+}
+
+
+
+}
+
+// $scope.displayRestaurants();
+initMap();
 });

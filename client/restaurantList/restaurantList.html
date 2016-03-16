@@ -1,13 +1,12 @@
 <div ng-controller='restaurantListController'>
   <div id="map"></div>
-
   <form ng-submit="displayRestaurants()">
-    <input type="text" style="width: 50%;" id="autocomplete" placeholder="Search..." required>
+    <input type="text" style="width: 50%;" id="autocomplete" placeholder="Search..." required autofocus="">
     <input type="submit" value="Submit">
   </form>
   <h2>Restaurant Listings</h2>
   <li class="restaurantList" ng-repeat="displayRestaurants in data">
-    <span ng-controller="menuViewController" ng-click="renderMenu(displayRestaurants.id)">{{displayRestaurants.name}}, {{displayRestaurants.formatted}},
+    <span ng-click="restaurantMenu(displayRestaurants.id)">{{displayRestaurants.name}}, {{displayRestaurants.formatted}},
       {{displayRestaurants.contact.formattedPhone}}</span>
     </li>
   </div>

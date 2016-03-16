@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.factory('menuAppFactory', function($http) {
+.factory('menuAppFactory', function($http, $location, $state) {
 
   var getRestaurantList = function (coordinates) {
     console.log(coordinates);
@@ -10,22 +10,26 @@ angular.module('menuApp')
       data: coordinates
     })
     .then(function (resp) {
+      console.log('++line 13 inside getRestaurantList in factories',resp);
       return resp.data;
-    }, function(error){
+    }, function(error) {
       console.log(error);
     })
   }
 
-  var getMenu = function (restaurant) {
-    console.log('++line28 inside getMenu in factories.js',restaurant);
+  var getMenu = function (restaurantId) {
+    var restaurantId = {restaurantId: restaurantId};
+    console.log('++line 21 inside getMenu in factories.js',restaurantId);
     return $http({
       method: 'POST',
       url: '/api/menu',
-      data: {restaurant: restaurant}
+      data: restaurantId
     })
     .then(function (resp) {
-      console.log('++line 35 in post getMenu inside factories',resp.data);
+      console.log('++line 28 in post getMenu inside factories',resp);
       return resp.data;
+    }, function(error) {
+      console.log(error);
     })
   }
   return {
@@ -35,44 +39,44 @@ angular.module('menuApp')
 })
 
 
-.factory('Auth', function($http, $location, $window){
-  var signin = function(user){
+.factory('Auth', function($http, $location, $window) {
+  var signin = function(user) {
     return $http({
       method: 'POST',
       url: 'api/users/signin',
       data: user
     })
-    .then(function(res){
+    .then(function(res) {
       token = res.data.token;
       return res.data.token;
     });
   };
 
-  var signup = function(user){
+  var signup = function(user) {
     return $http ({
       method: 'POST',
       url: 'api/users/signup',
       data: user
     })
-    .then(function(res){
+    .then(function(res) {
       return res.data.token;
     });
   };
 
-  var getToken = function(){
+  var getToken = function() {
     console.log('TOKEN!!!!')
     return $window.localStorage.getItem('authentication');
   }
 
-  var isAuth = function(){
+  var isAuth = function() {
     return !!$window.localStoage.getItem('authentication');
   }
 
-  var isSignedIn = function(){
+  var isSignedIn = function() {
     return isAuth();
   }
 
-  var signout = function(){
+  var signout = function() {
     $window.localStorage.removeItem('authentication');
     $location.path('/signup');
   }
