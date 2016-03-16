@@ -9,7 +9,7 @@ angular.module('menuApp')
       latitude: $scope.latitude,
       longitude: $scope.longitude
     }
-    console.log('COORDSINATES', coordinatesInput);
+    console.log('COORDINATES', coordinatesInput);
     menuAppFactory.getRestaurantList(coordinatesInput)
     .then(function(data) {
       console.log('++line 9 inside restaurantListController searchRestaurants',data);
@@ -41,63 +41,65 @@ angular.module('menuApp')
 
 
   $scope.restaurantMenu = function(restaurantId) {
-    // $state.go('menuView');
     console.log('++line 44 inside getMenu function in restaurantListCtrl',restaurantId);
     menuAppFactory.getMenu(restaurantId)
-    // .then($state.go('menuView'))
+    .then(function(data) {
+      console.log('++line 47 inside restaurantMenu in restaurantListCtrl', data);
+      // $state.go('menuView');
+    })
+}
+
+
+
+
+
+var autocomplete = new google.maps.places.Autocomplete(
+  (document.getElementById("autocomplete")),
+  {types: ["geocode"]});
+
+
+autocomplete.addListener('place_changed', function(){
+  var place = autocomplete.getPlace();
+  if(!place.geometry){
+    window.alert("Autocomplete's returned place contains no geometry");
+    return;
   }
-
-
-
-
-
-  var autocomplete = new google.maps.places.Autocomplete(
-    (document.getElementById("autocomplete")),
-    {types: ["geocode"]});
-
-
-  autocomplete.addListener('place_changed', function(){
-    var place = autocomplete.getPlace();
-    if(!place.geometry){
-      window.alert("Autocomplete's returned place contains no geometry");
-      return;
-    }
-    if (place.geometry.viewport) {
-     $scope.map.fitBounds(place.geometry.viewport);
-   } else {
-     $scope.map.setCenter(place.geometry.location);
-     $scope.map.setZoom(17);  // Why 17? Because it looks good.
-   }
-  })
-  function initMap() {
+  if (place.geometry.viewport) {
+    $scope.map.fitBounds(place.geometry.viewport);
+  } else {
+    $scope.map.setCenter(place.geometry.location);
+$scope.map.setZoom(17);  // Why 17? Because it looks good.
+}
+})
+function initMap() {
   // Create a map object and specify the DOM element for display.
 
-    if (navigator.geolocation) {
-      var thislat;
-      var thislng;
-      navigator.geolocation.getCurrentPosition(function(position) {
-        thislat = position.coords.latitude;
-        thislng = position.coords.longitude;
+  if (navigator.geolocation) {
+    var thislat;
+    var thislng;
+    navigator.geolocation.getCurrentPosition(function(position) {
+      thislat = position.coords.latitude;
+      thislng = position.coords.longitude;
 
 
-        var current_coords = {lat: thislat, lng: thislng};
-        makeMap(current_coords);
+      var current_coords = {lat: thislat, lng: thislng};
+      makeMap(current_coords);
+    });
+
+    var makeMap = function(current_coords){
+      $scope.map = new google.maps.Map(document.getElementById('map'), {
+        center: current_coords,
+        scrollwheel: false,
+        zoom: 14
       });
-
-      var makeMap = function(current_coords){
-        $scope.map = new google.maps.Map(document.getElementById('map'), {
-          center: current_coords,
-          scrollwheel: false,
-          zoom: 14
-        });
-      }
-
     }
-
-
 
   }
 
-  // $scope.displayRestaurants();
-  initMap();
+
+
+}
+
+// $scope.displayRestaurants();
+initMap();
 });
