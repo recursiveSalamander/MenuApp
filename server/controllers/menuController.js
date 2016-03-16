@@ -6,8 +6,9 @@ var config = require('../db/config/config.js');
 
 module.exports = {
 
-  getMenu: function(req, res,restaurantId) {
-    console.log('++line 11 inside getMenu in menuController.js',restaurantId);
+  getMenu: function(req, res) {
+    console.log(req);
+    console.log('++line 11 inside getMenu in menuController.js', req.body);
     var restaurantId = req.body ? req.body.restaurant : '564e615c498e2597e77f0c39';
     var date = moment().format('YYYYMMDD');
 
@@ -22,15 +23,5 @@ module.exports = {
         res.send(data);
       }
     });
-
-    // delete dummy[0].meta;
-    // delete dummy[0].response.menu.provider;
-    // var menus = dummy[0].response.menu.menus.items;
-    // for(var i=0; i<menus.length; i++){
-    //   var menu_name = menus[i].name.toLowerCase();
-    //   delete menus[i].menuId;
-    //   delete menus[i].description;
-    //   if(menu_name.includes('spirit') || menu_name.includes('beer') || menu_name.includes('wine') || menu_name.includes('whiskey')){
-    //     delete menus[i];
   }
 };

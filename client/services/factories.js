@@ -4,9 +4,9 @@ angular.module('menuApp')
 
   var getRestaurantList = function (address) {
     return $http({
-      method: 'GET',
+      method: 'POST',
       url: '/api/restaurants',
-      data: address
+      data: {address:address}
     })
     .then(function (resp) {
       return resp.data;
@@ -16,9 +16,9 @@ angular.module('menuApp')
   var getMenu = function (restaurant) {
     console.log('++line28 inside getMenu in factories.js',restaurant);
     return $http({
-      method: 'GET',
+      method: 'POST',
       url: '/api/menu',
-      data: restaurant
+      data: {restaurant: restaurant}
     })
     .then(function (resp) {
       console.log('++line 35 in post getMenu inside factories',resp.data);
