@@ -9,7 +9,7 @@ angular.module('menuApp')
       latitude: $scope.latitude,
       longitude: $scope.longitude
     }
-    console.log('COORDINATES', coordinatesInput);
+
     menuAppFactory.getRestaurantList(coordinatesInput)
     .then(function(data) {
       console.log('++line 9 inside restaurantListController searchRestaurants',data);
@@ -28,12 +28,13 @@ angular.module('menuApp')
   $scope.getLatLong = function() {
     var address = document.getElementById('autocomplete').value;
     var geocoder = new google.maps.Geocoder();
-    console.log('++line 32 in getLatLong inside restListCtrl');
-    geocoder.geocode({address: address}, function(results, status) {
-      console.log(results[0].geometry);
-      $scope.latitude = results[0].geometry.location.lat();
-      $scope.longitude = results[0].geometry.location.lng();
-    })
+
+    geocoder.geocode({address: address}, function(results, status){
+      if (status === google.maps.GeocoderStatus.OK) {
+        $scope.latitude = results[0].geometry.location.lat();
+        $scope.longitude = results[0].geometry.location.lng();
+      }
+    });
 
   }
 
