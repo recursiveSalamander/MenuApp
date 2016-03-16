@@ -15,7 +15,6 @@ if(!process.env.CLIENTID){
 module.exports = {
 
   getRestaurants: function(req, res) {
-    console.log(req);
     var lat = req.body.latitude ? req.body.latitude : '34.02';
     var long = req.body.longitude ? req.body.longitude : '-118.49';
     var date = moment().format('YYYYMMDD');

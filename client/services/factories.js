@@ -3,6 +3,7 @@ angular.module('menuApp')
 .factory('menuAppFactory', function($http) {
 
   var getRestaurantList = function (coordinates) {
+    console.log(coordinates);
     return $http({
       method: 'POST',
       url: '/api/restaurants',
@@ -10,6 +11,8 @@ angular.module('menuApp')
     })
     .then(function (resp) {
       return resp.data;
+    }, function(error){
+      console.log(error);
     })
   }
 
