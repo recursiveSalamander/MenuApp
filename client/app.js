@@ -1,5 +1,8 @@
 angular.module('menuApp', [
-  'ui.router'
+  'ui.router',
+  'ngMaterial',
+  'ngAria',
+  'ngAnimate'
 ])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
