@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.factory('menuAppFactory', function($http, $location) {
+.factory('menuAppFactory', function($http, $location, $state) {
 
   var getRestaurantList = function (coordinates) {
     console.log(coordinates);
@@ -17,12 +17,13 @@ angular.module('menuApp')
     })
   }
 
-  var getMenu = function (restaurant) {
-    console.log('++line21 inside getMenu in factories.js',restaurant);
+  var getMenu = function (restaurantId) {
+    var restaurantId = {restaurantId: restaurantId};
+    console.log('++line 21 inside getMenu in factories.js',restaurantId);
     return $http({
       method: 'POST',
       url: '/api/menu',
-      data: {restaurant: restaurant}
+      data: restaurantId
     })
     .then(function (resp) {
       console.log('++line 28 in post getMenu inside factories',resp);

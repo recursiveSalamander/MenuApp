@@ -9,7 +9,10 @@ angular.module('menuApp', [
   })
   .state('menuView', {
     url: '/menuView',
-    templateUrl: '/menuView/menuView.html'
+    templateUrl: '/menuView/menuView.html',
+    params: {
+      'menuData': null
+    }
   })
   .state('signIn', {
     url: '/signIn',

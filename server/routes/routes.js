@@ -5,12 +5,10 @@ var bodyParser = require('body-parser').json();
 
 module.exports = function(app, express) {
 
-  // app.use(jsonParser);
-
   app.use('/', express.static(__dirname + '/../../client'));
 
   app.post('/api/restaurants', bodyParser, restaurantController.getRestaurants);
-  app.get('/api/menu', bodyParser, menuController.getMenu);
+  app.post('/api/menu', bodyParser, menuController.getMenu);
   app.post('/api/users/signup', userAuthController.signup);
   // app.post('api/users/signin', userAuthController.signin);
 };

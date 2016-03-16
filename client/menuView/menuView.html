@@ -1,5 +1,5 @@
 <div ng-controller="menuViewController">
-  <div>The Menu</div>
+  <div ng-init="renderMenu(data)">The Menu</div>
   <div>
     <ul>
       <li ng-repeat="menu in data">
