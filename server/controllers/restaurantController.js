@@ -25,11 +25,11 @@ module.exports = {
     request(query, function(err, resp, body) {
       if (!err && resp.statusCode === 200) {
         var data = JSON.parse(body).response.venues;
-        console.log('++line 28 inside getRestaurants in restaurantCtrl',data);
+        // console.log('++line 28 inside getRestaurants in restaurantCtrl',data);
         data = _.filter(data, function(element) {
           return element.hasMenu;
         });
-        // console.log('++line 33 inside getRestaurants in restaurantCtrl',data);
+        // console.log('++line 32 inside getRestaurants in restaurantCtrl',data);
         res.send(data);
       }
     });

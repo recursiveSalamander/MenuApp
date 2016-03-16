@@ -6,7 +6,7 @@
   </form>
   <h2>Restaurant Listings</h2>
   <li class="restaurantList" ng-repeat="displayRestaurants in data">
-    <span ng-click="getMenu(displayRestaurants.id)">{{displayRestaurants.name}}, {{displayRestaurants.formatted}},
+    <span ng-click="restaurantMenu(displayRestaurants.id)">{{displayRestaurants.name}}, {{displayRestaurants.formatted}},
       {{displayRestaurants.contact.formattedPhone}}</span>
     </li>
   </div>
