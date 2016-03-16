@@ -26,6 +26,7 @@ module.exports = {
         newUser.save()
           .then(function(newUser){
             var token = jwt.encode(newUser, 'secret');
+            console.log(token);
             response.json({token: token});
           });
         } else {
