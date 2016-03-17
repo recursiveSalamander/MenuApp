@@ -1,10 +1,15 @@
 var bookshelf = require('../schema.js').bookshelf;
 var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
+var Item_Rating = require('./Item_Rating.js');
 
 var User = bookshelf.Model.extend({
 
   tableName: 'users',
+
+  ratings: function() {
+    return this.hasMany(Item_Rating);
+  },
 
   initialize: function() {
     this.on('creating', this.hashPassword);
@@ -12,8 +17,6 @@ var User = bookshelf.Model.extend({
 
   comparePassword: function(userEnteredPassword, callback) {
     var savedPassword = this.get('password');
-    console.log(savedPassword);
-    console.log(userEnteredPassword);
     bcrypt.compare(userEnteredPassword, savedPassword, function(err, isMatch) {
       if(err) {
         throw err;
