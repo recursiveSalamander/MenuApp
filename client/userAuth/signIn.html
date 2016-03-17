@@ -1,11 +1,9 @@
 <div id='signinpage' flex layout="column" layout-fill ng-controller="userAuthController">
-
   <div id="signinheader" flex="30">
     <h1 id="signinlogo">Menu App</h1>
   </div>
   <div flex-offset="50" layout="row">
-    <form  id="signinbox" class="md-whiteframe-z2 md-padding" flex="70" ng-submit="validate()">
-
+    <form  id="signinbox" name="signin" class="md-whiteframe-z2 md-padding" flex="70" ng-submit="validate()">
       <h2>Please Sign In</h2>
       <div id="signinformfields" layout="row">
         <div flex="60">
@@ -17,7 +15,8 @@
           <md-input-container>
             <label>Password</label>
             <input type="password" ng-model="user.loginPassword" required>
-          </md-input-container><br>
+          </md-input-container>
+          <br>
           <md-button type="submit" class="md-primary">Sign in</md-button>
         </div>
         <div flex="40">
