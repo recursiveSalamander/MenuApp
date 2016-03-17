@@ -25,7 +25,7 @@ db.knex.schema.hasTable('users').then(function(exists) {
       user.string('first_name', 30);
       user.string('last_name', 30);
       user.string('email', 30).unique();
-      user.string('password', 252);
+      user.string('password', 30);
       user.string('username', 30).unique();
     }).then(function(){
       console.log('users table has been created');
@@ -33,36 +33,36 @@ db.knex.schema.hasTable('users').then(function(exists) {
   }
 });
 
-db.knex.schema.hasTable('item_ratings').then(function(exists){
+db.knex.schema.hasTable('item_ratings').then(function(exists) {
   if(!exists){
-    knex.schema.createTable('item_ratings', function(rating){
+    knex.schema.createTable('item_ratings', function(rating) {
       rating.increments('id').primary();
       rating.integer('rating');
       rating.foreign('user_id').references('id').inTable('users');
       rating.foreign('item_id').references('id').inTable('menu_items');
-    }).then(function(){
+    }).then(function() {
       console.log('item_ratings table has been created');
     })
   }
 });
 
-db.knex.schema.hasTable('menu_items').then(function(exists){
+db.knex.schema.hasTable('menu_items').then(function(exists) {
   if(!exists){
-    knex.schema.createTable('menu_items', function(menuitems){
+    knex.schema.createTable('menu_items', function(menuitems) {
       menuitems.increments('id').primary();
       menuitems.foreign('restaurant_id').references('id').inTable('restaurants');
-    }).then(function(){
+    }).then(function() {
       console.log('menu_items table has been created');
     })
   }
 })
 
-db.knex.schema.hasTable('restaurants').then(function(exists){
+db.knex.schema.hasTable('restaurants').then(function(exists) {
   if(!exists){
-    knex.schema.createTable('restaurants', function(restaurant){
+    knex.schema.createTable('restaurants', function(restaurant) {
       restaurant.increments('id').primary();
       restaurant.string('restaurant_id', 50);
-    }).then(function(){
+    }).then(function() {
       console.log('restaurants table has been created');
     })
   }

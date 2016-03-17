@@ -1,7 +1,6 @@
 var request = require('request');
 var _=require('lodash');
 var jwt = require('jwt-simple');
-var bcrypt = require('bcrypt-nodejs');
 var User = require('../db/models/User.js');
 
 
@@ -15,8 +14,13 @@ module.exports = {
 
     new User({username: username})
       .fetch()
+<<<<<<< HEAD
       .then(function() {
         if(!username) {
+=======
+      .then(function(){
+        if(!username){
+>>>>>>> parent of 6d4fb14... [Feature] Implemented password compare function
           var newUser = new User({
             first_name: firstName,
             last_name: lastName,
@@ -34,6 +38,7 @@ module.exports = {
           return next(new Error('Username already exists'));
         }
     });
+<<<<<<< HEAD
   },
 
   signin: function(request, response, next) {
@@ -57,4 +62,7 @@ module.exports = {
         }
       })
     }
+=======
+  }
+>>>>>>> parent of 6d4fb14... [Feature] Implemented password compare function
 };
