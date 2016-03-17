@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.factory(['menuAppFactory', '$http', '$location', '$state',function($http, $location, $state) {
+.factory('menuAppFactory', ['$http', '$location', '$state',function($http, $location, $state) {
 
   var getRestaurantList = function (coordinates) {
     console.log(coordinates);

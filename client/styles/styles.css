@@ -3,26 +3,33 @@ height: 300px;
 width: 800px;
 }
 
-#signinpage {
+#signuppage, #signinpage {
   height: 100vh;
-  background: url('../assets/signin_background2.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
 }
 
-#signinbox {
+#signinpage {
+  background: url('../assets/signin_background2.jpg') no-repeat center center fixed;
+}
+
+#signuppage {
+  background: url('../assets/signin_background1.jpg') no-repeat center center fixed;
+}
+
+#signinbox, #signupbox {
   background-color: rgba(255,255,255, 0.7);
   border-radius: 3px;
 }
 
-#signinheader {
+#signinheader, #signupheader {
   display:flex;
   justify-content:center;
   align-items:center;
 }
 
-#signinlogo {
+#signinlogo, #signuplogo {
   /*-webkit-text-stroke-width: 3px;
 -webkit-text-stroke-color: black;*/
 text-shadow: 0 0 30px #000;

@@ -1,15 +1,49 @@
-<div id='signup' ng-controller = "userAuthController">
-  <form name = "signup" ng-submit="signUp()">
-    <h2>Please Sign Up</h2>
-    <label>Name</label>
-    <input type='text' placeholder = "First Name" ng-model="user.first_name" required autofocus="">
-    <input type='text' placeholder = "Last Name" ng-model="user.last_name" required>
-    <input type='text' placeholder = "email" ng-model="user.email" required>
-    <input type='text' placeholder = 'Desired Username' ng-model ='user.username' require>
-    <input type='text' placeholder ='password' ng-model="user.password" required>
-    <input type='text' placeholder = 'confirm password' ng-model="user.confirmpassword"required>
-    <button type="submit">Sign Up</button>
-    <br>
-    <a href="/#/signin">Already have an account? <strong>Signin</strong> ...</a>
-  </form>
+<div id='signuppage' flex layout="column" layout-fill ng-controller="userAuthController">
+  <div id="signupheader" flex="30">
+    <h1 id="signuplogo">Menu App</h1>
+  </div>
+  <div flex-offset="50" layout="row">
+    <form id="signupbox" name="signup" class="md-whiteframe-z2 md-padding" flex="70" ng-submit="signUp()">
+      <h2>Please Sign Up</h2>
+      <div id="signupformfields" layout="row">
+
+        <div flex="60">
+          <md-input-container>
+            <label>First Name</label>
+            <input type='text' ng-model="user.first_name" required autofocus>
+          </md-input-container>
+          <br>
+          <md-input-container>
+            <label>Last Name</label>
+            <input type="text" ng-model="user.last_name" required>
+          </md-input-container>
+          <br>
+          <md-input-container>
+            <label>E-mail</label>
+            <input type="text" ng-model="user.last_name" required>
+          </md-input-container>
+          <br>
+          <md-input-container>
+            <label>Username</label>
+            <input type="text" ng-model="user.last_name" required>
+          </md-input-container>
+          <br>
+          <md-input-container>
+            <label>Password</label>
+            <input type="text" ng-model="user.last_name" required>
+          </md-input-container>
+          <br>
+          <md-input-container>
+            <label>Confirm Password</label>
+            <input type="text" ng-model="user.last_name" required>
+          </md-input-container>
+          <br>
+          <md-button type="submit" class="md-primary">Sign Up</md-button>
+        </div>
+        <div flex="40">
+          <a href="/#/signin">Already have an account? <strong>Signin</strong> ...</a>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
