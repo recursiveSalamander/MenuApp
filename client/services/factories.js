@@ -38,8 +38,36 @@ angular.module('menuApp')
   };
 }])
 
+.factory('Geolocation', ['$http', '$location', '$state', function($http, $location, $state) {
 
-.factory('Auth', ['$http', '$location', '$state',function($http, $location, $window) {
+  var formatLatLong = function(lat, lng, callback) {
+    var coordinatesInput = {
+      latitude: lat,
+      longitude: lng
+    }
+    callback(coordinatesInput);
+  };
+
+  var getLatLong = function(callback) {
+    var address = document.getElementById('autocomplete').value;
+    var geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({address: address}, function(results, status){
+      if (status === google.maps.GeocoderStatus.OK) {
+        callback(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+      }
+    });
+  };
+
+  return {
+    getLatLong: getLatLong,
+    formatLatLong: formatLatLong
+  }
+
+
+}])
+
+.factory('Auth', ['$http', '$location', '$state', function($http, $location, $window) {
   var signin = function(user) {
     return $http({
       method: 'POST',
