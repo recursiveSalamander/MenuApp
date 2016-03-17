@@ -1,4 +1,4 @@
-<div ng-controller='restaurantListController'>
+<md-content flex ng-controller='restaurantListController'>
   <div id="map"></div>
   <form ng-submit="displayRestaurants()">
     <input type="text" style="width: 50%;" id="autocomplete" placeholder="Search..." required autofocus="">
@@ -9,4 +9,4 @@
     <span ng-click="restaurantMenu(displayRestaurants.id)">{{displayRestaurants.name}}, {{displayRestaurants.formatted}},
       {{displayRestaurants.contact.formattedPhone}}</span>
     </li>
-  </div>
+</md-content>
