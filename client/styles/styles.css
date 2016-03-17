@@ -38,3 +38,7 @@ text-shadow: 0 0 30px #000;
   color: white;
   font-size: 100px;
 }
+
+.inputdemoBasicUsage .md-datepicker-button {
+  width: 36px; }
+

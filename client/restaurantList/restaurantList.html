@@ -1,12 +1,18 @@
-<md-content flex ng-controller='restaurantListController'>
+<div ng-controller='restaurantListController' layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage">
   <div id="map"></div>
-  <form ng-submit="displayRestaurants()">
-    <input type="text" style="width: 50%;" id="autocomplete" placeholder="Search..." required autofocus="">
-    <input type="submit" value="Submit">
+  <md-content layout-padding="">
+  <div>
+    <form ng-submit="displayRestaurants()">
+      <md-input-container class="md-block">
+      <input type="text" style="width: 50%;" id="autocomplete" placeholder="Search..." required autofocus="">
+      <input type="submit" value="Submit">
+    </md-input-container>
   </form>
-  <h2>Restaurant Listings</h2>
-  <li class="restaurantList" ng-repeat="displayRestaurants in data">
-    <span ng-click="restaurantMenu(displayRestaurants.id)">{{displayRestaurants.name}}, {{displayRestaurants.formatted}},
-      {{displayRestaurants.contact.formattedPhone}}</span>
-    </li>
+</div>
 </md-content>
+<h2>Restaurant Listings</h2>
+<li class="restaurantList" ng-repeat="displayRestaurants in data">
+  <span ng-click="restaurantMenu(displayRestaurants.id)">{{displayRestaurants.name}}, {{displayRestaurants.formatted}},
+    {{displayRestaurants.contact.formattedPhone}}</span>
+  </li>
+</div>
