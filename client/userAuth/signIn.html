@@ -1,9 +1,13 @@
-<div id='signin' ng-controller = "userAuthController">
-  <form name = "signin" ng-submit="signIn()">
-    <h2>Please Sign Up</h2>
+<div id='signin'>
+  <div ng-controller = "userAuthController">
+  <form name="signIn" ng-submit="validate()">
+    <h2>Please Sign In</h2>
     <label>Name</label>
-    <input type='text' placeholder = 'Username' ng-model = 'user.loginUsername' autofocus = "" required>
-    <input type='text' placeholder ='password' ng-model="user.loginPassword" required>
-    <button type="submit">Sign In</button>
+    <input type='text' placeholder="Username" ng-model="user.loginUsername" required autofocus>
+    <label>Password</label>
+    <input type="password" placeholder="Password" ng-model="user.loginPassword" required>
+    <button type="submit">Sign in</button>
+    <a href="/#/signup">Don't have an account? <strong>Signup</strong> ...</a>
   </form>
+</div>
 </div>

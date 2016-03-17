@@ -1,7 +1,6 @@
 var request = require('request');
 var _=require('lodash');
 var jwt = require('jwt-simple');
-var bcrypt = require('bcrypt-nodejs');
 var User = require('../db/models/User.js');
 
 
@@ -12,11 +11,11 @@ module.exports = {
     var email = request.body.email;
     var password = request.body.password;
     var username = request.body.username;
-
+    console.log(username);
     new User({username: username})
       .fetch()
-      .then(function() {
-        if(!username) {
+      .then(function(user) {
+        if(!user) {
           var newUser = new User({
             first_name: firstName,
             last_name: lastName,
@@ -27,7 +26,6 @@ module.exports = {
         newUser.save()
           .then(function(newUser) {
             var token = jwt.encode(newUser, 'secret');
-            console.log(token);
             response.json({token: token});
           });
         } else {
@@ -43,7 +41,8 @@ module.exports = {
       .fetch()
       .then(function(user) {
         if(!user) {
-          response.redirect('/menuView')
+          console.log('user already exists');
+          response.redirect('/menuView');
         } else {
           user.comparePassword(password, function(err, match) {
             if(match) {
@@ -53,8 +52,8 @@ module.exports = {
             } else {
               return next(new Error("Whoops!"));
             }
-          })
+          });
         }
-      })
+      });
     }
-};
+  };

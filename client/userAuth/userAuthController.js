@@ -14,7 +14,7 @@ angular.module('menuApp')
       });
     }
 
-  $scope.signIn = function() {
+  $scope.validate = function() {
     Auth.signin($scope.user)
     .then(function(token) {
       if(token === undefined) {
@@ -25,5 +25,4 @@ angular.module('menuApp')
       }
     })
   }
-
 }])

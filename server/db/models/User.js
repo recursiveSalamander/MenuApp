@@ -1,6 +1,6 @@
 var bookshelf = require('../schema.js').bookshelf;
-var Promise = require('bluebird');
 var bcrypt = require('bcrypt-nodejs');
+var Promise = require('bluebird');
 
 var User = bookshelf.Model.extend({
 
@@ -12,7 +12,8 @@ var User = bookshelf.Model.extend({
 
   comparePassword: function(userEnteredPassword, callback) {
     var savedPassword = this.get('password');
-
+    console.log(savedPassword);
+    console.log(userEnteredPassword);
     bcrypt.compare(userEnteredPassword, savedPassword, function(err, isMatch) {
       if(err) {
         throw err;
