@@ -6,15 +6,15 @@ var User = bookshelf.Model.extend({
 
   tableName: 'users',
 
-  initialize: function(){
+  initialize: function() {
     this.on('creating', this.hashPassword);
   },
 
-  comparePassword: function(userEnteredPassword, callback){
+  comparePassword: function(userEnteredPassword, callback) {
     var savedPassword = this.get('password');
 
-    bcrypt.compare(userEnteredPassword, savedPassword, function(err, isMatch){
-      if(err){
+    bcrypt.compare(userEnteredPassword, savedPassword, function(err, isMatch) {
+      if(err) {
         throw err;
       } else {
         callback(null, isMatch);
@@ -22,10 +22,10 @@ var User = bookshelf.Model.extend({
     });
   },
 
-  hashPassword: function(){
+  hashPassword: function() {
     var cipher = Promise.promisify(bcrypt.hash);
     return cipher(this.get('password'), null, null).bind(this)
-      .then(function(hash){
+      .then(function(hash) {
         this.set('password', hash);
       });
     }

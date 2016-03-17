@@ -2,7 +2,7 @@ var request = require('request');
 var _ = require('lodash');
 var moment = require('moment');
 
-if(!process.env.CLIENTID){
+if(!process.env.CLIENTID) {
   var config = require('../db/config/config.js');
   var clientId = config.foursquare.clientId;
   var clientSecret = config.foursquare.clientSecret;
