@@ -11,16 +11,11 @@ module.exports = {
     var email = request.body.email;
     var password = request.body.password;
     var username = request.body.username;
-
+    console.log(username);
     new User({username: username})
       .fetch()
-<<<<<<< HEAD
-      .then(function() {
-        if(!username) {
-=======
-      .then(function(){
-        if(!username){
->>>>>>> parent of 6d4fb14... [Feature] Implemented password compare function
+      .then(function(user) {
+        if(!user) {
           var newUser = new User({
             first_name: firstName,
             last_name: lastName,
@@ -31,14 +26,12 @@ module.exports = {
         newUser.save()
           .then(function(newUser) {
             var token = jwt.encode(newUser, 'secret');
-            console.log(token);
             response.json({token: token});
           });
         } else {
           return next(new Error('Username already exists'));
         }
     });
-<<<<<<< HEAD
   },
 
   signin: function(request, response, next) {
@@ -48,7 +41,8 @@ module.exports = {
       .fetch()
       .then(function(user) {
         if(!user) {
-          response.redirect('/menuView')
+          console.log('user already exists');
+          response.redirect('/menuView');
         } else {
           user.comparePassword(password, function(err, match) {
             if(match) {
@@ -58,11 +52,8 @@ module.exports = {
             } else {
               return next(new Error("Whoops!"));
             }
-          })
+          });
         }
-      })
+      });
     }
-=======
-  }
->>>>>>> parent of 6d4fb14... [Feature] Implemented password compare function
-};
+  };

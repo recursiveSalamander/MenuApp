@@ -12,12 +12,13 @@ var User = bookshelf.Model.extend({
 
   comparePassword: function(userEnteredPassword, callback) {
     var savedPassword = this.get('password');
-
+    console.log(savedPassword);
+    console.log(userEnteredPassword);
     bcrypt.compare(userEnteredPassword, savedPassword, function(err, isMatch) {
       if(err) {
         throw err;
       } else {
-        callback(isMatch);
+        callback(null, isMatch);
       }
     });
   },

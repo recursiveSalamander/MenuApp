@@ -13,9 +13,8 @@ angular.module('menuApp')
         console.log(error);
       });
     }
-<<<<<<< HEAD
 
-  $scope.signIn = function() {
+  $scope.validate = function() {
     Auth.signin($scope.user)
     .then(function(token) {
       if(token === undefined) {
@@ -26,8 +25,4 @@ angular.module('menuApp')
       }
     })
   }
-
 }])
-=======
-})
->>>>>>> parent of 6d4fb14... [Feature] Implemented password compare function
