@@ -71,4 +71,6 @@ db.knex.schema.hasTable('users').then(function(exists) {
 //   }
 // });
 
+//HELLO I AM A TEST COMMENT
+
 module.exports.bookshelf = bookshelf;
