@@ -1,15 +1,15 @@
 angular.module('menuApp')
 
-.controller('userAuthController', function($window, $scope, Auth, $location) {
+.controller('userAuthController', ['$window', '$scope', 'Auth', '$location',function($window, $scope, Auth, $location) {
 
-  $scope.signUp = function(){
+  $scope.signUp = function() {
     Auth.signup($scope.user)
-      .then(function(token){
+      .then(function(token) {
         $window.localStorage.setItem('authentication', token);
         console.log('LOOK AT YOU, SIGNING UP AND WHATNOT. WHAT A BIG BOY.');
         $location.path('/user');
       })
-      .catch(function(error){
+      .catch(function(error) {
         console.log(error);
       });
     }
@@ -17,7 +17,7 @@ angular.module('menuApp')
   $scope.signIn = function(){
     Auth.signin($scope.user)
     .then(function(token){
-      if(token === undefined){
+      if(token === undefined) {
         console.log('INCORRECT LOGIN');
       } else {
         $window.localStorage.setItem('authentication', token);

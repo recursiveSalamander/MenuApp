@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.controller('restaurantListController', function($window, $scope, $state, menuAppFactory) {
+.controller('restaurantListController', ['$window', '$scope', '$state', 'menuAppFactory',function($window, $scope, $state, menuAppFactory) {
   $scope.data = [];
 
   $scope.displayRestaurants = function() {
@@ -29,7 +29,7 @@ angular.module('menuApp')
     var address = document.getElementById('autocomplete').value;
     var geocoder = new google.maps.Geocoder();
     console.log('++line 32 in getLatLong inside restListCtrl');
-    geocoder.geocode({address: address}, function(results, status){
+    geocoder.geocode({address: address}, function(results, status) {
       console.log(results[0].geometry);
       $scope.latitude = results[0].geometry.location.lat();
       $scope.longitude = results[0].geometry.location.lng();
@@ -53,9 +53,9 @@ angular.module('menuApp')
     {types: ["geocode"]});
 
 
-  autocomplete.addListener('place_changed', function(){
+  autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
-    if(!place.geometry){
+    if(!place.geometry) {
       window.alert("Autocomplete's returned place contains no geometry");
       return;
     }
@@ -82,7 +82,7 @@ if (navigator.geolocation) {
     makeMap(current_coords);
   });
 
-  var makeMap = function(current_coords){
+  var makeMap = function(current_coords) {
     $scope.map = new google.maps.Map(document.getElementById('map'), {
       center: current_coords,
       scrollwheel: false,
@@ -98,4 +98,4 @@ if (navigator.geolocation) {
 
 // $scope.displayRestaurants();
 initMap();
-});
+}]);

@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.factory('menuAppFactory', function($http, $location, $state) {
+.factory('menuAppFactory', ['$http', '$location', '$state',function($http, $location, $state) {
 
   var getRestaurantList = function (coordinates) {
     console.log(coordinates);
@@ -36,10 +36,10 @@ angular.module('menuApp')
     getRestaurantList: getRestaurantList,
     getMenu: getMenu
   };
-})
+}])
 
 
-.factory('Auth', function($http, $location, $window) {
+.factory('Auth', ['$http', '$location', '$state',function($http, $location, $window) {
   var signin = function(user) {
     return $http({
       method: 'POST',
@@ -89,4 +89,4 @@ angular.module('menuApp')
     isSignedIn: isSignedIn,
     signout: signout
   };
-})
+}])
