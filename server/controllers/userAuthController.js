@@ -36,16 +36,16 @@ module.exports = {
     });
   },
 
-  signin: function(request, response, next){
+  signin: function(request, response, next) {
     var username = request.body.loginUsername;
     var password = request.body.loginPassword;
     new User({username: username})
       .fetch()
-      .then(function(user){
+      .then(function(user) {
         if(!user) {
           response.redirect('/menuView')
         } else {
-          user.comparePassword(password, function(err, match){
+          user.comparePassword(password, function(err, match) {
             if(match) {
               console.log("YOU ARE LOGGED IN. CONGRATULATIONS. I'M SO HAPPY FOR YOU.");
               var token = jwt.encode(user, 'secret');

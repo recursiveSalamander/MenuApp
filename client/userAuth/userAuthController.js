@@ -14,9 +14,9 @@ angular.module('menuApp')
       });
     }
 
-  $scope.signIn = function(){
+  $scope.signIn = function() {
     Auth.signin($scope.user)
-    .then(function(token){
+    .then(function(token) {
       if(token === undefined) {
         console.log('INCORRECT LOGIN');
       } else {
