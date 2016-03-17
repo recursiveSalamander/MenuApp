@@ -18,7 +18,7 @@ angular.module('menuApp')
           })
       })
     })
-
+}
 
   $scope.restaurantMenu = function(restaurantId) {
     console.log('++line 42 inside restaurantMenu() in restaurantListCtrl',restaurantId);
