@@ -29,7 +29,7 @@ angular.module('menuApp')
     var address = document.getElementById('autocomplete').value;
     var geocoder = new google.maps.Geocoder();
 
-    geocoder.geocode({address: address}, function(results, status){
+    geocoder.geocode({address: address}, function(results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
         $scope.latitude = results[0].geometry.location.lat();
         $scope.longitude = results[0].geometry.location.lng();
