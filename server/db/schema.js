@@ -1,6 +1,6 @@
 var path = require('path');
 if(!process.env.DOMAIN) {
-  var config = require('./config/config.js')
+  var config = require('./config/config.js');
 }
 var knex = require('knex')({
   client: 'mysql',
@@ -29,7 +29,7 @@ db.knex.schema.hasTable('users').then(function(exists) {
       user.string('username', 30).unique();
     }).then(function(){
       console.log('users table has been created');
-    })
+    });
   }
 });
 
@@ -40,7 +40,7 @@ db.knex.schema.hasTable('restaurants').then(function(exists) {
       restaurant.string('restaurant_id', 50);
     }).then(function() {
       console.log('restaurants table has been created');
-    })
+    });
   }
 });
 
@@ -52,7 +52,7 @@ db.knex.schema.hasTable('menu_items').then(function(exists) {
       menuitems.foreign('restaurant_id').references('id').inTable('restaurants');
     }).then(function() {
       console.log('menu_items table has been created');
-    })
+    });
   }
 });
 
@@ -67,7 +67,7 @@ db.knex.schema.hasTable('item_ratings').then(function(exists) {
       rating.foreign('item_id').references('id').inTable('menu_items');
     }).then(function() {
       console.log('item_ratings table has been created');
-    })
+    });
   }
 });
 

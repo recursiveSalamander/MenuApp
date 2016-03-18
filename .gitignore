@@ -1,6 +1,7 @@
 client/bower_components
 
 node_modules/
+dist/
 
 npm-debug.log
 

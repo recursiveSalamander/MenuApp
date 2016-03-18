@@ -1,6 +1,6 @@
 var bookshelf = require('../schema.js').bookshelf;
 var bcrypt = require('bcrypt-nodejs');
-var Promise = require('bluebird');
+var promise = require('bluebird');
 var Item_Rating = require('./Item_Rating.js');
 
 var User = bookshelf.Model.extend({
@@ -27,13 +27,13 @@ var User = bookshelf.Model.extend({
   },
 
   hashPassword: function() {
-    var cipher = Promise.promisify(bcrypt.hash);
+    var cipher = promise.promisify(bcrypt.hash);
     return cipher(this.get('password'), null, null).bind(this)
       .then(function(hash) {
         this.set('password', hash);
       });
     }
-})
+});
 
 
 module.exports = User;

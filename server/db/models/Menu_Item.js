@@ -13,6 +13,6 @@ var Menu_Item = bookshelf.Model.extend({
     return this.hasMany(Item_Rating);
   }
 
-})
+});
 
 module.exports = Menu_Item;

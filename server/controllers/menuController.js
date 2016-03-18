@@ -7,7 +7,7 @@ var config = require('../db/config/config.js');
 module.exports = {
 
   getMenu: function(req, res) {
-    // console.log(req);
+    //console.log(req.body.restaurantId);
     var restaurantId = req.body.restaurantId ? req.body.restaurantId : '5584abda498e356407ad95cd';
     console.log('++line 11 inside getMenu in menuController.js',restaurantId);
     var date = moment().format('YYYYMMDD');
