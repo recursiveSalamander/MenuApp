@@ -1,6 +1,6 @@
 <div ng-controller="menuViewController">
-  <div ng-init="renderMenu(data)">The Menu</div>
-  <div>
+  <div id="menuListingLogo">The Menu</div>
+  <div ng-cloak ng-init="renderMenu(data)">
     <ul>
       <li ng-repeat="menu in data">
         <h2>{{menu.name}}</h2>

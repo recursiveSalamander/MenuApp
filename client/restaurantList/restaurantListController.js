@@ -10,26 +10,26 @@ angular.module('menuApp')
           .then(function (data) {
             data.forEach(function(value) {
               value.formatted = value.location.formattedAddress.join();
-            })
+            });
             $scope.data = data;
           })
           .catch(function(err) {
             console.log(err);
-          })
-      })
-    })
-}
+          });
+      });
+    });
+};
 
   $scope.restaurantMenu = function(restaurantId) {
     console.log('++line 42 inside restaurantMenu() in restaurantListCtrl',restaurantId);
-    $scope.restaurantId = restaurantId
+    $scope.restaurantId = restaurantId;
       $state.go('menuView', {'restaurantId': $scope.restaurantId});
     menuAppFactory.getMenu(restaurantId)
     .then(function(data) {
       console.log('++line 45 inside restaurantMenu() in restaurantListCtrl', data);
-      $state.go('menuView', {menuData: data})
-    })
-  }
+      $state.go('menuView', {menuData: data});
+    });
+  };
 
   var autocomplete = new google.maps.places.Autocomplete(
     (document.getElementById("autocomplete")),
@@ -49,7 +49,7 @@ angular.module('menuApp')
 
   $scope.map.setZoom(17);  // Why 17? Because it looks good.
 }
-})
+});
 
 function initMap() {
 // Create a map object and specify the DOM element for display.
@@ -72,7 +72,7 @@ function initMap() {
         scrollwheel: false,
         zoom: 14
       });
-    }
+    };
 
   }
 }

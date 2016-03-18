@@ -14,11 +14,11 @@ angular.module('menuApp')
       return resp.data;
     }, function(error) {
       console.log(error);
-    })
-  }
+    });
+  };
 
   var getMenu = function (restaurantId) {
-    var restaurantId = {restaurantId: restaurantId};
+    restaurantId = {restaurantId: restaurantId};
     console.log('++line 21 inside getMenu in factories.js',restaurantId);
     return $http({
       method: 'POST',
@@ -30,8 +30,8 @@ angular.module('menuApp')
       return resp.data;
     }, function(error) {
       console.log(error);
-    })
-  }
+    });
+  };
   return {
     getRestaurantList: getRestaurantList,
     getMenu: getMenu
@@ -44,7 +44,7 @@ angular.module('menuApp')
     var coordinatesInput = {
       latitude: lat,
       longitude: lng
-    }
+    };
     callback(coordinatesInput);
   };
 
@@ -62,7 +62,7 @@ angular.module('menuApp')
   return {
     getLatLong: getLatLong,
     formatLatLong: formatLatLong
-  }
+  };
 
 
 }])
@@ -92,22 +92,22 @@ angular.module('menuApp')
   };
 
   var getToken = function() {
-    console.log('TOKEN!!!!')
+    console.log('TOKEN!!!!');
     return $window.localStorage.getItem('authentication');
-  }
+  };
 
   var isAuth = function() {
     return !!$window.localStoage.getItem('authentication');
-  }
+  };
 
   var isSignedIn = function() {
     return isAuth();
-  }
+  };
 
   var signout = function() {
     $window.localStorage.removeItem('authentication');
     $location.path('/signup');
-  }
+  };
 
   return {
     signin: signin,
@@ -117,4 +117,4 @@ angular.module('menuApp')
     isSignedIn: isSignedIn,
     signout: signout
   };
-}])
+}]);
