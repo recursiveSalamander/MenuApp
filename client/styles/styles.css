@@ -3,6 +3,7 @@ height: 300px;
 width: 800px;
 }
 
+
 #signuppage, #signinpage {
   height: 100vh;
   -webkit-background-size: cover;
@@ -37,4 +38,54 @@ text-shadow: 0 0 30px #000;
  -webkit-text-shadow: 0 0 30px #000;
   color: white;
   font-size: 100px;
+}
+
+#a71622
+
+/*Setting custom slider colors*/
+#spicyslider .md-thumb:after, #spicyslider .md-track {
+  background-color: #a71622 !important;
+    border-color: #a71622 !important;
+}
+
+#spicyslider .md-thumb:after, #spicyslider .md-track {
+  background-color: #a71622 !important;
+    border-color: #a71622 !important;
+}
+
+
+#meatyslider .md-thumb:after, #meatyslider .md-track {
+  background-color: #EB8921 !important;
+    border-color: #EB8921 !important;
+}
+
+#meatyslider .md-focus-thumb, #meatyslider .md-focus-ring. {
+  background-color: #EB8921;
+}
+
+#sourslider .md-thumb:after, #sourslider .md-track {
+  background-color: #FFCC00 !important;
+    border-color: #FFCC00 !important;
+}
+
+#sourslider .md-focus-thumb, #sourslider .md-focus-ring. {
+  background-color: #FFCC00;
+}
+
+#sweetslider .md-thumb:after, #sweetslider .md-track {
+  background-color: #753D90 !important;
+    border-color: #753D90 !important;
+}
+
+#sweetslider .md-focus-thumb, #sweetslider .md-focus-ring. {
+  background-color: #753D90;
+}
+
+#bitterslider .md-thumb:after, #bitterslider .md-track {
+  background-color: #687894 !important;
+    border-color: #687894 !important;
+}
+
+#bitterslider .md-focus-thumb, #bitterslider .md-focus-ring. {
+  background-color: #687894;
 }

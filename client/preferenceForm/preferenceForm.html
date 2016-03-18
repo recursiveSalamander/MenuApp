@@ -1,0 +1,78 @@
+
+
+<!-- flavors:
+  flavors : The flavor scores for this recipe.
+  salty : Saltiness on a range of 0 to 1.
+  sour : Sourness on a range of 0 to 1.
+  sweet : Sweetness on a range of 0 to 1.
+  bitter : Bitterness on a range of 0 to 1.
+  meaty : Savoryness on a range of 0 to 1.
+
+cuisine:
+American, Italian, Asian, Mexican, Southern & Soul Food, French, Southwestern, Barbecue, Indian, Chinese, Cajun & Creole, English, Mediterranean, Greek, Spanish, German, Thai, Moroccan, Irish, Japanese, Cuban, Hawaiin, Swedish, Hungarian, Portugese
+important ones: America, Italian, Mexican, Southern & soul food, french, Indian, Chinese, Japanese, Greek, Cajun & Creole, German, Thai,
+
+
+ingredients : An array of the ingredients in this recipe. Always present in response.
+
+nutrition: min/max
+Allergies, excluded ingredients, allowed diet
+
+STEP 1:
+Pictures for preference algorithm
+
+
+STEP 2: allergies, excluded ingredients, allowed diet
+
+STEP 3: nutrition: min/max
+
+STEP 4: adjust
+
+
+
+
+-->
+<div ng-controller="preferenceFormController">
+<div layout>
+      <div flex="10" layout layout-align="center center">
+        <span class="md-body-1">spicy</span>
+      </div>
+      <md-slider id="spicyslider" flex md-discrete ng-model="rating1" step="1" min="1" max="5" aria-label="rating">
+      </md-slider>
+    </div>
+    <div layout>
+      <div flex="10" layout layout-align="center center">
+        <span class="md-body-1">meaty</span>
+      </div>
+      <md-slider id="meatyslider" flex class="md-warn" md-discrete ng-model="rating2" step="1" min="1" max="5" aria-label="rating">
+      </md-slider>
+    </div>
+    <div layout>
+      <div flex="10" layout layout-align="center center">
+        <span class="md-body-1">bitter</span>
+      </div>
+      <md-slider id="bitterslider" flex class="md-primary" md-discrete ng-model="rating3" step="1" min="1" max="5" aria-label="rating">
+      </md-slider>
+    </div>
+    <div layout>
+      <div flex="10" layout layout-align="center center">
+        <span class="md-body-1">sweet</span>
+      </div>
+      <md-slider id="sweetslider" flex class="md-primary" md-discrete ng-model="rating3" step="1" min="1" max="5" aria-label="rating">
+      </md-slider>
+    </div>
+    <div layout>
+      <div flex="10" layout layout-align="center center">
+        <span class="md-body-1">sour</span>
+      </div>
+      <md-slider id="sourslider" flex class="md-primary" md-discrete ng-model="rating3" step="1" min="1" max="5" aria-label="rating">
+      </md-slider>
+    </div>
+    <div layout>
+      <div flex="10" layout layout-align="center center">
+        <span class="md-body-1">salty</span>
+      </div>
+      <md-slider id="saltyslider" flex class="md-primary" md-discrete ng-model="rating3" step="1" min="1" max="5" aria-label="rating">
+      </md-slider>
+    </div>
+</div>
