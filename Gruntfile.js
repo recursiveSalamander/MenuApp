@@ -8,6 +8,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-purifycss');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-casperjs');
 
   grunt.initConfig({
@@ -29,10 +30,14 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['client/**/*.js', 'client/*.js', 'server/*'],
+      all: ['client/**/*.js',
+            'client/*.js',
+            'server/*',
+            'server/**/*',
+            '!client/bower_components/**'
+           ],
       options: {
-        force: 'true',
-        jshintrc: '.jshintrc',
+        esversion: 6
       }
     },
 
@@ -40,7 +45,7 @@ module.exports = function(grunt) {
       options: {},
       target: {
         src: ['client/*.html', 'client/**/*.html'],
-        css: ['client/styles/styles.css'],
+        css: ['client/styles/styles.css', 'client/bower_components/*.css'],
         dest: 'dist/purestyles.css'
       }
     },
@@ -71,11 +76,19 @@ module.exports = function(grunt) {
       }
     },
 
+    express: {
+      dev: {
+        options: {
+          script: 'dist/server/server.js'
+        }
+      }
+    },
+
     casperjs: {
       options: {},
       e2e: {
         files: {
-          'results/casper':
+          'results/casper': 'test/*.js'
         }
       }
     },
@@ -92,4 +105,11 @@ module.exports = function(grunt) {
       }
     }
   });
+
+  grunt.registerTask('build', [ 'jshint', 'clean', 'copy', 'concat', 'uglify']);
+
+  grunt.registerTask('teste2e', [ 'express:dev', 'casperjs']);
+
+  grunt.registerTask('default', [ 'build', 'express:dev', 'watch' ]);
+
 }
