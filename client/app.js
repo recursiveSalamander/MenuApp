@@ -32,6 +32,6 @@ angular.module('menuApp', [
     templateUrl: '/userAuth/signUp.html',
     authentication: false,
     signedin: false
-  })
+  });
   $urlRouterProvider.otherwise('/signIn');
 });
