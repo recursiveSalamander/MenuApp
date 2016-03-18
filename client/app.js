@@ -38,7 +38,11 @@ angular.module('menuApp', [
     templateUrl: '/userAuth/signUp.html',
     authentication: false,
     signedin: false
+  .state('preferenceForm', {
+    url: '/preferenceForm',
+    templateUrl: '/preferenceForm/preferenceForm.html',
+    authentication: true,
+    signedin: true
   });
-
   $urlRouterProvider.otherwise('/signIn');
 });
