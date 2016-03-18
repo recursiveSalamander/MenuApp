@@ -13,6 +13,6 @@ var Item_Rating = bookshelf.Model.extend({
   menu_items: function() {
     return this.belongsTo(Menu_Item, "item_id");
   },
-})
+});
 
 module.exports = Item_Rating;

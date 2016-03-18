@@ -106,10 +106,17 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('build', [ 'jshint', 'clean', 'copy', 'concat', 'uglify']);
+  grunt.registerTask('build', ['jshint',
+                               'clean',
+                               'copy',
+                               'concat',
+                               'uglify',
+                               'purifycss',
+                               'cssmin'
+                              ]);
 
-  grunt.registerTask('teste2e', [ 'express:dev', 'casperjs']);
+  grunt.registerTask('teste2e', ['express:dev', 'casperjs']);
 
-  grunt.registerTask('default', [ 'build', 'express:dev', 'watch' ]);
+  grunt.registerTask('default', ['build', 'express:dev', 'watch' ]);
 
 }

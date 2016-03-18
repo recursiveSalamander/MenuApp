@@ -7,6 +7,6 @@ var Restaurant = bookshelf.Model.extend({
   menu_items: function() {
       return this.hasMany(Menu_Item);
   }
-})
+});
 
 module.exports = Restaurant;
