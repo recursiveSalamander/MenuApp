@@ -5,11 +5,11 @@ angular.module('menuApp')
   $scope.renderProfile = function() {
     console.log('++line 6 inside renderProfile() in profileViewController');
     userInfo.getUserInfo()
-    .then(function(user) {
-      console.log('++line9 inside renderProfile() after promise in profileViewController',user);
-      $scope.user = user;
+    .then(function(users) {
+      console.log('++line9 inside renderProfile() after promise in profileViewController',users);
+      $scope.users = users;
     }).catch(function(err) {
-      console.log('++line 11 err inside renderProfile() in profileViewController',err);
+      console.log(err);
     });
   };
 }]);

@@ -1,6 +1,13 @@
 <div ng-controller="profileViewController">
   <div id="profileListingLogo">Profile Page</div>
   <div ng-cloak ng-init="renderProfile()">
-
+    <ul>
+      <li ng-repeat="info in users">
+      <dl>{{info.username}}</dl>
+      <dl>{{info.first_name}}</dl>
+      <dl>{{info.last_name}}</dl>
+      <dl>{{info.email}}</dl>
+      </li>
+    </ul>
   </div>
 </div>

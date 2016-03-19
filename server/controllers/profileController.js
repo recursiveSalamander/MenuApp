@@ -6,11 +6,11 @@ var config = require('../db/config/config.js');
 
 module.exports = {
   getProfile: function(req, res) {
-    console.log('++line 9 inside getProfile() in profileController');
     Users.fetch()
       .then(function(collection) {
         collection = collection.toJSON();
         res.send(collection);
+        console.log(collection);
       });
   },
 };

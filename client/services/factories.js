@@ -76,7 +76,8 @@ angular.module('menuApp')
     data: user
    })
    .then(function(res) {
-    return res;
+    // console.log(res.data);
+    return res.data;
    })
   };
    return {
@@ -97,11 +98,11 @@ angular.module('menuApp')
     });
   };
 
-  var signup = function(user) {
+  var signup = function(users) {
     return $http ({
       method: 'POST',
       url: 'api/users/signup',
-      data: user
+      data: users
     })
     .then(function(res) {
       return res.data.token;
