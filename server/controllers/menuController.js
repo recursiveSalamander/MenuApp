@@ -4,7 +4,6 @@ var moment = require('moment');
 
 var config = require('../db/config/config.js');
 
-var test = 'hello world!';
 
 module.exports = {
 

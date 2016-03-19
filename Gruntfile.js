@@ -117,6 +117,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('teste2e', ['express:dev', 'casperjs']);
 
-  grunt.registerTask('default', ['build', 'express:dev', 'watch' ]);
+  grunt.registerTask('default', ['jshint', 'express:dev', 'casperjs']);
 
 }
