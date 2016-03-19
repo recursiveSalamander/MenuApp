@@ -22,8 +22,6 @@
     "angular": "^1.5.0",
     "angular-ui-router": "^0.2.18",
     "angular-material": "^1.0.6",
-    "font-awesome": "^4.5.0",
-    "bootstrap": "^3.3.6",
-    "angular-bootstrap": "^1.2.4"
+    "font-awesome": "^4.5.0"
   }
 }
