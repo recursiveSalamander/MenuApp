@@ -24,7 +24,7 @@ angular.module('menuApp')
     console.log('++line 42 inside restaurantMenu() in restaurantListCtrl',restaurantId);
     $scope.restaurantId = restaurantId;
       $state.go('menuView', {'restaurantId': $scope.restaurantId});
-    menuAppFactory.getMenu(restaurantId)
+    menuAppFactory.getMenu(restaurantId);
     .then(function(data) {
       console.log('++line 45 inside restaurantMenu() in restaurantListCtrl', data);
       $state.go('menuView', {menuData: data});
