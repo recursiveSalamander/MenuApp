@@ -21,6 +21,12 @@ angular.module('menuApp', [
     authentication: true,
     signedin: true
   })
+  .state('profileView', {
+    url: '/profileView',
+    templateUrl: '/profile/profileView.html',
+    authentication: true,
+    signedin: true
+  })
   .state('signIn', {
     url: '/signIn',
     templateUrl: '/userAuth/signIn.html',
@@ -33,5 +39,6 @@ angular.module('menuApp', [
     authentication: false,
     signedin: false
   });
+
   $urlRouterProvider.otherwise('/signIn');
 });

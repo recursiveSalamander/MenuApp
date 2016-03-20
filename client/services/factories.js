@@ -67,6 +67,24 @@ angular.module('menuApp')
 
 }])
 
+.factory('userInfo', ['$http', '$location', '$state', function($http, $location, $state) {
+  var getUserInfo = function(user) {
+    console.log('++line 72 inside userInfo in factories');
+   return $http({
+    method: 'GET',
+    url: 'api/profile/profileView',
+    data: user
+   })
+   .then(function(res) {
+    // console.log(res.data);
+    return res.data;
+   })
+  };
+   return {
+    getUserInfo: getUserInfo
+   };
+}])
+
 .factory('Auth', ['$http', '$location', '$state', function($http, $location, $window) {
   var signin = function(user) {
     return $http({

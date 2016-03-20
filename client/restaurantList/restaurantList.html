@@ -1,63 +1,64 @@
 <div ng-controller='restaurantListController' flex layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage">
-<div class="collapse navbar-collapse">
+  <div class="collapse navbar-collapse">
     <nav class="nav navbar-nav">
-<h1 id="restaurantListinglogo">Menu App</h1>
-</div>
-</nav>
+      <ul class="header">
+        <li class="logo pull-left">MenuApp <i class="fa fa-cutlery"></i></li>
+        <li class='pull-right links' ><a href="#/logout">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
   <div id="map"></div>
   <md-content layout-padding="">
   <div>
     <form ng-submit="displayRestaurants()">
       <md-input-container class="md-block">
       <label></label>
-      <input type="text" style="width: 50%;" id="autocomplete" required autofocus="">
+      <input type="text" id="autocomplete" required autofocus="">
     </md-input-container>
-      <md-input-container ng-class="md-block">
-          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap="">
-            <md-button type="submit" value="Submit" class="md-raised">Submit</md-button>
-            </section>
-    </md-input-container>
-  </form>
+      <md-button type="submit" value="Submit" class="md-raised">Submit</md-button>
+</form>
 </div>
 </md-content>
-<h2>Restaurant Listings</h2>
+<h2>&nbsp; Restaurant Listings</h2>
 <div style="overflow: scroll; height:30%;">
-<li class="restaurantList" ng-repeat="displayRestaurants in data">
-  <span ng-click="restaurantMenu(displayRestaurants.id)">{{displayRestaurants.name}}, {{displayRestaurants.formatted}},
-    {{displayRestaurants.contact.formattedPhone}}</span>
-  </li>
+  <md-list class="restaurantList" ng-repeat="displayRestaurants in data">
+    <span ng-click="restaurantMenu(displayRestaurants.id)">&nbsp; &nbsp;<strong>{{displayRestaurants.name}}</strong> <br> &nbsp; &nbsp; {{displayRestaurants.formatted}}<br> &nbsp; &nbsp;
+      {{displayRestaurants.contact.formattedPhone}}</span>
+    <md-divider></md-divider>
+    </md-list>
   </div>
 </div>
 
-<!-- <ul class="header">
-  <li class="logo pull-left"><a href="#/home">Brew4Two <span class="fa fa-coffee"></span></a></li>
-  <li class='pull-right links' ng-show='!isAuth()'><a href="#/signin">login</a></li>
-  <li class='pull-right links' ng-show='isAuth()'><a href="#" ng-click='signout()'>logout</a></li>
-  <li class='pull-right links' ><a href="#/appointments" ng-click='fetchAllAppointmentsForUser()'>dates</a></li>
-</ul> -->
 
-<!--
-<div>
-  <md-content class="md-padding" layout-xs="column" layout="row">
-    <div flex-xs="" flex-gt-xs="10" layout="column">
-    </div>
-    <div flex-xs="" flex-gt-xs="30" layout="column">
-      <md-card>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">Card</span>
-            <span class="md-subhead">Sml</span>
-          </md-card-title-text>
-          <md-card-title-media>
-            <div class="md-media-sm card-media"></div>
-          </md-card-title-media>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button>Action 1</md-button>
-          <md-button>Action 2</md-button>
-        </md-card-actions>
-      </md-card>
-    </div>
-  </md-content>
-</div>
- -->
+ <!-- <div class="menu-demo-container" layout-align="center center" layout="column">
+    <h2 class="md-title">Simple dropdown menu</h2>
+    <p>Applying the <code>md-menu-origin</code> and <code>md-menu-align-target</code> attributes ensure that the menu elements align.
+    Note: If you select the Redial menu option, then a modal dialog will zoom out of the phone icon button.</p>
+    <md-menu>
+      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+        <md-icon md-menu-origin="" md-svg-icon="call:phone"></md-icon>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button ng-click="ctrl.redial($event)">
+            <md-icon md-svg-icon="call:dialpad" md-menu-align-target=""></md-icon>
+            Redial
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
+            <md-icon md-svg-icon="call:voicemail"></md-icon>
+            Check voicemail
+          </md-button>
+        </md-menu-item>
+        <md-menu-divider></md-menu-divider>
+        <md-menu-item>
+          <md-button ng-click="ctrl.toggleNotifications()">
+            <md-icon md-svg-icon="social:notifications-{{ctrl.notificationsEnabled ? 'off' : 'on'}}"></md-icon>
+            {{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+</div> -->
