@@ -12,5 +12,5 @@ module.exports = {
         res.send(collection);
         console.log(collection);
       });
-  },
+  }
 };
