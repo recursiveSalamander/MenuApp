@@ -98,11 +98,11 @@ angular.module('menuApp')
     });
   };
 
-  var signup = function(users) {
+  var signup = function(user) {
     return $http ({
       method: 'POST',
       url: 'api/users/signup',
-      data: users
+      data: user
     })
     .then(function(res) {
       return res.data.token;
