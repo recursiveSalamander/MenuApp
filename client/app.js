@@ -24,8 +24,8 @@ angular.module('menuApp', [
   .state('profileView', {
     url: '/profileView',
     templateUrl: '/profile/profileView.html',
-    authentication: false,
-    signedin: false
+    authentication: true,
+    signedin: true
   })
   .state('signIn', {
     url: '/signIn',
