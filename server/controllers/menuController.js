@@ -3,6 +3,7 @@ var _ = require('lodash');
 var moment = require('moment');
 
 var config = require('../db/config/config.js');
+var Cache = require('../constructors/Cache.js');
 
 
 module.exports = {
@@ -17,8 +18,13 @@ module.exports = {
 
     request(query, function(err, resp, body) {
       if (!err && resp.statusCode === 200) {
-        var data = JSON.parse(body).response.menu.menus.items;
-        res.send(data);
+        var data = JSON.parse(body).response.menu.menus;
+
+        // caches restaurant ids that correspond to empty menus so they may be filtered out
+        if (data.count === 0) {
+          emptyMenus.addData(restaurantId);
+        }
+        res.send(data.items);
       }
     });
   }
