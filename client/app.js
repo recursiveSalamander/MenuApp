@@ -44,5 +44,37 @@ angular.module('menuApp', [
     authentication: true,
     signedin: true
   });
+  // .state('form', {
+  //   url: '/test',
+  //   onEnter: ['$mdDialog', function($mdDialog, ev) {
+  //     $mdDialog.show({
+  //       controller: 'preferenceFormController',
+  //       templateUrl: './preferenceForm/test.html',
+  //       targetEvent: ev,
+  //       clickOutsideToClose:true
+  //     })
+  //     .result.finally(function() {
+  //       $state.go('^');
+  //     });
+  //   }]
+  // })
   $urlRouterProvider.otherwise('/signIn');
+})
+
+
+.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('red')
+  .primaryPalette('red');
+  $mdThemingProvider.theme('orange')
+  .primaryPalette('orange');
+  $mdThemingProvider.theme('yellow')
+  .primaryPalette('yellow');
+  $mdThemingProvider.theme('green')
+  .primaryPalette('green');
+  $mdThemingProvider.theme('indigo')
+  .primaryPalette('indigo');
+  $mdThemingProvider.theme('deep-purple')
+  .primaryPalette('deep-purple');
+  $mdThemingProvider.theme('light-green')
+  .primaryPalette('light-green');
 });
