@@ -38,12 +38,14 @@ angular.module('menuApp', [
     templateUrl: '/userAuth/signUp.html',
     authentication: false,
     signedin: false
+  })
   .state('preferenceForm', {
     url: '/preferenceForm',
     templateUrl: '/preferenceForm/preferenceForm.html',
     authentication: true,
     signedin: true
   });
+
   // .state('form', {
   //   url: '/test',
   //   onEnter: ['$mdDialog', function($mdDialog, ev) {
