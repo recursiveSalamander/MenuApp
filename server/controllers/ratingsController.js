@@ -22,9 +22,9 @@ module.exports = {
         Utils.insertMenuItem(menuitem, restaurant_id, function(data){
           Utils.getMenuItemID(data, function(menu_id){
             Utils.insertRating(rating, userID, menu_id);
-          })
-        })
-      })
-    })
+          });
+        });
+      });
+    });
   }
-}
+};

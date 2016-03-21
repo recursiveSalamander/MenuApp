@@ -78,7 +78,7 @@ angular.module('menuApp')
    .then(function(res) {
     // console.log(res.data);
     return res.data;
-   })
+   });
   };
    return {
     getUserInfo: getUserInfo

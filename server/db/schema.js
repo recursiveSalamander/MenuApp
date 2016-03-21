@@ -29,10 +29,10 @@ var users = function() {
         user.string('username', 30).unique();
       }).then(function(){
         console.log('users table has been created');
-      })
+      });
     }
   });
-}
+};
 
 var user_preferences = function() {
   db.knex.schema.hasTable('user_preferences').then(function(exists){
@@ -46,10 +46,10 @@ var user_preferences = function() {
         preference.foreign('user_id').references('id').inTable('users');
       }).then(function() {
         console.log('user_preferences table has been created');
-      })
+      });
     }
   });
-}
+};
 
 var restaurants = function() {
   db.knex.schema.hasTable('restaurants').then(function(exists) {
@@ -62,7 +62,7 @@ var restaurants = function() {
       });
     }
   });
-}
+};
 
 var menu_items = function() {
   db.knex.schema.hasTable('menu_items').then(function(exists) {
@@ -77,7 +77,7 @@ var menu_items = function() {
       });
     }
   });
-}
+};
 
 var item_ratings = function() {
   db.knex.schema.hasTable('item_ratings').then(function(exists) {
@@ -94,7 +94,7 @@ var item_ratings = function() {
       });
     }
   });
-}
+};
 
 
 users();
