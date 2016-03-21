@@ -6,7 +6,7 @@ function Cache(refreshTime, maintenanceInterval) {
   this.storage = {};
 
   this.refresh(this.refreshTime, this.maintenanceInterval);
-};
+}
 
 Cache.prototype.addData = function(dataId, data) {
   var date = moment().format('YYYYMMDD');

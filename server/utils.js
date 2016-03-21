@@ -27,7 +27,7 @@ module.exports = {
         } else {
           return data.id;
         }
-      })
+      });
   },
 
   insertRestaurant: function(restaurant, callback){
@@ -43,9 +43,9 @@ module.exports = {
             if(callback){
               callback(restaurant);
             }
-          })
-        };
-      })
+          });
+        }
+      });
     },
 
   insertMenuItem: function(menuitem, restaurant_id, callback){
@@ -62,9 +62,9 @@ module.exports = {
           if(callback){
             callback(menuitem);
           }
-        })
-      };
-    })
+        });
+      }
+    });
   },
 
   getMenuItemID: function(menuitem, callback){
@@ -73,9 +73,9 @@ module.exports = {
       if(callback){
         callback(data.id);
       } else {
-      return data.id
+      return data.id;
       }
-    })
+    });
   },
 
   insertRating: function(rating, userID, menuitem, callback){
@@ -94,8 +94,8 @@ module.exports = {
           if(callback){
             callback(rating);
           }
-        })
+        });
       }
-    })
+    });
   }
-}
+};

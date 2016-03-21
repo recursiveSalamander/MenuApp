@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/recursiveSalamander/MenuApp#readme",
   "dependencies": {
+    "angular-jk-rating-stars": "^1.0.1",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.3.4",
     "body-parser": "^1.15.0",

@@ -7,7 +7,7 @@ angular.module('menuApp')
     sweet: 1,
     salty: 1,
     bitter: 1
-  }
+  };
 
   $scope.dietaryrestrictions = {
     lacto_vegetarian: false,
@@ -15,7 +15,7 @@ angular.module('menuApp')
     pescetarian: false,
     vegan: false,
     vegetarian: false
-  }
+  };
 
   $scope.allergies = {
     dairy: false,
@@ -28,7 +28,7 @@ angular.module('menuApp')
     sulfite: false,
     tree_nut: false,
     wheat: false
-  }
+  };
 
   $scope.cuisinepreference = {
     american: 1,
@@ -54,14 +54,14 @@ angular.module('menuApp')
     swedish: 1,
     hungarian: 1,
     portugese: 1
-  }
+  };
 
 
   $scope.hello = {
     one: 1,
     two: 2,
     three: 3
-  }
+  };
   $scope.dummy = [
     'hello', 'hi'
   ];
@@ -72,7 +72,7 @@ angular.module('menuApp')
     if($scope.nutritionValue){
       $scope.userNutritionPreferences[$scope.selectedNutrition] = $scope.nutritionValue;
     }
-  }
+  };
 
   $scope.userNutritionPreferences = {};
 
@@ -92,11 +92,10 @@ angular.module('menuApp')
     'Energy',
     'Fat',
     'Vitamin_a'
-  ]
+  ];
 
-  $scope.userInput = function() {
-    debugger;
-  }
+  $scope.userInput = function() {};
+
   // $scope.showTabDialog = function(ev) {
   //   $mdDialog.show({
   //     // controller: preferenceFormController,

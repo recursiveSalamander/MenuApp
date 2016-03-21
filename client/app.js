@@ -2,7 +2,8 @@ angular.module('menuApp', [
   'ui.router',
   'ngMaterial',
   'ngAria',
-  'ngAnimate'
+  'ngAnimate',
+  'jkAngularRatingStars'
 ])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
