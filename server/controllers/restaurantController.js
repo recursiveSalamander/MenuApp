@@ -25,7 +25,7 @@ module.exports = {
     request(query, function(err, resp, body) {
       if (!err && resp.statusCode === 200) {
         var data = JSON.parse(body).response.venues;
-        
+
         data = _.filter(data, function(element) {
           return element.hasMenu && emptyMenus.getData(element.id) === undefined;
         });

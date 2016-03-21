@@ -2,6 +2,7 @@ var bookshelf = require('../schema.js').bookshelf;
 var bcrypt = require('bcrypt-nodejs');
 var promise = require('bluebird');
 var Item_Rating = require('./Item_Rating.js');
+var User_Preference = require('./User_Preference.js');
 
 var User = bookshelf.Model.extend({
 
@@ -9,6 +10,10 @@ var User = bookshelf.Model.extend({
 
   ratings: function() {
     return this.hasMany(Item_Rating);
+  },
+
+  preferences: function() {
+    return this.hasMany(User_Preference);
   },
 
   initialize: function() {
