@@ -28,25 +28,64 @@ var users = function() {
         user.string('email', 30).unique();
         user.string('password', 252);
         user.string('username', 30).unique();
-      }).then(function() {
+        user.string('diet', 30).defaultTo('none');
+      }).then(function(){
         console.log('users table has been created');
       });
     }
   });
 };
 
-var user_preferences = function() {
+
+var userPreferences = function() {
   db.knex.schema.hasTable('user_preferences').then(function(exists) {
     if(!exists) {
       knex.schema.createTable('user_preferences', function(preference) {
         preference.increments('id').primary();
-        preference.boolean('allergy');
-        preference.boolean('favorite');
         preference.string('ingredient', 50);
+        // relation contains whether an ingredient is liked, disliked, or an allergy
+        preference.string('relation', 50);
         preference.integer('user_id').unsigned();
         preference.foreign('user_id').references('id').inTable('users');
       }).then(function() {
         console.log('user_preferences table has been created');
+      });
+    }
+  });
+};
+
+var tastes = function() {
+  db.knex.schema.hasTable('tastes').then(function(exists) {
+    if(!exists) {
+      knex.schema.createTable('tastes', function(taste) {
+        taste.increments('id').primary();
+        taste.integer('spicy');
+        taste.integer('meaty');
+        taste.integer('sour');
+        taste.integer('sweet');
+        taste.integer('salty');
+        taste.integer('bitter');
+        taste.integer('user_id').unsigned();
+        taste.foreign('user_id').references('id').inTable('users');
+      }).then(function() {
+        console.log('tastes table has been created');
+      });
+    }
+  });
+};
+
+var nutritionRestrictions = function() {
+  db.knex.schema.hasTable('nutrition_restrictions').then(function(exists) {
+    if(!exists) {
+      knex.schema.createTable('nutrition_restrictions', function(restriction) {
+        restriction.increments('id').primary();
+        restriction.string('type', 30);
+        restriction.integer('min');
+        restriction.integer('max');
+        restriction.integer('user_id').unsigned();
+        restriction.foreign('user_id').references('id').inTable('users');
+      }).then(function() {
+        console.log('nutrition_restrictions table has been created');
       });
     }
   });
@@ -65,7 +104,7 @@ var restaurants = function() {
   });
 };
 
-var menu_items = function() {
+var menuItems = function() {
   db.knex.schema.hasTable('menu_items').then(function(exists) {
     if(!exists) {
       knex.schema.createTable('menu_items', function(menuitems) {
@@ -80,7 +119,7 @@ var menu_items = function() {
   });
 };
 
-var item_ratings = function() {
+var itemRatings = function() {
   db.knex.schema.hasTable('item_ratings').then(function(exists) {
     if(!exists) {
       knex.schema.createTable('item_ratings', function(rating) {
@@ -99,9 +138,11 @@ var item_ratings = function() {
 
 
 users();
-user_preferences();
+userPreferences();
+tastes();
+nutritionRestrictions();
 restaurants();
-menu_items();
-item_ratings();
+menuItems();
+itemRatings();
 
 module.exports.bookshelf = bookshelf;
