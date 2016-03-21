@@ -3,6 +3,7 @@
   width: 30%;
 }
 
+
 #signuppage, #signinpage {
   height: 100vh;
   -webkit-background-size: cover;
@@ -165,4 +166,7 @@ body {
   .restaurantList {
     font-size: 10px;
   }
+
+md-checkbox.md-checked .md-icon {
+ background-color: #4caf50;
 }
