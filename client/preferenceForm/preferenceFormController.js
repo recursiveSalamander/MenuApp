@@ -56,25 +56,13 @@ angular.module('menuApp')
     portugese: 1
   };
 
-
-  $scope.hello = {
-    one: 1,
-    two: 2,
-    three: 3
-  };
-  $scope.dummy = [
-    'hello', 'hi'
-  ];
-
-
   $scope.changeNutritionValue = function(){
-    console.log('KEKEKEKEKEKKEKEKEK');
     if($scope.nutritionValue){
-      $scope.userNutritionPreferences[$scope.selectedNutrition] = $scope.nutritionValue;
+      $scope.nutritionPreferences[$scope.selectedNutrition] = $scope.nutritionValue;
     }
   };
 
-  $scope.userNutritionPreferences = {};
+  $scope.nutritionPreferences = {};
 
   $scope.nutritionAttributes = [
     'Potassium',
@@ -94,8 +82,8 @@ angular.module('menuApp')
     'Vitamin_a'
   ];
 
-  $scope.userInput = function() {};
-
+  $scope.preferredIngredients = [];
+  $scope.rejectedIngredients = [];
   // $scope.showTabDialog = function(ev) {
   //   $mdDialog.show({
   //     // controller: preferenceFormController,
@@ -111,4 +99,17 @@ angular.module('menuApp')
   //       // });
   // };
 
+
+  $scope.sendPreferenceData = function(){
+    console.log('LOLOLOLO HI');
+    var preferenceData = {
+      tastepreference: $scope.tastepreference
+      dietaryrestrictions: $scope.dietaryrestrictions
+      allergies: $scope.allergies
+      cuisinepreference: $scope.cuisinepreference
+      nutritionPreferences: $scope.nutritionPreferences
+      preferredIngredients: $scope.preferredIngredients
+      rejectedIngredients: $scope.rejectedIngredients
+    }
+  }
 }]);

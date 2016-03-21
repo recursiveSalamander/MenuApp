@@ -13,7 +13,6 @@ STEP 1:
 Pictures for preference algorithm
 -->
 <div ng-controller="preferenceFormController">
-
   <h2>Taste preferences</h2>
   <div id="tastepreferenceform">
     <div layout md-theme="red">
@@ -351,11 +350,8 @@ Pictures for preference algorithm
   <h2>Nutrition Restrictions</h2>
   <div ng-controller="preferenceFormController">
 
-
-
-    <form layout="row" layout-wrap ng-submit="changeNutritionValue()">
       <md-input-container>
-      <label>Size</label>
+      <label>Nutrition</label>
         <md-select ng-model="selectedNutrition">
           <md-option ng-value="attribute" ng-repeat="attribute in nutritionAttributes">{{attribute}}</md-option>
         </md-select>
@@ -363,10 +359,30 @@ Pictures for preference algorithm
       <md-input-container >
         <label>Max</label>
         <input ng-model="nutritionValue" type="number"></input>
-        <span><md-button type="submit" class="md-raised">Submit</md-button></span>
-      </md-input-container>
 
-  </form>
-  <div ng-repeat="(key, value) in userNutritionPreferences">{{key}}: {{value}}</div>
+      </md-input-container>
+<md-button ng-click="changeNutritionValue()" class="md-raised">Submit</md-button>
+
+  <div ng-repeat="(key, value) in nutritionPreferences">{{key}}: {{value}}</div>
   </div>
+
+
+<div ng-controller="preferenceFormController">
+  <h2>Ingredient Preferences</h2>
+  <md-input-container>
+    <label>I like...</label>
+    <md-chips ng-model="preferredIngredients"></md-chips>
+  </md-input-container>
+  <md-input-container>
+    <label>I don't like...</label>
+    <md-chips ng-model="rejectedIngredients"></md-chips>
+  </md-input-container>
+
+<br>
+
+<md-button class="md-raised" ng-click="sendPreferenceData()">Submit</md-button>
+
+</div>
+
+
 </div>
