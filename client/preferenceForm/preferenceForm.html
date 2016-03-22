@@ -1,20 +1,3 @@
-
-
-<!-- flavors:
-
-
-
-ingredients : An array of the ingredients in this recipe. Always present in response.
-
-nutrition: min/max
-Allergies, excluded ingredients, allowed diet
-
-STEP 1:
-Pictures for preference algorithm
--->
-
-
-
   <h2>Taste preferences</h2>
   <div id="tastepreferenceform">
     <div layout md-theme="red">
@@ -96,9 +79,6 @@ Pictures for preference algorithm
 </div>
 
 
-
-
-
   <h2>Allergies</h2>
   <div layout="row" layout-wrap>
       <div flex="100" flex-gt-sm="50" layout="column">
@@ -116,13 +96,6 @@ Pictures for preference algorithm
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
 
 
   <h2>Cuisine Origin</h2>
@@ -303,8 +276,6 @@ Pictures for preference algorithm
 
 
   <h2>Nutrition Restrictions</h2>
-
-  <!-- <div ng-controller="preferenceFormController"> -->
   <div layout="row" layout-wrap>
       <md-input-container>
       <label>Nutrition</label>
@@ -321,11 +292,10 @@ Pictures for preference algorithm
 
   <div ng-repeat="(key, value) in nutritionPreferences">{{key}}: {{value}}</div>
   </div>
-  <!-- </div> -->
 
 
 
-<!-- <div ng-controller="preferenceFormController"> -->
+
   <h2>Ingredient Preferences</h2>
   <div>
   <md-input-container>
@@ -336,16 +306,6 @@ Pictures for preference algorithm
     <label>I don't like...</label>
     <md-chips ng-model="rejectedIngredients"></md-chips>
   </md-input-container>
-<!-- </div> -->
 </div>
-<!-- <div ng-controller="preferenceFormController"> -->
-<md-button class="md-raised" ng-click="sendPreferenceData()">Submit</md-button>
 
-{{tastepreference}}
-{{dietaryrestrictions}}
-{{userAllergies}}
-{{cuisinepreference}}
-{{nutritionPreferences}}
-{{preferredIngredients}}
-{{rejectedIngredients}}
-<!-- </div> -->
+<md-button class="md-raised" ng-click="sendPreferenceData()">Submit</md-button>
