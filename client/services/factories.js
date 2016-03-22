@@ -34,7 +34,7 @@ angular.module('menuApp')
   };
 
   var postUserPreference = function (preferences) {
-    console.log('I AM INSIDE FACTORIES POSTUSERPREFERENCES');
+    console.log('++line 37 inside postUserPreferences() in menuAppFactory');
     return $http({
       method: 'POST',
       url: '/api/preference',
@@ -69,7 +69,7 @@ angular.module('menuApp')
     var address = document.getElementById('autocomplete').value;
     var geocoder = new google.maps.Geocoder();
 
-    geocoder.geocode({address: address}, function(results, status){
+    geocoder.geocode({address: address}, function(results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
         callback(results[0].geometry.location.lat(), results[0].geometry.location.lng());
       }
@@ -87,7 +87,7 @@ angular.module('menuApp')
 
 .factory('userInfo', ['$http', '$location', '$state', '$window', 'Auth', function($http, $location, $state, $window, Auth) {
   var getUserInfo = function(user) {
-    console.log('++line 72 inside userInfo in factories');
+    console.log('++line 90 inside userInfo in factories');
     return $http({
       method: 'GET',
       url: 'api/profile/profileView',
@@ -102,12 +102,12 @@ angular.module('menuApp')
   };
 
   var ratingInfo = function(rating, entryId, restaurantId) {
-    console.log('++line 85 inside ratingInfo() in factories rating: ', rating);
-    console.log('++line 86 inside ratingInfo() in factories entryId: ', entryId);
-    console.log('++line 97 inside ratingInfo() in factories restaurantId: ', restaurantId );
+    console.log('++line 105 inside ratingInfo() in factories rating: ', rating);
+    console.log('++line 106 inside ratingInfo() in factories entryId: ', entryId);
+    console.log('++line 107 inside ratingInfo() in factories restaurantId: ', restaurantId );
 
     var currentToken = Auth.getToken();
-    console.log('++ line 90 inside ratingInfo() in factories token',currentToken);
+    console.log('++ line 110 inside ratingInfo() in factories token',currentToken);
 
     return $http({
       method: 'POST',
@@ -156,7 +156,7 @@ angular.module('menuApp')
   };
 
   var isAuth = function() {
-    return !!$window.localStoage.getItem('authentication');
+    return !!$window.localStorage.getItem('authentication');
   };
 
   var isSignedIn = function() {

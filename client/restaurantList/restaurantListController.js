@@ -25,13 +25,13 @@ angular.module('menuApp')
   };
 
   $scope.restaurantMenu = function(restaurantId) {
-    console.log('++line 24 inside restaurantMenu() in restaurantListCtrl',restaurantId);
+    console.log('++line 28 inside restaurantMenu() in restaurantListCtrl',restaurantId);
     $scope.restaurantId = restaurantId;
     $state.go('menuView', {'restaurantId': $scope.restaurantId});
     menuAppFactory.getMenu(restaurantId)
     .then(function(data) {
-      console.log('++line 29 inside restaurantMenu() in restaurantListCtrl data:', data);
-      console.log('++line 30 inside restaurantMenu() in restaurantListCtrl restaurantId:', restaurantId);
+      console.log('++line 33 inside restaurantMenu() in restaurantListCtrl data:', data);
+      console.log('++line 34 inside restaurantMenu() in restaurantListCtrl restaurantId:', restaurantId);
       $state.go('menuView', {menuData: data, restaurantId: restaurantId});
     });
   };
