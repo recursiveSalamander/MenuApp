@@ -5,7 +5,7 @@ angular.module('menuApp')
 
   $scope.signout = function() {
     Auth.signout();
-  }
+  };
 
   $scope.displayRestaurants = function() {
     Geolocation.getLatLong(function(lat, lng) {

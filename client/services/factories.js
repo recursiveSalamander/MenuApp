@@ -119,7 +119,7 @@ angular.module('menuApp')
     }, function(err) {
       console.log(err);
     });
-  }
+  };
   return {
     getUserInfo: getUserInfo,
     ratingInfo: ratingInfo

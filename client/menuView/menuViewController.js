@@ -21,7 +21,7 @@ angular.module('menuApp')
     console.log('++line 21 in onrating rating: ', rating);
     console.log('++line 22 in onrating entryId: ', entryId);
     console.log('++line 23 in onrating restaurantId: ', restaurantId );
-    userInfo.ratingInfo(rating, entryId, restaurantId)
+    userInfo.ratingInfo(rating, entryId, restaurantId);
     // .then(function(data) {
     //   $scope.data = data;
     // }).catch(function(err) {
