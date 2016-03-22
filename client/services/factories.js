@@ -19,14 +19,14 @@ angular.module('menuApp')
 
   var getMenu = function (restaurantId) {
     restaurantId = {restaurantId: restaurantId};
-    console.log('++line 21 inside getMenu in factories.js',restaurantId);
+    console.log('++line 22 inside getMenu in factories.js',restaurantId);
     return $http({
       method: 'POST',
       url: '/api/menu',
       data: restaurantId
     })
     .then(function (resp) {
-      console.log('++line 28 in post getMenu inside factories',resp);
+      console.log('++line 29 in post getMenu inside factories',resp.data);
       return resp.data;
     }, function(error) {
       console.log(error);
@@ -84,25 +84,49 @@ angular.module('menuApp')
 
 }])
 
-.factory('userInfo', ['$http', '$location', '$state', function($http, $location, $state) {
-  var getUserInfo = function (user) {
+
+.factory('userInfo', ['$http', '$location', '$state', '$window', 'Auth', function($http, $location, $state, $window, Auth) {
+  var getUserInfo = function(user) {
     console.log('++line 72 inside userInfo in factories');
-   return $http({
-    method: 'GET',
-    url: 'api/profile/profileView',
-    data: user
-   })
-   .then(function(res) {
+    return $http({
+      method: 'GET',
+      url: 'api/profile/profileView',
+      data: user
+    })
+    .then(function(res) {
     // console.log(res.data);
     return res.data;
-   });
+  }, function(err) {
+    console.log(err);
+  });
   };
-   return {
-    getUserInfo: getUserInfo
-   };
+
+  var ratingInfo = function(rating, entryId, restaurantId) {
+    console.log('++line 85 inside ratingInfo() in factories rating: ', rating);
+    console.log('++line 86 inside ratingInfo() in factories entryId: ', entryId);
+    console.log('++line 97 inside ratingInfo() in factories restaurantId: ', restaurantId );
+
+    var currentToken = Auth.getToken();
+    console.log('++ line 90 inside ratingInfo() in factories token',currentToken);
+
+    return $http({
+      method: 'POST',
+      url: 'api/rating',
+      data: {rating: rating, entryId: entryId, restaurantId: restaurantId, currentToken: currentToken}
+    })
+    .then(function(res) {
+      return res.data;
+    }, function(err) {
+      console.log(err);
+    });
+  };
+  return {
+    getUserInfo: getUserInfo,
+    ratingInfo: ratingInfo
+  };
 }])
 
-.factory('Auth', ['$http', '$location', '$state', function($http, $location, $window) {
+.factory('Auth', ['$http', '$location', '$state', '$window', function($http, $location, $state, $window) {
   var signin = function(user) {
     return $http({
       method: 'POST',
@@ -141,7 +165,6 @@ angular.module('menuApp')
 
   var signout = function() {
     $window.localStorage.removeItem('authentication');
-    $location.path('/signup');
   };
 
   return {
