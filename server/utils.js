@@ -1,5 +1,6 @@
 var jwt = require('jwt-simple');
 var db = require('./db/schema.js');
+var knex = require('knex');
 var Users = require('./db/collections/Users.js');
 var User = require('./db/models/User.js');
 var Menu_Items = require('./db/collections/Menu_Items.js');
@@ -16,6 +17,7 @@ var _ = require('lodash');
 module.exports = {
   getUserID: function(token) {
     var currentUser = jwt.decode(token, 'secret');
+    console.log(currentUser.id);
     return currentUser.id;
   },
 
@@ -41,9 +43,13 @@ module.exports = {
           newRestaurant.save()
           .then(function() {
             if(callback){
-              callback(restaurant);
+              callback (restaurant);
             }
           });
+        } else {
+          if(callback) {
+            callback(restaurant);
+          }
         }
       });
     },
@@ -63,6 +69,10 @@ module.exports = {
             callback(menuitem);
           }
         });
+      } else {
+        if(callback) {
+          callback(menuitem);
+        }
       }
     });
   },
@@ -78,24 +88,28 @@ module.exports = {
     });
   },
 
-  insertRating: function(rating, userID, menuitem, callback){
-    console.log('INSERTRATING: ', menuitem);
-    new Item_Rating({rating: rating})
-    .fetch()
-    .then(function(exists){
-      if(!exists){
-        var newRating = new Item_Rating({
-          rating: rating,
-          user_id: userID,
-          item_id: menuitem
-        });
-        newRating.save()
-        .then(function(){
-          if(callback){
-            callback(rating);
-          }
-        });
-      }
-    });
-  }
+  insertRating: function(rating, userID, menuitem, callback) {
+   console.log('INSERTRATING: ', menuitem);
+   Item_Rating.where({'user_id': userID, 'item_id': menuitem}).fetch()
+     .then(function(myItemRating) {
+       //if the rating already exists
+       if (myItemRating !== null) {
+         return myItemRating;
+       }
+       //if it doesnt exist, create a new rating object with the user/item id
+       var newRating = new Item_Rating({
+         user_id: userID,
+         item_id: menuitem
+       });
+       return newRating;
+       //this .then overwrites the rating if it already exists, or creates a new one
+     }).then(function(myItemRating) {
+       myItemRating.set({rating: rating});
+       return myItemRating.save()
+     }).then(function(savedItemRating) {
+       if (callback){
+         callback(savedItemRating);
+       }
+     })
+   }
 };
