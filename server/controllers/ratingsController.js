@@ -11,7 +11,7 @@ var Utils = require('../utils.js');
 module.exports = {
   postRatingToTable: function(request, response) {
     var token = request.body.currentToken
-    var userID = getUserID(currentToken);
+    var userID = Utils.getUserID(token);
     var rating = request.body.rating;
     var menuitem = request.body.entryId
     var restaurant = request.body.restaurantId
