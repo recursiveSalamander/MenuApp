@@ -16,6 +16,7 @@ module.exports = function(app, express) {
   app.post('/api/menu', bodyParser, menuController.getMenu);
   app.post('/api/users/signup', userAuthController.signup);
   app.post('/api/users/signin', userAuthController.signin);
+  app.post('/api/ratings', ratingsController.postRatingToTable);
   app.get('/api/profile/profileView', bodyParser, profileController.getProfile);
   app.post('/api/preference', bodyParser, preferenceController.postPreference);
   app.post('/api/rating', ratingsController.postRatingToTable);
