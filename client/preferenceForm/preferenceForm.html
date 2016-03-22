@@ -1,45 +1,45 @@
   <h2>Taste preferences</h2>
-  <div id="tastepreferenceform">
+  <div id="tastePreferenceform">
     <div layout md-theme="red">
       <div flex="10" layout layout-align="center center">
         <span class="md-body-1">spicy</span>
       </div>
-      <md-slider class="md-primary" flex md-discrete ng-model="tastepreference.spicy" step="1" min="1" max="5" aria-label="rating">
+      <md-slider class="md-primary" flex md-discrete ng-model="tastePreference.spicy" step="1" min="1" max="5" aria-label="rating">
       </md-slider>
     </div>
     <div layout md-theme="orange">
       <div flex="10" layout layout-align="center center">
         <span class="md-body-1">meaty</span>
       </div>
-      <md-slider class="md-primary" flex class="md-warn" md-discrete ng-model="tastepreference.meaty" step="1" min="1" max="5" aria-label="rating">
+      <md-slider class="md-primary" flex class="md-warn" md-discrete ng-model="tastePreference.meaty" step="1" min="1" max="5" aria-label="rating">
       </md-slider>
     </div>
     <div layout md-theme="yellow">
       <div flex="10" layout layout-align="center center">
         <span class="md-body-1">sour</span>
       </div>
-      <md-slider class="md-primary" flex class="md-primary" md-discrete ng-model="tastepreference.sour" step="1" min="1" max="5" aria-label="rating">
+      <md-slider class="md-primary" flex class="md-primary" md-discrete ng-model="tastePreference.sour" step="1" min="1" max="5" aria-label="rating">
       </md-slider>
     </div>
     <div layout md-theme="light-green">
       <div flex="10" layout layout-align="center center">
         <span class="md-body-1">sweet</span>
       </div>
-      <md-slider class="md-primary" flex class="md-primary" md-discrete ng-model="tastepreference.sweet" step="1" min="1" max="5" aria-label="rating">
+      <md-slider class="md-primary" flex class="md-primary" md-discrete ng-model="tastePreference.sweet" step="1" min="1" max="5" aria-label="rating">
       </md-slider>
     </div>
     <div layout md-theme="indigo">
       <div flex="10" layout layout-align="center center">
         <span class="md-body-1">salty</span>
       </div>
-      <md-slider class="md-primary" flex class="md-primary" md-discrete ng-model="tastepreference.salty" step="1" min="1" max="5" aria-label="rating">
+      <md-slider class="md-primary" flex class="md-primary" md-discrete ng-model="tastePreference.salty" step="1" min="1" max="5" aria-label="rating">
       </md-slider>
     </div>
     <div layout md-theme="deep-purple">
       <div flex="10" layout layout-align="center center">
         <span class="md-body-1">bitter</span>
       </div>
-      <md-slider class="md-primary" flex class="md-primary" md-discrete ng-model="tastepreference.bitter" step="1" min="1" max="5" aria-label="rating">
+      <md-slider class="md-primary" flex class="md-primary" md-discrete ng-model="tastePreference.bitter" step="1" min="1" max="5" aria-label="rating">
       </md-slider>
     </div>
   </div>
@@ -54,7 +54,7 @@
           <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend>
 
 
-          <md-radio-group ng-model="dietaryrestrictions">
+          <md-radio-group ng-model="dietaryRestrictions">
             <div layout="row" layout-wrap flex>
               <div flex="50">
                 <md-radio-button flex="50" value="lacto vegetarian" class="md-primary">Lacto Vegetarian</md-radio-button>
@@ -86,7 +86,7 @@
           <fieldset class="standard">
             <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend>
             <div layout="row" layout-wrap flex>
-              <div flex="33" ng-repeat="allergy in allergylist">
+              <div flex="33" ng-repeat="allergy in allergyList">
                 <md-checkbox ng-click="toggleAllergyCheckbox(allergy)">
                   {{allergy}}
                 </md-checkbox>
@@ -106,56 +106,56 @@
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">American</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.american" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.american" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Italian</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.italian" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.italian" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Mexican</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.mexican" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.mexican" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Southern & Soul food</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.southern_soulfood" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.southern_soulfood" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">French</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.french" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.french" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Southwestern</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.southwestern" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.southwestern" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Indian</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.indian" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.indian" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Chinese</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.chinese" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.chinese" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
     </div>
@@ -165,56 +165,56 @@
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Cajun & Creole</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.cajun_creole" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.cajun_creole" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">English</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.english" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.english" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Mediterranean</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.mediterranean" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.mediterranean" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Greek</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.greek" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.greek" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Spanish</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.spanish" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.spanish" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">German</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.german" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.german" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Thai</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.thai" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.thai" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Moroccan</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.moroccan" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.moroccan" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
     </div>
@@ -224,49 +224,49 @@
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Irish</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.irish" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.irish" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Japanese</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.japanese" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.japanese" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Cuban</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.cuban" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.cuban" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Hawaiian</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.hawaiian" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.hawaiian" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Swedish</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.swedish" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.swedish" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Hungarian</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.hungarian" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.hungarian" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
         <div flex="40" layout layout-align="center center">
           <span class="md-body-1">Portugese</span>
         </div>
-        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinepreference.portugese" step="1" min="1" max="3" aria-label="rating">
+        <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePreference.portugese" step="1" min="1" max="3" aria-label="rating">
         </md-slider>
       </div>
       <div flex layout="column">
@@ -290,7 +290,7 @@
       </md-input-container>
   <md-button ng-click="changeNutritionValue()" class="md-raised">Submit</md-button>
 
-  <div ng-repeat="(key, value) in nutritionPreferences">{{key}}: {{value}}</div>
+  <div ng-repeat="(key, value) in nutritionPreference">{{key}}: {{value}}</div>
   </div>
 
 

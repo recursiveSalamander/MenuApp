@@ -1,6 +1,6 @@
 angular.module('menuApp')
 .controller('preferenceFormController', ['$scope', 'menuAppFactory', function($scope, menuAppFactory) {
-  $scope.tastepreference = {
+  $scope.tastePreference = {
     spicy: 1,
     meaty: 1,
     sour: 1,
@@ -9,17 +9,17 @@ angular.module('menuApp')
     bitter: 1
   };
 
-  $scope.dietaryrestrictions;
+  $scope.dietaryRestrictions;
 
   $scope.userAllergies = [];
 
-  $scope.toggleAllergyCheckbox = function(item){
+  $scope.toggleAllergyCheckbox = function (item) {
     var idx = $scope.userAllergies.indexOf(item);
         if (idx > -1) $scope.userAllergies.splice(idx, 1);
         else $scope.userAllergies.push(item);
-  }
+  };
 
-  $scope.allergylist = [
+  $scope.allergyList = [
     'Dairy',
     'Egg',
     'Gluten',
@@ -32,7 +32,7 @@ angular.module('menuApp')
     'Wheat'
   ];
 
-  $scope.cuisinepreference = {
+  $scope.cuisinePreference = {
     american: 1,
     italian: 1,
     mexican: 1,
@@ -58,13 +58,13 @@ angular.module('menuApp')
     portugese: 1
   };
 
-  $scope.changeNutritionValue = function(){
-    if($scope.nutritionValue){
-      $scope.nutritionPreferences[$scope.selectedNutrition] = $scope.nutritionValue;
+  $scope.changeNutritionValue = function () {
+    if ($scope.nutritionValue) {
+      $scope.nutritionPreference[$scope.selectedNutrition] = $scope.nutritionValue;
     }
   };
 
-  $scope.nutritionPreferences = {};
+  $scope.nutritionPreference = {};
 
   $scope.nutritionAttributes = [
     'Potassium',
@@ -102,21 +102,21 @@ angular.module('menuApp')
   // };
 
 
-  $scope.sendPreferenceData = function(){
+  $scope.sendPreferenceData = function () {
     var preferenceData = {
-      tastepreference: $scope.tastepreference,
-      dietaryrestrictions: $scope.dietaryrestrictions,
+      tastePreference: $scope.tastePreference,
+      dietaryRestrictions: $scope.dietaryRestrictions,
       userAllergies: $scope.userAllergies,
-      cuisinepreference: $scope.cuisinepreference,
-      nutritionPreferences: $scope.nutritionPreferences,
+      cuisinePreference: $scope.cuisinePreference,
+      nutritionPreference: $scope.nutritionPreference,
       preferredIngredients: $scope.preferredIngredients,
       rejectedIngredients: $scope.rejectedIngredients
-    }
+    };
     menuAppFactory.postUserPreference(preferenceData)
     .then(function(data) {
       // console.log('++line 45 inside restaurantMenu() in restaurantListCtrl', data);c
       // $state.go('menuView', {menuData: data});
     });
 
-  }
+  };
 }]);

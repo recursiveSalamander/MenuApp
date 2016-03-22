@@ -33,7 +33,7 @@ angular.module('menuApp')
     });
   };
 
-  var postUserPreference = function (preferences){
+  var postUserPreference = function (preferences) {
     console.log('I AM INSIDE FACTORIES POSTUSERPREFERENCES');
     return $http({
       method: 'POST',
@@ -57,7 +57,7 @@ angular.module('menuApp')
 
 .factory('Geolocation', ['$http', '$location', '$state', function($http, $location, $state) {
 
-  var formatLatLong = function(lat, lng, callback) {
+  var formatLatLong = function (lat, lng, callback) {
     var coordinatesInput = {
       latitude: lat,
       longitude: lng
@@ -65,7 +65,7 @@ angular.module('menuApp')
     callback(coordinatesInput);
   };
 
-  var getLatLong = function(callback) {
+  var getLatLong = function (callback) {
     var address = document.getElementById('autocomplete').value;
     var geocoder = new google.maps.Geocoder();
 
@@ -85,7 +85,7 @@ angular.module('menuApp')
 }])
 
 .factory('userInfo', ['$http', '$location', '$state', function($http, $location, $state) {
-  var getUserInfo = function(user) {
+  var getUserInfo = function (user) {
     console.log('++line 72 inside userInfo in factories');
    return $http({
     method: 'GET',
