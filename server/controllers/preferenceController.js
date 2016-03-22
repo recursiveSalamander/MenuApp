@@ -1,6 +1,6 @@
 module.exports = {
 
-  postPreference: function(req, res) {
-
+  postPreferences: function(req, res) {
+    console.log(req.body);
   }
 };

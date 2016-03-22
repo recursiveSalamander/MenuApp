@@ -9,7 +9,7 @@ angular.module('menuApp')
     bitter: 1
   };
 
-  $scope.dietaryRestrictions;
+  $scope.dietaryRestrictions = '';
 
   $scope.userAllergies = [];
 

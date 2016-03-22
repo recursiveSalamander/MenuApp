@@ -1,12 +1,12 @@
 var express = require('express');
 var request = require('request');
 var jwt = require('jwt-simple');
+var bodyParser = require('body-parser');
 
 var restaurant = require('./db/models/Restaurant.js');
 var menu = require('./db/models/Menu_Item.js');
 var user = require('./db/models/User.js');
 var item = require('./db/models/Item_Rating.js');
-var bodyParser = require('body-parser');
 var userPreference = require('./db/models/User_Preference.js');
 var db = require('./db/schema.js');
 var Cache = require('./constructors/Cache.js');

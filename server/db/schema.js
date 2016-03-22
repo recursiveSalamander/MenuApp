@@ -20,7 +20,7 @@ var db = bookshelf;
 //table containing information user enters when signing up
 var users = function() {
   db.knex.schema.hasTable('users').then(function(exists) {
-    if(!exists) {
+    if (!exists) {
       knex.schema.createTable('users', function(user) {
         user.increments('id').primary();
         user.string('first_name', 30);
@@ -39,7 +39,7 @@ var users = function() {
 
 var userPreferences = function() {
   db.knex.schema.hasTable('user_preferences').then(function(exists) {
-    if(!exists) {
+    if (!exists) {
       knex.schema.createTable('user_preferences', function(preference) {
         preference.increments('id').primary();
         preference.string('ingredient', 50);
@@ -56,7 +56,7 @@ var userPreferences = function() {
 
 var userTastes = function() {
   db.knex.schema.hasTable('user_tastes').then(function(exists) {
-    if(!exists) {
+    if (!exists) {
       knex.schema.createTable('user_tastes', function(taste) {
         taste.increments('id').primary();
         taste.integer('spicy');
@@ -76,7 +76,7 @@ var userTastes = function() {
 
 var nutritionRestrictions = function() {
   db.knex.schema.hasTable('nutrition_restrictions').then(function(exists) {
-    if(!exists) {
+    if (!exists) {
       knex.schema.createTable('nutrition_restrictions', function(restriction) {
         restriction.increments('id').primary();
         restriction.string('type', 30);
@@ -86,6 +86,22 @@ var nutritionRestrictions = function() {
         restriction.foreign('user_id').references('id').inTable('users');
       }).then(function() {
         console.log('nutrition_restrictions table has been created');
+      });
+    }
+  });
+};
+
+var cuisinePreferences = function() {
+  db.knex.schema.hasTable('cuisine_preferences').then(function(exists) {
+    if (!exists) {
+      knex.schema.createTable('cuisine_preferences', function(preference) {
+        preference.increments('id').primary();
+        preference.string('origin', 50);
+        preference.integer('preference_level');
+        preference.interger('user_id').unsigned();
+        restriction.foreign('user_id').references('id').inTable('users');
+      }).then(function() {
+        console.log('cuisine_preferences table has been created');
       });
     }
   });
@@ -106,7 +122,7 @@ var restaurants = function() {
 
 var menuItems = function() {
   db.knex.schema.hasTable('menu_items').then(function(exists) {
-    if(!exists) {
+    if (!exists) {
       knex.schema.createTable('menu_items', function(menuitems) {
         menuitems.increments('id').primary();
         menuitems.string('item', 50);
@@ -121,7 +137,7 @@ var menuItems = function() {
 
 var itemRatings = function() {
   db.knex.schema.hasTable('item_ratings').then(function(exists) {
-    if(!exists) {
+    if (!exists) {
       knex.schema.createTable('item_ratings', function(rating) {
         rating.increments('id').primary();
         rating.integer('rating');
@@ -141,6 +157,7 @@ users();
 userPreferences();
 userTastes();
 nutritionRestrictions();
+cuisinePreferences();
 restaurants();
 menuItems();
 itemRatings();
