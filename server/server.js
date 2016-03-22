@@ -18,6 +18,7 @@ var app = express();
 
 // Creates Cache to store restaurant IDs that correspond to empty menus
 emptyMenus = new Cache('2 months ago', 86400000);
+
 app.use(bodyParser.json());
 require('./routes/routes.js')(app, express);
 

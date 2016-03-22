@@ -54,10 +54,10 @@ var userPreferences = function() {
   });
 };
 
-var tastes = function() {
-  db.knex.schema.hasTable('tastes').then(function(exists) {
+var userTastes = function() {
+  db.knex.schema.hasTable('user_tastes').then(function(exists) {
     if(!exists) {
-      knex.schema.createTable('tastes', function(taste) {
+      knex.schema.createTable('user_tastes', function(taste) {
         taste.increments('id').primary();
         taste.integer('spicy');
         taste.integer('meaty');
@@ -139,7 +139,7 @@ var itemRatings = function() {
 
 users();
 userPreferences();
-tastes();
+userTastes();
 nutritionRestrictions();
 restaurants();
 menuItems();
