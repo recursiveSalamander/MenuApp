@@ -1,5 +1,5 @@
 <div ng-controller="menuViewController">
-  <div ng-init="renderMenu(data)">The Menu</div>
+  <div id="menuListingLogo">The Menu</div>
   <div>
     <ul>
       <li ng-repeat="menu in data">
@@ -11,13 +11,15 @@
               <li><b>Name: {{entry.name}}</b></li>
               <dl>Price: {{entry.price}}</dl>
               <dl>Description: {{entry.description}}</dl>
-              <dl ng-if="prices.length > 1">NOTE: THERE ARE MORE THAN ONE PRICE IN PRICES ARRAY</dl>
-              <dl ng-if="options.length">NOTE: OPTIONS EXIST</dl>
-              <dl ng-if="additions.length">NOTE: ADDITIONS EXIST</dl>
-            </ul>
-          </li>
-        </ul>
-      </li>1
-    </ul>
-  </div>
+              <jk-rating-stars max-rating="5" rating="ctrl.rating" read-only="ctrl.readOnly" on-rating="ctrl.onRating(rating)" >
+            </jk-rating-stars>
+            <dl ng-if="prices.length > 1">NOTE: THERE ARE MORE THAN ONE PRICE IN PRICES ARRAY</dl>
+            <dl ng-if="options.length">NOTE: OPTIONS EXIST</dl>
+            <dl ng-if="additions.length">NOTE: ADDITIONS EXIST</dl>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
 </div>

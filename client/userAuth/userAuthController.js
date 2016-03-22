@@ -12,7 +12,7 @@ angular.module('menuApp')
       .catch(function(error) {
         console.log(error);
       });
-    }
+    };
 
   $scope.validate = function() {
     Auth.signin($scope.user)
@@ -23,6 +23,7 @@ angular.module('menuApp')
         $window.localStorage.setItem('authentication', token);
         console.log('SUCCESS!!!!');
       }
-    })
-  }
-}])
+    });
+  };
+
+}]);

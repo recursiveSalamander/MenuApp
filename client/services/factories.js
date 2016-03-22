@@ -14,11 +14,11 @@ angular.module('menuApp')
       return resp.data;
     }, function(error) {
       console.log(error);
-    })
-  }
+    });
+  };
 
   var getMenu = function (restaurantId) {
-    var restaurantId = {restaurantId: restaurantId};
+    restaurantId = {restaurantId: restaurantId};
     console.log('++line 21 inside getMenu in factories.js',restaurantId);
     return $http({
       method: 'POST',
@@ -30,16 +30,79 @@ angular.module('menuApp')
       return resp.data;
     }, function(error) {
       console.log(error);
+    });
+  };
+
+  var postUserPreference = function (preferences){
+    console.log('I AM INSIDE FACTORIES POSTUSERPREFERENCES');
+    return $http({
+      method: 'POST',
+      url: '/api/preference',
+      data: preferences
     })
-  }
+    .then(function (resp) {
+      return resp.data;
+    }, function(error) {
+      console.log(error);
+    });
+  };
+
+
   return {
     getRestaurantList: getRestaurantList,
-    getMenu: getMenu
+    getMenu: getMenu,
+    postUserPreference: postUserPreference
   };
 }])
 
+.factory('Geolocation', ['$http', '$location', '$state', function($http, $location, $state) {
 
-.factory('Auth', ['$http', '$location', '$state',function($http, $location, $window) {
+  var formatLatLong = function(lat, lng, callback) {
+    var coordinatesInput = {
+      latitude: lat,
+      longitude: lng
+    };
+    callback(coordinatesInput);
+  };
+
+  var getLatLong = function(callback) {
+    var address = document.getElementById('autocomplete').value;
+    var geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({address: address}, function(results, status){
+      if (status === google.maps.GeocoderStatus.OK) {
+        callback(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+      }
+    });
+  };
+
+  return {
+    getLatLong: getLatLong,
+    formatLatLong: formatLatLong
+  };
+
+
+}])
+
+.factory('userInfo', ['$http', '$location', '$state', function($http, $location, $state) {
+  var getUserInfo = function(user) {
+    console.log('++line 72 inside userInfo in factories');
+   return $http({
+    method: 'GET',
+    url: 'api/profile/profileView',
+    data: user
+   })
+   .then(function(res) {
+    // console.log(res.data);
+    return res.data;
+   });
+  };
+   return {
+    getUserInfo: getUserInfo
+   };
+}])
+
+.factory('Auth', ['$http', '$location', '$state', function($http, $location, $window) {
   var signin = function(user) {
     return $http({
       method: 'POST',
@@ -64,22 +127,22 @@ angular.module('menuApp')
   };
 
   var getToken = function() {
-    console.log('TOKEN!!!!')
+    console.log('TOKEN!!!!');
     return $window.localStorage.getItem('authentication');
-  }
+  };
 
   var isAuth = function() {
     return !!$window.localStoage.getItem('authentication');
-  }
+  };
 
   var isSignedIn = function() {
     return isAuth();
-  }
+  };
 
   var signout = function() {
     $window.localStorage.removeItem('authentication');
     $location.path('/signup');
-  }
+  };
 
   return {
     signin: signin,
@@ -89,4 +152,4 @@ angular.module('menuApp')
     isSignedIn: isSignedIn,
     signout: signout
   };
-}])
+}]);

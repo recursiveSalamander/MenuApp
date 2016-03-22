@@ -1,6 +1,6 @@
 #map {
-height: 300px;
-width: 800px;
+  height: 300px;
+  width: 30%;
 }
 
 
@@ -32,60 +32,141 @@ width: 800px;
 
 #signinlogo, #signuplogo {
   /*-webkit-text-stroke-width: 3px;
--webkit-text-stroke-color: black;*/
-text-shadow: 0 0 30px #000;
- -moz-text-shadow: 0 0 30px #000;
- -webkit-text-shadow: 0 0 30px #000;
+  -webkit-text-stroke-color: black;*/
+  text-shadow: 0 0 30px #000;
+  -moz-text-shadow: 0 0 30px #000;
+  -webkit-text-shadow: 0 0 30px #000;
   color: white;
   font-size: 100px;
 }
 
-#a71622
-
-/*Setting custom slider colors*/
-#spicyslider .md-thumb:after, #spicyslider .md-track {
-  background-color: #a71622 !important;
-    border-color: #a71622 !important;
+#restaurantListinglogo, #menuListingLogo {
+  color: white;
+  font-size: 40px;
 }
 
-#spicyslider .md-thumb:after, #spicyslider .md-track {
-  background-color: #a71622 !important;
-    border-color: #a71622 !important;
+.restaurantList {
+  font-size: 15px;
+  list-style: none;
 }
 
-
-#meatyslider .md-thumb:after, #meatyslider .md-track {
-  background-color: #EB8921 !important;
-    border-color: #EB8921 !important;
+.header {
+  background-color: #4caf50;
+  width: 100%;
+  height: 4%;
+  position: fixed;
+  top: -1.8%;
 }
 
-#meatyslider .md-focus-thumb, #meatyslider .md-focus-ring. {
-  background-color: #EB8921;
+.header a {
+  color: white;
+  text-decoration: none;
+  padding: 25px;
+  border-radius: 3px;
 }
 
-#sourslider .md-thumb:after, #sourslider .md-track {
-  background-color: #FFCC00 !important;
-    border-color: #FFCC00 !important;
+.logo {
+  font-size: 30px;
+  font-family: 'Kaushan Script', sans-serif;
+  color: white;
+  margin-bottom: -5px;
+  margin-left: -30px;
 }
 
-#sourslider .md-focus-thumb, #sourslider .md-focus-ring. {
-  background-color: #FFCC00;
+.googleLocation {
+  width: 50%;
 }
 
-#sweetslider .md-thumb:after, #sweetslider .md-track {
-  background-color: #753D90 !important;
-    border-color: #753D90 !important;
+.links {
+  font-family: 'Kaushan Script', sans-serif;
+  list-style: none;
+  width: 22%;
+  font-size: 20px;
+  padding: 0;
+  height: 30px;
+  padding-top: 6px;
+  margin-right: 25px;
+  text-align: right;
 }
 
-#sweetslider .md-focus-thumb, #sweetslider .md-focus-ring. {
-  background-color: #753D90;
+body {
+  background-color: #B3D1FF;
+  background-color: #F5F5F5;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-#bitterslider .md-thumb:after, #bitterslider .md-track {
-  background-color: #687894 !important;
-    border-color: #687894 !important;
+#map {
+  width: 100%;
+  height: 400px;
+  clear: both;
+  margin: auto;
+  margin-top: 4%;
 }
 
-#bitterslider .md-focus-thumb, #bitterslider .md-focus-ring. {
-  background-color: #687894;
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -95px;
+  margin-left: -55px;
+  width: 100px;
+  height: 100px;
+}
+
+.toolbardemoBasicUsage md-toolbar md-icon.md-default-theme {
+  color: white; }
+
+
+@media(max-width: 400px) {
+  #map {
+    width: 100%;
+    height: 250px;
+    clear: both;
+    margin: auto;
+    margin-top: 7%;
+  }
+
+  .header {
+    background-color: #4caf50;
+    width: 100%;
+    height: 5%;
+    position: fixed;
+    top: -2.4%;
+  }
+
+  .header a {
+    color: white;
+    text-decoration: none;
+    padding: 25px;
+    border-radius: 3px;
+  }
+
+  .logo {
+    font-size: 30px;
+    font-family: 'Kaushan Script', sans-serif;
+    color: white;
+    margin-bottom: -5px;
+    margin-left: -30px;
+  }
+
+  .googleLocation {
+    width: 100%;
+  }
+
+  .links {
+    width: 22%;
+    font-size: 20px;
+    padding: 0;
+    margin-right: 50px;
+    height: 30px;
+    padding-top: 6px;
+    text-align: right;
+  }
+  .restaurantList {
+    font-size: 10px;
+  }
+
+md-checkbox.md-checked .md-icon {
+ background-color: #4caf50;
 }

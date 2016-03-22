@@ -6,7 +6,10 @@
   <title>menuApp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link href="./bower_components/angular-material/angular-material.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css"/>
   <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
+  <link rel="stylesheet" type="text/css" href="./node_modules/angular-jk-rating-stars/dist/jk-rating-stars.min.css"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body ng-app="menuApp" layout="column">
 
@@ -40,7 +43,7 @@
         </md-list-item>
       </md-list>
     </md-sidenav> -->
-    <md-content flex ui-view>
+    <md-content id="main" flex ui-view>
         <!-- templates render here through ui-router -->
     </md-content>
 
@@ -53,8 +56,11 @@
   <script src="./menuView/menuViewController.js"></script>
   <script src="./restaurantList/restaurantListController.js"></script>
   <script src="./userAuth/userAuthController.js"></script>
+  <script src="./profile/profileViewController.js"></script>
   <script src="./services/factories.js"></script>
   <script src="./preferenceForm/preferenceFormController.js"></script>
+  <script src="./node_modules/angular-jk-rating-stars/dist/jk-rating-stars.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+  <script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
 </body>
 </html>
