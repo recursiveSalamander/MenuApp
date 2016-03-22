@@ -1,6 +1,6 @@
 angular.module('menuApp')
-.controller('preferenceFormController', ['$scope', '$mdDialog', function($scope, $mdDialog) {
-  $scope.tastepreference = {
+.controller('preferenceFormController', ['$scope', 'menuAppFactory', function($scope, menuAppFactory) {
+  $scope.tastePreference = {
     spicy: 1,
     meaty: 1,
     sour: 1,
@@ -9,28 +9,30 @@ angular.module('menuApp')
     bitter: 1
   };
 
-  $scope.dietaryrestrictions = {
-    lacto_vegetarian: false,
-    ovo_vegetarian: false,
-    pescetarian: false,
-    vegan: false,
-    vegetarian: false
+  $scope.dietaryRestrictions;
+
+  $scope.userAllergies = [];
+
+  $scope.toggleAllergyCheckbox = function (item) {
+    var idx = $scope.userAllergies.indexOf(item);
+        if (idx > -1) $scope.userAllergies.splice(idx, 1);
+        else $scope.userAllergies.push(item);
   };
 
-  $scope.allergies = {
-    dairy: false,
-    egg: false,
-    gluten: false,
-    peanut: false,
-    seafood: false,
-    sesame: false,
-    soy: false,
-    sulfite: false,
-    tree_nut: false,
-    wheat: false
-  };
+  $scope.allergyList = [
+    'Dairy',
+    'Egg',
+    'Gluten',
+    'Peanut',
+    'Seafood',
+    'Sesame',
+    'Soy',
+    'Sulfite',
+    'Tree nut',
+    'Wheat'
+  ];
 
-  $scope.cuisinepreference = {
+  $scope.cuisinePreference = {
     american: 1,
     italian: 1,
     mexican: 1,
@@ -56,25 +58,13 @@ angular.module('menuApp')
     portugese: 1
   };
 
-
-  $scope.hello = {
-    one: 1,
-    two: 2,
-    three: 3
-  };
-  $scope.dummy = [
-    'hello', 'hi'
-  ];
-
-
-  $scope.changeNutritionValue = function(){
-    console.log('KEKEKEKEKEKKEKEKEK');
-    if($scope.nutritionValue){
-      $scope.userNutritionPreferences[$scope.selectedNutrition] = $scope.nutritionValue;
+  $scope.changeNutritionValue = function () {
+    if ($scope.nutritionValue) {
+      $scope.nutritionPreference[$scope.selectedNutrition] = $scope.nutritionValue;
     }
   };
 
-  $scope.userNutritionPreferences = {};
+  $scope.nutritionPreference = {};
 
   $scope.nutritionAttributes = [
     'Potassium',
@@ -94,8 +84,8 @@ angular.module('menuApp')
     'Vitamin_a'
   ];
 
-  $scope.userInput = function() {};
-
+  $scope.preferredIngredients = [];
+  $scope.rejectedIngredients = [];
   // $scope.showTabDialog = function(ev) {
   //   $mdDialog.show({
   //     // controller: preferenceFormController,
@@ -111,4 +101,22 @@ angular.module('menuApp')
   //       // });
   // };
 
+
+  $scope.sendPreferenceData = function () {
+    var preferenceData = {
+      tastePreference: $scope.tastePreference,
+      dietaryRestrictions: $scope.dietaryRestrictions,
+      userAllergies: $scope.userAllergies,
+      cuisinePreference: $scope.cuisinePreference,
+      nutritionPreference: $scope.nutritionPreference,
+      preferredIngredients: $scope.preferredIngredients,
+      rejectedIngredients: $scope.rejectedIngredients
+    };
+    menuAppFactory.postUserPreference(preferenceData)
+    .then(function(data) {
+      // console.log('++line 45 inside restaurantMenu() in restaurantListCtrl', data);c
+      // $state.go('menuView', {menuData: data});
+    });
+
+  };
 }]);
