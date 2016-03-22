@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.controller('userAuthController', ['$window', '$scope', 'Auth', '$location',function($window, $scope, Auth, $location) {
+.controller('userAuthController', ['$window', '$scope', 'Auth', '$location', '$state',function($window, $scope, Auth, $location, $state) {
 
   $scope.signUp = function() {
     Auth.signup($scope.user)
@@ -22,6 +22,7 @@ angular.module('menuApp')
       } else {
         $window.localStorage.setItem('authentication', token);
         console.log('SUCCESS!!!!');
+        $state.go('restaurantList');
       }
     });
   };
