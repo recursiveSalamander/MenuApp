@@ -1,5 +1,5 @@
 angular.module('menuApp')
-.controller('preferenceFormController', ['$scope', '$mdDialog', function($scope, $mdDialog) {
+.controller('preferenceFormController', ['$scope', 'menuAppFactory', function($scope, menuAppFactory) {
   $scope.tastepreference = {
     spicy: 1,
     meaty: 1,
@@ -9,26 +9,28 @@ angular.module('menuApp')
     bitter: 1
   };
 
-  $scope.dietaryrestrictions = {
-    lacto_vegetarian: false,
-    ovo_vegetarian: false,
-    pescetarian: false,
-    vegan: false,
-    vegetarian: false
-  };
+  $scope.dietaryrestrictions;
 
-  $scope.allergies = {
-    dairy: false,
-    egg: false,
-    gluten: false,
-    peanut: false,
-    seafood: false,
-    sesame: false,
-    soy: false,
-    sulfite: false,
-    tree_nut: false,
-    wheat: false
-  };
+  $scope.userAllergies = [];
+
+  $scope.toggleAllergyCheckbox = function(item){
+    var idx = $scope.userAllergies.indexOf(item);
+        if (idx > -1) $scope.userAllergies.splice(idx, 1);
+        else $scope.userAllergies.push(item);
+  }
+
+  $scope.allergylist = [
+    'Dairy',
+    'Egg',
+    'Gluten',
+    'Peanut',
+    'Seafood',
+    'Sesame',
+    'Soy',
+    'Sulfite',
+    'Tree nut',
+    'Wheat'
+  ];
 
   $scope.cuisinepreference = {
     american: 1,
@@ -103,13 +105,20 @@ angular.module('menuApp')
   $scope.sendPreferenceData = function(){
     console.log('LOLOLOLO HI');
     var preferenceData = {
-      tastepreference: $scope.tastepreference
-      dietaryrestrictions: $scope.dietaryrestrictions
-      allergies: $scope.allergies
-      cuisinepreference: $scope.cuisinepreference
-      nutritionPreferences: $scope.nutritionPreferences
-      preferredIngredients: $scope.preferredIngredients
+      tastepreference: $scope.tastepreference,
+      dietaryrestrictions: $scope.dietaryrestrictions,
+      userAllergies: $scope.userAllergies,
+      cuisinepreference: $scope.cuisinepreference,
+      nutritionPreferences: $scope.nutritionPreferences,
+      preferredIngredients: $scope.preferredIngredients,
       rejectedIngredients: $scope.rejectedIngredients
     }
+
+    menuAppFactory.postUserPreference(preferenceData)
+    .then(function(data) {
+      // console.log('++line 45 inside restaurantMenu() in restaurantListCtrl', data);c
+      // $state.go('menuView', {menuData: data});
+    });
+
   }
 }]);

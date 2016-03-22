@@ -32,9 +32,26 @@ angular.module('menuApp')
       console.log(error);
     });
   };
+
+  var postUserPreference = function (preferences){
+    console.log('I AM INSIDE FACTORIES POSTUSERPREFERENCES');
+    return $http({
+      method: 'POST',
+      url: '/api/preference',
+      data: preferences
+    })
+    .then(function (resp) {
+      return resp.data;
+    }, function(error) {
+      console.log(error);
+    });
+  };
+
+
   return {
     getRestaurantList: getRestaurantList,
-    getMenu: getMenu
+    getMenu: getMenu,
+    postUserPreference: postUserPreference
   };
 }])
 

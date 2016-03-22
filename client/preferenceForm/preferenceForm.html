@@ -12,7 +12,9 @@ Allergies, excluded ingredients, allowed diet
 STEP 1:
 Pictures for preference algorithm
 -->
-<div ng-controller="preferenceFormController">
+
+
+
   <h2>Taste preferences</h2>
   <div id="tastepreferenceform">
     <div layout md-theme="red">
@@ -61,44 +63,36 @@ Pictures for preference algorithm
 
 
 
-
   <h2>Diet Restrictions</h2>
   <div layout="row" layout-wrap>
-      <div flex="100" flex-gt-sm="50" layout="column">
-        <div>
-          <fieldset class="standard" >
-            <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend>
+    <div flex="100" flex-gt-sm="50" layout="column">
+      <div>
+        <fieldset class="standard">
+          <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend>
+
+
+          <md-radio-group ng-model="dietaryrestrictions">
             <div layout="row" layout-wrap flex>
               <div flex="50">
-                <md-checkbox ng-model="dietaryrestrictions.lacto_vegetarian" ng-true-value="true" ng-false-value="false">
-                  Lacto vegetarian
-                </md-checkbox>
-              </div>
-
-              <div flex="50">
-                <md-checkbox ng-model="dietaryrestrictions.ovo_vegetarian" ng-true-value="true" ng-false-value="false">
-                  Ovo vegetarian
-                </md-checkbox>
+                <md-radio-button flex="50" value="lacto vegetarian" class="md-primary">Lacto Vegetarian</md-radio-button>
               </div>
               <div flex="50">
-                <md-checkbox ng-model="dietaryrestrictions.pescetarian" ng-true-value="true" ng-false-value="false">
-                  Pescetarian
-                </md-checkbox>
+                <md-radio-button flex="50" value="ovo vegetarian" class="md-primary">Ovo Vegetarian</md-radio-button>
               </div>
               <div flex="50">
-                <md-checkbox ng-model="dietaryrestrictions.vegan" ng-true-value="true" ng-false-value="false">
-                  Vegan
-                </md-checkbox>
+                <md-radio-button flex="50" value="pescetarian" class="md-primary">Pescetarian</md-radio-button>
               </div>
               <div flex="50">
-                <md-checkbox ng-model="dietaryrestrictions.vegetarian" ng-true-value="true" ng-false-value="false">
-                  Vegetarian
-                </md-checkbox>
+                <md-radio-button flex="50" value="vegan" class="md-primary">Vegan</md-radio-button>
               </div>
-          </fieldset>
-        </div>
-      </div>
+              <div flex="50">
+                <md-radio-button flex="50" value="vegetarian" class="md-primary">Vegetarian</md-radio-button>
+              </div>
+            </div>
+        </md-radio-group>
+      </fieldset>
     </div>
+  </div>
 </div>
 
 
@@ -112,61 +106,23 @@ Pictures for preference algorithm
           <fieldset class="standard">
             <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend>
             <div layout="row" layout-wrap flex>
-              <div flex="33">
-                <md-checkbox ng-model="allergies.dairy" ng-true-value="true" ng-false-value="false">
-                  Dairy
-                </md-checkbox>
-              </div>
-              <div flex="33">
-                <md-checkbox ng-model="allergies.egg" ng-true-value="true" ng-false-value="false">
-                  Egg
-                </md-checkbox>
-              </div>
-              <div flex="33">
-                <md-checkbox ng-model="allergies.gluten" ng-true-value="true" ng-false-value="false">
-                  Gluten
-                </md-checkbox>
-              </div>
-              <div flex="33">
-                <md-checkbox ng-model="allergies.peanut" ng-true-value="true" ng-false-value="false">
-                  Peanut
-                </md-checkbox>
-              </div>
-              <div flex="33">
-                <md-checkbox ng-model="allergies.seafood" ng-true-value="true" ng-false-value="false">
-                  Seafood
-                </md-checkbox>
-              </div>
-              <div flex="33">
-                <md-checkbox ng-model="allergies.sesame" ng-true-value="true" ng-false-value="false">
-                  Sesame
-                </md-checkbox>
-              </div>
-              <div flex="33">
-                <md-checkbox ng-model="allergies.soy" ng-true-value="true" ng-false-value="false">
-                  Soy
-                </md-checkbox>
-              </div>
-              <div flex="33">
-                <md-checkbox ng-model="allergies.sulfite" ng-true-value="true" ng-false-value="false">
-                  Sulfite
-                </md-checkbox>
-              </div>
-              <div flex="33">
-                <md-checkbox ng-model="allergies.tree_nut" ng-true-value="true" ng-false-value="false">
-                  Tree Nut
-                </md-checkbox>
-              </div>
-              <div flex="33">
-                <md-checkbox ng-model="allergies.wheat" ng-true-value="true" ng-false-value="false">
-                  Wheat
+              <div flex="33" ng-repeat="allergy in allergylist">
+                <md-checkbox ng-click="toggleAllergyCheckbox(allergy)">
+                  {{allergy}}
                 </md-checkbox>
               </div>
           </fieldset>
         </div>
       </div>
     </div>
-</div>
+  </div>
+
+
+
+
+
+
+
 
 
   <h2>Cuisine Origin</h2>
@@ -346,10 +302,10 @@ Pictures for preference algorithm
   </div>
 
 
-
   <h2>Nutrition Restrictions</h2>
-  <div ng-controller="preferenceFormController">
 
+  <!-- <div ng-controller="preferenceFormController"> -->
+  <div layout="row" layout-wrap>
       <md-input-container>
       <label>Nutrition</label>
         <md-select ng-model="selectedNutrition">
@@ -361,14 +317,17 @@ Pictures for preference algorithm
         <input ng-model="nutritionValue" type="number"></input>
 
       </md-input-container>
-<md-button ng-click="changeNutritionValue()" class="md-raised">Submit</md-button>
+  <md-button ng-click="changeNutritionValue()" class="md-raised">Submit</md-button>
 
   <div ng-repeat="(key, value) in nutritionPreferences">{{key}}: {{value}}</div>
   </div>
+  <!-- </div> -->
 
 
-<div ng-controller="preferenceFormController">
+
+<!-- <div ng-controller="preferenceFormController"> -->
   <h2>Ingredient Preferences</h2>
+  <div>
   <md-input-container>
     <label>I like...</label>
     <md-chips ng-model="preferredIngredients"></md-chips>
@@ -377,12 +336,16 @@ Pictures for preference algorithm
     <label>I don't like...</label>
     <md-chips ng-model="rejectedIngredients"></md-chips>
   </md-input-container>
-
-<br>
-
+<!-- </div> -->
+</div>
+<!-- <div ng-controller="preferenceFormController"> -->
 <md-button class="md-raised" ng-click="sendPreferenceData()">Submit</md-button>
 
-</div>
-
-
-</div>
+{{tastepreference}}
+{{dietaryrestrictions}}
+{{userAllergies}}
+{{cuisinepreference}}
+{{nutritionPreferences}}
+{{preferredIngredients}}
+{{rejectedIngredients}}
+<!-- </div> -->
