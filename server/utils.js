@@ -119,7 +119,6 @@ module.exports = {
 
     createRatingsArray: function(userID, restaurantID, callback) {
       var getItems = function(userID, restaurantID) {
-        console.log('INSIDE');
         Item_Rating.where({user_id: userID}).fetchAll({withRelated: ['menu_items']})
         .then(function(data) {
           var formattedItemData = data.toJSON();
@@ -132,10 +131,9 @@ module.exports = {
             for(var i = 0; i < data.length; i++){
               ratingsArr.push({rating: data[i].rating, item: formattedMenuData[i].item});
             }
-            console.log(ratingsArr);
+            return ratingsArr;
           })
         });
       }
-      getItems(userID, restaurantID);
     }
  }

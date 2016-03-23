@@ -27,7 +27,7 @@ module.exports = {
     });
   },
 
-  returnRating: function(request, response){
+  getRating: function(request, response){
     var token = request.body.currentToken;
     var userID = Utils.getUserID(token)
     var restaurantID = request.body.restaurantId;
