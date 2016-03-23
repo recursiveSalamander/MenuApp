@@ -28,7 +28,7 @@ var server = app.listen(port, function() {
 });
 
 // var test = function(){
-//   ratingsController.returnRating();
+//   ratingsController.getRating();
 // }
 //
 // test();

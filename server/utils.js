@@ -117,8 +117,7 @@ module.exports = {
      })
    },
 
-    createRatingsArray: function(userID, restaurantID, callback) {
-      var getItems = function(userID, restaurantID) {
+    createRatingsArray: function(userID, restaurantID) {
         Item_Rating.where({user_id: userID}).fetchAll({withRelated: ['menu_items']})
         .then(function(data) {
           var formattedItemData = data.toJSON();
@@ -129,11 +128,11 @@ module.exports = {
             var formattedMenuData = items.toJSON();
             var ratingsArr = [];
             for(var i = 0; i < data.length; i++){
-              ratingsArr.push({rating: data[i].rating, item: formattedMenuData[i].item});
+              ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
             }
+            console.log(ratingsArr);
             return ratingsArr;
           })
         });
       }
-    }
  }
