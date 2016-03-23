@@ -28,9 +28,9 @@ var server = app.listen(port, function() {
 });
 
 // var test = function(){
-//   ratingsController.getRating();
+//   ratingsController.averageRatings();
 // }
-//
+// 
 // test();
 
 module.exports = app;
