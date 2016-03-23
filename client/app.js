@@ -11,7 +11,7 @@ angular.module('menuApp', [
     url: '/restaurantList',
     templateUrl: '/restaurantList/restaurantList.html',
     authentication: true,
-    signedin: false
+    // signedin: false
   })
   .state('menuView', {
     url: '/menuView',
@@ -22,32 +22,32 @@ angular.module('menuApp', [
       'ratingInfo': null
     },
     authentication: true,
-    signedin: true
+    // signedin: true
   })
   .state('profileView', {
     url: '/profileView',
     templateUrl: '/profile/profileView.html',
     authentication: true,
-    signedin: true
+    // signedin: true
   })
   .state('signIn', {
     url: '/signIn',
     templateUrl: '/userAuth/signIn.html',
     authentication: false,
-    signedin: false
+    // signedin: false
   })
   .state('signUp', {
     url: '/signUp',
     templateUrl: '/userAuth/signUp.html',
     authentication: false,
-    signedin: false
+    // signedin: false
   })
   .state('preferenceForm', {
     url: '/preferenceForm',
     templateUrl: '/preferenceForm/preferenceForm.html',
     controller: 'preferenceFormController',
     authentication: true,
-    signedin: true
+    // signedin: true
   });
 
   // .state('form', {
