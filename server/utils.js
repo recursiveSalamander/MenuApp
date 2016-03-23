@@ -21,54 +21,56 @@ module.exports = {
     return currentUser.id;
   },
 
-  getRestaurantID: function(restaurant, callback){
-    console.log('inside getrestaurantID');
+  updateUser: function(userID, field, newValue, callback) {
+    var parameter = {};
+    parameter[field] = newValue;
+    new User({id: userID}).save(parameter)
+    .then(function(data) {
+      callback(data);
+    });
+  },
+
+  getRestaurantID: function(restaurant, callback) {
     Restaurant.where({'restaurant_id': restaurant}).fetch()
     .then(function(data) {
-      if(callback) {
-        callback(data.id);
-      } else {
-        return data.id;
-      }
-    });
-  },
-
-  insertRestaurant: function(restaurant, callback){
-    console.log('inside insertRestaurant');
-    new Restaurant( {restaurant_id: restaurant} )
-    .fetch()
-    .then(function(exists) {
-      if(!exists) {
-        var newRestaurant = new Restaurant({
-          restaurant_id: restaurant
-        });
-        newRestaurant.save()
-        .then(function() {
-          if(callback) {
-            callback (restaurant);
-          }
-        });
-      } else {
         if(callback) {
-          callback(restaurant);
+          callback(data.id);
+        } else {
+          return data.id;
         }
-      }
-    });
+      });
   },
 
-  insertMenuItem: function(menuitem, restaurantID, callback){
-    console.log('inside insertmenuitm');
+  insertRestaurant: function(restaurant, callback) {
+    new Restaurant( {restaurant_id: restaurant} )
+      .fetch()
+      .then(function(exists) {
+        if(!exists){
+          var newRestaurant = new Restaurant({
+            restaurant_id: restaurant
+          });
+          newRestaurant.save()
+          .then(function() {
+            if(callback) {
+              callback(restaurant);
+            }
+          });
+
+        }
+      },
+
+  insertMenuItem: function(menuitem, restaurant_id, callback) {
     new Menu_Item( { item: menuitem} )
     .fetch()
     .then(function(exists) {
-      if(!exists) {
+      if(!exists){
         var newItem = new Menu_Item({
           item: menuitem,
           restaurant: restaurantID
         });
         newItem.save()
         .then(function() {
-          if(callback){
+          if(callback) {
             callback(menuitem);
           }
         });
@@ -80,8 +82,8 @@ module.exports = {
     });
   },
 
-  getMenuItemID: function(menuitem, callback){
-    console.log('insidegetmenuitemid');
+
+  getMenuItemID: function(menuitem, callback) {
     Menu_Item.where({'item': menuitem}).fetch()
     .then(function (data) {
       if(callback) {

@@ -98,8 +98,8 @@ var cuisinePreferences = function() {
         preference.increments('id').primary();
         preference.string('origin', 50);
         preference.integer('preference_level');
-        preference.interger('user_id').unsigned();
-        restriction.foreign('user_id').references('id').inTable('users');
+        preference.integer('user_id').unsigned();
+        preference.foreign('user_id').references('id').inTable('users');
       }).then(function() {
         console.log('cuisine_preferences table has been created');
       });

@@ -1,5 +1,11 @@
 var moment = require('moment');
 
+/*  Creates Cache for use on server box
+ *
+ *  refreshTime = time to remove from cache, format according to Moment.js: 'a month ago'
+ *  maintenanceInterval = how often to check if data in the cache have exceeded the refresh time, in ms
+ */
+
 function Cache(refreshTime, maintenanceInterval) {
   this.refreshTime = refreshTime;
   this.maintenanceInterval = maintenanceInterval;
