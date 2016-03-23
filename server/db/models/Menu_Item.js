@@ -6,13 +6,12 @@ var Menu_Item = bookshelf.Model.extend({
   tableName: 'menu_items',
 
   restaurants: function() {
-    return this.belongsTo(Restaurant, 'restaurant_id');
+    return this.belongsTo('Restaurant', 'restaurant');
   },
 
   ratings: function() {
-    return this.hasMany(Item_Rating);
+    return this.hasMany('Item_Rating');
   }
-
 });
 
-module.exports = Menu_Item;
+module.exports = bookshelf.model('Menu_Item',Menu_Item);

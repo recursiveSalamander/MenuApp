@@ -9,4 +9,4 @@ var User_Preference = bookshelf.Model.extend({
   }
 });
 
-module.exports = User_Preference;
+module.exports = bookshelf.model('User_Preference',User_Preference);
