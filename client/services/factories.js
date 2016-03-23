@@ -144,7 +144,7 @@ angular.module('menuApp')
     getUserInfo: getUserInfo,
     ratingInfo: ratingInfo,
     getRating: getRating
-  }
+  };
 }])
 
 .factory('Auth', ['$http', '$location', '$state', '$window', function($http, $location, $state, $window) {

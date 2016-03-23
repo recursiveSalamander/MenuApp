@@ -47,7 +47,7 @@ angular.module('menuApp', [
     templateUrl: '/preferenceForm/preferenceForm.html',
     controller: 'preferenceFormController',
     authentication: true,
-    // signedin: true
+    // signedin: truesiap
   });
 
   // .state('form', {

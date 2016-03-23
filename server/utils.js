@@ -114,7 +114,7 @@ module.exports = {
        if (callback) {
          callback(savedItemRating);
        }
-     })
+     });
    },
 
     createRatingsArray: function(userID, restaurantID, callback) {
@@ -131,11 +131,11 @@ module.exports = {
               ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
             }
             if (callback) {
-              callback(ratingsArr)
+              callback(ratingsArr);
             } else {
             return ratingsArr;
             }
-          })
+          });
         });
       }
- }
+ };

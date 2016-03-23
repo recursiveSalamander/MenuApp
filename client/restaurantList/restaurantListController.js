@@ -39,7 +39,7 @@ angular.module('menuApp')
     .then(function(ratingInfo) {
       $state.go('menuView', {ratingInfo});
       console.log('++line 41 post getRating() in restListCtrl ratingInfo: ',ratingInfo);
-    })
+    });
     // .then(function() {
     //   $scope.restaurantId = restaurantId;
     //   console.log('++line 38 in restaurantMenu() in restListCtrl restaurantId: ',restaurantId);
