@@ -10,11 +10,11 @@ var Utils = require('../utils.js');
 
 module.exports = {
   postRatingToTable: function(request, response) {
-    // var token = request.body.currentToken;
-    var userID = 7
-    var rating = 5;
-    var menuitem = 'prime rib';
-    var restaurant = 'bobs big boy';
+    var token = request.body.currentToken;
+    var userID = Utils.getUserID(token);
+    var rating = request.body.rating;
+    var menuitem = request.body.entryId;
+    var restaurant = request.body.restaurantId;
 
     Utils.insertRestaurant(restaurant, function(data){
       Utils.getRestaurantID(data, function(restaurantID){
@@ -28,9 +28,9 @@ module.exports = {
   },
 
   returnRating: function(request, response){
-    // var token = request.body.currentToken;
-    var userID = 7;
-    var restaurantID = 12;
+    var token = request.body.currentToken;
+    var userID = Utils.getUserID(token)
+    var restaurantID = request.body.restaurantId;
 
     Utils.createRatingsArray(userID, restaurantID);
   }

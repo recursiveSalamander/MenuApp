@@ -27,10 +27,10 @@ var server = app.listen(port, function() {
   console.log('http://localhost:' + port);
 });
 
-var test = function(){
-  ratingsController.returnRating();
-}
-
-test();
+// var test = function(){
+//   ratingsController.returnRating();
+// }
+//
+// test();
 
 module.exports = app;
