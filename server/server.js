@@ -12,6 +12,7 @@ var db = require('./db/schema.js');
 var Cache = require('./constructors/Cache.js');
 var Utils = require('./utils.js');
 var ratingsController = require('./controllers/ratingsController.js');
+var Item_Rating = './db/models/Item_Rating.js';
 
 var app = express();
 
@@ -25,5 +26,11 @@ var port = process.env.PORT || 8000;
 var server = app.listen(port, function() {
   console.log('http://localhost:' + port);
 });
+
+var test = function(){
+  ratingsController.returnRating();
+}
+
+test();
 
 module.exports = app;

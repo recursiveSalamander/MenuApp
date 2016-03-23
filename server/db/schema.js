@@ -14,6 +14,7 @@ var knex = require('knex')({
 });
 
 var bookshelf = require('bookshelf')(knex);
+bookshelf.plugin('registry');
 var db = bookshelf;
 
 //table containing information user enters when signing up
@@ -56,7 +57,7 @@ var restaurants = function() {
     if(!exists){
       knex.schema.createTable('restaurants', function(restaurant) {
         restaurant.increments('id').primary();
-        restaurant.string('restaurant_id', 50);
+        restaurant.string('restaurantID', 50);
       }).then(function() {
         console.log('restaurants table has been created');
       });
@@ -70,8 +71,8 @@ var menu_items = function() {
       knex.schema.createTable('menu_items', function(menuitems) {
         menuitems.increments('id').primary();
         menuitems.string('item', 50);
-        menuitems.integer('restaurant_id').unsigned();
-        menuitems.foreign('restaurant_id').references('id').inTable('restaurants');
+        menuitems.integer('restaurant').unsigned();
+        menuitems.foreign('restaurant').references('id').inTable('restaurants');
       }).then(function() {
         console.log('menu_items table has been created');
       });

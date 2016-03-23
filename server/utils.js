@@ -22,6 +22,7 @@ module.exports = {
   },
 
   getRestaurantID: function(restaurant, callback){
+    console.log('inside getrestaurantID');
     Restaurant.where({'restaurant_id': restaurant}).fetch()
     .then(function(data){
         if(callback){
@@ -33,6 +34,7 @@ module.exports = {
   },
 
   insertRestaurant: function(restaurant, callback){
+    console.log('inside insertRestaurant');
     new Restaurant( {restaurant_id: restaurant} )
       .fetch()
       .then(function(exists){
@@ -54,14 +56,15 @@ module.exports = {
       });
     },
 
-  insertMenuItem: function(menuitem, restaurant_id, callback){
+  insertMenuItem: function(menuitem, restaurantID, callback){
+    console.log('inside insertmenuitm');
     new Menu_Item( { item: menuitem} )
     .fetch()
     .then(function(exists){
       if(!exists){
         var newItem = new Menu_Item({
           item: menuitem,
-          restaurant_id: restaurant_id
+          restaurant: restaurantID
         });
         newItem.save()
         .then(function() {
@@ -78,12 +81,13 @@ module.exports = {
   },
 
   getMenuItemID: function(menuitem, callback){
+    console.log('insidegetmenuitemid');
     Menu_Item.where({'item': menuitem}).fetch()
     .then(function (data){
       if(callback){
         callback(data.id);
       } else {
-      return data.id;
+        return data.id;
       }
     });
   },
@@ -111,5 +115,27 @@ module.exports = {
          callback(savedItemRating);
        }
      })
-   }
-};
+   },
+
+    createRatingsArray: function(userID, restaurantID, callback) {
+      var getItems = function(userID, restaurantID) {
+        console.log('INSIDE');
+        Item_Rating.where({user_id: userID}).fetchAll({withRelated: ['menu_items']})
+        .then(function(data) {
+          var formattedItemData = data.toJSON();
+          return formattedItemData;
+        }).then(function(data){
+        Menu_Item.where({restaurant: restaurantID}).fetchAll()
+          .then(function(items) {
+            var formattedMenuData = items.toJSON();
+            var ratingsArr = [];
+            for(var i = 0; i < data.length; i++){
+              ratingsArr.push({rating: data[i].rating, item: formattedMenuData[i].item});
+            }
+            console.log(ratingsArr);
+          })
+        });
+      }
+      getItems(userID, restaurantID);
+    }
+ }

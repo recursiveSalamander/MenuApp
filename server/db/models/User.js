@@ -41,4 +41,4 @@ var User = bookshelf.Model.extend({
 });
 
 
-module.exports = User;
+module.exports = bookshelf.model('User',User);
