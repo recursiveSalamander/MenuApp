@@ -7,13 +7,13 @@ angular.module('menuApp')
   // console.log('++line 7 in menuViewCtrl in restaurantId ',$scope.restaurantId);
 
   $scope.renderMenu = function(restaurantId) {
-    console.log('++line 7 in renderMenu() in menuViewCtrl',restaurantId);
+    console.log('++line 10 in renderMenu() in menuViewCtrl',restaurantId);
     menuAppFactory.getMenu(restaurantId)
     .then(function(data) {
       $scope.data = data;
-      console.log('++line 11 inside renderMenu in menuViewController', data);
+      console.log('++line 14 inside renderMenu in menuViewController', data);
     }).catch(function(err) {
-      console.log('++line 12 err inside renderMenu in menuViewController',err);
+      console.log('++line 16 err inside renderMenu in menuViewController',err);
     });
   };
 

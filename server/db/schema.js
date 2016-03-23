@@ -28,7 +28,7 @@ var users = function() {
         user.string('email', 30).unique();
         user.string('password', 252);
         user.string('username', 30).unique();
-      }).then(function(){
+      }).then(function() {
         console.log('users table has been created');
       });
     }
@@ -36,9 +36,9 @@ var users = function() {
 };
 
 var user_preferences = function() {
-  db.knex.schema.hasTable('user_preferences').then(function(exists){
-    if(!exists){
-      knex.schema.createTable('user_preferences', function(preference){
+  db.knex.schema.hasTable('user_preferences').then(function(exists) {
+    if(!exists) {
+      knex.schema.createTable('user_preferences', function(preference) {
         preference.increments('id').primary();
         preference.boolean('allergy');
         preference.boolean('favorite');
@@ -54,7 +54,7 @@ var user_preferences = function() {
 
 var restaurants = function() {
   db.knex.schema.hasTable('restaurants').then(function(exists) {
-    if(!exists){
+    if(!exists) {
       knex.schema.createTable('restaurants', function(restaurant) {
         restaurant.increments('id').primary();
         restaurant.string('restaurantID', 50);
@@ -67,7 +67,7 @@ var restaurants = function() {
 
 var menu_items = function() {
   db.knex.schema.hasTable('menu_items').then(function(exists) {
-    if(!exists){
+    if(!exists) {
       knex.schema.createTable('menu_items', function(menuitems) {
         menuitems.increments('id').primary();
         menuitems.string('item', 50);
@@ -82,7 +82,7 @@ var menu_items = function() {
 
 var item_ratings = function() {
   db.knex.schema.hasTable('item_ratings').then(function(exists) {
-    if(!exists){
+    if(!exists) {
       knex.schema.createTable('item_ratings', function(rating) {
         rating.increments('id').primary();
         rating.integer('rating');

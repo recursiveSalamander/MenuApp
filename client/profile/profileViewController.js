@@ -6,7 +6,7 @@ angular.module('menuApp')
     console.log('++line 6 inside renderProfile() in profileViewController');
     userInfo.getUserInfo()
     .then(function(users) {
-      console.log('++line9 inside renderProfile() after promise in profileViewController',users);
+      console.log('++line 9 inside renderProfile() after promise in profileViewController',users);
       $scope.users = users;
     }).catch(function(err) {
       console.log(err);

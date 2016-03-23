@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.controller('restaurantListController', ['$window', '$scope', '$state', 'menuAppFactory', 'Geolocation', 'Auth' ,function($window, $scope, $state, menuAppFactory, Geolocation, Auth) {
+.controller('restaurantListController', ['$window', '$scope', '$state', 'menuAppFactory', 'Geolocation', 'Auth', 'userInfo', function($window, $scope, $state, menuAppFactory, Geolocation, Auth, userInfo) {
   $scope.data = [];
 
   $scope.signout = function() {
@@ -25,15 +25,30 @@ angular.module('menuApp')
   };
 
   $scope.restaurantMenu = function(restaurantId) {
-    console.log('++line 24 inside restaurantMenu() in restaurantListCtrl',restaurantId);
+    console.log('++line 28 inside restaurantMenu() in restaurantListCtrl',restaurantId);
     $scope.restaurantId = restaurantId;
-    $state.go('menuView', {'restaurantId': $scope.restaurantId});
+    // $state.go('menuView', {'restaurantId': $scope.restaurantId});
     menuAppFactory.getMenu(restaurantId)
     .then(function(data) {
-      console.log('++line 29 inside restaurantMenu() in restaurantListCtrl data:', data);
-      console.log('++line 30 inside restaurantMenu() in restaurantListCtrl restaurantId:', restaurantId);
-      $state.go('menuView', {menuData: data, restaurantId: restaurantId});
+      console.log('++line 33 inside restaurantMenu() in restaurantListCtrl data:', data);
+      console.log('++line 34 inside restaurantMenu() in restaurantListCtrl restaurantId:', restaurantId);
+      $scope.menuData = data;
+      // $state.go('menuView', {menuData: data, restaurantId: restaurantId});
+      userInfo.getRating(restaurantId)
+    })
+    .then(function(ratingInfo) {
+      $state.go('menuView', {ratingInfo});
+      console.log('++line 41 post getRating() in restListCtrl ratingInfo: ',ratingInfo);
     });
+    // .then(function() {
+    //   $scope.restaurantId = restaurantId;
+    //   console.log('++line 38 in restaurantMenu() in restListCtrl restaurantId: ',restaurantId);
+    //   userInfo.getRating(restaurantId)
+    // })
+    // .then(function(ratingInfo) {
+    //   // $state.go('menuView', {ratingInfo});
+    //   console.log('++line 44 post getRating()', ratingInfo);
+    // })
   };
 
   var autocomplete = new google.maps.places.Autocomplete(

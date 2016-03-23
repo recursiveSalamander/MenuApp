@@ -4,49 +4,50 @@ angular.module('menuApp', [
   'ngAria',
   'ngAnimate',
   'jkAngularRatingStars'
-])
+  ])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
   .state('restaurantList', {
     url: '/restaurantList',
     templateUrl: '/restaurantList/restaurantList.html',
     authentication: true,
-    signedin: true
+    // signedin: false
   })
   .state('menuView', {
     url: '/menuView',
     templateUrl: '/menuView/menuView.html',
     params: {
       'menuData': null,
-      'restaurantId': null
+      'restaurantId': null,
+      'ratingInfo': null
     },
     authentication: true,
-    signedin: true
+    // signedin: true
   })
   .state('profileView', {
     url: '/profileView',
     templateUrl: '/profile/profileView.html',
     authentication: true,
-    signedin: true
+    // signedin: true
   })
   .state('signIn', {
     url: '/signIn',
     templateUrl: '/userAuth/signIn.html',
     authentication: false,
-    signedin: false
+    // signedin: false
   })
   .state('signUp', {
     url: '/signUp',
     templateUrl: '/userAuth/signUp.html',
     authentication: false,
-    signedin: false
+    // signedin: false
   })
   .state('preferenceForm', {
     url: '/preferenceForm',
     templateUrl: '/preferenceForm/preferenceForm.html',
     controller: 'preferenceFormController',
     authentication: true,
-    signedin: true
+    // signedin: truesiap
   });
 
   // .state('form', {
@@ -82,4 +83,18 @@ angular.module('menuApp', [
   .primaryPalette('deep-purple');
   $mdThemingProvider.theme('light-green')
   .primaryPalette('light-green');
+})
+
+.run(function ($rootScope, $state, $location, Auth) {
+  $rootScope.url = "http://localhost:8000";
+  $rootScope.$on('$stateChangeStart', function (e, toState) {
+    if (toState.authentication && !Auth.isAuth()) {
+      e.preventDefault();
+      $state.go('signIn');
+    }
+    if(!toState.authentication && Auth.isAuth()) {
+      e.preventDefault();
+      $state.go('restaurantList');
+    }
+  });
 });

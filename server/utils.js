@@ -24,44 +24,44 @@ module.exports = {
   getRestaurantID: function(restaurant, callback){
     console.log('inside getrestaurantID');
     Restaurant.where({'restaurant_id': restaurant}).fetch()
-    .then(function(data){
-        if(callback){
-          callback(data.id);
-        } else {
-          return data.id;
-        }
-      });
+    .then(function(data) {
+      if(callback) {
+        callback(data.id);
+      } else {
+        return data.id;
+      }
+    });
   },
 
   insertRestaurant: function(restaurant, callback){
     console.log('inside insertRestaurant');
     new Restaurant( {restaurant_id: restaurant} )
-      .fetch()
-      .then(function(exists){
-        if(!exists){
-          var newRestaurant = new Restaurant({
-            restaurant_id: restaurant
-          });
-          newRestaurant.save()
-          .then(function() {
-            if(callback){
-              callback (restaurant);
-            }
-          });
-        } else {
+    .fetch()
+    .then(function(exists) {
+      if(!exists) {
+        var newRestaurant = new Restaurant({
+          restaurant_id: restaurant
+        });
+        newRestaurant.save()
+        .then(function() {
           if(callback) {
-            callback(restaurant);
+            callback (restaurant);
           }
+        });
+      } else {
+        if(callback) {
+          callback(restaurant);
         }
-      });
-    },
+      }
+    });
+  },
 
   insertMenuItem: function(menuitem, restaurantID, callback){
     console.log('inside insertmenuitm');
     new Menu_Item( { item: menuitem} )
     .fetch()
-    .then(function(exists){
-      if(!exists){
+    .then(function(exists) {
+      if(!exists) {
         var newItem = new Menu_Item({
           item: menuitem,
           restaurant: restaurantID
@@ -83,8 +83,8 @@ module.exports = {
   getMenuItemID: function(menuitem, callback){
     console.log('insidegetmenuitemid');
     Menu_Item.where({'item': menuitem}).fetch()
-    .then(function (data){
-      if(callback){
+    .then(function (data) {
+      if(callback) {
         callback(data.id);
       } else {
         return data.id;
@@ -95,7 +95,7 @@ module.exports = {
   insertRating: function(rating, userID, menuitem, callback) {
    console.log('INSERTRATING: ', menuitem);
    Item_Rating.where({'user_id': userID, 'item_id': menuitem}).fetch()
-     .then(function(myItemRating) {
+   .then(function(myItemRating) {
        //if the rating already exists
        if (myItemRating !== null) {
          return myItemRating;
@@ -109,15 +109,15 @@ module.exports = {
        //this .then overwrites the rating if it already exists, or creates a new one
      }).then(function(myItemRating) {
        myItemRating.set({rating: rating});
-       return myItemRating.save()
+       return myItemRating.save();
      }).then(function(savedItemRating) {
-       if (callback){
+       if (callback) {
          callback(savedItemRating);
        }
-     })
+     });
    },
 
-    createRatingsArray: function(userID, restaurantID) {
+    createRatingsArray: function(userID, restaurantID, callback) {
         Item_Rating.where({user_id: userID}).fetchAll({withRelated: ['menu_items']})
         .then(function(data) {
           var formattedItemData = data.toJSON();
@@ -130,9 +130,12 @@ module.exports = {
             for(var i = 0; i < data.length; i++){
               ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
             }
-            console.log(ratingsArr);
+            if (callback) {
+              callback(ratingsArr);
+            } else {
             return ratingsArr;
-          })
+            }
+          });
         });
       }
- }
+ };

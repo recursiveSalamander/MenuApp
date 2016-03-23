@@ -28,10 +28,16 @@ module.exports = {
   },
 
   getRating: function(request, response){
+    console.log('++line 31 inside getRating() in ratingsController request.body: ',request.body);
     var token = request.body.currentToken;
-    var userID = Utils.getUserID(token)
+    var userID = Utils.getUserID(token);
     var restaurantID = request.body.restaurantId;
-
-    Utils.createRatingsArray(userID, restaurantID);
+    console.log('++line 35 getRating() in ratingsController userId: ',userID);
+    Utils.getRestaurantID(restaurantID, function(data) {
+      Utils.createRatingsArray(userID, data, function(data) {
+        console.log('++line 38 getrating() in ratingsController data: ',data);
+        response.send(data);
+      });
+    });
   }
 };
