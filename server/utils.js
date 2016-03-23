@@ -117,7 +117,7 @@ module.exports = {
      })
    },
 
-    createRatingsArray: function(userID, restaurantID) {
+    createRatingsArray: function(userID, restaurantID, callback) {
         Item_Rating.where({user_id: userID}).fetchAll({withRelated: ['menu_items']})
         .then(function(data) {
           var formattedItemData = data.toJSON();
@@ -130,8 +130,11 @@ module.exports = {
             for(var i = 0; i < data.length; i++){
               ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
             }
-            console.log(ratingsArr);
+            if (callback) {
+              callback(ratingsArr)
+            } else {
             return ratingsArr;
+            }
           })
         });
       }

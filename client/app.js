@@ -18,7 +18,8 @@ angular.module('menuApp', [
     templateUrl: '/menuView/menuView.html',
     params: {
       'menuData': null,
-      'restaurantId': null
+      'restaurantId': null,
+      'ratingInfo': null
     },
     authentication: true,
     signedin: true
@@ -96,4 +97,4 @@ angular.module('menuApp', [
       $state.go('restaurantList');
     }
   });
-})
+});

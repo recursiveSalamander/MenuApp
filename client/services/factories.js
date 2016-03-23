@@ -3,7 +3,7 @@ angular.module('menuApp')
 .factory('menuAppFactory', ['$http', '$location', '$state',function($http, $location, $state) {
 
   var getRestaurantList = function (coordinates) {
-    console.log(coordinates);
+    console.log('++line 6 in getRestaurantList() in factories coordinates: ',coordinates);
     return $http({
       method: 'POST',
       url: '/api/restaurants',
@@ -87,11 +87,13 @@ angular.module('menuApp')
 
 .factory('userInfo', ['$http', '$location', '$state', '$window', 'Auth', function($http, $location, $state, $window, Auth) {
   var getUserInfo = function(user) {
-    console.log('++line 90 inside userInfo in factories');
+    // console.log('++line 90 inside userInfo() in factories user:', user);
+    var currentToken = Auth.getToken();
+    console.log('++ line 92 inside ratingInfo() in factories token',currentToken);
     return $http({
       method: 'GET',
-      url: 'api/profile/profileView',
-      data: user
+      url: 'api/profile',
+      data: currentToken
     })
     .then(function(res) {
     // console.log(res.data);
@@ -102,12 +104,12 @@ angular.module('menuApp')
   };
 
   var ratingInfo = function(rating, entryId, restaurantId) {
-    console.log('++line 105 inside ratingInfo() in factories rating: ', rating);
-    console.log('++line 106 inside ratingInfo() in factories entryId: ', entryId);
-    console.log('++line 107 inside ratingInfo() in factories restaurantId: ', restaurantId );
+    console.log('++line 107 inside ratingInfo() in factories rating: ', rating);
+    console.log('++line 108 inside ratingInfo() in factories entryId: ', entryId);
+    console.log('++line 109 inside ratingInfo() in factories restaurantId: ', restaurantId );
 
     var currentToken = Auth.getToken();
-    console.log('++ line 110 inside ratingInfo() in factories token',currentToken);
+    console.log('++ line 112 inside ratingInfo() in factories token',currentToken);
 
     return $http({
       method: 'POST',
@@ -120,10 +122,29 @@ angular.module('menuApp')
       console.log(err);
     });
   };
+
+  var getRating = function(restaurantId) {
+    console.log('++line 127 in getRating() in factories restaurantId: ',restaurantId);
+    var currentToken = Auth.getToken();
+    console.log('++ line 129 inside ratingInfo() in factories token',currentToken);
+
+    return $http({
+      method: 'POST',
+      url: 'api/getRating',
+      data: {currentToken: currentToken, restaurantId: restaurantId}
+    })
+    .then(function(res) {
+      console.log('++line 137 post getRating in factories', res);
+      return res.data;
+    }), function(err) {
+      console.log(err);
+    };
+  };
   return {
     getUserInfo: getUserInfo,
-    ratingInfo: ratingInfo
-  };
+    ratingInfo: ratingInfo,
+    getRating: getRating
+  }
 }])
 
 .factory('Auth', ['$http', '$location', '$state', '$window', function($http, $location, $state, $window) {
