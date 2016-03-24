@@ -80,21 +80,21 @@ module.exports = {
 
   insertRestaurant: function(restaurant, callback) {
     new Restaurant( {restaurant_id: restaurant} )
-      .fetch()
-      .then(function(exists) {
-        if(!exists){
-          var newRestaurant = new Restaurant({
-            restaurant_id: restaurant
-          });
-          newRestaurant.save()
-          .then(function() {
-            if(callback) {
-              callback(restaurant);
-            }
-          });
-        }
-      });
-    },
+    .fetch()
+    .then(function(exists) {
+      if(!exists){
+        var newRestaurant = new Restaurant({
+          restaurant_id: restaurant
+        });
+        newRestaurant.save()
+        .then(function() {
+          if(callback) {
+            callback(restaurant);
+          }
+        });
+      }
+    });
+  },
 
   insertMenuItem: function(menuitem, restaurant_id, callback) {
     new Menu_Item( { item: menuitem} )
@@ -132,98 +132,62 @@ module.exports = {
   },
 
   insertRating: function(rating, userID, menuitem, callback) {
-   console.log('INSERTRATING: ', menuitem);
-   Item_Rating.where({'user_id': userID, 'item_id': menuitem}).fetch()
-   .then(function(myItemRating) {
-       //if the rating already exists
-       if (myItemRating !== null) {
-         return myItemRating;
-       }
-       //if it doesnt exist, create a new rating object with the user/item id
-       var newRating = new Item_Rating({
-         user_id: userID,
-         item_id: menuitem
-       });
-       return newRating;
-       //this .then overwrites the rating if it already exists, or creates a new one
-     }).then(function(myItemRating) {
-       myItemRating.set({rating: rating});
-       return myItemRating.save();
-     }).then(function(savedItemRating) {
-       if (callback) {
-         callback(savedItemRating);
-       }
+    console.log('INSERTRATING: ', menuitem);
+    Item_Rating.where({'user_id': userID, 'item_id': menuitem}).fetch()
+    .then(function(myItemRating) {
+      // if the rating already exists
+      if (myItemRating !== null) {
+       return myItemRating;
+     }
+      // if it doesnt exist, create a new rating object with the user/item id
+      var newRating = new Item_Rating({
+       user_id: userID,
+       item_id: menuitem
      });
-   },
+      return newRating;
+      // this .then overwrites the rating if it already exists, or creates a new one
+    }).then(function(myItemRating) {
+     myItemRating.set({rating: rating});
+     return myItemRating.save();
+   }).then(function(savedItemRating) {
+     if (callback) {
+       callback(savedItemRating);
+     }
+   });
+ },
 
-<<<<<<< Updated upstream
-    createRatingsArray: function(userID, restaurantID, callback) {
-        Item_Rating.where({user_id: userID}).fetchAll({withRelated: ['menu_items']})
-        .then(function(data) {
-          var formattedItemData = data.toJSON();
-          return formattedItemData;
-        }).then(function(data){
-        Menu_Item.where({restaurant: restaurantID}).fetchAll()
-          .then(function(items) {
-            var formattedMenuData = items.toJSON();
-            var ratingsArr = [];
-            for(var i = 0; i < data.length; i++){
-              ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
-            }
-            if(callback) {
-              callback(ratingsArr);
-            } else {
-            return ratingsArr;
-            }
-          });
-        });
-      },
-
-    ratingsAverage: function(ratingsArray) {
-        var sum = 0;
-        var average;
-        for(var i = 0; i < ratingsArray.length; i++){
-          sum += ratingsArray[i].rating;
-        }
-        sum = sum/ratingsArray.length;
-        average = (Math.round(sum*4) / 4).toFixed(1);
-        console.log({average: parseInt(average)});
-        return {average: parseInt(average)};
+ createRatingsArray: function(userID, restaurantID, callback) {
+  Item_Rating.where({user_id: userID}).fetchAll({withRelated: ['menu_items']})
+  .then(function(data) {
+    var formattedItemData = data.toJSON();
+    return formattedItemData;
+  }).then(function(data){
+    Menu_Item.where({restaurant: restaurantID}).fetchAll()
+    .then(function(items) {
+      var formattedMenuData = items.toJSON();
+      var ratingsArr = [];
+      for(var i = 0; i < data.length; i++){
+        ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
       }
- };
-=======
-   createRatingsArray: function(userID, restaurantID, callback) {
-    Item_Rating.where({user_id: userID}).fetchAll({withRelated: ['menu_items']})
-    .then(function(data) {
-      var formattedItemData = data.toJSON();
-      return formattedItemData;
-    }).then(function(data){
-      Menu_Item.where({restaurant: restaurantID}).fetchAll()
-      .then(function(items) {
-        var formattedMenuData = items.toJSON();
-        var ratingsArr = [];
-        for(var i = 0; i < data.length; i++){
-          ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
-        }
-        if(callback) {
-          callback(ratingsArr);
-        } else {
-          return ratingsArr;
-        }
-      });
+      if(callback) {
+        callback(ratingsArr);
+      } else {
+        return ratingsArr;
+      }
     });
-  },
+  });
+},
 
-  ratingsAverage: function(ratingsArray) {
-    var sum = 0;
-    var average;
-    for(var i = 0; i < ratingsArray.length; i++){
-      sum += ratingsArray[i].rating;
-    }
-    sum = sum/ratingsArray.length;
-    average = (Math.round(sum*4) / 4).toFixed(1);
-    console.log({average: parseInt(average)});
-    return {average: parseInt(average)};
+ratingsAverage: function(ratingsArray) {
+  var sum = 0;
+  var average;
+  for(var i = 0; i < ratingsArray.length; i++){
+    sum += ratingsArray[i].rating;
   }
+  sum = sum/ratingsArray.length;
+  average = (Math.round(sum*4) / 4).toFixed(1);
+  console.log({average: parseInt(average)});
+  return {average: parseInt(average)};
+}
 };
->>>>>>> Stashed changes
+

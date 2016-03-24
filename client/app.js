@@ -3,7 +3,7 @@ angular.module('menuApp', [
   'ngMaterial',
   'ngAria',
   'ngAnimate',
-  'jkAngularRatingStars',
+  'jkAngularRatingStars'
   ])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
