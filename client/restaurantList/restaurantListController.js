@@ -41,10 +41,10 @@ angular.module('menuApp')
             data.ratingInfo = ratingData.rating;
           }
           console.log('++line 43 post getRating() in restListCtrl data:',data);
-        })
+        });
         $state.go('menuView', {menuData: data, restaurantId: restaurantId});
-      })
-    })
+      });
+    });
   };
 
   var autocomplete = new google.maps.places.Autocomplete(

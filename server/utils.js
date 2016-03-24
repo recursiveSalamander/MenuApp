@@ -42,7 +42,7 @@ module.exports = {
           } else {
             return data.id;
           }
-        })
+        });
       } else if (callback) {
         callback(data.id);
       } else {

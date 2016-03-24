@@ -139,7 +139,7 @@ angular.module('menuApp')
     .then(function(res) {
       console.log('++line 137 post getRating in factories', res);
       return res.data;
-    })
+    });
   };
   return {
     getUserInfo: getUserInfo,
