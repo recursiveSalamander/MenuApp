@@ -1,6 +1,7 @@
 var jwt = require('jwt-simple');
 var db = require('./db/schema.js');
 var knex = require('knex');
+var _ = require('lodash');
 var Users = require('./db/collections/Users.js');
 var User = require('./db/models/User.js');
 var Menu_Items = require('./db/collections/Menu_Items.js');
@@ -11,7 +12,6 @@ var User_Preferences = require('./db/collections/User_Preferences.js');
 var User_Preference = require('./db/models/User_Preference.js');
 var Item_Rating = require('./db/models/Item_Rating.js');
 var Item_Ratings = require('./db/collections/Item_Ratings.js');
-var _ = require('lodash');
 
 
 module.exports = {
