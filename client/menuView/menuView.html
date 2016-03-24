@@ -11,7 +11,7 @@
               <li><b>Name: {{entry.name}}</b></li>
               <dl>Price: {{entry.price}}</dl>
               <dl>Description: {{entry.description}}</dl>
-              <jk-rating-stars max-rating="5" rating="ctrl.rating" read-only="ctrl.readOnly" on-rating="onRating(rating,entry.entryId, restaurantId)" >
+              <jk-rating-stars max-rating="5" rating="" read-only="data.ratingInfo" on-rating="onRating(rating,entry.entryId, restaurantId)" >
             </jk-rating-stars>
             <dl ng-if="prices.length > 1">NOTE: THERE ARE MORE THAN ONE PRICE IN PRICES ARRAY</dl>
             <dl ng-if="options.length">NOTE: OPTIONS EXIST</dl>

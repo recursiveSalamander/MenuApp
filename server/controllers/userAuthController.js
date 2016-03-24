@@ -13,24 +13,24 @@ module.exports = {
     var username = request.body.username;
     console.log(username);
     new User({username: username})
-      .fetch()
-      .then(function(user) {
-        if(!user) {
-          var newUser = new User({
-            first_name: firstName,
-            last_name: lastName,
-            email: email,
-            password: password,
-            username: username
-          });
+    .fetch()
+    .then(function(user) {
+      if(!user) {
+        var newUser = new User({
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          password: password,
+          username: username
+        });
         newUser.save()
-          .then(function(newUser) {
-            var token = jwt.encode(newUser, 'secret');
-            response.json({token: token});
-          });
-        } else {
-          return next(new Error('Username already exists'));
-        }
+        .then(function(newUser) {
+          var token = jwt.encode(newUser, 'secret');
+          response.json({token: token});
+        });
+      } else {
+        return next(new Error('Username already exists'));
+      }
     });
   },
 
@@ -38,22 +38,22 @@ module.exports = {
     var username = request.body.loginUsername;
     var password = request.body.loginPassword;
     new User({username: username})
-      .fetch()
-      .then(function(user) {
-        if(!user) {
-          console.log('user already exists');
-          response.redirect('/menuView');
-        } else {
-          user.comparePassword(password, function(err, match) {
-            if(match) {
-              console.log("YOU ARE LOGGED IN. CONGRATULATIONS. I'M SO HAPPY FOR YOU.");
-              var token = jwt.encode(user, 'secret');
-              response.json({token: token});
-            } else {
-              return next(new Error("Whoops!"));
-            }
-          });
-        }
-      });
-    }
-  };
+    .fetch()
+    .then(function(user) {
+      if(!user) {
+        console.log('user already exists');
+        response.redirect('/menuView');
+      } else {
+        user.comparePassword(password, function(err, match) {
+          if(match) {
+            console.log("YOU ARE LOGGED IN. CONGRATULATIONS. I'M SO HAPPY FOR YOU.");
+            var token = jwt.encode(user, 'secret');
+            response.json({token: token});
+          } else {
+            return next(new Error("Whoops!"));
+          }
+        });
+      }
+    });
+  }
+};

@@ -14,7 +14,6 @@ var Item_Rating = require('./db/models/Item_Rating.js');
 var Item_Ratings = require('./db/collections/Item_Ratings.js');
 
 
-
 module.exports = {
   getUserID: function(token) {
     var currentUser = jwt.decode(token, 'secret');
@@ -31,47 +30,65 @@ module.exports = {
     });
   },
 
-  getRestaurantID: function(restaurant, callback) {
+  getRestaurantID: function(restaurant, callback){
+    // console.log('inside getRestaurantID');
     Restaurant.where({'restaurant_id': restaurant}).fetch()
     .then(function(data) {
-        if(callback) {
-          callback(data.id);
-        } else {
-          return data.id;
-        }
-      });
+      if (!data) {
+        module.exports.insertRestaurant(restaurant)
+        .then(function(data) {
+          if (callback) {
+            callback(data.id);
+          } else {
+            return data.id;
+          }
+        });
+      } else if (callback) {
+        callback(data.id);
+      } else {
+        return data.id;
+      }
+    });
   },
 
-  insertRestaurant: function(restaurant, callback) {
+  insertRestaurant: function(restaurant, callback){
+    console.log('inside insertRestaurant');
     new Restaurant( {restaurant_id: restaurant} )
-      .fetch()
-      .then(function(exists) {
-        if(!exists){
-          var newRestaurant = new Restaurant({
-            restaurant_id: restaurant
-          });
-          newRestaurant.save()
-          .then(function() {
-            if(callback) {
-              callback(restaurant);
-            }
-          });
+    .fetch()
+    .then(function(exists) {
+      if(!exists) {
+        var newRestaurant = new Restaurant({
+          restaurant_id: restaurant
+        });
+        newRestaurant.save()
+        .then(function() {
+          if(callback) {
+            callback (restaurant);
+          } else {
+            return restaurant;
+          }
+        });
+      } else {
+        if(callback) {
+          callback(restaurant);
         }
-      });
-    },
+      }
+    });
+  },
 
-  insertMenuItem: function(menuitem, restaurant_id, callback) {
+  insertMenuItem: function(menuitem, restaurantID, callback){
+    console.log('inside insertmenuitm');
     new Menu_Item( { item: menuitem} )
     .fetch()
     .then(function(exists) {
-      if(!exists){
+      if(!exists) {
         var newItem = new Menu_Item({
           item: menuitem,
           restaurant: restaurantID
         });
         newItem.save()
         .then(function() {
-          if(callback) {
+          if(callback){
             callback(menuitem);
           }
         });
@@ -83,8 +100,8 @@ module.exports = {
     });
   },
 
-
-  getMenuItemID: function(menuitem, callback) {
+  getMenuItemID: function(menuitem, callback){
+    console.log('insidegetmenuitemid');
     Menu_Item.where({'item': menuitem}).fetch()
     .then(function (data) {
       if(callback) {
@@ -120,37 +137,37 @@ module.exports = {
      });
    },
 
-    createRatingsArray: function(userID, restaurantID, callback) {
-        Item_Rating.where({user_id: userID}).fetchAll({withRelated: ['menu_items']})
-        .then(function(data) {
-          var formattedItemData = data.toJSON();
-          return formattedItemData;
-        }).then(function(data){
-        Menu_Item.where({restaurant: restaurantID}).fetchAll()
-          .then(function(items) {
-            var formattedMenuData = items.toJSON();
-            var ratingsArr = [];
-            for(var i = 0; i < data.length; i++){
-              ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
-            }
-            if(callback) {
-              callback(ratingsArr);
-            } else {
-            return ratingsArr;
-            }
-          });
-        });
-      },
-
-    ratingsAverage: function(ratingsArray) {
-        var sum = 0;
-        var average;
-        for(var i = 0; i < ratingsArray.length; i++){
-          sum += ratingsArray[i].rating;
+   createRatingsArray: function(userID, restaurantID, callback) {
+    Item_Rating.where({user_id: userID}).fetchAll({withRelated: ['menu_items']})
+    .then(function(data) {
+      var formattedItemData = data.toJSON();
+      return formattedItemData;
+    }).then(function(data){
+      Menu_Item.where({restaurant: restaurantID}).fetchAll()
+      .then(function(items) {
+        var formattedMenuData = items.toJSON();
+        var ratingsArr = [];
+        for(var i = 0; i < data.length; i++){
+          ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
         }
-        sum = sum/ratingsArray.length;
-        average = (Math.round(sum*4) / 4).toFixed(1);
-        console.log({average: parseInt(average)});
-        return {average: parseInt(average)};
-      }
- };
+        if(callback) {
+          callback(ratingsArr);
+        } else {
+          return ratingsArr;
+        }
+      });
+    });
+  },
+
+  ratingsAverage: function(ratingsArray) {
+    var sum = 0;
+    var average;
+    for(var i = 0; i < ratingsArray.length; i++){
+      sum += ratingsArray[i].rating;
+    }
+    sum = sum/ratingsArray.length;
+    average = (Math.round(sum*4) / 4).toFixed(1);
+    console.log({average: parseInt(average)});
+    return {average: parseInt(average)};
+  }
+};

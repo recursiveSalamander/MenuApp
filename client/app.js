@@ -18,8 +18,8 @@ angular.module('menuApp', [
     templateUrl: '/menuView/menuView.html',
     params: {
       'menuData': null,
-      'restaurantId': null,
-      'ratingInfo': null
+      'restaurantId': null
+      // 'ratingData': null
     },
     authentication: true,
     // signedin: true
@@ -47,7 +47,7 @@ angular.module('menuApp', [
     templateUrl: '/preferenceForm/preferenceForm.html',
     controller: 'preferenceFormController',
     authentication: true,
-    // signedin: truesiap
+    // signedin: true
   });
 
   // .state('form', {

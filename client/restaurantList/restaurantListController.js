@@ -11,7 +11,7 @@ angular.module('menuApp')
     Geolocation.getLatLong(function(lat, lng) {
       Geolocation.formatLatLong(lat, lng, function(coords) {
         menuAppFactory.getRestaurantList(coords)
-        .then(function (data) {
+        .then(function(data) {
           data.forEach(function(value) {
             value.formatted = value.location.formattedAddress.join();
           });
@@ -32,23 +32,19 @@ angular.module('menuApp')
     .then(function(data) {
       console.log('++line 33 inside restaurantMenu() in restaurantListCtrl data:', data);
       console.log('++line 34 inside restaurantMenu() in restaurantListCtrl restaurantId:', restaurantId);
-      $scope.menuData = data;
-      // $state.go('menuView', {menuData: data, restaurantId: restaurantId});
-      userInfo.getRating(restaurantId);
-    })
-    .then(function(ratingInfo) {
-      $state.go('menuView', {ratingInfo});
-      console.log('++line 41 post getRating() in restListCtrl ratingInfo: ',ratingInfo);
+      userInfo.getRating(restaurantId)
+      .then(function(ratingData) {
+        console.log('++line 37 in restaurantMenu() in restListCtrl data: ',data);
+        data.forEach(function(ratingData) {
+          console.log('++line39 in restaurantMenu() in restListCtrl ratingData: ',ratingData);
+          if (ratingData.entryId === data.entryId) {
+            data.ratingInfo = ratingData.rating;
+          }
+          console.log('++line 43 post getRating() in restListCtrl data:',data);
+        });
+        $state.go('menuView', {menuData: data, restaurantId: restaurantId});
+      });
     });
-    // .then(function() {
-    //   $scope.restaurantId = restaurantId;
-    //   console.log('++line 38 in restaurantMenu() in restListCtrl restaurantId: ',restaurantId);
-    //   userInfo.getRating(restaurantId)
-    // })
-    // .then(function(ratingInfo) {
-    //   // $state.go('menuView', {ratingInfo});
-    //   console.log('++line 44 post getRating()', ratingInfo);
-    // })
   };
 
   var autocomplete = new google.maps.places.Autocomplete(
@@ -67,7 +63,7 @@ angular.module('menuApp')
     } else {
       $scope.map.setCenter(place.geometry.location);
 
-  $scope.map.setZoom(17);  // Why 17? Because it looks good.
+$scope.map.setZoom(17);  // Why 17? Because it looks good.
 }
 });
 

@@ -4,14 +4,14 @@ angular.module('menuApp')
 
   var currentToken = Auth.getToken();
 
-  var getRestaurantList = function (coordinates) {
+  var getRestaurantList = function(coordinates) {
     console.log('++line 6 in getRestaurantList() in factories coordinates: ',coordinates);
     return $http({
       method: 'POST',
       url: '/api/restaurants',
       data: coordinates
     })
-    .then(function (resp) {
+    .then(function(resp) {
       console.log('++line 13 inside getRestaurantList in factories',resp);
       return resp.data;
     }, function(error) {
@@ -19,7 +19,7 @@ angular.module('menuApp')
     });
   };
 
-  var getMenu = function (restaurantId) {
+  var getMenu = function(restaurantId) {
     restaurantId = {restaurantId: restaurantId};
     console.log('++line 22 inside getMenu in factories.js',restaurantId);
     return $http({
@@ -27,7 +27,7 @@ angular.module('menuApp')
       url: '/api/menu',
       data: restaurantId
     })
-    .then(function (resp) {
+    .then(function(resp) {
       console.log('++line 29 in post getMenu inside factories',resp.data);
       return resp.data;
     }, function(error) {
@@ -43,7 +43,7 @@ angular.module('menuApp')
       url: '/api/preference',
       data: preferences
     })
-    .then(function (resp) {
+    .then(function(resp) {
       return resp.data;
     }, function(error) {
       console.log(error);
@@ -60,7 +60,7 @@ angular.module('menuApp')
 
 .factory('Geolocation', ['$http', '$location', '$state', function($http, $location, $state) {
 
-  var formatLatLong = function (lat, lng, callback) {
+  var formatLatLong = function(lat, lng, callback) {
     var coordinatesInput = {
       latitude: lat,
       longitude: lng
@@ -68,7 +68,7 @@ angular.module('menuApp')
     callback(coordinatesInput);
   };
 
-  var getLatLong = function (callback) {
+  var getLatLong = function(callback) {
     var address = document.getElementById('autocomplete').value;
     var geocoder = new google.maps.Geocoder();
 
@@ -139,9 +139,7 @@ angular.module('menuApp')
     .then(function(res) {
       console.log('++line 137 post getRating in factories', res);
       return res.data;
-    }), function(err) {
-      console.log(err);
-    };
+    });
   };
   return {
     getUserInfo: getUserInfo,
