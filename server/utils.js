@@ -56,9 +56,9 @@ module.exports = {
               callback(restaurant);
             }
           });
-
         }
-      },
+      });
+    },
 
   insertMenuItem: function(menuitem, restaurant_id, callback) {
     new Menu_Item( { item: menuitem} )

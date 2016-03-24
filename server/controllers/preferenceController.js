@@ -10,7 +10,6 @@ var Nutrition_Restriction = require('../db/models/Nutrition_Restriction.js');
 module.exports = {
 
   postPreferences: function(req, res) {
-    console.log(req.body);
     var userID = utils.getUserID(req.body.token);
     var userDiet = req.body.dietaryRestrictions;
     var cuisines = req.body.cuisinePreference;
@@ -18,21 +17,9 @@ module.exports = {
 
     var flavors = _.map(req.body.tastePreference, function(flavor) {
       return flavor;
-    })
-
-    var ingredientRelations = [];
-
-    _.forEach(req.body.userAllergies, function(allergy) {
-      ingredientRelations.push([allergy, 'allergy']);
     });
 
-    _.forEach(req.body.preferredIngredients, function(preference) {
-      ingredientRelations.push([preference, 'liked']);
-    });
-
-    _.forEach(req.body.rejectedIngredients, function(dislike) {
-      ingredientRelations.push([dislike, 'disliked']);
-    });
+    var ingredientRelations = combineIngredients(req.body);
 
     var asyncTasks = [];
 
@@ -46,7 +33,7 @@ module.exports = {
       insertTastePreference(flavors, userID, function() {
         callback();
       });
-    })
+    });
 
     _.forEach(ingredientRelations, function(relationship) {
       asyncTasks.push(function(callback) {
@@ -56,17 +43,17 @@ module.exports = {
       });
     });
 
-    _.forEach(cuisines, function(cuisine) {
+    _.forEach(cuisines, function(preferenceLevel, cuisine) {
       asyncTasks.push(function(callback) {
-        insertCuisinePreference(cuisine, cuisines[cuisine], userID, function() {
+        insertCuisinePreference(cuisine, preferenceLevel, userID, function() {
           callback();
         });
       });
     });
 
-    _.forEach(nutrients, function(nutrient) {
+    _.forEach(nutrients, function(max, nutrient) {
       asyncTasks.push(function(callback) {
-        insertNutritionRestriction(nutrient, 0, nutrients[nutrient], userID, function() {
+        insertNutritionRestriction(nutrient, 0, max, userID, function() {
           callback();
         });
       });
@@ -79,6 +66,24 @@ module.exports = {
     });
 
    }
+};
+
+var combineIngredients = function(data) {
+  var ingredientRelations = [];
+
+  _.forEach(data.userAllergies, function(allergy) {
+    ingredientRelations.push([allergy, 'allergy']);
+  });
+
+  _.forEach(data.preferredIngredients, function(preference) {
+    ingredientRelations.push([preference, 'liked']);
+  });
+
+  _.forEach(data.rejectedIngredients, function(dislike) {
+    ingredientRelations.push([dislike, 'disliked']);
+  });
+
+  return ingredientRelations;
 };
 
 
@@ -106,7 +111,7 @@ var insertTastePreference = function(tastePreferences, userID, callback) {
 
 var insertCuisinePreference = function(cuisine, preferenceLevel, userID, callback) {
   new Cuisine_Preference({user_id: userID})
-  .save({origin: cuisine, preferenceLevel: preferenceLevel})
+  .save({origin: cuisine, preference_level: preferenceLevel})
   .then(function(data) {
     callback(data);
   });

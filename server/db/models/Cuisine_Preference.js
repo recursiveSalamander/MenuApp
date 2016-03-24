@@ -2,7 +2,7 @@ var bookshelf = require('../schema.js').bookshelf;
 var User = require('./User.js');
 
 var Cuisine_Preference = bookshelf.Model.extend({
-  tableName: 'cuisine_preference',
+  tableName: 'cuisine_preferences',
 
   users: function() {
     return this.belongsTo(User, 'user_id');

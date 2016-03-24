@@ -36,7 +36,6 @@ var users = function() {
   });
 };
 
-
 var userPreferences = function() {
   db.knex.schema.hasTable('user_preferences').then(function(exists) {
     if (!exists) {
@@ -112,7 +111,7 @@ var restaurants = function() {
     if(!exists) {
       knex.schema.createTable('restaurants', function(restaurant) {
         restaurant.increments('id').primary();
-        restaurant.string('restaurantID', 50);
+        restaurant.string('restaurant_id', 50);
       }).then(function() {
         console.log('restaurants table has been created');
       });

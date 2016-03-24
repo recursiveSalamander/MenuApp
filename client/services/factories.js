@@ -175,7 +175,6 @@ angular.module('menuApp')
   };
 
   var getToken = function() {
-    console.log('TOKEN!!!!');
     return $window.localStorage.getItem('authentication');
   };
 
