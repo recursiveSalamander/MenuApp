@@ -1,7 +1,7 @@
 var bookshelf = require('../schema.js').bookshelf;
 var User = require('./User.js');
 
-var User_Preference = bookshelf.Model.extend({
+var Nutrition_Restriction = bookshelf.Model.extend({
   tableName: 'nutrition_restriction',
 
   users: function() {

@@ -48,7 +48,7 @@ angular.module('menuApp')
     spanish: 1,
     german: 1,
     thai: 1,
-    Moroccan: 1,
+    moroccan: 1,
     irish: 1,
     japanese: 1,
     cuban: 1,

@@ -1,6 +1,8 @@
 angular.module('menuApp')
 
-.factory('menuAppFactory', ['$http', '$location', '$state',function($http, $location, $state) {
+.factory('menuAppFactory', ['$http', '$location', '$state', 'Auth',function($http, $location, $state, Auth) {
+
+  var currentToken = Auth.getToken();
 
   var getRestaurantList = function (coordinates) {
     console.log('++line 6 in getRestaurantList() in factories coordinates: ',coordinates);
@@ -34,7 +36,8 @@ angular.module('menuApp')
   };
 
   var postUserPreference = function (preferences) {
-    console.log('++line 37 inside postUserPreferences() in menuAppFactory');
+    preferences.token = currentToken;
+
     return $http({
       method: 'POST',
       url: '/api/preference',
