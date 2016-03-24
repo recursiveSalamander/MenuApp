@@ -130,12 +130,24 @@ module.exports = {
             for(var i = 0; i < data.length; i++){
               ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
             }
-            if (callback) {
+            if(callback) {
               callback(ratingsArr);
             } else {
             return ratingsArr;
             }
           });
         });
+      },
+
+    ratingsAverage: function(ratingsArray) {
+        var sum = 0;
+        var average;
+        for(var i = 0; i < ratingsArray.length; i++){
+          sum += ratingsArray[i].rating;
+        }
+        sum = sum/ratingsArray.length;
+        average = (Math.round(sum*4) / 4).toFixed(1);
+        console.log({average: parseInt(average)});
+        return {average: parseInt(average)};
       }
  };
