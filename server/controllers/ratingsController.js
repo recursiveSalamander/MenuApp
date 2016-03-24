@@ -16,10 +16,10 @@ module.exports = {
     var menuitem = request.body.entryId;
     var restaurant = request.body.restaurantId;
 
-    Utils.insertRestaurant(restaurant, function(data){
-      Utils.getRestaurantID(data, function(restaurantID){
-        Utils.insertMenuItem(menuitem, restaurantID, function(data){
-          Utils.getMenuItemID(data, function(menu_id){
+    Utils.insertRestaurant(restaurant, function(data) {
+      Utils.getRestaurantID(data, function(restaurantID) {
+        Utils.insertMenuItem(menuitem, restaurantID, function(data) {
+          Utils.getMenuItemID(data, function(menu_id) {
             Utils.insertRating(rating, userID, menu_id);
           });
         });
@@ -32,8 +32,8 @@ module.exports = {
     var userID = Utils.getUserID(token);
     var restaurantID = request.body.restaurantId;
 
-    Utils.getRestaurantID(restaurantID, function(data){
-      Utils.createRatingsArray(userID, data, function(data){
+    Utils.getRestaurantID(restaurantID, function(data) {
+      Utils.createRatingsArray(userID, data, function(data) {
         response.send(data);
       });
     });
@@ -44,7 +44,7 @@ module.exports = {
     var userID = Utils.getUserID(token);
     var restaurantID = request.body.restaurantId;
 
-    Utils.createRatingsArray(userID, restaurantID, function(data){
+    Utils.createRatingsArray(userID, restaurantID, function(data) {
       Utils.ratingsAverage(data);
     });
   }

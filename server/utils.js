@@ -130,7 +130,7 @@ module.exports = {
             for(var i = 0; i < data.length; i++){
               ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
             }
-            if(callback){
+            if(callback) {
               callback(ratingsArr);
             } else {
             return ratingsArr;

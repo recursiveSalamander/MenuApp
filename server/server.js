@@ -27,9 +27,9 @@ var server = app.listen(port, function() {
   console.log('http://localhost:' + port);
 });
 
-// var test = function(){
+// var test = function() {
 //   ratingsController.getRating();
-// }
+// };
 //
 // test();
 
