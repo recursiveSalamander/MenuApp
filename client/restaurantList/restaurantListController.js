@@ -34,7 +34,7 @@ angular.module('menuApp')
       console.log('++line 34 inside restaurantMenu() in restaurantListCtrl restaurantId:', restaurantId);
       $scope.menuData = data;
       // $state.go('menuView', {menuData: data, restaurantId: restaurantId});
-      userInfo.getRating(restaurantId)
+      userInfo.getRating(restaurantId);
     })
     .then(function(ratingInfo) {
       $state.go('menuView', {ratingInfo});

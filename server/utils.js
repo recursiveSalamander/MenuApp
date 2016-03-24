@@ -1,6 +1,7 @@
 var jwt = require('jwt-simple');
 var db = require('./db/schema.js');
 var knex = require('knex');
+var _ = require('lodash');
 var Users = require('./db/collections/Users.js');
 var User = require('./db/models/User.js');
 var Menu_Items = require('./db/collections/Menu_Items.js');
@@ -11,7 +12,7 @@ var User_Preferences = require('./db/collections/User_Preferences.js');
 var User_Preference = require('./db/models/User_Preference.js');
 var Item_Rating = require('./db/models/Item_Rating.js');
 var Item_Ratings = require('./db/collections/Item_Ratings.js');
-var _ = require('lodash');
+
 
 
 module.exports = {
@@ -21,54 +22,56 @@ module.exports = {
     return currentUser.id;
   },
 
-  getRestaurantID: function(restaurant, callback){
-    console.log('inside getrestaurantID');
+  updateUser: function(userID, field, newValue, callback) {
+    var parameter = {};
+    parameter[field] = newValue;
+    new User({id: userID}).save(parameter)
+    .then(function(data) {
+      callback(data);
+    });
+  },
+
+  getRestaurantID: function(restaurant, callback) {
     Restaurant.where({'restaurant_id': restaurant}).fetch()
     .then(function(data) {
-      if(callback) {
-        callback(data.id);
-      } else {
-        return data.id;
-      }
-    });
-  },
-
-  insertRestaurant: function(restaurant, callback){
-    console.log('inside insertRestaurant');
-    new Restaurant( {restaurant_id: restaurant} )
-    .fetch()
-    .then(function(exists) {
-      if(!exists) {
-        var newRestaurant = new Restaurant({
-          restaurant_id: restaurant
-        });
-        newRestaurant.save()
-        .then(function() {
-          if(callback) {
-            callback (restaurant);
-          }
-        });
-      } else {
         if(callback) {
-          callback(restaurant);
+          callback(data.id);
+        } else {
+          return data.id;
         }
-      }
-    });
+      });
   },
 
-  insertMenuItem: function(menuitem, restaurantID, callback){
-    console.log('inside insertmenuitm');
+  insertRestaurant: function(restaurant, callback) {
+    new Restaurant( {restaurant_id: restaurant} )
+      .fetch()
+      .then(function(exists) {
+        if(!exists){
+          var newRestaurant = new Restaurant({
+            restaurant_id: restaurant
+          });
+          newRestaurant.save()
+          .then(function() {
+            if(callback) {
+              callback(restaurant);
+            }
+          });
+        }
+      });
+    },
+
+  insertMenuItem: function(menuitem, restaurant_id, callback) {
     new Menu_Item( { item: menuitem} )
     .fetch()
     .then(function(exists) {
-      if(!exists) {
+      if(!exists){
         var newItem = new Menu_Item({
           item: menuitem,
           restaurant: restaurantID
         });
         newItem.save()
         .then(function() {
-          if(callback){
+          if(callback) {
             callback(menuitem);
           }
         });
@@ -80,8 +83,8 @@ module.exports = {
     });
   },
 
-  getMenuItemID: function(menuitem, callback){
-    console.log('insidegetmenuitemid');
+
+  getMenuItemID: function(menuitem, callback) {
     Menu_Item.where({'item': menuitem}).fetch()
     .then(function (data) {
       if(callback) {
