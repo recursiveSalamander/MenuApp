@@ -30,19 +30,23 @@ angular.module('menuApp')
     // $state.go('menuView', {'restaurantId': $scope.restaurantId});
     menuAppFactory.getMenu(restaurantId)
     .then(function(data) {
-      console.log('++line 33 inside restaurantMenu() in restaurantListCtrl data:', data);
-      console.log('++line 34 inside restaurantMenu() in restaurantListCtrl restaurantId:', restaurantId);
+      console.log('++line 33 inside restaurantMenu() in restaurantListCtrl restaurantId:', restaurantId);
+      console.log('++line 34 inside restaurantMenu() in restaurantListCtrl data:', data);
       userInfo.getRating(restaurantId)
       .then(function(ratingData) {
         console.log('++line 37 in restaurantMenu() in restListCtrl data: ',data);
-        data.forEach(function(ratingData) {
-          console.log('++line39 in restaurantMenu() in restListCtrl ratingData: ',ratingData);
-          if (ratingData.entryId === data.entryId) {
-            data.ratingInfo = ratingData.rating;
-          }
-          console.log('++line 43 post getRating() in restListCtrl data:',data);
-        });
-        $state.go('menuView', {menuData: data, restaurantId: restaurantId});
+        if (ratingData !== undefined) {
+          $state.go('menuView', {menuData: data, restaurantId: restaurantId});
+        } else {
+          data.forEach(function(ratingData) {
+            console.log('++line39 in restaurantMenu() in restListCtrl ratingData: ',ratingData);
+            if (ratingData.entryId === data.entryId) {
+              data.ratingInfo = ratingData.rating;
+            }
+            console.log('++line 43 post getRating() in restListCtrl data:',data);
+          });
+          $state.go('menuView', {menuData: data, restaurantId: restaurantId});
+        }
       });
     });
   };
