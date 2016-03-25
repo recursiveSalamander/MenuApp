@@ -130,12 +130,8 @@ module.exports = {
        }
      });
    },
-<<<<<<< HEAD
 
    createRatingsArray: function(userID, callback) {
-=======
-   createRatingsArray: function(userID, restaurantID, callback) {
->>>>>>> [Feature] Updated utils.js
     Item_Rating.where({user_id: userID}).fetchAll({withRelated: ['menu_items']})
     .then(function(data) {
       var formattedItemData = data.toJSON();
