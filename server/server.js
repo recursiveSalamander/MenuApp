@@ -13,6 +13,7 @@ var Cache = require('./constructors/Cache.js');
 var Utils = require('./utils.js');
 var ratingsController = require('./controllers/ratingsController.js');
 var Item_Rating = './db/models/Item_Rating.js';
+var profileController = require('./controllers/profileController.js');
 
 var app = express();
 
@@ -28,10 +29,10 @@ var server = app.listen(port, function() {
   console.log('http://localhost:' + port);
 });
 
-// var test = function() {
-//   ratingsController.getRating();
-// };
-//
-// test();
+var test = function() {
+  profileController.updateProfile();
+};
+
+test();
 
 module.exports = app;
