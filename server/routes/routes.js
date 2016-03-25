@@ -10,17 +10,17 @@ var bodyParser = require('body-parser').json();
 
 module.exports = function(app, express) {
 
- app.use('/', express.static(__dirname + '/../../client'));
+  app.use('/', express.static(__dirname + '/../../client'));
 
- app.use('/', express.static(__dirname + '/../../'));
+  app.use('/', express.static(__dirname + '/../../'));
 
- app.post('/api/restaurants', bodyParser, restaurantController.getRestaurants);
- app.post('/api/menu', bodyParser, menuController.getMenu);
- app.post('/api/users/signup', userAuthController.signup);
- app.post('/api/users/signin', userAuthController.signin);
- app.post('/api/preference', bodyParser, preferenceController.postPreferences);
- app.get('/api/profile/profileView', bodyParser, profileController.getProfile);
- app.post('/api/rating', ratingsController.postRatingToTable);
- app.post('/api/getRating', bodyParser, ratingsController.getRating);
- app.get('/api/profile', bodyParser, profileController.getProfile);
+  app.post('/api/restaurants', bodyParser, restaurantController.getRestaurants);
+  app.post('/api/menu', bodyParser, menuController.getMenu);
+  app.post('/api/users/signup', userAuthController.signup);
+  app.post('/api/users/signin', userAuthController.signin);
+  app.post('/api/preference', bodyParser, preferenceController.postPreferences);
+  app.get('/api/profile/profileView', bodyParser, profileController.getProfile);
+  app.post('/api/rating', ratingsController.postRatingToTable);
+  app.post('/api/getRating', bodyParser, ratingsController.getRating);
+  app.get('/api/profile', bodyParser, profileController.getProfile);
 };
