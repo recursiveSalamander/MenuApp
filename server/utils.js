@@ -30,6 +30,7 @@ module.exports = {
     });
   },
 
+
   getRestaurantID: function(restaurant, callback){
     // console.log('inside getRestaurantID');
     Restaurant.where({'restaurant_id': restaurant}).fetch()
@@ -51,30 +52,32 @@ module.exports = {
     });
   },
 
-  insertRestaurant: function(restaurant, callback){
-    console.log('inside insertRestaurant');
-    new Restaurant( {restaurant_id: restaurant} )
-    .fetch()
-    .then(function(exists) {
-      if(!exists) {
-        var newRestaurant = new Restaurant({
-          restaurant_id: restaurant
-        });
-        newRestaurant.save()
-        .then(function() {
+
+    insertRestaurant: function(restaurant, callback){
+      console.log('inside insertRestaurant');
+      new Restaurant( {restaurant_id: restaurant} )
+      .fetch()
+      .then(function(exists) {
+        if(!exists) {
+          var newRestaurant = new Restaurant({
+            restaurant_id: restaurant
+          });
+          newRestaurant.save()
+          .then(function() {
+            if(callback) {
+              callback (restaurant);
+            } else {
+              return restaurant;
+            }
+          });
+        } else {
           if(callback) {
-            callback (restaurant);
-          } else {
-            return restaurant;
+            callback(restaurant);
           }
-        });
-      } else {
-        if(callback) {
-          callback(restaurant);
         }
-      }
-    });
-  },
+      });
+    },
+
 
   insertMenuItem: function(menuitem, restaurantID, callback){
     console.log('inside insertmenuitm');
