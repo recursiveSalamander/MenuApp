@@ -30,8 +30,8 @@ angular.module('menuApp')
     // $state.go('menuView', {'restaurantId': $scope.restaurantId});
     menuAppFactory.getMenu(restaurantId)
     .then(function(data) {
-      console.log('++line 33 inside restaurantMenu() in restaurantListCtrl data:', data);
-      console.log('++line 34 inside restaurantMenu() in restaurantListCtrl restaurantId:', restaurantId);
+      console.log('++line 33 inside restaurantMenu() in restaurantListCtrl restaurantId:', restaurantId);
+      console.log('++line 34 inside restaurantMenu() in restaurantListCtrl data:', data);
       userInfo.getRating(restaurantId)
       .then(function(ratingData) {
         console.log('++line 37 in restaurantMenu() in restListCtrl data: ',data);

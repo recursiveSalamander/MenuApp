@@ -163,7 +163,7 @@ module.exports = {
             return ratingsArr;
           }
         } else if (callback) {
-          callback({});
+          callback(undefined);
         } else {
           return undefined;
         }
