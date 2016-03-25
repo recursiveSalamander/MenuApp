@@ -74,6 +74,8 @@ angular.module('menuApp')
 
 $scope.map.setZoom(17);  // Why 17? Because it looks good.
 }
+
+$scope.displayRestaurants();
 });
 
   function initMap() {
