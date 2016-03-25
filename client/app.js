@@ -26,27 +26,27 @@ angular.module('menuApp', [
   })
   .state('profileView', {
     url: '/profileView',
-    templateUrl: '/profile/profileView.html',
-    authentication: true,
+    templateUrl: '/profileView/profileView.html',
+    authentication: true
     // signedin: true
   })
   .state('signIn', {
     url: '/signIn',
     templateUrl: '/userAuth/signIn.html',
-    authentication: false,
+    authentication: false
     // signedin: false
   })
   .state('signUp', {
     url: '/signUp',
     templateUrl: '/userAuth/signUp.html',
-    authentication: false,
+    authentication: false
     // signedin: false
   })
   .state('preferenceForm', {
     url: '/preferenceForm',
     templateUrl: '/preferenceForm/preferenceForm.html',
     controller: 'preferenceFormController',
-    authentication: true,
+    authentication: true
     // signedin: true
   })
   .state('preferenceSurvey', {
