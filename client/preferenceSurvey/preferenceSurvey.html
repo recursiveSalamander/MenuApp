@@ -1,0 +1,81 @@
+<h2>SURVEY</h2>
+
+<div id="foodpicturechoices">
+  <div ng-if="checkChoicesStorage()">
+    <h3>We're calculating your preferences based on your choices... please wait!</h3>
+  </div>
+  <div id="surveycontinue" ng-if="checkChoicesContainer()">
+      <h1 ng-click="submitThreePictures()">Continue</h1>
+  </div>
+<ul  dnd-list="foodPics.choices" layout="row" layout-align="center" layout-margin>
+
+
+
+    <li
+        ng-repeat="item in foodPics.choices"
+        class="foodpicture"
+        dnd-draggable="item"
+        dnd-moved="foodPics.choices.splice($index, 1)"
+        dnd-effect-allowed="move"
+        dnd-selected="foodPics.selected = item"
+        ng-class="{'selected': foodPics.selected === item}"
+        >
+        <img src='../assets/{{item.label}}.jpg' height="400" width="400"/>
+    </li>
+</ul>
+</div>
+
+<div id="surveyprompt">Which of these look most appetizing? Please drag each picture to rank them</div>
+
+<div layout="row" layout-wrap layout-align="space-between center" layout-margin>
+
+  <div flex>
+  </div>
+  <ul class="foodrankbox" id="firstchoice" dnd-list="foodPics.first">
+      <li ng-repeat="item in foodPics.first"
+          class="foodpicture"
+          dnd-draggable="item"
+          dnd-moved="foodPics.first.splice($index, 1)"
+          dnd-effect-allowed="move"
+          dnd-selected="foodPics.selected = item"
+          ng-class="{'selected': foodPics.selected === item}"
+          >
+          <img src='../assets/{{item.label}}.jpg' height="250" width="250"/>
+      </li>
+  </ul>
+
+  <div flex>
+  </div>
+
+  <ul class="foodrankbox" id="secondchoice" dnd-list="foodPics.second">
+      <li ng-repeat="item in foodPics.second"
+          class="foodpicture"
+          dnd-draggable="item"
+          dnd-moved="foodPics.second.splice($index, 1)"
+          dnd-effect-allowed="move"
+          dnd-selected="foodPics.selected = item"
+          ng-class="{'selected': foodPics.selected === item}"
+          >
+          <img src='../assets/{{item.label}}.jpg' height="250" width="250"/>
+      </li>
+  </ul>
+
+  <div flex>
+  </div>
+
+  <ul class="foodrankbox" id="thirdchoice" dnd-list="foodPics.third">
+      <li ng-repeat="item in foodPics.third"
+          class="foodpicture"
+          dnd-draggable="item"
+          dnd-moved="foodPics.third.splice($index, 1)"
+          dnd-effect-allowed="move"
+          dnd-selected="foodPics.selected = item"
+          ng-class="{'selected': foodPics.selected === item}"
+          >
+          <img src='../assets/{{item.label}}.jpg' height="250" width="250"/>
+      </li>
+  </ul>
+  <div flex>
+  </div>
+
+</div>

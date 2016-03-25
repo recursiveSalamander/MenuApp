@@ -3,8 +3,9 @@ angular.module('menuApp', [
   'ngMaterial',
   'ngAria',
   'ngAnimate',
-  'jkAngularRatingStars'
-  ])
+  'jkAngularRatingStars',
+  'dndLists'
+])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
   .state('restaurantList', {
@@ -48,6 +49,11 @@ angular.module('menuApp', [
     controller: 'preferenceFormController',
     authentication: true,
     // signedin: true
+  })
+  .state('preferenceSurvey', {
+    url: '/preferenceSurvey',
+    templateUrl: '/preferenceSurvey/preferenceSurvey.html',
+    controller: 'preferenceSurveyController'
   });
 
   // .state('form', {
