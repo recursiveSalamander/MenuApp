@@ -12,12 +12,15 @@ var User_Preferences = require('./db/collections/User_Preferences.js');
 var User_Preference = require('./db/models/User_Preference.js');
 var Item_Rating = require('./db/models/Item_Rating.js');
 var Item_Ratings = require('./db/collections/Item_Ratings.js');
+
+
 module.exports = {
   getUserID: function(token) {
     var currentUser = jwt.decode(token, 'secret');
     console.log(currentUser.id);
     return currentUser.id;
   },
+
   updateUser: function(userID, field, newValue, callback) {
     var parameter = {};
     parameter[field] = newValue;
@@ -26,6 +29,8 @@ module.exports = {
       callback(data);
     });
   },
+
+
   getRestaurantID: function(restaurant, callback){
     // console.log('inside getRestaurantID');
     Restaurant.where({'restaurant_id': restaurant}).fetch()
@@ -48,6 +53,8 @@ module.exports = {
       }
     });
   },
+
+
   insertRestaurant: function(restaurant, callback){
     console.log('inside insertRestaurant');
     new Restaurant( {restaurant_id: restaurant} )
@@ -72,6 +79,8 @@ module.exports = {
       }
     });
   },
+
+
   insertMenuItem: function(menuitem, restaurantID, callback){
     console.log('inside insertmenuitm');
     new Menu_Item( { item: menuitem} )
@@ -95,6 +104,7 @@ module.exports = {
       }
     });
   },
+
   getMenuItemID: function(menuitem, callback){
     console.log('insidegetmenuitemid');
     Menu_Item.where({'item': menuitem}).fetch()
@@ -106,6 +116,7 @@ module.exports = {
       }
     });
   },
+
   insertRating: function(rating, userID, menuitem, callback) {
    console.log('INSERTRATING: ', menuitem);
    Item_Rating.where({'user_id': userID, 'item_id': menuitem}).fetch()
@@ -159,6 +170,7 @@ module.exports = {
       });
     });
   },
+
   ratingsAverage: function(ratingsArray) {
     var sum = 0;
     var average;
