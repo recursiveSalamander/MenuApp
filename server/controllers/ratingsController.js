@@ -26,7 +26,6 @@ module.exports = {
       });
     });
   },
-
   getRating: function(request, response) {
     var token = request.body.currentToken;
     var userID = Utils.getUserID(token);

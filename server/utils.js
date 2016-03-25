@@ -35,9 +35,11 @@ module.exports = {
     // console.log('inside getRestaurantID');
     Restaurant.where({'restaurant_id': restaurant}).fetch()
     .then(function(data) {
+      console.log('++line 38 getRestaurantID() data: ',data);
       if (!data) {
         module.exports.insertRestaurant(restaurant)
         .then(function(data) {
+          console.log('++line 42 getRestaurantID() data: ',data);
           if (callback) {
             callback(data.id);
           } else {
@@ -53,30 +55,30 @@ module.exports = {
   },
 
 
-    insertRestaurant: function(restaurant, callback){
-      console.log('inside insertRestaurant');
-      new Restaurant( {restaurant_id: restaurant} )
-      .fetch()
-      .then(function(exists) {
-        if(!exists) {
-          var newRestaurant = new Restaurant({
-            restaurant_id: restaurant
-          });
-          newRestaurant.save()
-          .then(function() {
-            if(callback) {
-              callback (restaurant);
-            } else {
-              return restaurant;
-            }
-          });
-        } else {
+  insertRestaurant: function(restaurant, callback){
+    console.log('inside insertRestaurant');
+    new Restaurant( {restaurant_id: restaurant} )
+    .fetch()
+    .then(function(exists) {
+      if(!exists) {
+        var newRestaurant = new Restaurant({
+          restaurant_id: restaurant
+        });
+        newRestaurant.save()
+        .then(function() {
           if(callback) {
-            callback(restaurant);
+            callback (restaurant);
+          } else {
+            return restaurant;
           }
+        });
+      } else {
+        if(callback) {
+          callback(restaurant);
         }
-      });
-    },
+      }
+    });
+  },
 
 
   insertMenuItem: function(menuitem, restaurantID, callback){
@@ -149,14 +151,21 @@ module.exports = {
       Menu_Item.where({restaurant: restaurantID}).fetchAll()
       .then(function(items) {
         var formattedMenuData = items.toJSON();
-        var ratingsArr = [];
-        for(var i = 0; i < data.length; i++){
-          ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
-        }
-        if(callback) {
-          callback(ratingsArr);
+        console.log('++line 152',formattedMenuData)
+        if (formattedMenuData.length>0) {
+          var ratingsArr = [];
+          for(var i = 0; i < data.length; i++){
+            ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
+          }
+          if(callback) {
+            callback(ratingsArr);
+          } else {
+            return ratingsArr;
+          }
+        } else if (callback) {
+          callback({});
         } else {
-          return ratingsArr;
+          return undefined;
         }
       });
     });
