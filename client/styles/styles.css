@@ -1,12 +1,12 @@
 /*----------------------------Sign-in/Sign-up styling-------------------------------------------------*/
-#signuppage, #signinpage {
+.signup, .signin {
   height: 100vh;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
 }
 
-#signinpage {
+.signin {
   background: url('../assets/signin_background2.jpg') no-repeat center center fixed;
 }
 
