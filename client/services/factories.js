@@ -196,4 +196,17 @@ angular.module('menuApp')
     isSignedIn: isSignedIn,
     signout: signout
   };
+}])
+
+.factory('Navbar', ['$state', function($state) {
+
+  var formatLatLong = function(lat, lng, callback) {
+  }
+
+  return {
+    getLatLong: getLatLong,
+    formatLatLong: formatLatLong
+  };
+
+
 }]);

@@ -11,10 +11,29 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
 </head>
-<body ng-app="menuApp" layout="column">
-    <md-content id="main" flex ui-view>
-        <!-- templates render here through ui-router -->
+<body ng-app="menuApp" layout="column" ng-cloak>
+
+    <md-toolbar id="navbar">
+      <ul>
+        <li id="logo"><a href="#/restaurantList">MenuApp <i class="fa fa-cutlery"></i></a></li>
+        <li>
+          <div class="searchbox">
+            <input type="search" id="searchinput" placeholder="Search..." />
+            <button class="icon"><i class="fa fa-search"></i></button>
+          </div>
+        </li>
+
+        <li class='navbarlinks'><a href="#/profileView">Profile</a></li>
+        <li class='navbarlinks' ng-click="signout()"><a href="#/signIn">Logout</a></li>
+      </ul>
+    </md-toolbar>
+
+
+    <md-content flex id="main" ui-view>
+
+          <!-- templates render here through ui-router -->
     </md-content>
+
 
   <script src="./bower_components/angular/angular.min.js"></script>
   <script src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
