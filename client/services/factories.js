@@ -154,10 +154,10 @@ angular.module('menuApp')
     callback(data);
     });
   };
-  
+
   return {
     retrieveSurvey: retrieveSurvey
-  }
+  };
 }])
 
 .factory('Auth', ['$http', '$location', '$state', '$window', function($http, $location, $state, $window) {

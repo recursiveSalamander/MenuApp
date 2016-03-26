@@ -13,8 +13,8 @@ angular.module('menuApp')
     $scope.foodPics.storage = data.storage;
   });
 
-          var choicesCount = 1;
-          $scope.submitThreePictures = function(){
+    var choicesCount = 1;
+    $scope.submitThreePictures = function(){
     //make pictures disappear
     if($scope.foodPics.first.length === choicesCount && $scope.foodPics.second.length === choicesCount && $scope.foodPics.third.length === choicesCount){
       angular.element( document.querySelectorAll('.foodpicture')).addClass('ng-hide');
