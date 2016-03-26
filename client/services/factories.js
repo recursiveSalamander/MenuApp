@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.factory('menuAppFactory', ['$http', '$location', '$state', 'Auth',function($http, $location, $state, Auth) {
+.factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
 
   var currentToken = Auth.getToken();
 
@@ -146,6 +146,18 @@ angular.module('menuApp')
     ratingInfo: ratingInfo,
     getRating: getRating
   };
+}])
+
+.factory('Survey', ['$http', function($http) {
+  var retrieveSurvey = function(callback) {
+  $http.get('../assets/dishes.json').success(function(data) {
+    callback(data);
+    });
+  };
+  
+  return {
+    retrieveSurvey: retrieveSurvey
+  }
 }])
 
 .factory('Auth', ['$http', '$location', '$state', '$window', function($http, $location, $state, $window) {
