@@ -11,41 +11,29 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
 </head>
-<body ng-app="menuApp" layout="column">
+<body ng-app="menuApp" layout="column" ng-cloak>
+  <div ng-controller="userAuthController">
+    <md-toolbar id="navbar" ng-if="checkToken()">
+      <ul>
+        <li id="logo"><a href="#/restaurantList">MenuApp <i class="fa fa-cutlery"></i></a></li>
+        <li>
+          <div class="searchbox">
+            <input type="search" id="searchinput" placeholder="Search..." />
+            <button class="icon"><i class="fa fa-search"></i></button>
+          </div>
+        </li>
 
-  <!-- <md-toolbar layout="row">
-    <h1 class="appheader">Menu App</h1>
-  </md-toolbar> -->
-    <!-- <md-sidenav md-is-locked-open="true" class="md-whiteframe-4dp">
-      <md-list>
-        <md-list-item>
-          <md-button>
-             My Profile
-           </md-button>
-        </md-list-item>
+        <li class='navbarlinks'><a href="#/profileView">Profile</a></li>
+        <li class='navbarlinks' ng-click="signOut()"><a href="#/signIn">Logout</a></li>
+      </ul>
+    </md-toolbar>
+  </div>
 
-        <md-list-item >
-            <md-button>
-              Search More
-            </md-button>
-        </md-list-item>
+    <md-content flex id="main" ui-view>
 
-        <md-list-item >
-            <md-button>
-              Search History
-            </md-button>
-        </md-list-item>
-
-        <md-list-item >
-            <md-button>
-              Log Out
-            </md-button>
-        </md-list-item>
-      </md-list>
-    </md-sidenav> -->
-    <md-content id="main" flex ui-view>
-        <!-- templates render here through ui-router -->
+          <!-- templates render here through ui-router -->
     </md-content>
+
 
   <script src="./bower_components/angular/angular.min.js"></script>
   <script src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -57,7 +45,7 @@
   <script src="./menuView/menuViewController.js"></script>
   <script src="./restaurantList/restaurantListController.js"></script>
   <script src="./userAuth/userAuthController.js"></script>
-  <script src="./profile/profileViewController.js"></script>
+  <script src="./profileView/profileViewController.js"></script>
   <script src="./services/factories.js"></script>
   <script src="./preferenceForm/preferenceFormController.js"></script>
   <script src="./preferenceSurvey/preferenceSurveyController.js"></script>

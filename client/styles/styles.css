@@ -1,14 +1,12 @@
-
-
 /*----------------------------Sign-in/Sign-up styling-------------------------------------------------*/
-#signuppage, #signinpage {
+.signup, .signin {
   height: 100vh;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
 }
 
-#signinpage {
+.signin {
   background: url('../assets/signin_background2.jpg') no-repeat center center fixed;
 }
 
@@ -38,20 +36,30 @@
 }
 
 /*----------------------------RestaurantList styling-------------------------------------------------*/
-#map {
-  height: 300px;
-  width: 30%;
+#sidenav {
+  padding-bottom: 10px;
 }
 
-#restaurantListinglogo, #menuListingLogo {
-  color: white;
-  font-size: 40px;
+.restaurantlist .sidenav {
+  position: fixed;
 }
-
-.restaurantList {
+.restaurantlist .list {
+}
+.restaurantquery {
   font-size: 15px;
   list-style: none;
 }
+
+
+/*----------------------------------map styling--------------------------------------*/
+#map {
+  height: 55vh;
+  min-height: 80px;
+  clear: both;
+  position: fixed;
+
+}
+
 
 /*----------------------------PreferenceSurvey styling-------------------------------------------------*/
 ul[dnd-list], ul[dnd-list] > li {
@@ -141,8 +149,7 @@ ul[dnd-list] li.selected {
 }
 
 /*----------------------------????? styling-------------------------------------------------*/
-.header {
-  background-color: #4caf50;
+/*.header {
   width: 100%;
   height: 4%;
   position: fixed;
@@ -160,24 +167,113 @@ ul[dnd-list] li.selected {
   font-size: 30px;
   font-family: 'Kaushan Script', sans-serif;
   color: white;
+    list-style: none;
   margin-bottom: -5px;
   margin-left: -30px;
+}*/
+
+/*----------------------navbar styling---------------------------*/
+
+
+#navbar {
+  /*position: fixed;*/
+  background-color: #4caf50;
 }
 
+#navbar ul{
+  margin: 5px;
+  vertical-align: center;
+  padding-left: 10px;
+  white-space: nowrap;
+}
+
+#navbar li {
+  display: inline-block;
+  list-style: none;
+  vertical-align: middle;
+  margin-right: 30px;
+}
+
+#navbar li a {
+  color: white;
+
+  text-decoration: none;
+}
+
+#navbar li: last-child {
+
+}
+
+#navbar .searchbox {
+  overflow: hidden;
+  width: 320px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+#navbar .searchbox input#searchinput {
+  width: 300px;
+  height: 50px;
+  background: white;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  color: black;
+  padding-left: 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+#navbar .searchbox input#search::-webkit-input-placeholder {
+   color: #65737e;
+}
+
+
+#navbar .searchbox input#search:-ms-input-placeholder {
+   color: #65737e;
+}
+
+#navbar .searchbox button.icon{
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  border: none;
+  /*background: #232833;*/
+  height: 52px;
+  width: 50px;
+  /*color: #4f5b66;*/
+  opacity: 0;
+  font-size: 10pt;
+
+  -webkit-transition: all .55s ease;
+  -moz-transition: all .55s ease;
+  -ms-transition: all .55s ease;
+  -o-transition: all .55s ease;
+  transition: all .55s ease;
+}
+
+#navbar .searchbox button.icon, .container-4:active button.icon, .container-4:focus button.icon{
+  outline: none;
+  opacity: 1;
+  margin-left: -50px;
+}
+
+#navbar .searchbox:hover button.icon:hover{
+  background: white;
+}
+
+
+
+
+
+/*?????*/
 .googleLocation {
   width: 50%;
-}
-
-.links {
-  font-family: 'Kaushan Script', sans-serif;
-  list-style: none;
-  width: 22%;
-  font-size: 20px;
-  padding: 0;
-  height: 30px;
-  padding-top: 6px;
-  margin-right: 25px;
-  text-align: right;
 }
 
 body {
@@ -187,13 +283,6 @@ body {
   background-size: cover;
 }
 
-#map {
-  width: 100%;
-  height: 400px;
-  clear: both;
-  margin: auto;
-  margin-top: 4%;
-}
 
 .loading {
   position: fixed;
@@ -209,7 +298,7 @@ body {
   color: white;
 }
 
-
+/*
 @media(max-width: 400px) {
   #map {
     width: 100%;
@@ -258,7 +347,7 @@ body {
   .restaurantList {
     font-size: 10px;
   }
-
+}*/
 /*----------------------------PreferenceForm styling-------------------------------------------------*/
 md-checkbox.md-checked .md-icon {
  background-color: #4caf50;
@@ -280,4 +369,3 @@ md-checkbox.md-checked .md-icon {
 .tabsdemoDynamicHeight md-content h1:first-child {
   margin-top: 0;
 }
-

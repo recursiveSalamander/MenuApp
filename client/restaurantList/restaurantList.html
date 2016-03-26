@@ -1,18 +1,11 @@
-<div ng-controller='restaurantListController' flex layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage">
-  <div class="collapse navbar-collapse">
-    <nav class="nav navbar-nav">
-      <ul class="header">
-        <li class="logo pull-left">MenuApp <i class="fa fa-cutlery"></i></li>
-        <li class='pull-right links' ng-click="signout()"><a href="#/signIn">Logout</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div id="map"></div>
+<div class="restaurantlist" ng-controller='restaurantListController' flex layout="row" ng-cloak="" class="md-inline-form inputdemoBasicUsage">
+
+
+  <!-- <div id="map"></div>
   <md-content layout-padding="">
   <div>
     <form ng-submit="displayRestaurants()">
-      <md-input-container class="md-block">
-      <label></label>
+      <md-input-container class="md-block" type="submit">
       <input type="text" id="autocomplete" required autofocus="">
     </md-input-container>
     <md-button type="submit" value="Submit" class="md-raised">Submit</md-button>
@@ -21,43 +14,38 @@
 </md-content>
 <h2>&nbsp; Restaurant Listings</h2>
 <div style="overflow: height:30%;">
-  <md-list class="restaurantList" ng-repeat="displayRestaurants in data">
+  <md-list class="restaurantquery" ng-repeat="displayRestaurants in data">
   <span ng-click="restaurantMenu(displayRestaurants.id)">&nbsp; &nbsp;<strong>{{displayRestaurants.name}}</strong> <br> &nbsp; &nbsp; {{displayRestaurants.formatted}}<br> &nbsp; &nbsp;
     {{displayRestaurants.contact.formattedPhone}}</span>
     <md-divider></md-divider>
   </md-list>
 </div>
-</div>
-
- <!-- <div class="menu-demo-container" layout-align="center center" layout="column">
-    <h2 class="md-title">Simple dropdown menu</h2>
-    <p>Applying the <code>md-menu-origin</code> and <code>md-menu-align-target</code> attributes ensure that the menu elements align.
-    Note: If you select the Redial menu option, then a modal dialog will zoom out of the phone icon button.</p>
-    <md-menu>
-      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
-        <md-icon md-menu-origin="" md-svg-icon="call:phone"></md-icon>
-      </md-button>
-      <md-menu-content width="4">
-        <md-menu-item>
-          <md-button ng-click="ctrl.redial($event)">
-            <md-icon md-svg-icon="call:dialpad" md-menu-align-target=""></md-icon>
-            Redial
-          </md-button>
-        </md-menu-item>
-        <md-menu-item>
-          <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
-            <md-icon md-svg-icon="call:voicemail"></md-icon>
-            Check voicemail
-          </md-button>
-        </md-menu-item>
-        <md-menu-divider></md-menu-divider>
-        <md-menu-item>
-          <md-button ng-click="ctrl.toggleNotifications()">
-            <md-icon md-svg-icon="social:notifications-{{ctrl.notificationsEnabled ? 'off' : 'on'}}"></md-icon>
-            {{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
-          </md-button>
-        </md-menu-item>
-      </md-menu-content>
-    </md-menu>
-  </div>
 </div> -->
+
+
+
+    <md-sidenav id="sidenav" flex="30" md-is-locked-open="true" class="md-whiteframe-z2">
+    <div id="map" layout-margin></div>
+
+    <div>
+      <form ng-submit="displayRestaurants()">
+        <md-input-container class="md-block" type="submit">
+        <input type="text" id="autocomplete" required autofocus="">
+      </md-input-container>
+      <md-button type="submit" value="Submit" class="md-raised">Submit</md-button>
+    </form>
+    </div>
+  </md-sidenav>
+  <div class="list" flex="70">
+    <h2>&nbsp; Restaurant Listings</h2>
+    <div style="overflow: height:30%;">
+    <md-list class="restaurantquery" ng-repeat="displayRestaurants in data">
+    <span ng-click="restaurantMenu(displayRestaurants.id)">&nbsp; &nbsp;<strong>{{displayRestaurants.name}}</strong> <br> &nbsp; &nbsp; {{displayRestaurants.formatted}}<br> &nbsp; &nbsp;
+      {{displayRestaurants.contact.formattedPhone}}</span>
+      <md-divider></md-divider>
+    </md-list>
+    </div>
+  </div>
+
+
+</div>

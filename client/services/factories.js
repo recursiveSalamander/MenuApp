@@ -89,14 +89,14 @@ angular.module('menuApp')
 
 
 .factory('userInfo', ['$http', '$location', '$state', '$window', 'Auth', function($http, $location, $state, $window, Auth) {
-  var getUserInfo = function(user) {
+  var getUserInfo = function() {
     // console.log('++line 90 inside userInfo() in factories user:', user);
     var currentToken = Auth.getToken();
-    console.log('++ line 92 inside ratingInfo() in factories token',currentToken);
+    console.log('++ line 92 inside ratingInfo() in factories token', currentToken);
     return $http({
-      method: 'GET',
-      url: 'api/profile',
-      data: currentToken
+      method: 'POST',
+      url: '/api/profile',
+      data: {currentToken: currentToken}
     })
     .then(function(res) {
     // console.log(res.data);
@@ -196,4 +196,17 @@ angular.module('menuApp')
     isSignedIn: isSignedIn,
     signout: signout
   };
+}])
+
+.factory('Navbar', ['$state', function($state) {
+
+  var formatLatLong = function(lat, lng, callback) {
+  }
+
+  return {
+    getLatLong: getLatLong,
+    formatLatLong: formatLatLong
+  };
+
+
 }]);

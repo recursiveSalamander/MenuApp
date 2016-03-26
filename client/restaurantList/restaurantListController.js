@@ -3,9 +3,7 @@ angular.module('menuApp')
 .controller('restaurantListController', ['$window', '$scope', '$state', 'menuAppFactory', 'Geolocation', 'Auth', 'userInfo', function($window, $scope, $state, menuAppFactory, Geolocation, Auth, userInfo) {
   $scope.data = [];
 
-  $scope.signout = function() {
-    Auth.signout();
-  };
+
 
   $scope.displayRestaurants = function() {
     Geolocation.getLatLong(function(lat, lng) {
@@ -74,6 +72,8 @@ angular.module('menuApp')
 
 $scope.map.setZoom(17);  // Why 17? Because it looks good.
 }
+
+$scope.displayRestaurants();
 });
 
   function initMap() {
