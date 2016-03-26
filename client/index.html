@@ -13,7 +13,7 @@
 </head>
 <body ng-app="menuApp" layout="column" ng-cloak>
   <div ng-controller="userAuthController">
-    <md-toolbar id="navbar">
+    <md-toolbar id="navbar" ng-if="checkToken()">
       <ul>
         <li id="logo"><a href="#/restaurantList">MenuApp <i class="fa fa-cutlery"></i></a></li>
         <li>
@@ -24,7 +24,7 @@
         </li>
 
         <li class='navbarlinks'><a href="#/profileView">Profile</a></li>
-        <li class='navbarlinks' ng-click="signout()"><a href="#/signIn">Logout</a></li>
+        <li class='navbarlinks' ng-click="signOut()"><a href="#/signIn">Logout</a></li>
       </ul>
     </md-toolbar>
   </div>
