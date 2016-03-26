@@ -12,7 +12,7 @@
   <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
 </head>
 <body ng-app="menuApp" layout="column" ng-cloak>
-
+  <div ng-controller="userAuthController">
     <md-toolbar id="navbar">
       <ul>
         <li id="logo"><a href="#/restaurantList">MenuApp <i class="fa fa-cutlery"></i></a></li>
@@ -27,7 +27,7 @@
         <li class='navbarlinks' ng-click="signout()"><a href="#/signIn">Logout</a></li>
       </ul>
     </md-toolbar>
-
+  </div>
 
     <md-content flex id="main" ui-view>
 
