@@ -20,7 +20,6 @@ angular.module('menuApp', [
     params: {
       'menuData': null,
       'restaurantId': null
-      // 'ratingData': null
     },
     authentication: true,
     // signedin: true

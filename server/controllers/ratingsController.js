@@ -26,15 +26,14 @@ module.exports = {
       });
     });
   },
+
   getRating: function(request, response) {
+    console.log('++line 31 inside getRating() pre Utils');
     var token = request.body.currentToken;
     var userID = Utils.getUserID(token);
-    var restaurantID = request.body.restaurantId;
-
-    Utils.getRestaurantID(restaurantID, function(data) {
-      Utils.createRatingsArray(userID, data, function(data) {
-        response.send(data);
-      });
+    Utils.createRatingsArray(userID, function(data) {
+      console.log('++line 34 in getRating() in ratingCtrl data: ',data);
+      response.send(data);
     });
   },
 

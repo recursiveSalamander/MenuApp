@@ -1,25 +1,22 @@
-<div ng-controller="menuViewController">
-  <div id="menuListingLogo">The Menu</div>
-  <div>
-    <ul>
-      <li ng-repeat="menu in data">
-        <h2>{{menu.name}}</h2>
-        <ul>
-          <li ng-repeat="item in menu.entries.items">
-            <h3>{{item.name}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Entries count:{{item.entries.count}}</h3>
-            <ul ng-repeat="entry in item.entries.items" ng-init="prices=entry.prices" ng-init="options=entry.options" ng-init="additions=entry.additions">
-              <li><b>Name: {{entry.name}}</b></li>
-              <dl>Price: {{entry.price}}</dl>
-              <dl>Description: {{entry.description}}</dl>
-              <jk-rating-stars max-rating="5" rating="" read-only="data.ratingInfo" on-rating="onRating(rating,entry.entryId, restaurantId)" >
+<div ng-cloak="" class="tabsdemoDynamicHeight" ng-controller="menuViewController">
+  <md-content>
+    <md-tabs md-dynamic-height="" md-border-bottom="">
+      <md-tab label="Tab" ng-repeat=" submenu in data">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">{{submenu.name}}</h1>
+          <ul ng-repeat="item in submenu.entries.items">
+            <li> Name: {{item.name}}</li>
+            <dl> Description: {{item.description}}</dl>
+            <dl> Price: {{item.price}}</dl>
+            <jk-rating-stars max-rating="5" rating="item.ratingInfo" read-only="" on-rating="onRating(rating,item.entryId, restaurantId)" >
             </jk-rating-stars>
             <dl ng-if="prices.length > 1">NOTE: THERE ARE MORE THAN ONE PRICE IN PRICES ARRAY</dl>
             <dl ng-if="options.length">NOTE: OPTIONS EXIST</dl>
             <dl ng-if="additions.length">NOTE: ADDITIONS EXIST</dl>
           </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
 </div>
-</div>
+

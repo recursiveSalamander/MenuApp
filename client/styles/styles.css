@@ -53,10 +53,6 @@
   list-style: none;
 }
 
-
-
-
-
 /*----------------------------PreferenceSurvey styling-------------------------------------------------*/
 ul[dnd-list], ul[dnd-list] > li {
 	position: relative;
@@ -143,10 +139,6 @@ ul[dnd-list] li.selected {
 #thirdchoice{
   /*margin-right: 300px;*/
 }
-
-
-
-
 
 /*----------------------------????? styling-------------------------------------------------*/
 .header {
@@ -271,3 +263,21 @@ body {
 md-checkbox.md-checked .md-icon {
  background-color: #4caf50;
 }
+
+
+/*----------------------------MenuView----------------------------------------------------------------*/
+
+.tabsdemoDynamicHeight md-content {
+  background-color: transparent !important;
+}
+.tabsdemoDynamicHeight md-content md-tabs {
+  background: #f6f6f6;
+  border: 1px solid #e1e1e1;
+}
+.tabsdemoDynamicHeight md-content md-tabs md-tabs-wrapper {
+  background: white;
+}
+.tabsdemoDynamicHeight md-content h1:first-child {
+  margin-top: 0;
+}
+

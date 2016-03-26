@@ -1,11 +1,11 @@
 angular.module('menuApp')
 .controller('preferenceSurveyController', ['$scope', function($scope) {
   $scope.foodPics = {
-          selected: null,
-          first: [],
-          second: [],
-          third: [],
-          choices: [
+    selected: null,
+    first: [],
+    second: [],
+    third: [],
+    choices: [
             //First set of choices
             {
               label: 'spaghetti_italy',
@@ -37,9 +37,9 @@ angular.module('menuApp')
               spicy: 3,
               ingredients: []
             }
-          ],
+            ],
 
-          storage: [
+            storage: [
             //Second set of choices
             {
               label: 'chickenshwarma_mediterranean',
@@ -267,16 +267,18 @@ angular.module('menuApp')
             //   spicy: 3,
             //   ingredients: []
             // }
-          ]
-      };
+            ]
+          };
 
-  var choicesCount = 1;
-  $scope.submitThreePictures = function(){
+          var choicesCount = 1;
+          $scope.submitThreePictures = function(){
     //make pictures disappear
     if($scope.foodPics.first.length === choicesCount && $scope.foodPics.second.length === choicesCount && $scope.foodPics.third.length === choicesCount){
       angular.element( document.querySelectorAll('.foodpicture')).addClass('ng-hide');
       $scope.foodPics.choices.splice(0,3);
-      if($scope.foodPics.storage.length === 0) alert('YOBUDDIES')
+      if($scope.foodPics.storage.length === 0) {
+        alert('YOBUDDIES');
+      }
       else{
         for(var i=0; i<3; i++){
           $scope.foodPics.choices.push($scope.foodPics.storage[i]);
@@ -289,7 +291,7 @@ angular.module('menuApp')
       alert('YO FOLLOW INSTRUCTIONS DUMDUM');
     }
 
-  }
+  };
 
 
   $scope.checkChoicesContainer = function() {
@@ -299,7 +301,7 @@ angular.module('menuApp')
     else{
       return false;
     }
-  }
+  };
 
 
   var initTastePreferences = function() {
@@ -314,7 +316,7 @@ angular.module('menuApp')
       if(first >= second && second >= third) return true;
       if(first <= second && second <= third) return true;
       return false;
-    }
+    };
 
     for(var i=0; i<numberOfPics; i++){
       if(verifyRankOrder($scope.foodPics.first[i].salty, $scope.foodPics.second[i].salty, $scope.foodPics.third[i].salty)){
@@ -322,19 +324,19 @@ angular.module('menuApp')
         salty_total += ($scope.foodPics.first[i].salty - $scope.foodPics.third[i].salty);
       }
       if(verifyRankOrder($scope.foodPics.first[i].sour, $scope.foodPics.second[i].sour, $scope.foodPics.third[i].sour)){
-        sour_total += ($scope.foodPics.first[i].sour - $scope.foodPics.third[i].sour)
+        sour_total += ($scope.foodPics.first[i].sour - $scope.foodPics.third[i].sour);
       }
       if(verifyRankOrder($scope.foodPics.first[i].meaty, $scope.foodPics.second[i].meaty, $scope.foodPics.third[i].meaty)){
-        meaty_total += ($scope.foodPics.first[i].meaty - $scope.foodPics.third[i].meaty)
+        meaty_total += ($scope.foodPics.first[i].meaty - $scope.foodPics.third[i].meaty);
       }
       if(verifyRankOrder($scope.foodPics.first[i].bitter, $scope.foodPics.second[i].bitter, $scope.foodPics.third[i].bitter)){
-        bitter_total += ($scope.foodPics.first[i].bitter - $scope.foodPics.third[i].bitter)
+        bitter_total += ($scope.foodPics.first[i].bitter - $scope.foodPics.third[i].bitter);
       }
       if(verifyRankOrder($scope.foodPics.first[i].sweet, $scope.foodPics.second[i].sweet, $scope.foodPics.third[i].sweet)){
-        sweet_total += ($scope.foodPics.first[i].sweet - $scope.foodPics.third[i].sweet)
+        sweet_total += ($scope.foodPics.first[i].sweet - $scope.foodPics.third[i].sweet);
       }
       if(verifyRankOrder($scope.foodPics.first[i].spicy, $scope.foodPics.second[i].spicy, $scope.foodPics.third[i].spicy)){
-        spicy_total += ($scope.foodPics.first[i].spicy - $scope.foodPics.third[i].spicy)
+        spicy_total += ($scope.foodPics.first[i].spicy - $scope.foodPics.third[i].spicy);
       }
     }
     $scope.tasteIndex_salty = salty_total / numberOfPics;
@@ -343,7 +345,7 @@ angular.module('menuApp')
     $scope.tasteIndex_bitter = bitter_total / numberOfPics;
     $scope.tasteIndex_sweet = sweet_total / numberOfPics;
     $scope.tasteIndex_spicy = spicy_total / numberOfPics;
-  }
+  };
 
   var initCuisinePreferences = function () {
     //actual cuisine choices
@@ -372,8 +374,8 @@ angular.module('menuApp')
       swedish: 1,
       hungarian: 1,
       portugese: 1
-    }
-  }
+    };
+  };
 
   $scope.checkChoicesStorage = function() {
     if($scope.foodPics.storage.length === 0){
@@ -387,7 +389,7 @@ angular.module('menuApp')
     else{
       return false;
     }
-  }
+  };
 
 
 }]);
