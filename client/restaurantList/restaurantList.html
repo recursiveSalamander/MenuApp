@@ -1,11 +1,16 @@
 <div ng-controller='restaurantListController' flex layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage">
+  <md-toolbar id="navbar" layout="column">
+    <ul>
+      <li class="logo"><a href="#/restaurantList">MenuApp <i class="fa fa-cutlery"></i></a></li>
+      <li class='navbarlinks'><a href="#/profileView">Profile</a></li>
+      <li class='navbarlinks' ng-click="signout()"><a href="#/signIn">Logout</a></li>
+    </ul>
+  </md-toolbar>
+
+
   <div class="collapse navbar-collapse">
     <nav class="nav navbar-nav">
-      <ul class="header">
-        <li class="logo pull-left">MenuApp <i class="fa fa-cutlery"></i></li>
-        <li class='pull-right links'><a href="#/profileView">Profile</a></li>
-        <li class='pull-right links' ng-click="signout()"><a href="#/signIn">Logout</a></li>
-      </ul>
+
     </div>
   </nav>
   <div id="map"></div>
