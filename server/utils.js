@@ -155,7 +155,7 @@ module.exports = {
       } else {
         return ratingsArray;
       }
-    })
+    });
   },
 
   ratingsAverage: function(ratingsArray) {

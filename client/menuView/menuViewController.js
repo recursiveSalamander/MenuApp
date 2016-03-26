@@ -11,5 +11,4 @@ angular.module('menuApp')
     console.log('++line 23 in onrating restaurantId: ', restaurantId );
     userInfo.ratingInfo(rating, entryId, restaurantId);
   };
-
 }]);
