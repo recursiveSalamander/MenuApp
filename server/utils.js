@@ -35,11 +35,9 @@ module.exports = {
     // console.log('inside getRestaurantID');
     Restaurant.where({'restaurant_id': restaurant}).fetch()
     .then(function(data) {
-      console.log('++line 38 getRestaurantID() data: ',data);
       if (!data) {
         module.exports.insertRestaurant(restaurant)
         .then(function(data) {
-          console.log('++line 42 getRestaurantID() data: ',data);
           if (callback) {
             callback(data.id);
           } else {
@@ -56,7 +54,6 @@ module.exports = {
 
 
   insertRestaurant: function(restaurant, callback){
-    console.log('inside insertRestaurant');
     new Restaurant( {restaurant_id: restaurant} )
     .fetch()
     .then(function(exists) {
@@ -82,7 +79,6 @@ module.exports = {
 
 
   insertMenuItem: function(menuitem, restaurantID, callback){
-    console.log('inside insertmenuitm');
     new Menu_Item( { item: menuitem} )
     .fetch()
     .then(function(exists) {
@@ -106,7 +102,6 @@ module.exports = {
   },
 
   getMenuItemID: function(menuitem, callback){
-    console.log('insidegetmenuitemid');
     Menu_Item.where({'item': menuitem}).fetch()
     .then(function (data) {
       if(callback) {
@@ -118,7 +113,6 @@ module.exports = {
   },
 
   insertRating: function(rating, userID, menuitem, callback) {
-   console.log('INSERTRATING: ', menuitem);
    Item_Rating.where({'user_id': userID, 'item_id': menuitem}).fetch()
    .then(function(myItemRating) {
        //if the rating already exists
