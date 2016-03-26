@@ -15,6 +15,16 @@ var Item_Ratings = require('./db/collections/Item_Ratings.js');
 
 
 module.exports = {
+  hasCallBack: function(data, callback){
+    if(callback){
+      console.log('running callback');
+      callback(data);
+    } else {
+      console.log('returning data');
+      return data;
+    }
+  },
+
   getUserID: function(token) {
     var currentUser = jwt.decode(token, 'secret');
     console.log(currentUser.id);
@@ -26,7 +36,7 @@ module.exports = {
     parameter[field] = newValue;
     new User({id: userID}).save(parameter)
     .then(function(data) {
-      callback(data);
+      module.exports.hasCallBack(data, callback);
     });
   },
 
@@ -38,16 +48,10 @@ module.exports = {
       if (!data) {
         module.exports.insertRestaurant(restaurant)
         .then(function(data) {
-          if (callback) {
-            callback(data.id);
-          } else {
-            return data.id;
-          }
+          module.exports.hasCallBack(data.id, callback);
         });
-      } else if (callback) {
-        callback(data.id);
       } else {
-        return data.id;
+        module.exports.hasCallBack(data.id, callback);
       }
     });
   },
@@ -63,16 +67,10 @@ module.exports = {
         });
         newRestaurant.save()
         .then(function() {
-          if(callback) {
-            callback (restaurant);
-          } else {
-            return restaurant;
-          }
+          module.exports.hasCallBack(restaurant, callback);
         });
       } else {
-        if(callback) {
-          callback(restaurant);
-        }
+        module.exports.hasCallBack(restaurant, callback);
       }
     });
   },
@@ -89,14 +87,10 @@ module.exports = {
         });
         newItem.save()
         .then(function() {
-          if(callback){
-            callback(menuitem);
-          }
+          module.exports.hasCallBack(menuitem, callback);
         });
       } else {
-        if(callback) {
-          callback(menuitem);
-        }
+        module.exports.hasCallBack(menuitem, callback);
       }
     });
   },
@@ -104,11 +98,7 @@ module.exports = {
   getMenuItemID: function(menuitem, callback){
     Menu_Item.where({'item': menuitem}).fetch()
     .then(function (data) {
-      if(callback) {
-        callback(data.id);
-      } else {
-        return data.id;
-      }
+      module.exports.hasCallBack(data.id, callback);
     });
   },
 
@@ -130,9 +120,7 @@ module.exports = {
        myItemRating.set({rating: rating});
        return myItemRating.save();
      }).then(function(savedItemRating) {
-       if (callback) {
-         callback(savedItemRating);
-       }
+       module.exports.hasCallBack(savedItemRating, callback);
      });
    },
 
@@ -140,28 +128,11 @@ module.exports = {
     Item_Rating.where({user_id: userID}).fetchAll({withRelated: ['menu_items']})
     .then(function(data) {
       var formattedItemData = data.toJSON();
-      return formattedItemData;
-    }).then(function(data){
-      Menu_Item.where({restaurant: restaurantID}).fetchAll()
-      .then(function(items) {
-        var formattedMenuData = items.toJSON();
-        console.log('++line 152',formattedMenuData)
-        if (formattedMenuData.length>0) {
-          var ratingsArr = [];
-          for(var i = 0; i < data.length; i++){
-            ratingsArr.push({rating: data[i].rating, entryId: formattedMenuData[i].item});
-          }
-          if(callback) {
-            callback(ratingsArr);
-          } else {
-            return ratingsArr;
-          }
-        } else if (callback) {
-          callback(undefined);
-        } else {
-          return undefined;
-        }
-      });
+      var ratingsArray = [];
+      for(var i = 0; i < formattedItemData.length; i++) {
+        ratingsArray.push({rating: formattedItemData[i].rating, entryId: formattedItemData[i].menu_items.item});
+      }
+      module.exports.hasCallBack(ratingsArray, callback);
     });
   },
 
