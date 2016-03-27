@@ -2,7 +2,9 @@ angular.module('menuApp')
 
 .controller('restaurantListController', ['$window', '$scope', '$state', 'menuAppFactory', 'Geolocation', 'Auth', 'userInfo', function($window, $scope, $state, menuAppFactory, Geolocation, Auth, userInfo) {
   $scope.data = [];
-
+  $scope.checkToken = function(){
+    return Auth.isAuth();
+  }
 
 
   $scope.displayRestaurants = function() {
