@@ -91,35 +91,63 @@ angular.module('menuApp')
     $scope.tasteIndex_spicy = spicy_total / numberOfPics;
   };
 
+  $scope.cuisineIndex = {
+    american: {score: 0, index: 0},
+    italian: {score: 0, index: 0},
+    mexican: {score: 0, index: 0},
+    southern_soulfood: {score: 0, index: 0},
+    french: {score: 0, index: 0},
+    southwestern: {score: 0, index: 0},
+    indian: {score: 0, index: 0},
+    chinese: {score: 0, index: 0},
+    cajun_creole: {score: 0, index: 0},
+    english: {score: 0, index: 0},
+    mediterranean: {score: 0, index: 0},
+    greek: {score: 0, index: 0},
+    spanish: {score: 0, index: 0},
+    german: {score: 0, index: 0},
+    thai: {score: 0, index: 0},
+    moroccan: {score: 0, index: 0},
+    irish: {score: 0, index: 0},
+    japanese: {score: 0, index: 0},
+    cuban: {score: 0, index: 0},
+    hawaiian: {score: 0, index: 0},
+    swedish: {score: 0, index: 0},
+    hungarian: {score: 0, index: 0},
+    portugese: {score: 0, index: 0}
+  };
+
   var initCuisinePreferences = function () {
-    //actual cuisine choices
-    console.log($scope.foodPics);
-    //representative ingredients
-    $scope.cuisineIndex = {
-      american: {score: 0, index: 0},
-      italian: {score: 0, index: 0},
-      mexican: {score: 0, index: 0},
-      southern_soulfood: {score: 0, index: 0},
-      french: {score: 0, index: 0},
-      southwestern: {score: 0, index: 0},
-      indian: {score: 0, index: 0},
-      chinese: {score: 0, index: 0},
-      cajun_creole: {score: 0, index: 0},
-      english: {score: 0, index: 0},
-      mediterranean: {score: 0, index: 0},
-      greek: {score: 0, index: 0},
-      spanish: {score: 0, index: 0},
-      german: {score: 0, index: 0},
-      thai: {score: 0, index: 0},
-      Moroccan: {score: 0, index: 0},
-      irish: {score: 0, index: 0},
-      japanese: {score: 0, index: 0},
-      cuban: {score: 0, index: 0},
-      hawaiian: {score: 0, index: 0},
-      swedish: {score: 0, index: 0},
-      hungarian: {score: 0, index: 0},
-      portugese: {score: 0, index: 0}
-    };
+    var choicePoints = [3, 1, -1];
+    var relatedCuisinePoints = [0.5, 0, -0.5];
+
+    _.forEach($scope.foodPics.first, function(dish) {
+      $scope.cuisineIndex[dish.cuisine].score += choicePoints[0];
+
+      _.forEach(dish.relatedCuisines, function(cuisine) {
+        $scope.cuisineIndex[cuisine].score += relatedCuisinePoints[0];
+      });
+    });
+
+    _.forEach($scope.foodPics.second, function(dish) {
+      $scope.cuisineIndex[dish.cuisine].score += choicePoints[1];
+
+      _.forEach(dish.relatedCuisines, function(cuisine) {
+        $scope.cuisineIndex[cuisine].score += relatedCuisinePoints[1];
+      });
+    });
+
+    _.forEach($scope.foodPics.third, function(dish) {
+      $scope.cuisineIndex[dish.cuisine].score += choicePoints[2];
+
+      _.forEach(dish.relatedCuisines, function(cuisine) {
+        $scope.cuisineIndex[cuisine].score += relatedCuisinePoints[2];
+      });
+    });
+
+    console.log(_.map($scope.cuisineIndex, function(cuisine) {
+      return cuisine.score;
+    }));
   };
 
   $scope.checkChoicesStorage = function() {
