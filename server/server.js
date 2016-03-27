@@ -29,7 +29,7 @@ var server = app.listen(port, function() {
 });
 
 // var test = function() {
-//   ratingsController.getRating();
+//   ratingsController.getRating()
 // };
 //
 // test();

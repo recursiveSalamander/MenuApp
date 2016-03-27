@@ -16,7 +16,6 @@ module.exports = {
       var userInfo = data.toJSON();
       console.log(userInfo);
       res.send(userInfo);
-
     });
   }
 };

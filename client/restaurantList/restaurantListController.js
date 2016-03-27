@@ -10,8 +10,21 @@ angular.module('menuApp')
       Geolocation.formatLatLong(lat, lng, function(coords) {
         menuAppFactory.getRestaurantList(coords)
         .then(function(data) {
+          console.log(data);
           data.forEach(function(value) {
             value.formatted = value.location.formattedAddress.join();
+            var LatLng = {lat: value.location.lat, lng: value.location.lng};
+            var infoWindow = new google.maps.InfoWindow({
+              content: value.name
+            })
+            var marker = new google.maps.Marker({
+              position: LatLng,
+              map: $scope.map,
+              title: 'restaurant'
+            });
+            marker.addListener('click', function(){
+              infoWindow.open($scope.map, marker);
+            })
           });
           $scope.data = data;
         })
@@ -21,6 +34,7 @@ angular.module('menuApp')
       });
     });
   };
+
 
   $scope.restaurantMenu = function(restaurantId) {
     console.log('++line 28 inside restaurantMenu() in restaurantListCtrl',restaurantId);
@@ -76,7 +90,7 @@ $scope.map.setZoom(17);  // Why 17? Because it looks good.
 $scope.displayRestaurants();
 });
 
-  function initMap() {
+function initMap() {
 // Create a map object and specify the DOM element for display.
 
 if (navigator.geolocation) {
@@ -88,6 +102,7 @@ if (navigator.geolocation) {
 
 
     var current_coords = {lat: thislat, lng: thislng};
+
     makeMap(current_coords);
   });
 
@@ -97,9 +112,14 @@ if (navigator.geolocation) {
       scrollwheel: false,
       zoom: 14
     });
-  };
+    $scope.marker = new google.maps.Marker({
+      position: current_coords,
+      map: $scope.map,
+      title: 'hello'
+      })
+    };
 
-}
+  }
 }
 
 initMap();
