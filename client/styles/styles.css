@@ -10,7 +10,7 @@
   background: url('../assets/signin_background2.jpg') no-repeat center center fixed;
 }
 
-#signuppage {
+.signup {
   background: url('../assets/signin_background1.jpg') no-repeat center center fixed;
 }
 
