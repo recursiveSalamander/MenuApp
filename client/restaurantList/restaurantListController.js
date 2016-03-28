@@ -5,7 +5,7 @@ angular.module('menuApp')
   $scope.map;
   $scope.checkToken = function(){
     return Auth.isAuth();
-  }
+  };
   $scope.signOut = function() {
     Auth.signout();
   };
@@ -13,7 +13,7 @@ angular.module('menuApp')
 
   $scope.lightUpCard = function() {
     console.log('hello');
-  }
+  };
 
 
 
@@ -35,14 +35,14 @@ angular.module('menuApp')
     };
 
   var clearMarkers = function (callback) {
-    console.log('inside clearmarkers MARKERS', markers)
+    console.log('inside clearmarkers MARKERS', markers);
     for (var i = 0; i < markers.length; i++) {
       if(markers[i].Pb)
       markers[i].Pb.setMap(null);
       else markers[i].setMap(null);
     }
     markers = [];
-  }
+  };
 
   var refocusMapBounds = function () {
     var bounds = new google.maps.LatLngBounds();
@@ -51,19 +51,19 @@ angular.module('menuApp')
     }
 
     $scope.map.fitBounds(bounds);
-  }
+  };
 
   var makeInfoWindow = function (marker, restaurantName) {
     marker.addListener('click', function(){
       if(infoWindow){
-        infoWindow.close()
+        infoWindow.close();
       }
         infoWindow = new google.maps.InfoWindow({
            content: restaurantName
          });
          infoWindow.open($scope.map, this);
     });
-  }
+  };
 
   function toggleBounce() {
     for(var i=0; i<markers.length; i++){
@@ -109,7 +109,7 @@ angular.module('menuApp')
               // icon: "http://maps.google.com/mapfiles/marker" + 'A' + ".png",
               icon: 'http://google-maps-icons.googlecode.com/files/red' + markerlabel + '.png',
               animation: google.maps.Animation.DROP
-            })
+            });
             marker.addListener('click', toggleBounce);
             console.log('AHERIAEJORIJAORE');
             makeInfoWindow(marker, restaurantName);
@@ -117,7 +117,7 @@ angular.module('menuApp')
             //SETTIMEOUT HELP PLS
           }
           $scope.data = data;
-          console.log('hhriereirheirererere',markers)
+          console.log('hhriereirheirererere',markers);
           window.setTimeout(refocusMapBounds(),200);
           //FIX THIS TOO
 
@@ -169,7 +169,7 @@ angular.module('menuApp')
 
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
-    console.log('place', place)
+    console.log('place', place);
     if(!place.geometry) {
       window.alert("Autocomplete's returned place contains no geometry");
       return;
