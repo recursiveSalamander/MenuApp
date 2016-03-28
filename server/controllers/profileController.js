@@ -7,7 +7,6 @@ var Utils = require('../utils.js');
 
 module.exports = {
   getProfile: function(req, res) {
-    console.log('log');
     var token = req.body.currentToken;
     console.log('++line 11 in getProfile() in profileCtrl token: ',token);
     var userID = Utils.getUserID(token);
