@@ -109,7 +109,7 @@ module.exports = {
        if (myItemRating !== null) {
          return myItemRating;
        }
-       //if irlrart doesnt exist, create a new rating object with the user/item id
+       //if it doesnt exist, create a new rating object with the user/item id
        var newRating = new Item_Rating({
          user_id: userID,
          item_id: menuitem
