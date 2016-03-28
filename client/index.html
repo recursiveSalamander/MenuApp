@@ -12,14 +12,20 @@
   <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
 </head>
 <body ng-app="menuApp" layout="column" ng-cloak>
-  <div ng-controller="userAuthController">
+  <div ng-controller="restaurantListController">
     <md-toolbar id="navbar" ng-if="checkToken()">
       <ul>
         <li id="logo"><a href="#/restaurantList">MenuApp <i class="fa fa-cutlery"></i></a></li>
         <li>
-          <div class="searchbox">
-            <input type="search" id="searchinput" placeholder="Search..." />
-            <button class="icon"><i class="fa fa-search"></i></button>
+          <div class="searchbox" ng-submit="displayRestaurants()">
+            <input type="text"  id="autocomplete" placeholder="Search..." />
+
+              <!-- <md-input-container class="md-block" type="submit">
+              <input type="text" id="autocomplete" required autofocus="">
+            </md-input-container> -->
+            <!-- <md-button type="submit" value="Submit" class="md-raised">Submit</md-button> -->
+
+            <button ng-click="displayRestaurants()" class="icon"><i class="fa fa-search"></i></button>
           </div>
         </li>
 

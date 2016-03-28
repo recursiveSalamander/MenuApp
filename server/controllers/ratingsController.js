@@ -40,9 +40,8 @@ module.exports = {
   averageRatings: function(request, response) {
     var token = request.body.currentToken;
     var userID = Utils.getUserID(token);
-    var restaurantID = request.body.restaurantId;
 
-    Utils.createRatingsArray(userID, restaurantID, function(data) {
+    Utils.createRatingsArray(userID, function(data) {
       Utils.ratingsAverage(data);
     });
   }

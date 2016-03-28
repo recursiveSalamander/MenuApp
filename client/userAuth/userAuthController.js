@@ -31,7 +31,5 @@ angular.module('menuApp')
     Auth.signout();
   };
 
-  $scope.checkToken = function(){
-    return !!$window.localStorage.getItem('authentication');
-  }
+
 }]);

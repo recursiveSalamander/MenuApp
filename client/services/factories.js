@@ -5,30 +5,32 @@ angular.module('menuApp')
   var currentToken = Auth.getToken();
 
   var getRestaurantList = function(coordinates) {
-    console.log('++line 6 in getRestaurantList() in factories coordinates: ',coordinates);
+    console.log('++line 8 in getRestaurantList() in factories coordinates: ',coordinates);
     return $http({
       method: 'POST',
       url: '/api/restaurants',
       data: coordinates
     })
     .then(function(resp) {
-      console.log('++line 13 inside getRestaurantList in factories',resp);
+      console.log('++line 15 inside getRestaurantList in factories',resp);
       return resp.data;
     }, function(error) {
       console.log(error);
     });
   };
 
-  var getMenu = function(restaurantId) {
+  var getMenu = function(restaurantId, restaurantName) {
     restaurantId = {restaurantId: restaurantId};
-    console.log('++line 22 inside getMenu in factories.js',restaurantId);
+    console.log('++line 24 inside getMenu in factories.js',restaurantId);
     return $http({
       method: 'POST',
       url: '/api/menu',
       data: restaurantId
     })
     .then(function(resp) {
-      console.log('++line 29 in post getMenu inside factories',resp.data);
+      console.log('++line 31 in post getMenu() inside factories resp.data: ',resp.data);
+      resp.data[0].entries.items.restaurantName = restaurantName;
+      console.log('++line 33 inside getMenu() in factories resp.data[0].entries.items.restaurantName: ',resp.data[0].entries.items.restaurantName);
       return resp.data;
     }, function(error) {
       console.log(error);
@@ -201,7 +203,7 @@ angular.module('menuApp')
 .factory('Navbar', ['$state', function($state) {
 
   var formatLatLong = function(lat, lng, callback) {
-  }
+  };
 
   return {
     getLatLong: getLatLong,

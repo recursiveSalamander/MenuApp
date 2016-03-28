@@ -3,13 +3,15 @@
     <md-tabs md-dynamic-height="" md-border-bottom="">
       <md-tab label="Tab" ng-repeat=" submenu in data">
         <md-content class="md-padding">
-          <h1 class="md-display-2">{{submenu.name}}</h1>
+        <h1 class="md-display-1">{{restaurantName}}</h1>
+          <h1 class="md-headline">{{submenu.name}}</h1>
           <ul ng-repeat="item in submenu.entries.items">
             <li> Name: {{item.name}}</li>
             <dl> Description: {{item.description}}</dl>
             <dl> Price: {{item.price}}</dl>
             <jk-rating-stars max-rating="5" rating="item.ratingInfo" read-only="" on-rating="onRating(rating,item.entryId, restaurantId)" >
             </jk-rating-stars>
+            <dl> Average rating: {{item.avgRating}}</dl>
             <dl ng-if="prices.length > 1">NOTE: THERE ARE MORE THAN ONE PRICE IN PRICES ARRAY</dl>
             <dl ng-if="options.length">NOTE: OPTIONS EXIST</dl>
             <dl ng-if="additions.length">NOTE: ADDITIONS EXIST</dl>

@@ -8,7 +8,7 @@ var Utils = require('../utils.js');
 module.exports = {
   getProfile: function(req, res) {
     var token = req.body.currentToken;
-    console.log(token);
+    console.log('++line 11 in getProfile() in profileCtrl token: ',token);
     var userID = Utils.getUserID(token);
     console.log('++line 13 in getProfile() in profileController userID: ', userID);
     User.where({'id': userID}).fetch()
