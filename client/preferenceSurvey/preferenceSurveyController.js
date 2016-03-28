@@ -1,5 +1,5 @@
 angular.module('menuApp')
-.controller('preferenceSurveyController', ['$scope', 'Survey', function($scope, Survey) {
+.controller('preferenceSurveyController', ['$scope', 'Survey', 'Utils', function($scope, Survey, Utils) {
   $scope.foodPics = {
           selected: null,
           first: [],
@@ -94,29 +94,29 @@ angular.module('menuApp')
   };
 
   $scope.cuisineIndex = {
-    american: {score: 0, index: 0},
-    italian: {score: 0, index: 0},
-    mexican: {score: 0, index: 0},
-    southern_soulfood: {score: 0, index: 0},
-    french: {score: 0, index: 0},
-    southwestern: {score: 0, index: 0},
-    indian: {score: 0, index: 0},
-    chinese: {score: 0, index: 0},
-    cajun_creole: {score: 0, index: 0},
-    english: {score: 0, index: 0},
-    mediterranean: {score: 0, index: 0},
-    greek: {score: 0, index: 0},
-    spanish: {score: 0, index: 0},
-    german: {score: 0, index: 0},
-    thai: {score: 0, index: 0},
-    moroccan: {score: 0, index: 0},
-    irish: {score: 0, index: 0},
-    japanese: {score: 0, index: 0},
-    cuban: {score: 0, index: 0},
-    hawaiian: {score: 0, index: 0},
-    swedish: {score: 0, index: 0},
-    hungarian: {score: 0, index: 0},
-    portugese: {score: 0, index: 0}
+    american: {score: 0, eval: 0},
+    italian: {score: 0, eval: 0},
+    mexican: {score: 0, eval: 0},
+    southern_soulfood: {score: 0, eval: 0},
+    french: {score: 0, eval: 0},
+    southwestern: {score: 0, eval: 0},
+    indian: {score: 0, eval: 0},
+    chinese: {score: 0, eval: 0},
+    cajun_creole: {score: 0, eval: 0},
+    english: {score: 0, eval: 0},
+    mediterranean: {score: 0, eval: 0},
+    greek: {score: 0, eval: 0},
+    spanish: {score: 0, eval: 0},
+    german: {score: 0, eval: 0},
+    thai: {score: 0, eval: 0},
+    moroccan: {score: 0, eval: 0},
+    irish: {score: 0, eval: 0},
+    japanese: {score: 0, eval: 0},
+    cuban: {score: 0, eval: 0},
+    hawaiian: {score: 0, eval: 0},
+    swedish: {score: 0, eval: 0},
+    hungarian: {score: 0, eval: 0},
+    portugese: {score: 0, eval: 0}
   };
 
   var initCuisinePreferences = function () {
@@ -135,13 +135,13 @@ angular.module('menuApp')
 
     _.forEach(scores, function(score) {
       if (score[1] <= lowerBound) {
-        $scope.cuisineIndex[score[0]].index = 1;
+        $scope.cuisineIndex[score[0]].eval = 1;
       }
       if (score[1] > lowerBound && score[1] <= upperBound) {
-        $scope.cuisineIndex[score[0]].index = 2;
+        $scope.cuisineIndex[score[0]].eval = 2;
       }
       if (score[1] > upperBound) {
-        $scope.cuisineIndex[score[0]].index = 3;
+        $scope.cuisineIndex[score[0]].eval = 3;
       }
     });
   };
@@ -176,46 +176,13 @@ angular.module('menuApp')
   };
 
   var initIngredientPreferences = function() {
-    var liked = createHistogram($scope.foodPics.first, 'ingredients');
-    var disliked = createHistogram($scope.foodPics.third, 'ingredients');
+    var liked = Utils.createHistogram($scope.foodPics.first, 'ingredients');
+    var disliked = Utils.createHistogram($scope.foodPics.third, 'ingredients');
 
-    var mostLiked = mostFreqElements(liked, 3);
-    var mostDisliked = mostFreqElements(disliked, 3);
+    var mostLiked = Utils.mostFreqElements(liked, 3);
+    var mostDisliked = Utils.mostFreqElements(disliked, 3);
 
-
-  };
-
-  var createHistogram = function(arr, property) {
-    var hist = {};
-
-    _.forEach(arr, function(element) {
-      _.forEach(element[property], function(item) {
-        hist[item] = hist[item] + 1 || 1;
-      });
-    });
-    return hist;
-  };
-
-  var mostFreqElements = function(obj, num) {
-    var arrayified = _.map(obj, function(value, key) {
-      return [key, value];
-    });
-
-  var removeMatches = function(arr1, arr2) {
-    var filteredArr1 = _.filter(arr1, function(element) {
-      return _.includes(arr2, element);
-    });
-    var filteredArr2 = _.filter(arr2, function(element) {
-      return _.includes(arr1, element);
-    });
-    return [filteredArr1, filteredArr2];
-  };
-
-    arrayified.sort(function(a, b) {
-      return a[1] - b[1];
-    });
-
-    return arrayified.slice(arrayified.length - num);
+    console.log(Utils.removeMatches(mostLiked, mostDisliked));
   };
 
   $scope.checkChoicesStorage = function() {

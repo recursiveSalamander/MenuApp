@@ -160,6 +160,45 @@ angular.module('menuApp')
   };
 }])
 
+.factory('Utils', [function() {
+  var createHistogram = function(arr, property) {
+    var hist = {};
+
+    _.forEach(arr, function(element) {
+      _.forEach(element[property], function(item) {
+        hist[item] = hist[item] + 1 || 1;
+      });
+    });
+    return hist;
+  };
+
+  var mostFreqElements = function(obj, num) {
+    var arrayified = _.map(obj, function(value, key) {
+      return [key, value];
+    });
+    arrayified.sort(function(a, b) {
+      return a[1] - b[1];
+    });
+    return arrayified.slice(arrayified.length - num);
+  };
+
+  var removeMatches = function(arr1, arr2) {
+    var filteredArr1 = _.filter(arr1, function(element) {
+      return !_.includes(arr2, element);
+    });
+    var filteredArr2 = _.filter(arr2, function(element) {
+      return !_.includes(arr1, element);
+    });
+    return [filteredArr1, filteredArr2];
+  };
+
+  return {
+    createHistogram: createHistogram,
+    mostFreqElements: mostFreqElements,
+    removeMatches: removeMatches
+  }
+}])
+
 .factory('Auth', ['$http', '$location', '$state', '$window', function($http, $location, $state, $window) {
   var signin = function(user) {
     return $http({
