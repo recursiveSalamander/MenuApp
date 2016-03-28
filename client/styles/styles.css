@@ -10,7 +10,7 @@
   background: url('../assets/signin_background2.jpg') no-repeat center center fixed;
 }
 
-#signuppage {
+.signup {
   background: url('../assets/signin_background1.jpg') no-repeat center center fixed;
 }
 
@@ -36,6 +36,14 @@
 }
 
 /*----------------------------RestaurantList styling-------------------------------------------------*/
+#restaurantlistindex {
+  padding-left: 20px;
+}
+
+.listhighlight {
+  background-color: #93cf96;
+}
+
 #sidenav {
   padding-bottom: 10px;
 }
@@ -211,7 +219,7 @@ ul[dnd-list] li.selected {
   white-space: nowrap;
 }
 
-#navbar .searchbox input#searchinput {
+#navbar .searchbox input {
   width: 300px;
   height: 50px;
   background: white;
