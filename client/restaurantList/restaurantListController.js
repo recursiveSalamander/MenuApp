@@ -116,6 +116,7 @@ angular.module('menuApp')
             markers.push(marker);
             //SETTIMEOUT HELP PLS
           }
+
           $scope.data = data;
           console.log('hhriereirheirererere',markers);
           window.setTimeout(refocusMapBounds(),200);

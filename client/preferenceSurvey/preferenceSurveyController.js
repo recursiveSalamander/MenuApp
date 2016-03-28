@@ -16,7 +16,9 @@ angular.module('menuApp')
     var choicesCount = 1;
     $scope.submitThreePictures = function(){
     //make pictures disappear
-    if($scope.foodPics.first.length === choicesCount && $scope.foodPics.second.length === choicesCount && $scope.foodPics.third.length === choicesCount){
+    if($scope.foodPics.first.length === choicesCount &&
+       $scope.foodPics.second.length === choicesCount &&
+        $scope.foodPics.third.length === choicesCount) {
       angular.element( document.querySelectorAll('.foodpicture')).addClass('ng-hide');
       $scope.foodPics.choices.splice(0,3);
       if($scope.foodPics.storage.length === 0) {
@@ -118,6 +120,34 @@ angular.module('menuApp')
   };
 
   var initCuisinePreferences = function () {
+    tallyCuisineScores();
+
+    var scores = _.map($scope.cuisineIndex, function(values, cuisine) {
+      return [cuisine, values.score];
+    });
+
+    scores.sort(function(a, b) {
+      return a[1] - b[1];
+    });
+
+    var lowerBound = scores[Math.floor((scores.length - 1)/3)][1];
+    var upperBound = scores[(Math.floor(((scores.length - 1)/3)) * 2)][1];
+
+    _.forEach(scores, function(score) {
+      if (score[1] <= lowerBound) {
+        $scope.cuisineIndex[score[0]].index = 1;
+      }
+      if (score[1] > lowerBound && score[1] <= upperBound) {
+        $scope.cuisineIndex[score[0]].index = 2;
+      }
+      if (score[1] > upperBound) {
+        $scope.cuisineIndex[score[0]].index = 3;
+      }
+    });
+    console.log($scope.cuisineIndex);
+  };
+
+  var tallyCuisineScores = function() {
     var choicePoints = [3, 1, -1];
     var relatedCuisinePoints = [0.5, 0, -0.5];
 
@@ -144,10 +174,6 @@ angular.module('menuApp')
         $scope.cuisineIndex[cuisine].score += relatedCuisinePoints[2];
       });
     });
-
-    console.log(_.map($scope.cuisineIndex, function(cuisine) {
-      return cuisine.score;
-    }));
   };
 
   $scope.checkChoicesStorage = function() {
