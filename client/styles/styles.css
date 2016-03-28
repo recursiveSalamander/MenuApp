@@ -36,6 +36,14 @@
 }
 
 /*----------------------------RestaurantList styling-------------------------------------------------*/
+#restaurantlistindex {
+  padding-left: 20px;
+}
+
+.listhighlight {
+  background-color: #93cf96;
+}
+
 #sidenav {
   padding-bottom: 10px;
 }

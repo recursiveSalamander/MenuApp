@@ -5,7 +5,18 @@ angular.module('menuApp')
   $scope.map;
   $scope.checkToken = function(){
     return Auth.isAuth();
+  }
+  $scope.signOut = function() {
+    Auth.signout();
   };
+
+
+  $scope.lightUpCard = function() {
+    console.log('hello');
+  }
+
+
+
 
   var infoWindow;
   var markers = [];
@@ -18,28 +29,20 @@ angular.module('menuApp')
     markers.push(new google.maps.Marker({
       position: current_coords,
       map: $scope.map,
-      title: 'hello'
+      title: 'You may be here'
     }));
 
     };
 
-  var addMarkerWithTimeout = function (position) {
-
-
-
-  };
-
   var clearMarkers = function (callback) {
-    console.log('inside clearmarkers MARKERS', markers);
+    console.log('inside clearmarkers MARKERS', markers)
     for (var i = 0; i < markers.length; i++) {
       if(markers[i].Pb)
       markers[i].Pb.setMap(null);
       else markers[i].setMap(null);
     }
     markers = [];
-  };
-
-
+  }
 
   var refocusMapBounds = function () {
     var bounds = new google.maps.LatLngBounds();
@@ -48,23 +51,19 @@ angular.module('menuApp')
     }
 
     $scope.map.fitBounds(bounds);
-  };
+  }
 
   var makeInfoWindow = function (marker, restaurantName) {
     marker.addListener('click', function(){
       if(infoWindow){
-        infoWindow.close();
+        infoWindow.close()
       }
-
         infoWindow = new google.maps.InfoWindow({
            content: restaurantName
          });
          infoWindow.open($scope.map, this);
-
-
     });
-  };
-
+  }
 
   function toggleBounce() {
     for(var i=0; i<markers.length; i++){
@@ -73,8 +72,7 @@ angular.module('menuApp')
       }
     }
     this.setAnimation(google.maps.Animation.BOUNCE);
-
-}
+  }
   // data.forEach(function(restaurant) {
   //   restaurant.formatted = restaurant.location.formattedAddress.join();
   //   var LatLng = {lat: restaurant.location.lat, lng: restaurant.location.lng};
@@ -90,9 +88,6 @@ angular.module('menuApp')
   //   // })
   // });
 
-
-
-
   $scope.displayRestaurants = function() {
     clearMarkers();
     Geolocation.getLatLong(function(lat, lng) {
@@ -101,27 +96,29 @@ angular.module('menuApp')
         .then(function(data) {
           for(var i=0; i< data.length; i++){
             data[i].formatted = data[i].location.formattedAddress.join();
-            console.log('djfoidjfiosjdoifsajoifjiosadfo',data[i].name);
+            console.log('djfoidjfiosjdoifsajoifjiosadfo',data[i]);
+            var markerlabel = (i+1).toString();
+            data[i].index = (i+1).toString();
+            markerlabel.length === 2 ? markerlabel = markerlabel : markerlabel = '0' + markerlabel;
             var restaurantName = data[i].name;
             var LatLng = {lat: data[i].location.lat, lng: data[i].location.lng};
             var marker = new google.maps.Marker({
               position: LatLng,
               map: $scope.map,
+              // label: markerlabel.toString(),
+              // icon: "http://maps.google.com/mapfiles/marker" + 'A' + ".png",
+              icon: 'http://google-maps-icons.googlecode.com/files/red' + markerlabel + '.png',
               animation: google.maps.Animation.DROP
-            });
+            })
             marker.addListener('click', toggleBounce);
-            console.log('++line 113 in displayRestaurants() in restListCtrl');
+            console.log('AHERIAEJORIJAORE');
             makeInfoWindow(marker, restaurantName);
             markers.push(marker);
-
-
-
             //SETTIMEOUT HELP PLS
           }
           $scope.data = data;
-          console.log('hhriereirheirererere',markers);
+          console.log('hhriereirheirererere',markers)
           window.setTimeout(refocusMapBounds(),200);
-
           //FIX THIS TOO
 
         })
@@ -133,18 +130,19 @@ angular.module('menuApp')
     });
   };
 
+
   $scope.restaurantMenu = function(restaurantId, restaurantName) {
-    console.log('++line 137 inside restaurantMenu() in restListCtrl restaurantId: ',restaurantId);
-    console.log('++line 138 inside restaurantMenu() in restListCtrl restaurantName: ',restaurantName);
+    console.log('++line 135 inside restaurantMenu() in restListCtrl restaurantId: ',restaurantId);
+    console.log('++line 136 inside restaurantMenu() in restListCtrl restaurantName: ',restaurantName);
     $scope.restaurantId = restaurantId;
     menuAppFactory.getMenu(restaurantId, restaurantName)
     .then(function(data) {
-      console.log('++line 142 inside restaurantMenu() in restListCtrl restaurantId:', restaurantId);
-      console.log('++line 143 inside restaurantMenu() in restListCtrl data:', data);
+      console.log('++line 140 inside restaurantMenu() in restListCtrl restaurantId:', restaurantId);
+      console.log('++line 141 inside restaurantMenu() in restListCtrl data:', data);
       userInfo.getRating()
       .then(function(ratingData) {
-        console.log('++line 146 post getRating() in restListCtrl ratingData: ',ratingData);
-        console.log('++line 147 post getRating() in restListCtrl data[0].entries.items: ',data[0].entries.items);
+        console.log('++line 144 post getRating() in restListCtrl ratingData: ',ratingData);
+        console.log('++line 145 post getRating() in restListCtrl data[0].entries.items: ',data[0].entries.items);
         if (ratingData !== undefined) {
           for (var k = 0; k < data[0].entries.items.length; k++) {
             var menuItems = data[0].entries.items[k].entries.items;
@@ -156,7 +154,7 @@ angular.module('menuApp')
               }
             }
           }
-          console.log('++line 159 in restaurantMenu() in restListCtrl data: ',data[0].entries.items.restaurantName);
+          console.log('++line 157 in restaurantMenu() in restListCtrl data: ',data[0].entries.items.restaurantName);
           $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId, restaurantName: data[0].entries.items.restaurantName});
         } else {
          $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId});
@@ -164,7 +162,6 @@ angular.module('menuApp')
      });
     });
   };
-
   var autocomplete = new google.maps.places.Autocomplete(
     (document.getElementById("autocomplete")),
     {types: ["geocode"]});
@@ -172,7 +169,7 @@ angular.module('menuApp')
 
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
-    console.log('place', place);
+    console.log('place', place)
     if(!place.geometry) {
       window.alert("Autocomplete's returned place contains no geometry");
       return;
@@ -182,15 +179,10 @@ angular.module('menuApp')
     } else {
       $scope.map.setCenter(place.geometry.location);
 
-$scope.map.setZoom(17);  // Why 17? Because it looks good.
-}
-
-$scope.displayRestaurants();
-
-
-});
-
-
+    $scope.map.setZoom(17);  // Why 17? Because it looks good.
+    }
+    $scope.displayRestaurants();
+  });
 
 function initMap() {
 // Create a map object and specify the DOM element for display.
@@ -207,9 +199,6 @@ if (navigator.geolocation) {
 
     makeMap(current_coords);
   });
-
-
-
   }
 }
 

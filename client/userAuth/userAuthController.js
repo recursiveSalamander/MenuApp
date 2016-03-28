@@ -26,10 +26,4 @@ angular.module('menuApp')
       }
     });
   };
-
-  $scope.signOut = function() {
-    Auth.signout();
-  };
-
-
 }]);
