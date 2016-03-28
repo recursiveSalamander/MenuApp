@@ -26,8 +26,4 @@ angular.module('menuApp')
       }
     });
   };
-
-
-
-
 }]);

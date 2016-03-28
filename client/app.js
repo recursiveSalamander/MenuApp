@@ -19,7 +19,8 @@ angular.module('menuApp', [
     templateUrl: '/menuView/menuView.html',
     params: {
       'menuData': null,
-      'restaurantId': null
+      'restaurantId': null,
+      'restaurantName': null
     },
     authentication: true,
     // signedin: true

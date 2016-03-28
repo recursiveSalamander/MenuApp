@@ -71,7 +71,7 @@
 
 /*----------------------------PreferenceSurvey styling-------------------------------------------------*/
 ul[dnd-list], ul[dnd-list] > li {
-	position: relative;
+  position: relative;
 }
 
 
@@ -163,14 +163,12 @@ ul[dnd-list] li.selected {
   position: fixed;
   top: -1.8%;
 }
-
 .header a {
   color: white;
   text-decoration: none;
   padding: 25px;
   border-radius: 3px;
 }
-
 .logo {
   font-size: 30px;
   font-family: 'Kaushan Script', sans-serif;
@@ -315,7 +313,6 @@ body {
     margin: auto;
     margin-top: 7%;
   }
-
   .header {
     background-color: #4caf50;
     width: 100%;
@@ -323,14 +320,12 @@ body {
     position: fixed;
     top: -2.4%;
   }
-
   .header a {
     color: white;
     text-decoration: none;
     padding: 25px;
     border-radius: 3px;
   }
-
   .logo {
     font-size: 30px;
     font-family: 'Kaushan Script', sans-serif;
@@ -338,11 +333,9 @@ body {
     margin-bottom: -5px;
     margin-left: -30px;
   }
-
   .googleLocation {
     width: 100%;
   }
-
   .links {
     width: 22%;
     font-size: 20px;

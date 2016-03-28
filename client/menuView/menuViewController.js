@@ -2,7 +2,9 @@ angular.module('menuApp')
 
 .controller('menuViewController', ['$window', '$scope', 'menuAppFactory', '$stateParams', 'userInfo', function($window, $scope, menuAppFactory, $stateParams, userInfo) {
   $scope.data = $stateParams.menuData;
-  console.log('++line 5 in menuViewCtrl scope.data: ', $scope.data);
+  $scope.restaurantName = $stateParams.restaurantName;
+  console.log('++line 6 in menuViewCtrl scope.restaurantName: ', $scope.restaurantName);
+  console.log('++line 7 in menuViewCtrl scope.data: ', $scope.data);
   $scope.restaurantId = $stateParams.restaurantId;
 
   $scope.onRating = function(rating, entryId, restaurantId) {
