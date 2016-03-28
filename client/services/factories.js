@@ -85,8 +85,6 @@ angular.module('menuApp')
     getLatLong: getLatLong,
     formatLatLong: formatLatLong
   };
-
-
 }])
 
 
@@ -94,17 +92,17 @@ angular.module('menuApp')
   var getUserInfo = function() {
     // console.log('++line 90 inside userInfo() in factories user:', user);
     var currentToken = Auth.getToken();
-    console.log('++ line 92 inside ratingInfo() in factories token', currentToken);
+    // console.log('++ line 92 inside ratingInfo() in factories token', currentToken);
     return $http({
       method: 'POST',
       url: '/api/profile',
       data: {currentToken: currentToken}
     })
     .then(function(res) {
-    // console.log(res.data);
+    // console.log('++line 104 in getUserInfo() in factories res.data: ',res.data);
     return res.data;
   }, function(err) {
-    console.log(err);
+    // console.log('++line 107 in getUserInfo in factories res.data err: ',err);
   });
   };
 
@@ -114,7 +112,7 @@ angular.module('menuApp')
     // console.log('++line 109 inside ratingInfo() in factories restaurantId: ', restaurantId );
 
     var currentToken = Auth.getToken();
-    console.log('++ line 112 inside ratingInfo() in factories token',currentToken);
+    console.log('++ line 115 inside ratingInfo() in factories token',currentToken);
 
     return $http({
       method: 'POST',
@@ -131,7 +129,7 @@ angular.module('menuApp')
   var getRating = function() {
     // console.log('++line 127 in getRating() in factories restaurantId: ',restaurantId);
     var currentToken = Auth.getToken();
-    console.log('++ line 129 inside ratingInfo() in factories token',currentToken);
+    console.log('++ line 132 inside ratingInfo() in factories token',currentToken);
 
     return $http({
       method: 'POST',
@@ -139,7 +137,7 @@ angular.module('menuApp')
       data: {currentToken: currentToken}
     })
     .then(function(res) {
-      console.log('++line 137 post getRating in factories', res);
+      console.log('++line 140 post getRating in factories', res);
       return res.data;
     });
   };

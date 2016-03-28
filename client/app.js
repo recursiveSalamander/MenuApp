@@ -53,7 +53,8 @@ angular.module('menuApp', [
   .state('preferenceSurvey', {
     url: '/preferenceSurvey',
     templateUrl: '/preferenceSurvey/preferenceSurvey.html',
-    controller: 'preferenceSurveyController'
+    controller: 'preferenceSurveyController',
+    authentication: true
   });
 
   // .state('form', {
