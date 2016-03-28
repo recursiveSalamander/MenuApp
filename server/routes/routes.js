@@ -21,5 +21,5 @@ module.exports = function(app, express) {
   app.post('/api/preference', bodyParser, preferenceController.postPreferences);
   app.post('/api/rating', ratingsController.postRatingToTable);
   app.post('/api/getRating', bodyParser, ratingsController.getRating);
-  app.get('/api/profile', bodyParser, profileController.getProfile);
+  app.post('/api/profile', bodyParser, profileController.getProfile);
 };
