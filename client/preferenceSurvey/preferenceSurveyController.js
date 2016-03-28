@@ -85,44 +85,18 @@ angular.module('menuApp')
         spicy_total += ($scope.foodPics.first[i].spicy - $scope.foodPics.third[i].spicy);
       }
     }
-    $scope.tasteIndex_salty = salty_total / numberOfPics;
-    $scope.tasteIndex_sour = sour_total / numberOfPics;
-    $scope.tasteIndex_meaty = meaty_total / numberOfPics;
-    $scope.tasteIndex_bitter = bitter_total / numberOfPics;
-    $scope.tasteIndex_sweet = sweet_total / numberOfPics;
-    $scope.tasteIndex_spicy = spicy_total / numberOfPics;
-  };
-
-  $scope.cuisineIndex = {
-    american: {score: 0, eval: 0},
-    italian: {score: 0, eval: 0},
-    mexican: {score: 0, eval: 0},
-    southern_soulfood: {score: 0, eval: 0},
-    french: {score: 0, eval: 0},
-    southwestern: {score: 0, eval: 0},
-    indian: {score: 0, eval: 0},
-    chinese: {score: 0, eval: 0},
-    cajun_creole: {score: 0, eval: 0},
-    english: {score: 0, eval: 0},
-    mediterranean: {score: 0, eval: 0},
-    greek: {score: 0, eval: 0},
-    spanish: {score: 0, eval: 0},
-    german: {score: 0, eval: 0},
-    thai: {score: 0, eval: 0},
-    moroccan: {score: 0, eval: 0},
-    irish: {score: 0, eval: 0},
-    japanese: {score: 0, eval: 0},
-    cuban: {score: 0, eval: 0},
-    hawaiian: {score: 0, eval: 0},
-    swedish: {score: 0, eval: 0},
-    hungarian: {score: 0, eval: 0},
-    portugese: {score: 0, eval: 0}
+    Survey.preferencesForm.tastePreference.salty = Math.round(salty_total / numberOfPics) + 3;
+    Survey.preferencesForm.tastePreference.sour = Math.round(sour_total / numberOfPics) + 3;
+    Survey.preferencesForm.tastePreference.meaty = Math.round(meaty_total / numberOfPics) + 3;
+    Survey.preferencesForm.tastePreference.bitter = Math.round(bitter_total / numberOfPics) + 3;
+    Survey.preferencesForm.tastePreference.sweet = Math.round(sweet_total / numberOfPics) + 3;
+    Survey.preferencesForm.tastePreference.spicy = Math.round(spicy_total / numberOfPics) + 3;
   };
 
   var initCuisinePreferences = function () {
     tallyCuisineScores();
 
-    var scores = _.map($scope.cuisineIndex, function(values, cuisine) {
+    var scores = _.map(Survey.preferencesForm.cuisinePreference, function(values, cuisine) {
       return [cuisine, values.score];
     });
 
@@ -130,18 +104,18 @@ angular.module('menuApp')
       return a[1] - b[1];
     });
 
-    var lowerBound = scores[Math.floor((scores.length - 1)/3)][1];
-    var upperBound = scores[(Math.floor(((scores.length - 1)/3)) * 2)][1];
+    var lowerBound = Math.floor((scores.length - 1)/3);
+    var upperBound = Math.floor(((scores.length - 1)/3)) * 2;
 
-    _.forEach(scores, function(score) {
-      if (score[1] <= lowerBound) {
-        $scope.cuisineIndex[score[0]].eval = 1;
+    _.forEach(scores, function(score, index) {
+      if (index <= lowerBound) {
+        Survey.preferencesForm.cuisinePreference[score[0]].eval = 1;
       }
-      if (score[1] > lowerBound && score[1] <= upperBound) {
-        $scope.cuisineIndex[score[0]].eval = 2;
+      if (index > lowerBound && index <= upperBound) {
+        Survey.preferencesForm.cuisinePreference[score[0]].eval = 2;
       }
-      if (score[1] > upperBound) {
-        $scope.cuisineIndex[score[0]].eval = 3;
+      if (index > upperBound) {
+        Survey.preferencesForm.cuisinePreference[score[0]].eval = 3;
       }
     });
   };
@@ -151,38 +125,39 @@ angular.module('menuApp')
     var relatedCuisinePoints = [0.5, 0, -0.5];
 
     _.forEach($scope.foodPics.first, function(dish) {
-      $scope.cuisineIndex[dish.cuisine].score += choicePoints[0];
+      Survey.preferencesForm.cuisinePreference[dish.cuisine].score += choicePoints[0];
 
       _.forEach(dish.relatedCuisines, function(cuisine) {
-        $scope.cuisineIndex[cuisine].score += relatedCuisinePoints[0];
+        Survey.preferencesForm.cuisinePreference[cuisine].score += relatedCuisinePoints[0];
       });
     });
 
     _.forEach($scope.foodPics.second, function(dish) {
-      $scope.cuisineIndex[dish.cuisine].score += choicePoints[1];
+      Survey.preferencesForm.cuisinePreference[dish.cuisine].score += choicePoints[1];
 
       _.forEach(dish.relatedCuisines, function(cuisine) {
-        $scope.cuisineIndex[cuisine].score += relatedCuisinePoints[1];
+        Survey.preferencesForm.cuisinePreference[cuisine].score += relatedCuisinePoints[1];
       });
     });
 
     _.forEach($scope.foodPics.third, function(dish) {
-      $scope.cuisineIndex[dish.cuisine].score += choicePoints[2];
+      Survey.preferencesForm.cuisinePreference[dish.cuisine].score += choicePoints[2];
 
       _.forEach(dish.relatedCuisines, function(cuisine) {
-        $scope.cuisineIndex[cuisine].score += relatedCuisinePoints[2];
+        Survey.preferencesForm.cuisinePreference[cuisine].score += relatedCuisinePoints[2];
       });
     });
   };
 
   var initIngredientPreferences = function() {
-    var liked = Utils.createHistogram($scope.foodPics.first, 'ingredients');
-    var disliked = Utils.createHistogram($scope.foodPics.third, 'ingredients');
+    var liked = Utils.mostFreqElements(Utils.createHistogram($scope.foodPics.first, 'ingredients'), 3);
+    var disliked = Utils.mostFreqElements(Utils.createHistogram($scope.foodPics.third, 'ingredients'), 3);
 
-    var mostLiked = Utils.mostFreqElements(liked, 3);
-    var mostDisliked = Utils.mostFreqElements(disliked, 3);
+    var uniqIngredients = Utils.removeMatches(liked, disliked);
 
-    console.log(Utils.removeMatches(mostLiked, mostDisliked));
+    Survey.preferencesForm.preferredIngredients = uniqIngredients[0];
+    Survey.preferencesForm.rejectedIngredients = uniqIngredients[1];
+
   };
 
   $scope.checkChoicesStorage = function() {
@@ -195,6 +170,4 @@ angular.module('menuApp')
       return false;
     }
   };
-
-
 }]);

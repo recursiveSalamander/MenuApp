@@ -155,8 +155,46 @@ angular.module('menuApp')
     });
   };
 
+  var preferencesForm = {tastePreference: {
+    spicy: 1,
+    meaty: 1,
+    sour: 1,
+    sweet: 1,
+    salty: 1,
+    bitter: 1
+    },
+   cuisinePreference: {
+    american: {score: 0, eval: 0},
+    italian: {score: 0, eval: 0},
+    mexican: {score: 0, eval: 0},
+    southern_soulfood: {score: 0, eval: 0},
+    french: {score: 0, eval: 0},
+    southwestern: {score: 0, eval: 0},
+    indian: {score: 0, eval: 0},
+    chinese: {score: 0, eval: 0},
+    cajun_creole: {score: 0, eval: 0},
+    english: {score: 0, eval: 0},
+    mediterranean: {score: 0, eval: 0},
+    greek: {score: 0, eval: 0},
+    spanish: {score: 0, eval: 0},
+    german: {score: 0, eval: 0},
+    thai: {score: 0, eval: 0},
+    moroccan: {score: 0, eval: 0},
+    irish: {score: 0, eval: 0},
+    japanese: {score: 0, eval: 0},
+    cuban: {score: 0, eval: 0},
+    hawaiian: {score: 0, eval: 0},
+    swedish: {score: 0, eval: 0},
+    hungarian: {score: 0, eval: 0},
+    portugese: {score: 0, eval: 0}
+  },
+  preferredIngredients: [],
+  rejectedIngredients: []
+  };
+
   return {
-    retrieveSurvey: retrieveSurvey
+    retrieveSurvey: retrieveSurvey,
+    preferencesForm: preferencesForm
   };
 }])
 
@@ -183,12 +221,22 @@ angular.module('menuApp')
   };
 
   var removeMatches = function(arr1, arr2) {
-    var filteredArr1 = _.filter(arr1, function(element) {
-      return !_.includes(arr2, element);
+    var newArr1 = _.map(arr1, function(element) {
+      return element[0];
     });
-    var filteredArr2 = _.filter(arr2, function(element) {
-      return !_.includes(arr1, element);
+    var newArr2 = _.map(arr2, function(element) {
+      return element[0];
     });
+
+    var filteredArr1 = _.reject(newArr1, function (element) {
+      return _.includes(element, newArr2);
+    });
+
+    var filteredArr2 = _.reject(newArr2, function (element) {
+      return _.includes(element, newArr1);
+    });
+
+
     return [filteredArr1, filteredArr2];
   };
 
