@@ -7,12 +7,13 @@ angular.module('menuApp')
     return Auth.isAuth();
   }
 
+  var infoWindow;
   var markers = [];
   var makeMap = function(current_coords) {
     $scope.map = new google.maps.Map(document.getElementById('map'), {
       center: current_coords,
       scrollwheel: false,
-      zoom: 14
+      zoom: 17
     });
     markers.push(new google.maps.Marker({
       position: current_coords,
@@ -24,20 +25,20 @@ angular.module('menuApp')
 
   var addMarkerWithTimeout = function (position) {
 
-        markers.push(new google.maps.Marker({
-          position: position,
-          map: $scope.map,
-          animation: google.maps.Animation.DROP
-        }));
+
 
   }
 
   var clearMarkers = function (callback) {
+    console.log('inside clearmarkers MARKERS', markers)
     for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(null);
+      if(markers[i].Pb)
+      markers[i].Pb.setMap(null);
+      else markers[i].setMap(null);
     }
     markers = [];
   }
+
 
 
   var refocusMapBounds = function () {
@@ -48,6 +49,32 @@ angular.module('menuApp')
 
     $scope.map.fitBounds(bounds);
   }
+
+  var makeInfoWindow = function (marker, restaurantName) {
+    marker.addListener('click', function(){
+      if(infoWindow){
+        infoWindow.close()
+      }
+
+        infoWindow = new google.maps.InfoWindow({
+           content: restaurantName
+         });
+         infoWindow.open($scope.map, this);
+
+
+    });
+  }
+
+
+  function toggleBounce() {
+    for(var i=0; i<markers.length; i++){
+      if (markers[i].getAnimation() !== null) {
+        markers[i].setAnimation(null);
+      }
+    }
+    this.setAnimation(google.maps.Animation.BOUNCE);
+
+}
   // data.forEach(function(restaurant) {
   //   restaurant.formatted = restaurant.location.formattedAddress.join();
   //   var LatLng = {lat: restaurant.location.lat, lng: restaurant.location.lng};
@@ -66,25 +93,37 @@ angular.module('menuApp')
 
 
 
-
   $scope.displayRestaurants = function() {
     clearMarkers();
     Geolocation.getLatLong(function(lat, lng) {
       Geolocation.formatLatLong(lat, lng, function(coords) {
         menuAppFactory.getRestaurantList(coords)
         .then(function(data) {
-          console.log('djfoidjfiosjdoifsajoifjiosadfo',data);
-
           for(var i=0; i< data.length; i++){
             data[i].formatted = data[i].location.formattedAddress.join();
+            console.log('djfoidjfiosjdoifsajoifjiosadfo',data[i].name);
+            var restaurantName = data[i].name;
             var LatLng = {lat: data[i].location.lat, lng: data[i].location.lng};
-            addMarkerWithTimeout(LatLng);
+            var marker = new google.maps.Marker({
+              position: LatLng,
+              map: $scope.map,
+              animation: google.maps.Animation.DROP
+            })
+            marker.addListener('click', toggleBounce);
+            console.log('AHERIAEJORIJAORE');
+            makeInfoWindow(marker, restaurantName);
+            markers.push(marker);
+
+
+
             //SETTIMEOUT HELP PLS
           }
           $scope.data = data;
-          refocusMapBounds();
-          //FIX THIS TOO
           console.log('hhriereirheirererere',markers)
+          window.setTimeout(refocusMapBounds(),200);
+
+          //FIX THIS TOO
+
         })
         .catch(function(err) {
           console.log(err);
