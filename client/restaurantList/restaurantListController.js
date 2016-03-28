@@ -11,6 +11,13 @@ angular.module('menuApp')
   };
 
 
+  $scope.lightUpCard = function() {
+    console.log('hello');
+  }
+
+
+
+
   var infoWindow;
   var markers = [];
   var makeMap = function(current_coords) {
@@ -89,12 +96,18 @@ angular.module('menuApp')
         .then(function(data) {
           for(var i=0; i< data.length; i++){
             data[i].formatted = data[i].location.formattedAddress.join();
-            console.log('djfoidjfiosjdoifsajoifjiosadfo',data[i].name);
+            console.log('djfoidjfiosjdoifsajoifjiosadfo',data[i]);
+            var markerlabel = (i+1).toString();
+            data[i].index = (i+1).toString();
+            markerlabel.length === 2 ? markerlabel = markerlabel : markerlabel = '0' + markerlabel;
             var restaurantName = data[i].name;
             var LatLng = {lat: data[i].location.lat, lng: data[i].location.lng};
             var marker = new google.maps.Marker({
               position: LatLng,
               map: $scope.map,
+              // label: markerlabel.toString(),
+              // icon: "http://maps.google.com/mapfiles/marker" + 'A' + ".png",
+              icon: 'http://google-maps-icons.googlecode.com/files/red' + markerlabel + '.png',
               animation: google.maps.Animation.DROP
             })
             marker.addListener('click', toggleBounce);
