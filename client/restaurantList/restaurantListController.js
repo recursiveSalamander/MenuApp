@@ -6,6 +6,10 @@ angular.module('menuApp')
   $scope.checkToken = function(){
     return Auth.isAuth();
   }
+  $scope.signOut = function() {
+    Auth.signout();
+  };
+
 
   var infoWindow;
   var markers = [];
@@ -18,16 +22,10 @@ angular.module('menuApp')
     markers.push(new google.maps.Marker({
       position: current_coords,
       map: $scope.map,
-      title: 'hello'
+      title: 'You may be here'
     }));
 
     };
-
-  var addMarkerWithTimeout = function (position) {
-
-
-
-  }
 
   var clearMarkers = function (callback) {
     console.log('inside clearmarkers MARKERS', markers)
@@ -38,8 +36,6 @@ angular.module('menuApp')
     }
     markers = [];
   }
-
-
 
   var refocusMapBounds = function () {
     var bounds = new google.maps.LatLngBounds();
@@ -55,16 +51,12 @@ angular.module('menuApp')
       if(infoWindow){
         infoWindow.close()
       }
-
         infoWindow = new google.maps.InfoWindow({
            content: restaurantName
          });
          infoWindow.open($scope.map, this);
-
-
     });
   }
-
 
   function toggleBounce() {
     for(var i=0; i<markers.length; i++){
@@ -73,8 +65,7 @@ angular.module('menuApp')
       }
     }
     this.setAnimation(google.maps.Animation.BOUNCE);
-
-}
+  }
   // data.forEach(function(restaurant) {
   //   restaurant.formatted = restaurant.location.formattedAddress.join();
   //   var LatLng = {lat: restaurant.location.lat, lng: restaurant.location.lng};
@@ -89,9 +80,6 @@ angular.module('menuApp')
   //   //   infoWindow.open($scope.map, marker);
   //   // })
   // });
-
-
-
 
   $scope.displayRestaurants = function() {
     clearMarkers();
@@ -113,15 +101,11 @@ angular.module('menuApp')
             console.log('AHERIAEJORIJAORE');
             makeInfoWindow(marker, restaurantName);
             markers.push(marker);
-
-
-
             //SETTIMEOUT HELP PLS
           }
           $scope.data = data;
           console.log('hhriereirheirererere',markers)
           window.setTimeout(refocusMapBounds(),200);
-
           //FIX THIS TOO
 
         })
@@ -183,15 +167,10 @@ angular.module('menuApp')
     } else {
       $scope.map.setCenter(place.geometry.location);
 
-$scope.map.setZoom(17);  // Why 17? Because it looks good.
-}
-
-$scope.displayRestaurants();
-
-
-});
-
-
+    $scope.map.setZoom(17);  // Why 17? Because it looks good.
+    }
+    $scope.displayRestaurants();
+  });
 
 function initMap() {
 // Create a map object and specify the DOM element for display.
@@ -208,9 +187,6 @@ if (navigator.geolocation) {
 
     makeMap(current_coords);
   });
-
-
-
   }
 }
 
