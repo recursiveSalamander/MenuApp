@@ -1,5 +1,5 @@
 angular.module('menuApp')
-.controller('preferenceSurveyController', ['$scope', '$mdDialog', 'Survey', 'Utils', 'Preferences', function($scope, $mdDialog, Survey, Utils, Preferences) {
+.controller('preferenceSurveyController', ['$scope', '$mdDialog', 'Survey', 'Utils', 'Preferences', '$mdToast', function($scope, $mdDialog, Survey, Utils, Preferences, $mdToast) {
   $scope.foodPics = {
           selected: null,
           first: [],
@@ -160,17 +160,35 @@ angular.module('menuApp')
 
   };
 
-  $scope.checkChoicesStorage = function() {
-    if($scope.foodPics.storage.length === 0 && $scope.foodPics.choices.length === 0) {
-      initTastePreferences();
-      initCuisinePreferences();
-      initIngredientPreferences();
-      console.log('SURVEy.PREFERENCESFORM.prffered', Survey.preferencesForm.preferredIngredients);
-      console.log('SURVEy.PREFERENCESFORM.rejected', Survey.preferencesForm.rejectedIngredients);
-      $mdDialog.hide();
-      return true;
-    } else {
-      return false;
-    }
-  };
+var surveyFinished = $scope.foodPics.storage.length === 0 && $scope.foodPics.choices.length === 0;
+$scope.finishSurvey = function(){
+  initTastePreferences();
+  initCuisinePreferences();
+  initIngredientPreferences();
+  $mdDialog.hide();
+  $mdToast.show({
+         hideDelay   : 3000,
+         position    : 'top right',
+         template : '<span>Your responses have gone through our dank algorithm and your preferences have been initialized!</span>'
+       });
+};
+
+
+  // $scope.checkChoicesStorage = function() {
+  //   console.log('STORAGE AND CHOICES LENGTHS ARE 0')
+  //   if($scope.foodPics.storage.length === 0 && $scope.foodPics.choices.length === 0) {
+  //     initTastePreferences();
+  //     initCuisinePreferences();
+  //     initIngredientPreferences();
+  //     $mdDialog.hide();
+  //     // $mdToast.show({
+  //     //     hideDelay   : 3000,
+  //     //     position    : 'top right',
+  //     //     template : '<span>Your responses have gone through our dank algorithm and your preferences have been initialized!</span>'
+  //     //   });
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // };
 }]);

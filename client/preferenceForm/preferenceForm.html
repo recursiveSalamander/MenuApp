@@ -2,7 +2,9 @@
 
 
 <div layout="row">
-  <md-card flex="50" class="md-padding">
+  <div flex="10">
+  </div>
+  <md-card id="tastepreferencecard" flex="60" class="md-padding">
        <!-- <md-card-title>
          <md-card-title-text>
            <span class="md-headline">Card with image</span>
@@ -20,42 +22,42 @@
        <div class="md-padding" id="tastePreferenceform">
          <div layout md-theme="red">
            <div flex="10" layout layout-align="center center">
-             <span class="md-body-1">Spicy</span>
+             <span class="md-body-1">Spicy</span>&nbsp&nbsp
            </div>
            <md-slider class="md-primary" flex md-discrete ng-init="preferencesForm.tastePreference.spicy" ng-model="preferencesForm.tastePreference.spicy" step="1" min="1" max="5" aria-label="rating">
            </md-slider>
          </div>
          <div layout md-theme="orange">
            <div flex="10" layout layout-align="center center">
-             <span class="md-body-1">Meaty</span>
+             <span class="md-body-1">Meaty</span>&nbsp&nbsp
            </div>
            <md-slider class="md-primary" flex class="md-warn" md-discrete ng-init="preferencesForm.tastePreference.meaty" ng-model="preferencesForm.tastePreference.meaty" step="1" min="1" max="5" aria-label="rating">
            </md-slider>
          </div>
          <div layout md-theme="yellow">
            <div flex="10" layout layout-align="center center">
-             <span class="md-body-1">Sour</span>
+             <span class="md-body-1">Sour</span>&nbsp&nbsp
            </div>
            <md-slider class="md-primary" flex class="md-primary" md-discrete ng-init="preferencesForm.tastePreference.sour" ng-model="preferencesForm.tastePreference.sour" step="1" min="1" max="5" aria-label="rating">
            </md-slider>
          </div>
          <div layout md-theme="light-green">
            <div flex="10" layout layout-align="center center">
-             <span class="md-body-1">Sweet</span>
+             <span class="md-body-1">Sweet</span>&nbsp&nbsp
            </div>
            <md-slider class="md-primary" flex class="md-primary" md-discrete ng-init="preferencesForm.tastePreference.sweet" ng-model="preferencesForm.tastePreference.sweet" step="1" min="1" max="5" aria-label="rating">
            </md-slider>
          </div>
          <div layout md-theme="indigo">
            <div flex="10" layout layout-align="center center">
-             <span class="md-body-1">Salty</span>
+             <span class="md-body-1">Salty</span>&nbsp&nbsp
            </div>
            <md-slider class="md-primary" flex class="md-primary" md-discrete ng-init="preferencesForm.tastePreference.salty" ng-model="preferencesForm.tastePreference.salty" step="1" min="1" max="5" aria-label="rating">
            </md-slider>
          </div>
          <div layout md-theme="deep-purple">
            <div flex="10" layout layout-align="center center">
-             <span class="md-body-1">Bitter</span>
+             <span class="md-body-1">Bitter</span>&nbsp&nbsp
            </div>
            <md-slider class="md-primary" flex class="md-primary" md-discrete ng-init="preferencesForm.tastePreference.bitter" ng-model="preferencesForm.tastePreference.bitter" step="1" min="1" max="5" aria-label="rating">
            </md-slider>
@@ -64,8 +66,9 @@
 
      </md-card>
 
-
-<md-card flex="50" class="md-padding">
+     <!-- <div flex="10">
+     </div> -->
+<md-card id="ingredientpreferencecard" flex="25" class="md-padding">
      <h2 class="md-padding md-margin">Ingredient Preferences</h2>
      <div class="md-padding">
      <md-input-container>
@@ -80,6 +83,9 @@
 
 
   </md-card>
+
+<div flex="10">
+</div>
 
   </div>
 
@@ -157,7 +163,10 @@
 
   <div ng-repeat="(key, value) in nutritionPreference">{{key}}: {{value}}</div>
   </div> -->
-  <md-card flex="100" class="md-padding">
+<div layout="row">
+  <div flex="9">
+  </div>
+  <md-card id="cuisinepreferencecard" flex="80" class="md-padding">
     <h2 class="md-padding md-margin">Cuisine Origin</h2>
 
     <div class="md-padding" md-theme="green" layout="column">
@@ -334,8 +343,10 @@
       </div>
     </div>
        </md-card>
-
-       <div style="text-align: right">
+       <div flex="11">
+       </div>
+</div>
+       <div style="text-align: center">
          <md-button class="md-raised" ng-click="sendPreferenceData()">Submit</md-button>
        </div>
 

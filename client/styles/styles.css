@@ -1,3 +1,12 @@
+#main {
+  background: url('../assets/mainbackground.jpg') no-repeat fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
 /*----------------------------Sign-in/Sign-up styling-------------------------------------------------*/
 .signup, .signin {
   height: 100vh;
@@ -54,12 +63,19 @@
 
 #sidenav {
   padding-bottom: 10px;
+  height: 100vh;
+}
+
+.list md-list {
+  background-color: white;
+  background-color:rgba(255,255,255, 0.5);
 }
 
 .restaurantlist .sidenav {
   position: fixed;
 }
 .restaurantlist .list {
+
 }
 .restaurantquery {
   font-size: 15px;
@@ -384,4 +400,10 @@ md-checkbox.md-checked .md-icon {
 }
 .tabsdemoDynamicHeight md-content h1:first-child {
   margin-top: 0;
+}
+
+/*ProfileView*/
+
+.profileview {
+  text-align: center;
 }
