@@ -9,32 +9,32 @@
         <div flex="60">
           <md-input-container>
             <label>First Name</label>
-            <input type='text' ng-model="user.first_name" required autofocus>
+            <input type='text' ng-model="user.first_name" maxlength = "20" required autofocus>
           </md-input-container>
           <br>
           <md-input-container>
             <label>Last Name</label>
-            <input type="text" ng-model="user.last_name" required>
+            <input type="text" ng-model="user.last_name" maxlength = "30" required>
           </md-input-container>
           <br>
           <md-input-container>
             <label>E-mail</label>
-            <input type="text" ng-model="user.email" required>
+            <input type="text" ng-model="user.email" maxlength = "30" required>
           </md-input-container>
           <br>
           <md-input-container>
             <label>Username</label>
-            <input type="text" ng-model="user.username" required>
+            <input type="text" ng-model="user.username" maxlength = "20" required>
           </md-input-container>
           <br>
           <md-input-container>
             <label>Password</label>
-            <input type="text" ng-model="user.password" required>
+            <input type="text" ng-model="user.password" maxlength = "20" required>
           </md-input-container>
           <br>
           <md-input-container>
             <label>Confirm Password</label>
-            <input type="text" ng-model="user.confirmpassword" required>
+            <input type="text" ng-model="user.confirmpassword" maxlength = "20" required>
           </md-input-container>
           <br>
           <md-button type="submit" class="md-raised">Sign Up</md-button>

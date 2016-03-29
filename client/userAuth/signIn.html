@@ -9,12 +9,12 @@
         <div flex="60">
           <md-input-container>
             <label>Username</label>
-            <input type='text' ng-model="user.loginUsername" required autofocus>
+            <input type='text' ng-model="user.loginUsername" required maxlength = "20" autofocus>
           </md-input-container>
           <br>
           <md-input-container>
             <label>Password</label>
-            <input type="password" ng-model="user.loginPassword" required>
+            <input type="password" ng-model="user.loginPassword" maxlength = "20" required>
           </md-input-container>
           <br>
           <md-button type="submit" class="md-raised">Sign in</md-button>
