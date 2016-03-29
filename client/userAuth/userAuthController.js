@@ -28,10 +28,12 @@ angular.module('menuApp')
         confirmationButtonText: 'OK'
       });
     } else {
-    Auth.signup($scope.user)
+      Auth.signup($scope.user)
       .then(function(token) {
         $window.localStorage.setItem('authentication', token);
-        $location.path('/user');
+        $state.go('profileView');
+        Preferences.showTabDialog();
+
       })
       .catch(function(error) {
         swal({

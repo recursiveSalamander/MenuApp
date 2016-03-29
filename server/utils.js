@@ -132,21 +132,26 @@ module.exports = {
       for(var i = 0; i < formattedItemData.length; i++) {
         ratingsArray.push({rating: formattedItemData[i].rating, entryId: formattedItemData[i].menu_items.item});
       }
+      // console.log('++line 135 inside createRatingsArray() in Utils ratingsArray: ',ratingsArray);
       module.exports.hasCallBack(ratingsArray, callback);
     });
   },
 
-  ratingsMenuAverage: function(restaurantID, callback) {
+  averageRatings: function(restaurantID, callback) {
+    // console.log('++line 141 in ratingsMenuAverage() inside utils restaurantId: ',restaurantID);
     Menu_Item.where({restaurant: restaurantID}).fetchAll({withRelated: ['ratings']})
     .then(function(data) {
+      // console.log('++line 144 inside ratingsMenuAverage() inside utils data: ',data);
       var formattedData = data.toJSON();
-      var idArr = [];
+      // console.log('++line 146 inside ratingsMenuAverage() inside utils formattedData: ',formattedData);
+      // var idArr = [];
       var arr = [];
       for(var i = 0; i < formattedData.length; i++){
         for(var j = 0; j < formattedData[i].ratings.length; j++){
-          arr.push({id: formattedData[i].id, rating: formattedData[i].ratings[j].rating});
+          arr.push({entryId: formattedData[i].item, rating: formattedData[i].ratings[j].rating});
         }
       }
+      console.log('++line 154 in averageRatings in Utils arr: ',arr);
       var array = {};
       var sum = 0;
       var counter = 0;
@@ -155,25 +160,25 @@ module.exports = {
           sum = arr[0].rating;
           counter = 1;
         }
-        var currentID = parseInt(arr[i].id);
-        if(currentID === parseInt(arr[i-1].id)){
+        var currentItem = parseInt(arr[i].entryId);
+        if(currentItem === parseInt(arr[i-1].entryId)){
           sum+=arr[i].rating;
           counter++;
           if(i===arr.length-1){
-            parseInt(array[arr[i].id]) = parseInt((sum/counter).toFixed(1));
+            parseInt(array[arr[i].entryId]) = parseInt((sum/counter).toFixed(1));
           }
         }
         else {
-            array[arr[i-1].id] = parseInt((sum/counter).toFixed(1));
-            sum = arr[i].rating;
-            counter = 1;
-        if(i=== arr.length - 1){
-          array[arr[i].id] = parseInt(arr[i].rating.toFixed(1));
+          array[arr[i-1].entryId] = parseInt((sum/counter).toFixed(1));
+          sum = arr[i].rating;
+          counter = 1;
+          if(i=== arr.length - 1){
+            array[arr[i].entryId] = parseInt(arr[i].rating.toFixed(1));
+          }
         }
       }
-    }
-    console.log(array);
-    return array;
+      // console.log('++line 175 in ratingsMenuAverage() in utils array: ',array);
+      module.exports.hasCallBack(array, callback);
     });
   }
 };
