@@ -167,7 +167,7 @@ angular.module('menuApp')
     (document.getElementById("autocomplete")),
     {types: ["geocode"]});
 
-
+  
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
     console.log('place', place);
