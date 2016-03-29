@@ -1,5 +1,6 @@
 angular.module('menuApp')
-.controller('preferenceFormController', ['$scope', 'menuAppFactory', function($scope, menuAppFactory) {
+.controller('preferenceFormController', ['$scope', 'menuAppFactory', 'Survey', function($scope, menuAppFactory, Survey) {
+  $scope.preferencesForm = Survey.preferencesForm;
   $scope.tastePreference = {
     spicy: 1,
     meaty: 1,
