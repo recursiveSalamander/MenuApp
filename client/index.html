@@ -14,11 +14,11 @@
 <body ng-app="menuApp" layout="column" ng-cloak>
   <div ng-controller="restaurantListController">
     <md-toolbar id="navbar" ng-if="checkToken()">
-      <ul>
-        <li id="logo"><a href="#/restaurantList">MenuApp <i class="fa fa-cutlery"></i></a></li>
-        <li>
+      <ul layout="row">
+        <li flex="15"> <a href="#/restaurantList">MenuApp <i class="fa fa-cutlery"></i></a></li>
+        <li flex="60">
           <div class="searchbox" ng-submit="displayRestaurants()">
-            <input type="text"  id="autocomplete" placeholder="Search..." />
+            <input type="text" id="autocomplete" placeholder="Search..." />
 
               <!-- <md-input-container class="md-block" type="submit">
               <input type="text" id="autocomplete" required autofocus="">
@@ -29,8 +29,8 @@
           </div>
         </li>
 
-        <li class='navbarlinks'><a href="#/profileView">Profile</a></li>
-        <li class='navbarlinks' ng-click="signOut()"><a href="#/signIn">Logout</a></li>
+        <li flex="15" class='navbarlinks'><a href="#/profileView">Profile</a></li>
+        <li flex="10" class='navbarlinks' ng-click="signOut()"><a href="#/signIn">Logout</a></li>
       </ul>
     </md-toolbar>
   </div>

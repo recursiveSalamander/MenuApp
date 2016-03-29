@@ -2,7 +2,7 @@
   <form>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>Mango (Fruit)</h2>
+        <h2>Food Survey</h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="cancel()">
           <!-- <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon> -->
@@ -15,7 +15,7 @@
           <md-content class="md-padding" style="max-width:900px; max-height:600px; min-height:600px; min-width: 900px ">
 
             <div id="foodpicturechoices">
-              <div ng-if="checkChoicesStorage()">
+              <div ng-if="foodPics.storage.length === 0 && foodPics.choices.length === 0" ng-init="finishSurvey()">
                 <h3>We're calculating your preferences based on your choices... please wait!</h3>
               </div>
               <div id="surveycontinue" ng-if="checkChoicesContainer()">
@@ -94,28 +94,20 @@
 
 
         </md-tab>
-        <md-tab label="Allergies">
+        <!-- <md-tab label="Allergies">
           <md-content class="md-padding">
             <h2>Allergies</h2>
-            <!-- <div layout="row" layout-wrap> -->
-                <!-- <div flex="100" flex-gt-sm="50" layout="column"> -->
-                  <!-- <div> -->
                     <fieldset class="standard">
                       <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend>
-                      <!-- <div layout="row" layout-wrap flex> -->
                         <div flex="33" ng-repeat="allergy in allergyList">
                           <md-checkbox ng-click="toggleAllergyCheckbox(allergy)">
                             {{allergy}}
                           </md-checkbox>
                         </div>
                     </fieldset>
-                  <!-- </div>
-                </div>
-              </div> -->
-            <!-- </div> -->
           </md-content>
-        </md-tab>
-        <md-tab label="three">
+        </md-tab> -->
+        <!-- <md-tab label="three">
           <md-content class="md-padding">
 
 
@@ -152,20 +144,13 @@
           </div>
 
             </md-content>
-        </md-tab>
+        </md-tab> -->
       </md-tabs>
     </md-dialog-content>
-    <md-dialog-actions layout="row">
-      <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
-        More on Wikipedia
-      </md-button>
+    <!-- <md-dialog-actions layout="row">
       <span flex></span>
-      <md-button ng-click="answer('not useful')" >
-        Not Useful
+
       </md-button>
-      <md-button ng-click="answer('useful')" style="margin-right:20px;" >
-        Useful
-      </md-button>
-    </md-dialog-actions>
+    </md-dialog-actions> -->
   </form>
 </md-dialog>
