@@ -297,14 +297,39 @@ angular.module('menuApp')
   };
 }])
 
-.factory('Navbar', ['$state', function($state) {
+.factory('Preferences', ['$mdDialog', function($mdDialog) {
 
-  var formatLatLong = function(lat, lng, callback) {
-  };
+  // function DialogController($scope, $mdDialog) {
+  //   $scope.hide = function() {
+  //     $mdDialog.hide();
+  //   };
+  //   $scope.cancel = function() {
+  //     $mdDialog.cancel();
+  //   };
+  //   $scope.answer = function(answer) {
+  //     $mdDialog.hide(answer);
+  //   };
+  // }
+
+
+
+  var showTabDialog = function(ev) {
+    $mdDialog.show({
+      controller: 'preferenceSurveyController',
+      templateUrl: '../preferenceSurvey/preferenceSurvey.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: false
+    });
+    // .then(function(answer) {
+    //   $scope.status = 'You said the information was "' + answer + '".';
+    // }, function() {
+    //   $scope.status = 'You cancelled the dialog.';
+    // });
+};
 
   return {
-    getLatLong: getLatLong,
-    formatLatLong: formatLatLong
+    showTabDialog: showTabDialog
   };
 
 

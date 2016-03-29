@@ -1,13 +1,14 @@
 angular.module('menuApp')
 
-.controller('userAuthController', ['$window', '$scope', 'Auth', '$location', '$state',function($window, $scope, Auth, $location, $state) {
+.controller('userAuthController', ['$window', '$scope', 'Auth', '$location', 'Preferences', '$state', function($window, $scope, Auth, $location, Preferences, $state) {
 
   $scope.signUp = function() {
     Auth.signup($scope.user)
     .then(function(token) {
       $window.localStorage.setItem('authentication', token);
       console.log('LOOK AT YOU, SIGNING UP AND WHATNOT. WHAT A BIG BOY.');
-      $location.path('/user');
+      $state.go('profileView');
+      Preferences.showTabDialog();
     })
     .catch(function(error) {
       console.log(error);

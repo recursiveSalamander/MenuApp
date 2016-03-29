@@ -1,83 +1,171 @@
-<div class="preferencesurvey">
-<h2>SURVEY</h2>
+<md-dialog aria-label="Mango (Fruit)">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Mango (Fruit)</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <!-- <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon> -->
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:900px;max-height:810px; ">
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="Survey">
+          <md-content class="md-padding" style="max-width:900px; max-height:600px; min-height:600px; min-width: 900px ">
 
-<div id="foodpicturechoices">
-  <div ng-if="checkChoicesStorage()">
-    <h3>We're calculating your preferences based on your choices... please wait!</h3>
-  </div>
-  <div id="surveycontinue" ng-if="checkChoicesContainer()">
-      <h1 ng-click="submitThreePictures()">Continue</h1>
-  </div>
-<ul  dnd-list="foodPics.choices" layout="row" layout-align="center" layout-margin>
+            <div id="foodpicturechoices">
+              <div ng-if="checkChoicesStorage()">
+                <h3>We're calculating your preferences based on your choices... please wait!</h3>
+              </div>
+              <div id="surveycontinue" ng-if="checkChoicesContainer()">
+                  <h1 ng-click="submitThreePictures()">Continue</h1>
+              </div>
+            <ul  dnd-list="foodPics.choices" layout="row" layout-align="center" layout-margin>
+                <li
+                    ng-repeat="item in foodPics.choices"
+                    class="foodpicture"
+                    dnd-draggable="item"
+                    dnd-moved="foodPics.choices.splice($index, 1)"
+                    dnd-effect-allowed="move"
+                    dnd-selected="foodPics.selected = item"
+                    ng-class="{'selected': foodPics.selected === item}"
+                    >
+                    <img src='../assets/{{item.label}}.jpg' height="200" width="200"/>
+                </li>
+            </ul>
+            </div>
+
+            <div id="surveyprompt">Which of these look most appetizing? Please drag each picture to rank them</div>
+
+            <div layout="row" layout-wrap layout-align="space-between center" layout-margin>
+
+              <div flex>
+              </div>
+              <ul class="foodrankbox" id="firstchoice" dnd-list="foodPics.first">
+                  <li ng-repeat="item in foodPics.first"
+                      class="foodpicture"
+                      dnd-draggable="item"
+                      dnd-moved="foodPics.first.splice($index, 1)"
+                      dnd-effect-allowed="move"
+                      dnd-selected="foodPics.selected = item"
+                      ng-class="{'selected': foodPics.selected === item}"
+                      >
+                      <img src='../assets/{{item.label}}.jpg' height="100" width="100"/>
+                  </li>
+              </ul>
+
+              <div flex>
+              </div>
+
+              <ul class="foodrankbox" id="secondchoice" dnd-list="foodPics.second">
+                  <li ng-repeat="item in foodPics.second"
+                      class="foodpicture"
+                      dnd-draggable="item"
+                      dnd-moved="foodPics.second.splice($index, 1)"
+                      dnd-effect-allowed="move"
+                      dnd-selected="foodPics.selected = item"
+                      ng-class="{'selected': foodPics.selected === item}"
+                      >
+                      <img src='../assets/{{item.label}}.jpg' height="100" width="100"/>
+                  </li>
+              </ul>
+
+              <div flex>
+              </div>
+
+              <ul class="foodrankbox" id="thirdchoice" dnd-list="foodPics.third">
+                  <li ng-repeat="item in foodPics.third"
+                      class="foodpicture"
+                      dnd-draggable="item"
+                      dnd-moved="foodPics.third.splice($index, 1)"
+                      dnd-effect-allowed="move"
+                      dnd-selected="foodPics.selected = item"
+                      ng-class="{'selected': foodPics.selected === item}"
+                      >
+                      <img src='../assets/{{item.label}}.jpg' height="100" width="100"/>
+                  </li>
+              </ul>
+              <div flex>
+              </div>
+
+            </div>
+          </md-content>
 
 
+        </md-tab>
+        <md-tab label="Allergies">
+          <md-content class="md-padding">
+            <h2>Allergies</h2>
+            <!-- <div layout="row" layout-wrap> -->
+                <!-- <div flex="100" flex-gt-sm="50" layout="column"> -->
+                  <!-- <div> -->
+                    <fieldset class="standard">
+                      <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend>
+                      <!-- <div layout="row" layout-wrap flex> -->
+                        <div flex="33" ng-repeat="allergy in allergyList">
+                          <md-checkbox ng-click="toggleAllergyCheckbox(allergy)">
+                            {{allergy}}
+                          </md-checkbox>
+                        </div>
+                    </fieldset>
+                  <!-- </div>
+                </div>
+              </div> -->
+            <!-- </div> -->
+          </md-content>
+        </md-tab>
+        <md-tab label="three">
+          <md-content class="md-padding">
 
-    <li
-        ng-repeat="item in foodPics.choices"
-        class="foodpicture"
-        dnd-draggable="item"
-        dnd-moved="foodPics.choices.splice($index, 1)"
-        dnd-effect-allowed="move"
-        dnd-selected="foodPics.selected = item"
-        ng-class="{'selected': foodPics.selected === item}"
-        >
-        <img src='../assets/{{item.label}}.jpg' height="400" width="400"/>
-    </li>
-</ul>
-</div>
 
-<div id="surveyprompt">Which of these look most appetizing? Please drag each picture to rank them</div>
+            <h2>Diet Restrictions</h2>
+            <div layout="row" layout-wrap>
+              <div flex="100" flex-gt-sm="50" layout="column">
+                <div>
+                  <fieldset class="standard">
+                    <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend>
 
-<div layout="row" layout-wrap layout-align="space-between center" layout-margin>
 
-  <div flex>
-  </div>
-  <ul class="foodrankbox" id="firstchoice" dnd-list="foodPics.first">
-      <li ng-repeat="item in foodPics.first"
-          class="foodpicture"
-          dnd-draggable="item"
-          dnd-moved="foodPics.first.splice($index, 1)"
-          dnd-effect-allowed="move"
-          dnd-selected="foodPics.selected = item"
-          ng-class="{'selected': foodPics.selected === item}"
-          >
-          <img src='../assets/{{item.label}}.jpg' height="250" width="250"/>
-      </li>
-  </ul>
+                    <md-radio-group ng-model="dietaryRestrictions">
+                      <div layout="row" layout-wrap flex>
+                        <div flex="50">
+                          <md-radio-button flex="50" value="lacto vegetarian" class="md-primary">Lacto Vegetarian</md-radio-button>
+                        </div>
+                        <div flex="50">
+                          <md-radio-button flex="50" value="ovo vegetarian" class="md-primary">Ovo Vegetarian</md-radio-button>
+                        </div>
+                        <div flex="50">
+                          <md-radio-button flex="50" value="pescetarian" class="md-primary">Pescetarian</md-radio-button>
+                        </div>
+                        <div flex="50">
+                          <md-radio-button flex="50" value="vegan" class="md-primary">Vegan</md-radio-button>
+                        </div>
+                        <div flex="50">
+                          <md-radio-button flex="50" value="vegetarian" class="md-primary">Vegetarian</md-radio-button>
+                        </div>
+                      </div>
+                  </md-radio-group>
+                </fieldset>
+              </div>
+            </div>
+          </div>
 
-  <div flex>
-  </div>
-
-  <ul class="foodrankbox" id="secondchoice" dnd-list="foodPics.second">
-      <li ng-repeat="item in foodPics.second"
-          class="foodpicture"
-          dnd-draggable="item"
-          dnd-moved="foodPics.second.splice($index, 1)"
-          dnd-effect-allowed="move"
-          dnd-selected="foodPics.selected = item"
-          ng-class="{'selected': foodPics.selected === item}"
-          >
-          <img src='../assets/{{item.label}}.jpg' height="250" width="250"/>
-      </li>
-  </ul>
-
-  <div flex>
-  </div>
-
-  <ul class="foodrankbox" id="thirdchoice" dnd-list="foodPics.third">
-      <li ng-repeat="item in foodPics.third"
-          class="foodpicture"
-          dnd-draggable="item"
-          dnd-moved="foodPics.third.splice($index, 1)"
-          dnd-effect-allowed="move"
-          dnd-selected="foodPics.selected = item"
-          ng-class="{'selected': foodPics.selected === item}"
-          >
-          <img src='../assets/{{item.label}}.jpg' height="250" width="250"/>
-      </li>
-  </ul>
-  <div flex>
-  </div>
-
-</div>
-</div>
+            </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
+        More on Wikipedia
+      </md-button>
+      <span flex></span>
+      <md-button ng-click="answer('not useful')" >
+        Not Useful
+      </md-button>
+      <md-button ng-click="answer('useful')" style="margin-right:20px;" >
+        Useful
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

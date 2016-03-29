@@ -70,6 +70,12 @@
 
 
 /*----------------------------PreferenceSurvey styling-------------------------------------------------*/
+.preferenceSurvey {
+  width: 200px;
+  /*-webkit-transform: scale(0.2, 0.2); */
+  /*background-color: green;*/
+
+}
 ul[dnd-list], ul[dnd-list] > li {
   position: relative;
 }
@@ -88,13 +94,14 @@ ul[dnd-list] .dndDraggingSource {
 
 
 #foodpicturechoices{
-  min-height: 500px;
+
 }
 
 #foodpicturechoices{
   display:flex;
   justify-content:center;
   align-items:center;
+  min-height: 280px;
 }
 #foodpicturechoices ul{
   padding-left: 0px;
@@ -102,13 +109,13 @@ ul[dnd-list] .dndDraggingSource {
 #foodpicturechoices ul[dnd-list] .dndPlaceholder {
     display: block;
     background-color: #ddd;
-    min-width: 370px;
+    min-width: 100px;
 }
 
 .foodrankbox[dnd-list] .dndPlaceholder {
     display: block;
     background-color: #76c379;
-    min-height: 175px;
+    min-height: 80px;
 }
 
 ul[dnd-list] li {
@@ -134,8 +141,8 @@ ul[dnd-list] li.selected {
 
 
 .foodrankbox {
-  min-height: 250px;
-  min-width: 250px;
+  min-height: 150px;
+  min-width: 150px;
   border: 7px solid #4caf50;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
