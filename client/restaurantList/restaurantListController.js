@@ -10,14 +10,6 @@ angular.module('menuApp')
     Auth.signout();
   };
 
-
-  $scope.lightUpCard = function() {
-    console.log('hello');
-  };
-
-
-
-
   var infoWindow;
   var markers = [];
   var makeMap = function(current_coords) {
