@@ -28,8 +28,11 @@ var server = app.listen(port, function() {
   console.log('http://localhost:' + port);
 });
 
-var test = function() {
-  ratingsController.averageRatings();
-};
+
+// var test = function() {
+//   ratingsController.averageRatings()
+// };
+//
+// test();
 
 module.exports = app;
