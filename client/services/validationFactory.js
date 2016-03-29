@@ -9,14 +9,12 @@ angular.module('menuApp')
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if(re.test(email)){
-      console.log('inside ifemail');
         resultsObj.emailFormFlag = true;
       } else {
         resultsObj.emailFormFlag = false;
       }
 
     if(password === secondEntryPassword){
-      console.log('inside ifpassword')
       resultsObj.passwordFormFlag = true;
       } else {
       resultsObj.passwordFormFlag = false;

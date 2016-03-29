@@ -35,7 +35,6 @@ module.exports = {
   },
 
   signin: function(request, response, next) {
-    console.log('FAILED')
     var username = request.body.loginUsername;
     var password = request.body.loginPassword;
     new User({username: username})
