@@ -38,11 +38,7 @@ module.exports = {
   },
 
   averageRatings: function(request, response) {
-    var token = request.body.currentToken;
-    var userID = Utils.getUserID(token);
-
-    Utils.createRatingsArray(userID, function(data) {
-      Utils.ratingsAverage(data);
-    });
+    var restaurantID = request.body.restaurantId;
+    Utils.ratingsMenuAverage(restaurantID);
   }
 };
