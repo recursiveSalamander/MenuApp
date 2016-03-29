@@ -1,284 +1,30 @@
 angular.module('menuApp')
-.controller('preferenceSurveyController', ['$scope', function($scope) {
+.controller('preferenceSurveyController', ['$scope', 'Survey', 'Utils', function($scope, Survey, Utils) {
   $scope.foodPics = {
-    selected: null,
-    first: [],
-    second: [],
-    third: [],
-    choices: [
-            //First set of choices
-            {
-              label: 'spaghetti_italy',
-              salty: 3,
-              sour: 3,
-              meaty: 2,
-              bitter: 3,
-              sweet: 2,
-              spicy: 1,
-              ingredients: []
-            },
-            {
-              label: 'gumbo_cajuncreole',
-              salty: 2,
-              sour: 2,
-              meaty: 3,
-              bitter: 2,
-              sweet: 1,
-              spicy: 2,
-              ingredients: []
-            },
-            {
-              label: 'mapotofu_china',
-              salty: 3,
-              sour: 1,
-              meaty: 2,
-              bitter: 2,
-              sweet: 1,
-              spicy: 3,
-              ingredients: []
-            }
-            ],
+          selected: null,
+          first: [],
+          second: [],
+          third: [],
+          choices: [],
+          storage: []};
 
-            storage: [
-            //Second set of choices
-            {
-              label: 'chickenshwarma_mediterranean',
-              salty: 2,
-              sour: 2,
-              meaty: 3,
-              bitter: 3,
-              sweet: 2,
-              spicy: 2,
-              ingredients: []
-            },
-            {
-              label: 'hamburger_america',
-              salty: 3,
-              sour: 1,
-              meaty: 3,
-              bitter: 2,
-              sweet: 1,
-              spicy: 1,
-              ingredients: []
-            },
-            {
-              label: 'ostkaka_sweden',
-              salty: 1,
-              sour: 1,
-              meaty: 3,
-              bitter: 1,
-              sweet: 3,
-              spicy: 1,
-              ingredients: []
-            },
+  Survey.retrieveSurvey(function(data) {
+    $scope.foodPics.choices = data.choices;
+    $scope.foodPics.storage = data.storage;
+  });
 
-            //third set of choices
-            {
-              label: 'caldoverde_portugal',
-              salty: 3,
-              sour: 3,
-              meaty: 1,
-              bitter: 1,
-              sweet: 1,
-              spicy: 2,
-              ingredients: []
-            },
-            {
-              label: 'curry_india',
-              salty: 2,
-              sour: 1,
-              meaty: 1,
-              bitter: 3,
-              sweet: 1,
-              spicy: 3,
-              ingredients: []
-            },
-            {
-              label: 'crepe_france',
-              salty: 2,
-              sour: 3,
-              meaty: 2,
-              bitter: 2,
-              sweet: 3,
-              spicy: 1,
-              ingredients: []
-            },
-
-            // //fourth set of choices
-            // {
-            //   label: 'roastbeef_england',
-            //   salty: 2,
-            //   sour: 1,
-            //   meaty: 3,
-            //   bitter: 2,
-            //   sweet: 1,
-            //   spicy: 1,
-            //   ingredients: []
-            // },
-            // {
-            //   label: 'tagine_morocco',
-            //   salty: 3,
-            //   sour: 3,
-            //   meaty: 1,
-            //   bitter: 3,
-            //   sweet: 3,
-            //   spicy: 2,
-            //   ingredients: []
-            // },
-            // {
-            //   label: 'tzatziki_greece',
-            //   salty: 3,
-            //   sour: 2,
-            //   meaty: 1,
-            //   bitter: 2,
-            //   sweet: 2,
-            //   spicy: 1,
-            //   ingredients: []
-            // },
-            //
-            // //fifth set of choices
-            // {
-            //   label: 'tostones_cuba',
-            //   salty: 1,
-            //   sour: 3,
-            //   meaty: 2,
-            //   bitter: 2,
-            //   sweet: 3,
-            //   spicy: 1,
-            //   ingredients: []
-            // },
-            // {
-            //   label: 'ramen_japan',
-            //   salty: 3,
-            //   sour: 3,
-            //   meaty: 1,
-            //   bitter: 2,
-            //   sweet: 1,
-            //   spicy: 1,
-            //   ingredients: []
-            // },
-            // {
-            //   label: 'chimichanga_southwestern',
-            //   salty: 3,
-            //   sour: 2,
-            //   meaty: 3,
-            //   bitter: 1,
-            //   sweet: 1,
-            //   spicy: 3,
-            //   ingredients: []
-            // },
-            //
-            //
-            // //sixth set of choices
-            // {
-            //   label: 'chickenfriedsteak_southernsoul',
-            //   salty: 3,
-            //   sour: 1,
-            //   meaty: 3,
-            //   bitter: 3,
-            //   sweet: 1,
-            //   spicy: 1,
-            //   ingredients: []
-            // },
-            // {
-            //   label: 'currywurst_germany',
-            //   salty: 3,
-            //   sour: 1,
-            //   meaty: 3,
-            //   bitter: 2,
-            //   sweet: 1,
-            //   spicy: 1,
-            //   ingredients: []
-            // },
-            // {
-            //   label: 'halaszle_hungary',
-            //   salty: 2,
-            //   sour: 3,
-            //   meaty: 1,
-            //   bitter: 2,
-            //   sweet: 2,
-            //   spicy: 3,
-            //   ingredients: []
-            // },
-            //
-            //
-            // //seventh set of choices
-            // {
-            //   label: 'salsa_mexico',
-            //   salty: 2,
-            //   sour: 3,
-            //   meaty: 1,
-            //   bitter: 1,
-            //   sweet: 1,
-            //   spicy: 3,
-            //   ingredients: []
-            // },
-            // {
-            //   label: 'sodabread_ireland',
-            //   salty: 3,
-            //   sour: 1,
-            //   meaty: 1,
-            //   bitter: 3,
-            //   sweet: 2,
-            //   spicy: 1,
-            //   ingredients: []
-            // },
-            // {
-            //   label: 'tomyamgoong_thai',
-            //   salty: 3,
-            //   sour: 2,
-            //   meaty: 1,
-            //   bitter: 1,
-            //   sweet: 1,
-            //   spicy: 3,
-            //   ingredients: []
-            // },
-            //
-            // //eighth set of choices
-            // {
-            //   label: 'pokebowl_hawaii',
-            //   salty: 1,
-            //   sour: 3,
-            //   meaty: 2,
-            //   bitter: 2,
-            //   sweet: 3,
-            //   spicy: 1,
-            //   ingredients: []
-            // },
-            // {
-            //   label: 'croquette_spain',
-            //   salty: 3,
-            //   sour: 2,
-            //   meaty: 3,
-            //   bitter: 3,
-            //   sweet: 1,
-            //   spicy: 1,
-            //   ingredients: []
-            // },
-            //
-            // //DELETE THIS
-            // {
-            //   label: 'mapotofu_china',
-            //   salty: 3,
-            //   sour: 1,
-            //   meaty: 2,
-            //   bitter: 2,
-            //   sweet: 1,
-            //   spicy: 3,
-            //   ingredients: []
-            // }
-            ]
-          };
-
-          var choicesCount = 1;
-          $scope.submitThreePictures = function(){
+    var choicesCount = 1;
+    $scope.submitThreePictures = function(){
     //make pictures disappear
-    if($scope.foodPics.first.length === choicesCount && $scope.foodPics.second.length === choicesCount && $scope.foodPics.third.length === choicesCount){
+    if($scope.foodPics.first.length === choicesCount &&
+       $scope.foodPics.second.length === choicesCount &&
+        $scope.foodPics.third.length === choicesCount) {
       angular.element( document.querySelectorAll('.foodpicture')).addClass('ng-hide');
       $scope.foodPics.choices.splice(0,3);
       if($scope.foodPics.storage.length === 0) {
         alert('YOBUDDIES');
       }
+
       else{
         for(var i=0; i<3; i++){
           $scope.foodPics.choices.push($scope.foodPics.storage[i]);
@@ -339,57 +85,89 @@ angular.module('menuApp')
         spicy_total += ($scope.foodPics.first[i].spicy - $scope.foodPics.third[i].spicy);
       }
     }
-    $scope.tasteIndex_salty = salty_total / numberOfPics;
-    $scope.tasteIndex_sour = sour_total / numberOfPics;
-    $scope.tasteIndex_meaty = meaty_total / numberOfPics;
-    $scope.tasteIndex_bitter = bitter_total / numberOfPics;
-    $scope.tasteIndex_sweet = sweet_total / numberOfPics;
-    $scope.tasteIndex_spicy = spicy_total / numberOfPics;
+    Survey.preferencesForm.tastePreference.salty = Math.round(salty_total / numberOfPics) + 3;
+    Survey.preferencesForm.tastePreference.sour = Math.round(sour_total / numberOfPics) + 3;
+    Survey.preferencesForm.tastePreference.meaty = Math.round(meaty_total / numberOfPics) + 3;
+    Survey.preferencesForm.tastePreference.bitter = Math.round(bitter_total / numberOfPics) + 3;
+    Survey.preferencesForm.tastePreference.sweet = Math.round(sweet_total / numberOfPics) + 3;
+    Survey.preferencesForm.tastePreference.spicy = Math.round(spicy_total / numberOfPics) + 3;
   };
 
   var initCuisinePreferences = function () {
-    //actual cuisine choices
-    //representative ingredients
-    $scope.cuisineIndex = {
-      american: 1,
-      italian: 1,
-      mexican: 1,
-      southern_soulfood: 1,
-      french: 1,
-      southwestern: 1,
-      indian: 1,
-      chinese: 1,
-      cajun_creole: 1,
-      english: 1,
-      mediterranean: 1,
-      greek: 1,
-      spanish: 1,
-      german: 1,
-      thai: 1,
-      Moroccan: 1,
-      irish: 1,
-      japanese: 1,
-      cuban: 1,
-      hawaiian: 1,
-      swedish: 1,
-      hungarian: 1,
-      portugese: 1
-    };
+    tallyCuisineScores();
+
+    var scores = _.map(Survey.preferencesForm.cuisinePreference, function(values, cuisine) {
+      return [cuisine, values.score];
+    });
+
+    scores.sort(function(a, b) {
+      return a[1] - b[1];
+    });
+
+    var lowerBound = Math.floor((scores.length - 1)/3);
+    var upperBound = Math.floor(((scores.length - 1)/3)) * 2;
+
+    _.forEach(scores, function(score, index) {
+      if (index <= lowerBound) {
+        Survey.preferencesForm.cuisinePreference[score[0]].eval = 1;
+      }
+      if (index > lowerBound && index <= upperBound) {
+        Survey.preferencesForm.cuisinePreference[score[0]].eval = 2;
+      }
+      if (index > upperBound) {
+        Survey.preferencesForm.cuisinePreference[score[0]].eval = 3;
+      }
+    });
+  };
+
+  var tallyCuisineScores = function() {
+    var choicePoints = [3, 1, -1];
+    var relatedCuisinePoints = [0.5, 0, -0.5];
+
+    _.forEach($scope.foodPics.first, function(dish) {
+      Survey.preferencesForm.cuisinePreference[dish.cuisine].score += choicePoints[0];
+
+      _.forEach(dish.relatedCuisines, function(cuisine) {
+        Survey.preferencesForm.cuisinePreference[cuisine].score += relatedCuisinePoints[0];
+      });
+    });
+
+    _.forEach($scope.foodPics.second, function(dish) {
+      Survey.preferencesForm.cuisinePreference[dish.cuisine].score += choicePoints[1];
+
+      _.forEach(dish.relatedCuisines, function(cuisine) {
+        Survey.preferencesForm.cuisinePreference[cuisine].score += relatedCuisinePoints[1];
+      });
+    });
+
+    _.forEach($scope.foodPics.third, function(dish) {
+      Survey.preferencesForm.cuisinePreference[dish.cuisine].score += choicePoints[2];
+
+      _.forEach(dish.relatedCuisines, function(cuisine) {
+        Survey.preferencesForm.cuisinePreference[cuisine].score += relatedCuisinePoints[2];
+      });
+    });
+  };
+
+  var initIngredientPreferences = function() {
+    var liked = Utils.mostFreqElements(Utils.createHistogram($scope.foodPics.first, 'ingredients'), 3);
+    var disliked = Utils.mostFreqElements(Utils.createHistogram($scope.foodPics.third, 'ingredients'), 3);
+
+    var uniqIngredients = Utils.removeMatches(liked, disliked);
+
+    Survey.preferencesForm.preferredIngredients = uniqIngredients[0];
+    Survey.preferencesForm.rejectedIngredients = uniqIngredients[1];
+
   };
 
   $scope.checkChoicesStorage = function() {
-    if($scope.foodPics.storage.length === 0){
-      if($scope.foodPics.choices.length === 0){
-        initTastePreferences();
-        //initCuisinePreferences();
-        //initIngredientPreferences();
-        return true;
-      }
-    }
-    else{
+    if($scope.foodPics.storage.length === 0 && $scope.foodPics.choices.length === 0) {
+      initTastePreferences();
+      initCuisinePreferences();
+      initIngredientPreferences();
+      return true;
+    } else {
       return false;
     }
   };
-
-
 }]);

@@ -26,4 +26,13 @@ angular.module('menuApp')
       }
     });
   };
+
+
+  $scope.signOut = function() {
+    Auth.signout();
+  };
+
+  $scope.checkToken = function(){
+    return !!$window.localStorage.getItem('authentication');
+  };
 }]);

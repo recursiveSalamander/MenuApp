@@ -19,7 +19,7 @@ module.exports = {
     request(query, function(err, resp, body) {
       if (!err && resp.statusCode === 200) {
         var data = JSON.parse(body).response.menu.menus;
-        console.log('data from getMenu: ',data.items);
+
         // caches restaurant ids that correspond to empty menus so they may be filtered out
         if (data.count === 0) {
           emptyMenus.addData(restaurantId);

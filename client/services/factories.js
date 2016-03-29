@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.factory('menuAppFactory', ['$http', '$location', '$state', 'Auth',function($http, $location, $state, Auth) {
+.factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
 
   var currentToken = Auth.getToken();
 
@@ -145,6 +145,105 @@ angular.module('menuApp')
     getUserInfo: getUserInfo,
     ratingInfo: ratingInfo,
     getRating: getRating
+  };
+}])
+
+.factory('Survey', ['$http', function($http) {
+  var retrieveSurvey = function(callback) {
+  $http.get('../assets/dishes.json').success(function(data) {
+    callback(data);
+    });
+  };
+
+  var preferencesForm = {tastePreference: {
+    spicy: 1,
+    meaty: 1,
+    sour: 1,
+    sweet: 1,
+    salty: 1,
+    bitter: 1
+    },
+   cuisinePreference: {
+    american: {score: 0, eval: 0},
+    italian: {score: 0, eval: 0},
+    mexican: {score: 0, eval: 0},
+    southern_soulfood: {score: 0, eval: 0},
+    french: {score: 0, eval: 0},
+    southwestern: {score: 0, eval: 0},
+    indian: {score: 0, eval: 0},
+    chinese: {score: 0, eval: 0},
+    cajun_creole: {score: 0, eval: 0},
+    english: {score: 0, eval: 0},
+    mediterranean: {score: 0, eval: 0},
+    greek: {score: 0, eval: 0},
+    spanish: {score: 0, eval: 0},
+    german: {score: 0, eval: 0},
+    thai: {score: 0, eval: 0},
+    moroccan: {score: 0, eval: 0},
+    irish: {score: 0, eval: 0},
+    japanese: {score: 0, eval: 0},
+    cuban: {score: 0, eval: 0},
+    hawaiian: {score: 0, eval: 0},
+    swedish: {score: 0, eval: 0},
+    hungarian: {score: 0, eval: 0},
+    portugese: {score: 0, eval: 0}
+  },
+  preferredIngredients: [],
+  rejectedIngredients: []
+  };
+
+  return {
+    retrieveSurvey: retrieveSurvey,
+    preferencesForm: preferencesForm
+  };
+}])
+
+.factory('Utils', [function() {
+  var createHistogram = function(arr, property) {
+    var hist = {};
+
+    _.forEach(arr, function(element) {
+      _.forEach(element[property], function(item) {
+        hist[item] = hist[item] + 1 || 1;
+      });
+    });
+    return hist;
+  };
+
+  var mostFreqElements = function(obj, num) {
+    var arrayified = _.map(obj, function(value, key) {
+      return [key, value];
+    });
+    arrayified.sort(function(a, b) {
+      return a[1] - b[1];
+    });
+    return arrayified.slice(arrayified.length - num);
+  };
+
+  var removeMatches = function(arr1, arr2) {
+    var newArr1 = _.map(arr1, function(element) {
+      return element[0];
+    });
+    var newArr2 = _.map(arr2, function(element) {
+      return element[0];
+    });
+
+    var filteredArr1 = _.reject(newArr1, function (element) {
+      return _.includes(element, newArr2);
+    });
+
+    var filteredArr2 = _.reject(newArr2, function (element) {
+      return _.includes(element, newArr1);
+    });
+
+
+    return [filteredArr1, filteredArr2];
+  };
+
+  return {
+    createHistogram: createHistogram,
+    mostFreqElements: mostFreqElements,
+    removeMatches: removeMatches
   };
 }])
 
