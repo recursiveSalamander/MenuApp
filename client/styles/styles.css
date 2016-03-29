@@ -1,17 +1,25 @@
 /*----------------------------Sign-in/Sign-up styling-------------------------------------------------*/
 .signup, .signin {
   height: 100vh;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+
+
 }
 
 .signin {
-  background: url('../assets/signin_background2.jpg') no-repeat center center fixed;
+  background: url('../assets/signin_background2.jpg') no-repeat fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
 }
 
 .signup {
-  background: url('../assets/signin_background1.jpg') no-repeat center center fixed;
+  background: url('../assets/signin_background1.jpg') no-repeat fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 #signinbox, #signupbox {
