@@ -244,7 +244,7 @@ angular.module('menuApp')
     createHistogram: createHistogram,
     mostFreqElements: mostFreqElements,
     removeMatches: removeMatches
-  }
+  };
 }])
 
 .factory('Auth', ['$http', '$location', '$state', '$window', function($http, $location, $state, $window) {
