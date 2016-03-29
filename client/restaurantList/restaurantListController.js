@@ -136,6 +136,11 @@ function toggleBounce() {
       console.log('++line 141 inside restaurantMenu() in restListCtrl data:', data);
       userInfo.getRating(restaurantId)
       .then(function(ratingData) {
+
+        userInfo.getRestrictions()
+        .then(function(restrictionData) {
+          console.log('FEEEEFI FO FUM MOTHERFUCKER', restrictionData);
+
         console.log('++line 144 post getRating() in restListCtrl ratingData: ',ratingData);
         console.log('++line 145 post getRating() in restListCtrl data[0].entries.items: ',data[0].entries.items);
         if (ratingData !== undefined) {
@@ -154,6 +159,7 @@ function toggleBounce() {
         } else {
          $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId});
        }
+     });
      });
     });
   };

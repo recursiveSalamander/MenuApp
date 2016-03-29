@@ -180,5 +180,10 @@ module.exports = {
       // console.log('++line 175 in ratingsMenuAverage() in utils array: ',array);
       module.exports.hasCallBack(array, callback);
     });
+  },
+
+  ratingsMenuAverage: function(restaurantID, callback) {
+
   }
+
 };

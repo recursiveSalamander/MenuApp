@@ -116,7 +116,7 @@ angular.module('menuApp')
 
     return $http({
       method: 'POST',
-      url: 'api/rating',
+      url: '/api/rating',
       data: {rating: rating, entryId: entryId, restaurantId: restaurantId, currentToken: currentToken}
     })
     .then(function(res) {
@@ -153,6 +153,19 @@ angular.module('menuApp')
     .then(function(response) {
       console.log('++line 154 post getRating in factories response.data: ', response.data);
       return response.data;
+    }
+
+  var getRestrictions = function() {
+    var currentToken = Auth.getToken();
+
+    return $http({
+      method: 'POST',
+      url: '/api/restrictions',
+      data: {currentToken: currentToken}
+    })
+    .then(function(res) {
+      return res.data;
+>>>>>>> [feature] gets food restriction data from database
     });
   };
 
@@ -160,7 +173,8 @@ angular.module('menuApp')
     getUserInfo: getUserInfo,
     ratingInfo: ratingInfo,
     getRating: getRating,
-    getAvgRating: getAvgRating
+    getAvgRating: getAvgRating,
+    getRestrictions: getRestrictions
   };
 }])
 

@@ -12,6 +12,7 @@ var db = require('./db/schema.js');
 var Cache = require('./constructors/Cache.js');
 var Utils = require('./utils.js');
 var ratingsController = require('./controllers/ratingsController.js');
+var recommendationsController = require('./controllers/recommendationsController.js');
 var Item_Rating = './db/models/Item_Rating.js';
 
 var app = express();
