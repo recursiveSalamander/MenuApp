@@ -8,22 +8,22 @@ angular.module('menuApp')
     console.log(validate);
     if(validate.passwordFormFlag === false && validate.emailFormFlag === false) {
       swal({
-        title: 'Password and/or email are not valid!',
-        text: 'Please doublecheck and resubmit.',
+        title: '',
+        text: 'Password and/or email are not valid! Please doublecheck and resubmit.',
         type: 'error',
         confirmationButtonText: 'OK'
       });
     } else if(validate.passwordFormFlag === false) {
       swal({
-        title: 'Passwords do not match!',
-        text: 'Please re-enter your passwords and make sure they match.',
+        title: '',
+        text: 'Passwords do not match! Please re-enter your passwords and make sure they match.',
         type: 'error',
         confirmationButtonText: 'OK'
       });
     } else if(validate.emailFormFlag === false) {
       swal({
-        title: 'Invalid email!',
-        text: 'Please enter a valid email address.',
+        title: '',
+        text: 'Invalid email! Please enter a valid email address.',
         type: 'error',
         confirmationButtonText: 'OK'
       });
@@ -49,11 +49,12 @@ angular.module('menuApp')
     .then(function(token) {
       if(token === undefined) {
         swal({
-          title: 'Username/password do not match!',
-          text: 'Please double check your login information, or sign up for a new account.',
+          title: '',
+          text: 'Username/password do not exist! Double check your credentials or create a new account.',
           type: 'error',
           confirmationButtonText: 'OK'
         });
+        $location.path('/signIn');
       } else {
         $window.localStorage.setItem('authentication', token);
         $state.go('restaurantList');

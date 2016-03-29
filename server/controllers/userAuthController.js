@@ -35,14 +35,14 @@ module.exports = {
   },
 
   signin: function(request, response, next) {
+    console.log('FAILED')
     var username = request.body.loginUsername;
     var password = request.body.loginPassword;
     new User({username: username})
     .fetch()
     .then(function(user) {
       if(!user) {
-        console.log('user already exists');
-        response.redirect('/menuView');
+        response.redirect('/#/signIn');
       } else {
         user.comparePassword(password, function(err, match) {
           if(match) {
