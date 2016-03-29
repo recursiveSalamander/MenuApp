@@ -10,7 +10,7 @@ var Menu_Item = bookshelf.Model.extend({
   },
 
   ratings: function() {
-    return this.hasMany('Item_Rating');
+    return this.hasMany('Item_Rating', 'item_id');
   }
 });
 

@@ -20,7 +20,7 @@ module.exports = {
       console.log('running callback');
       callback(data);
     } else {
-      console.log('returning data');
+      console.log('returning data: ', data);
       return data;
     }
   },
@@ -136,15 +136,44 @@ module.exports = {
     });
   },
 
-  ratingsAverage: function(ratingsArray) {
-    var sum = 0;
-    var average;
-    for(var i = 0; i < ratingsArray.length; i++){
-      sum += ratingsArray[i].rating;
+  ratingsMenuAverage: function(restaurantID, callback) {
+    Menu_Item.where({restaurant: restaurantID}).fetchAll({withRelated: ['ratings']})
+    .then(function(data) {
+      var formattedData = data.toJSON();
+      var idArr = [];
+      var arr = [];
+      for(var i = 0; i < formattedData.length; i++){
+        for(var j = 0; j < formattedData[i].ratings.length; j++){
+          arr.push({id: formattedData[i].id, rating: formattedData[i].ratings[j].rating});
+        }
+      }
+      var array = {};
+      var sum = 0;
+      var counter = 0;
+      for(var i = 1; i < arr.length; i++){
+        if(i === 1){
+          sum = arr[0].rating;
+          counter = 1;
+        }
+        var currentID = parseInt(arr[i].id);
+        if(currentID === parseInt(arr[i-1].id)){
+          sum+=arr[i].rating;
+          counter++;
+          if(i===arr.length-1){
+            parseInt(array[arr[i].id]) = parseInt((sum/counter).toFixed(1));
+          }
+        }
+        else {
+            array[arr[i-1].id] = parseInt((sum/counter).toFixed(1));
+            sum = arr[i].rating;
+            counter = 1;
+        if(i=== arr.length - 1){
+          array[arr[i].id] = parseInt(arr[i].rating.toFixed(1));
+        }
+      }
     }
-    sum = sum/ratingsArray.length;
-    average = (Math.round(sum*4) / 4).toFixed(1);
-    console.log({average: parseInt(average)});
-    return {average: parseInt(average)};
+    console.log(array);
+    return array;
+    });
   }
 };
