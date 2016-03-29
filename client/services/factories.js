@@ -310,7 +310,9 @@ angular.module('menuApp')
   //     $mdDialog.hide(answer);
   //   };
   // }
-
+  var hide = function() {
+      $mdDialog.hide();
+    };
 
 
   var showTabDialog = function(ev) {
