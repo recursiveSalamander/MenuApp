@@ -4,8 +4,9 @@ angular.module('menuApp', [
   'ngAria',
   'ngAnimate',
   'jkAngularRatingStars',
-  'dndLists'
-])
+  'dndLists',
+  'angular-loading-bar'
+  ])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
   .state('restaurantList', {

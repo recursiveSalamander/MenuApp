@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.controller('userAuthController', ['$window', '$scope', 'Auth', 'ValidationFactory', '$location', '$state',function($window, $scope, Auth, ValidationFactory, $location, $state) {
+.controller('userAuthController', ['$window', '$scope', 'Auth', 'ValidationFactory', '$location', '$state', 'Preferences',function($window, $scope, Auth, ValidationFactory, $location, $state, Preferences) {
 
   $scope.signUp = function() {
     var validate = ValidationFactory.validatePasswordAndEmail($scope.user.email, $scope.user.password, $scope.user.confirmpassword);
@@ -28,10 +28,11 @@ angular.module('menuApp')
         confirmationButtonText: 'OK'
       });
     } else {
-    Auth.signup($scope.user)
+      Auth.signup($scope.user)
       .then(function(token) {
         $window.localStorage.setItem('authentication', token);
-        $location.path('/user');
+        $state.go('profileView');
+        Preferences.showTabDialog();
       })
       .catch(function(error) {
         swal({
@@ -50,7 +51,7 @@ angular.module('menuApp')
       if(token === undefined) {
         swal({
           title: '',
-          text: 'Username/password do not exist! Double check your credentials or create a new account.',
+          text: 'Username does not exist!',
           type: 'error',
           confirmationButtonText: 'OK'
         });

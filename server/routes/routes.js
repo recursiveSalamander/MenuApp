@@ -19,7 +19,8 @@ module.exports = function(app, express) {
   app.post('/api/users/signup', userAuthController.signup);
   app.post('/api/users/signin', userAuthController.signin);
   app.post('/api/preference', bodyParser, preferenceController.postPreferences);
+  app.post('/api/profile', bodyParser, profileController.getProfile);
   app.post('/api/rating', ratingsController.postRatingToTable);
   app.post('/api/getRating', bodyParser, ratingsController.getRating);
-  app.post('/api/profile', bodyParser, profileController.getProfile);
+  app.post('/api/ratingsAverage', bodyParser, ratingsController.averageRatings);
 };
