@@ -126,25 +126,41 @@ angular.module('menuApp')
     });
   };
 
-  var getRating = function() {
+  var getRating = function(restaurantId) {
     // console.log('++line 127 in getRating() in factories restaurantId: ',restaurantId);
     var currentToken = Auth.getToken();
-    console.log('++ line 132 inside ratingInfo() in factories token',currentToken);
+    console.log('++ line 132 inside ratingInfo() in factories restaurantId',restaurantId);
 
     return $http({
       method: 'POST',
       url: 'api/getRating',
-      data: {currentToken: currentToken}
+      data: {currentToken: currentToken, restaurantId: restaurantId}
     })
     .then(function(res) {
       console.log('++line 140 post getRating in factories', res);
       return res.data;
     });
   };
+
+    var getAvgRating = function(restaurantId) {
+    console.log('++line 146 in getAvgRating() in factories restaurantId: ',restaurantId);
+
+    return $http({
+      method: 'POST',
+      url: 'api/ratingsAverage',
+      data: {restaurantId:restaurantId}
+    })
+    .then(function(response) {
+      console.log('++line 154 post getRating in factories response.data: ', response.data);
+      return response.data;
+    });
+  };
+
   return {
     getUserInfo: getUserInfo,
     ratingInfo: ratingInfo,
-    getRating: getRating
+    getRating: getRating,
+    getAvgRating: getAvgRating
   };
 }])
 

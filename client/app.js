@@ -5,7 +5,7 @@ angular.module('menuApp', [
   'ngAnimate',
   'jkAngularRatingStars',
   'dndLists'
-])
+  ])
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
   .state('restaurantList', {
