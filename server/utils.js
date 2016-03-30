@@ -155,7 +155,7 @@ module.exports = {
       var array = {};
       var sum = 0;
       var counter = 0;
-      for(var m = 1; m < arr.length; m++){
+      for(var m = 1; m < arr.length-1; m++){
         if(m === 1){
           sum = arr[0].rating;
           counter = 1;

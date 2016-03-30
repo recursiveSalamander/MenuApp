@@ -154,10 +154,9 @@ function toggleBounce() {
         } else {
          $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId});
        }
-    //  });
      });
      });
-    });
+     });
   };
 
   var autocomplete = new google.maps.places.Autocomplete(

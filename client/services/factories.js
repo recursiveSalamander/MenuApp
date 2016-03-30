@@ -153,7 +153,7 @@ angular.module('menuApp')
     .then(function(response) {
       console.log('++line 154 post getRating in factories response.data: ', response.data);
       return response.data;
-    }
+    })
   }
 
   var getRestrictions = function(menuData) {
