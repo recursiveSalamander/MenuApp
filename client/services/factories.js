@@ -154,18 +154,18 @@ angular.module('menuApp')
       console.log('++line 154 post getRating in factories response.data: ', response.data);
       return response.data;
     }
+  }
 
-  var getRestrictions = function() {
+  var getRestrictions = function(menuData) {
     var currentToken = Auth.getToken();
 
     return $http({
       method: 'POST',
       url: '/api/restrictions',
-      data: {currentToken: currentToken}
+      data: {currentToken: currentToken, menuData: menuData}
     })
     .then(function(res) {
       return res.data;
->>>>>>> [feature] gets food restriction data from database
     });
   };
 
@@ -359,6 +359,18 @@ angular.module('menuApp')
     //   $scope.status = 'You cancelled the dialog.';
     // });
 };
+
+
+  var queryYummly = function(restrictionData, menuData) {
+    return $http ({
+      method: 'POST',
+      url: '/api/yummly',
+      data: {restrictionData: restrictionData, menuData: menuData}
+    })
+    .then(function(res) {
+      return res.data;
+    });
+  };
 
   return {
     showTabDialog: showTabDialog

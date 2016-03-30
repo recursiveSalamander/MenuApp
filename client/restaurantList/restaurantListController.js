@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.controller('restaurantListController', ['$window', '$scope', '$state', 'menuAppFactory', 'Geolocation', 'Auth', 'userInfo', function($window, $scope, $state, menuAppFactory, Geolocation, Auth, userInfo) {
+.controller('restaurantListController', ['$window', '$scope', '$state', 'menuAppFactory', 'Geolocation', 'Auth', 'userInfo', 'Preferences', function($window, $scope, $state, menuAppFactory, Geolocation, Auth, userInfo, Preferences) {
   $scope.data = [];
   $scope.map;
 
@@ -137,9 +137,11 @@ function toggleBounce() {
       userInfo.getRating(restaurantId)
       .then(function(ratingData) {
 
-        userInfo.getRestrictions()
+        userInfo.getRestrictions(data[0].entries.items)
         .then(function(restrictionData) {
-          console.log('FEEEEFI FO FUM MOTHERFUCKER', restrictionData);
+          Preferences.queryYummly(restrictionData, data[0].entries)
+          .then(function(restrictionQueryResults){
+            console.log('WEEEEEEEEEEE GOT FUCKING DATA', restrictionQueryResults);
 
         console.log('++line 144 post getRating() in restListCtrl ratingData: ',ratingData);
         console.log('++line 145 post getRating() in restListCtrl data[0].entries.items: ',data[0].entries.items);
@@ -159,6 +161,7 @@ function toggleBounce() {
         } else {
          $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId});
        }
+    //  });
      });
      });
     });
