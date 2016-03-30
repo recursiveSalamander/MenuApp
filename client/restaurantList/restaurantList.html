@@ -1,46 +1,22 @@
 <div class="restaurantlist mainbackground" ng-controller='restaurantListController' flex layout="row" ng-cloak="" class="md-inline-form inputdemoBasicUsage">
-
-
-  <!-- <div id="map"></div>
-  <md-content layout-padding="">
-  <div>
-    <form ng-submit="displayRestaurants()">
-      <md-input-container class="md-block" type="submit">
-      <input type="text" id="autocomplete" required autofocus="">
-    </md-input-container>
-    <md-button type="submit" value="Submit" class="md-raised">Submit</md-button>
-  </form>
-</div>
-</md-content>
-<h2>&nbsp; Restaurant Listings</h2>
-<div style="overflow: height:30%;">
-  <md-list class="restaurantquery" ng-repeat="displayRestaurants in data">
-  <span ng-click="restaurantMenu(displayRestaurants.id)">&nbsp; &nbsp;<strong>{{displayRestaurants.name}}</strong> <br> &nbsp; &nbsp; {{displayRestaurants.formatted}}<br> &nbsp; &nbsp;
-    {{displayRestaurants.contact.formattedPhone}}</span>
-    <md-divider></md-divider>
-  </md-list>
-</div>
-</div> -->
-
-    <md-sidenav id="sidenav" flex="30" md-is-locked-open="true" class="md-whiteframe-z2">
-    <div id="map" layout-margin></div>
-  </md-sidenav>
-  <div class="list" flex="70">
-    <h2>&nbsp; Restaurant Listings</h2>
-    <div style="overflow: height:30%;">
+  <md-sidenav id="sidenav" flex="30" md-is-locked-open="true" class="md-whiteframe-z2">
+  <div id="map" layout-margin></div>
+</md-sidenav>
+<div class="list" flex="70">
+  <h2>&nbsp; Restaurant Listings</h2>
+  <div style="overflow: height:30%;">
     <md-list layout="column" ng-class="{listhighlight: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" class="restaurantquery" ng-repeat="displayRestaurants in data">
-      <div layout="row">
+    <div layout="row">
       <div id="restaurantlistindex">
         <h2>{{displayRestaurants.index}}</h2>
       </div>
       <div>
         <span ng-click="restaurantMenu(displayRestaurants.id, displayRestaurants.name)">&nbsp; &nbsp;<strong>{{displayRestaurants.name}}</strong> <br> &nbsp; &nbsp; {{displayRestaurants.formatted}}<br> &nbsp; &nbsp;
           {{displayRestaurants.contact.formattedPhone}}</span>
+        </div>
       </div>
-    </div>
-    <md-divider></md-divider>
+      <md-divider></md-divider>
     </md-list>
-
-    </div>
   </div>
+</div>
 </div>

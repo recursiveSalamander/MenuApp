@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.controller('userAuthController', ['$window', '$scope', 'Auth', 'ValidationFactory', '$location', '$state',function($window, $scope, Auth, ValidationFactory, $location, $state) {
+.controller('userAuthController', ['$window', '$scope', 'Auth', 'ValidationFactory', '$location', '$state', 'Preferences',function($window, $scope, Auth, ValidationFactory, $location, $state, Preferences) {
 
   $scope.signUp = function() {
     var validate = ValidationFactory.validatePasswordAndEmail($scope.user.email, $scope.user.password, $scope.user.confirmpassword);
@@ -28,20 +28,13 @@ angular.module('menuApp')
         confirmationButtonText: 'OK'
       });
     } else {
-      Auth.signup($scope.user)
+    Auth.signup($scope.user)
       .then(function(token) {
         $window.localStorage.setItem('authentication', token);
         $state.go('profileView');
         Preferences.showTabDialog();
-
       })
       .catch(function(error) {
-        swal({
-          title: 'Username already exists!',
-          text: 'Please choose a different username or sign into your account.',
-          type: 'error',
-          confirmationButtonText: 'OK'
-        });
       });
     }
   };
