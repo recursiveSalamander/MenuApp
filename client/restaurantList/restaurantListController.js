@@ -90,7 +90,6 @@ function toggleBounce() {
         .then(function(data) {
           for(var i=0; i< data.length; i++){
             data[i].formatted = data[i].location.formattedAddress.join();
-            // console.log('djfoidjfiosjdoifsajoifjiosadfo',data[i]);
             var markerlabel = (i+1).toString();
             data[i].index = (i+1).toString();
             markerlabel.length === 2 ? markerlabel = markerlabel : markerlabel = '0' + markerlabel;
@@ -105,14 +104,12 @@ function toggleBounce() {
               animation: google.maps.Animation.DROP
             });
             marker.addListener('click', toggleBounce);
-            // console.log('AHERIAEJORIJAORE');
             makeInfoWindow(marker, restaurantName);
             markers.push(marker);
             //SETTIMEOUT HELP PLS
           }
 
           $scope.data = data;
-          // console.log('hhriereirheirererere',markers);
           window.setTimeout(refocusMapBounds(),200);
           //FIX THIS TOO
 
@@ -139,10 +136,6 @@ function toggleBounce() {
 
         userInfo.getRestrictions(data[0].entries.items)
         .then(function(restrictionData) {
-          Preferences.queryYummly(restrictionData, data[0].entries)
-          .then(function(restrictionQueryResults){
-            console.log('WEEEEEEEEEEE GOT FUCKING DATA', restrictionQueryResults);
-
         console.log('++line 144 post getRating() in restListCtrl ratingData: ',ratingData);
         console.log('++line 145 post getRating() in restListCtrl data[0].entries.items: ',data[0].entries.items);
         if (ratingData !== undefined) {

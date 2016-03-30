@@ -25,5 +25,4 @@ module.exports = function(app, express) {
   app.post('/api/getRating', bodyParser, ratingsController.getRating);
   app.post('/api/ratingsAverage', bodyParser, ratingsController.averageRatings);
   app.post('/api/restrictions', bodyParser, recommendationsController.restrictionsRecommendation);
-  app.post('/api/yummly', bodyParser, recommendationsController.restrictionsRecommendation);
 };

@@ -360,18 +360,6 @@ angular.module('menuApp')
     // });
 };
 
-
-  var queryYummly = function(restrictionData, menuData) {
-    return $http ({
-      method: 'POST',
-      url: '/api/yummly',
-      data: {restrictionData: restrictionData, menuData: menuData}
-    })
-    .then(function(res) {
-      return res.data;
-    });
-  };
-
   return {
     showTabDialog: showTabDialog
   };

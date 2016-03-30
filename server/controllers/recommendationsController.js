@@ -110,9 +110,6 @@ module.exports = {
           var searchquery = key_words.join('+');
           var query = `http://api.yummly.com/v1/api/recipes?_app_id=0a1658f1&_app_key=26fcc7b19149942523604cf763d9321d&q=` + searchquery +
                       `&facetField[]=diet`;
-          console.log('JUST AOBUT TO MAKE THE DAMN req YO', query);
-
-
 
       //variables diet, disliked, liked, and allergies are ready for processing
 
@@ -161,7 +158,6 @@ module.exports = {
         }
         req.body.menuData[0].entries.items[0].allergyIndexes = allergyRestrictionIndex;
         req.body.menuData[0].entries.items[0].dietRestrictionIndex = dietRestrictionIndex;
-        console.log('ISTHIS WHAT U WANT BBY?', req.body.menuData[0].entries.items[0]);
         response_Ultimate.send(req.body.menuData);
       });
 
