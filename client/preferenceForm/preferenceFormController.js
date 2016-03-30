@@ -99,10 +99,10 @@ angular.module('menuApp')
       preferredIngredients: $scope.preferredIngredients,
       rejectedIngredients: $scope.rejectedIngredients
     };
-    console.log('++line 115 pre postUserPreference in preferenceFormController preferenceData: ',preferenceData);
+    // console.log('++line 115 pre postUserPreference in preferenceFormController preferenceData: ',preferenceData);
     menuAppFactory.postUserPreference(preferenceData)
     .then(function(data) {
-      console.log('++line 117 post postUserPreference in preferenceFormController data: ',data);
+      // console.log('++line 117 post postUserPreference in preferenceFormController data: ',data);
       // $state.go('menuView', {menuData: data});
     });
 
