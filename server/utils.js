@@ -155,25 +155,25 @@ module.exports = {
       var array = {};
       var sum = 0;
       var counter = 0;
-      for(var i = 1; i < arr.length; i++){
-        if(i === 1){
+      for(var m = 1; m < arr.length; m++){
+        if(m === 1){
           sum = arr[0].rating;
           counter = 1;
         }
-        var currentItem = parseInt(arr[i].entryId);
-        if(currentItem === parseInt(arr[i-1].entryId)){
-          sum+=arr[i].rating;
+        var currentItem = parseInt(arr[m].entryId);
+        if(currentItem === parseInt(arr[m-1].entryId)){
+          sum+=arr[m].rating;
           counter++;
-          if(i===arr.length-1){
-            parseInt(array[arr[i].entryId]) = parseInt((sum/counter).toFixed(1));
+          if(m===arr.length-1){
+            parseInt(array[arr[m].entryId]) = parseInt((sum/counter).toFixed(1));
           }
         }
         else {
-          array[arr[i-1].entryId] = parseInt((sum/counter).toFixed(1));
-          sum = arr[i].rating;
+          array[arr[m-1].entryId] = parseInt((sum/counter).toFixed(1));
+          sum = arr[m].rating;
           counter = 1;
           if(i=== arr.length - 1){
-            array[arr[i].entryId] = parseInt(arr[i].rating.toFixed(1));
+            array[arr[m].entryId] = parseInt(arr[m].rating.toFixed(1));
           }
         }
       }

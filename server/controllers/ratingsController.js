@@ -40,18 +40,17 @@ module.exports = {
           console.log('++line 40 in getRating() in ratingCtrl avgRatings: ',avgRatings);
           console.log('++line 41 in getRating() in ratingCtrl ratingsArray: ',ratingsArray);
           ratingsArray.forEach(function(value) {
-            console.log();
             for(var key in avgRatings) {
               console.log('++line 45 in forEach in getRating in RatingsCtrl key: ',key);
               if (value.entryId === key) {
-                value.avgRating = avgRatings[key]
+                value.avgRating = avgRatings[key];
               }
             }
-          })
+          });
           console.log('++line 50 in getRating() in ratingsCtrl ratingsArray: ',ratingsArray);
           response.send(ratingsArray);
-        })
-      })
+        });
+      });
     });
   },
 
