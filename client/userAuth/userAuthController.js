@@ -28,13 +28,19 @@ angular.module('menuApp')
         confirmationButtonText: 'OK'
       });
     } else {
-    Auth.signup($scope.user)
+      Auth.signup($scope.user)
       .then(function(token) {
         $window.localStorage.setItem('authentication', token);
         $state.go('profileView');
         Preferences.showTabDialog();
       })
       .catch(function(error) {
+        swal({
+          title: 'Username already exists!',
+          text: 'Please choose a different username or sign into your account.',
+          type: 'error',
+          confirmationButtonText: 'OK'
+        });
       });
     }
   };
