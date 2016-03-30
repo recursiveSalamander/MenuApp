@@ -130,6 +130,7 @@ module.exports = {
       var formattedItemData = data.toJSON();
       var ratingsArray = [];
       for(var i = 0; i < formattedItemData.length; i++) {
+        console.log(formattedItemData[i].menu_items);
         ratingsArray.push({rating: formattedItemData[i].rating, entryId: formattedItemData[i].menu_items.item});
       }
       // console.log('++line 135 inside createRatingsArray() in Utils ratingsArray: ',ratingsArray);
