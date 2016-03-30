@@ -51,7 +51,7 @@ angular.module('menuApp')
       if(token === undefined) {
         swal({
           title: '',
-          text: 'Username/password do not exist! Double check your credentials or create a new account.',
+          text: 'Username does not exist!',
           type: 'error',
           confirmationButtonText: 'OK'
         });

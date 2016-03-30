@@ -1,5 +1,6 @@
 <div class="restaurantlist mainbackground" ng-controller='restaurantListController' flex layout="row" ng-cloak="" class="md-inline-form inputdemoBasicUsage">
   <md-sidenav id="sidenav" flex="30" md-is-locked-open="true" class="md-whiteframe-z2">
+  <img src="../assets/pizza.gif" ng-if="contentLoading" class="loading">
   <div id="map" layout-margin></div>
 </md-sidenav>
 <div class="list" flex="70">

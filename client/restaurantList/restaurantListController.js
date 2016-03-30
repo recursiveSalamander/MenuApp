@@ -3,9 +3,11 @@ angular.module('menuApp')
 .controller('restaurantListController', ['$window', '$scope', '$state', 'menuAppFactory', 'Geolocation', 'Auth', 'userInfo', function($window, $scope, $state, menuAppFactory, Geolocation, Auth, userInfo) {
   $scope.data = [];
   $scope.map;
+
   $scope.checkToken = function(){
     return Auth.isAuth();
   };
+
   $scope.signOut = function() {
     Auth.signout();
   };
@@ -23,7 +25,6 @@ angular.module('menuApp')
       map: $scope.map,
       title: 'You may be here'
     }));
-
   };
 
   var clearMarkers = function (callback) {
@@ -64,6 +65,7 @@ function toggleBounce() {
     }
   }
   this.setAnimation(google.maps.Animation.BOUNCE);
+  $scope.contentLoading = false;
 }
   // data.forEach(function(restaurant) {
   //   restaurant.formatted = restaurant.location.formattedAddress.join();
@@ -148,7 +150,7 @@ function toggleBounce() {
               }
             }
           }
-            $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId, restaurantName: data[0].entries.items.restaurantName});
+          $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId, restaurantName: data[0].entries.items.restaurantName});
         } else {
          $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId});
        }
@@ -197,4 +199,5 @@ if (navigator.geolocation) {
 }
 
 initMap();
+$scope.contentLoading = true;
 }]);
