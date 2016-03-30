@@ -23,4 +23,5 @@ module.exports = function(app, express) {
   app.post('/api/rating', ratingsController.postRatingToTable);
   app.post('/api/getRating', bodyParser, ratingsController.getRating);
   app.post('/api/ratingsAverage', bodyParser, ratingsController.averageRatings);
+  app.post('/api/updateProfile', bodyParser, profileController.updateProfile);
 };
