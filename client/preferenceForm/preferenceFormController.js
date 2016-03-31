@@ -98,5 +98,5 @@ angular.module('menuApp')
       // console.log('++line 117 post postUserPreference in preferenceFormController data: ',data);
       // $state.go('menuView', {menuData: data});
     });
-  }
+  };
 }]);

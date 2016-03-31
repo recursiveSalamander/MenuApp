@@ -95,7 +95,7 @@ var insertIngredientPreference = function(ingredient, relation, userID, callback
       ingredient: ingredient,
       relation: relation
     });
-    return newPreference.save()
+    return newPreference.save();
   }).then(function(savedPreference) {
     utils.hasCallBack(savedPreference, callback);
   });
@@ -115,8 +115,8 @@ var insertTastePreference = function(tastePreferences, userID, callback) {
       sweet:  tastePreferences[3],
       salty:  tastePreferences[4],
       bitter: tastePreferences[5]
-      })
-      return newUserTaste
+    });
+      return newUserTaste;
     }).then(function (usertaste) {
       usertaste.set({
         user_id: userID,
@@ -126,7 +126,7 @@ var insertTastePreference = function(tastePreferences, userID, callback) {
         sweet:  tastePreferences[3],
         salty:  tastePreferences[4],
         bitter: tastePreferences[5]
-      })
+      });
       return usertaste.save();
     }).then(function(savedUsertaste) {
       utils.hasCallBack(savedUsertaste, callback);
@@ -141,7 +141,7 @@ var insertCuisinePreference = function(cuisine, preferenceLevel, userID, callbac
       preference_level: preferenceLevel,
       origin: cuisine
     });
-    return newCuisine.save()
+    return newCuisine.save();
   }).then(function(savedCuisine){
     utils.hasCallBack(savedCuisine, callback);
   });
@@ -151,14 +151,14 @@ var insertNutritionRestriction = function(type, min, max, userID, callback) {
   Nutrition_Restriction.where({user_id: userID}).fetch()
   .then(function(myRestriction) {
     if(myRestriction !== null){
-      return myRestriction
+      return myRestriction;
     }
     var newRestriction = new Nutrition_Restriction({
       user_id: userID,
       type: type,
       min: min,
       max: max
-    })
+    });
     return newRestriction;
   }).then(function(restriction) {
     restriction.set({
@@ -166,7 +166,7 @@ var insertNutritionRestriction = function(type, min, max, userID, callback) {
       type: type,
       min: min,
       max:max
-    })
+    });
     return restriction.save();
   }).then(function(savedRestriction) {
     utils.hasCallBack(savedRestriction);
