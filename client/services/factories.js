@@ -3,7 +3,7 @@ angular
   .factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
 
     var currentToken = Auth.getToken();
-.factory('ValidationFactory', function() {
+  .factory('ValidationFactory', function() {
 
   var validatePasswordAndEmail = function(email, password, secondEntryPassword) {
     var resultsObj = {};
@@ -32,7 +32,7 @@ angular
   };
 })
 
-.factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
+  .factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
 
   var currentToken = Auth.getToken();
 
