@@ -11,7 +11,6 @@ module.exports = {
     var email = request.body.email;
     var password = request.body.password;
     var username = request.body.username;
-    console.log(username);
     new User({username: username})
     .fetch()
     .then(function(user) {
@@ -45,7 +44,6 @@ module.exports = {
       } else {
         user.comparePassword(password, function(err, match) {
           if (match) {
-            console.log("YOU ARE LOGGED IN. CONGRATULATIONS. I'M SO HAPPY FOR YOU.");
             var token = jwt.encode(user, 'secret');
             response.json({token: token});
           } else {

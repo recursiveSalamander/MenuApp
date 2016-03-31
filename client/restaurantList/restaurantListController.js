@@ -28,7 +28,6 @@ angular
     };
 
     var clearMarkers = function(callback) {
-      console.log('inside clearmarkers MARKERS', markers);
       for (var i = 0; i < markers.length; i++) {
         if(markers[i].Pb)
           markers[i].Pb.setMap(null);
@@ -67,20 +66,6 @@ angular
     this.setAnimation(google.maps.Animation.BOUNCE);
     $scope.contentLoading = false;
   }
-  // data.forEach(function(restaurant) {
-  //   restaurant.formatted = restaurant.location.formattedAddress.join();
-  //   var LatLng = {lat: restaurant.location.lat, lng: restaurant.location.lng};
-  //
-  //   var infoWindow = new google.maps.InfoWindow({
-  //     content: restaurant.name
-  //   })
-  //   addMarkerWithTimeout(LatLng, 0);
-  //   console.log(markers);
-  //
-  //   // markers[].addListener('click', function(){
-  //   //   infoWindow.open($scope.map, marker);
-  //   // })
-  // });
 
   $scope.displayRestaurants = function() {
     clearMarkers();
@@ -123,19 +108,13 @@ angular
   };
 
   $scope.restaurantMenu = function(restaurantId, restaurantName) {
-    console.log('++line 135 inside restaurantMenu() in restListCtrl restaurantId: ',restaurantId);
-    console.log('++line 136 inside restaurantMenu() in restListCtrl restaurantName: ',restaurantName);
     $scope.restaurantId = restaurantId;
     menuAppFactory.getMenu(restaurantId)
     .then(function(data) {
-      console.log('++line 140 inside restaurantMenu() in restListCtrl restaurantId:', restaurantId);
-      console.log('++line 141 inside restaurantMenu() in restListCtrl data:', data);
       userInfo.getRating(restaurantId)
       .then(function(ratingData) {
         userInfo.getRestrictions(data[0].entries.items)
         .then(function(restrictionData) {
-          console.log('++line 144 post getRating() in restListCtrl ratingData: ',ratingData);
-          console.log('++line 145 post getRating() in restListCtrl data[0].entries.items: ',data[0].entries.items);
           if (ratingData !== undefined) {
             for (var k = 0; k < data[0].entries.items.length; k++) {
               var menuItems = data[0].entries.items[k].entries.items;
@@ -164,7 +143,6 @@ angular
 
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
-    console.log('place', place);
     if(!place.geometry) {
       window.alert("Autocomplete's returned place contains no geometry");
       return;

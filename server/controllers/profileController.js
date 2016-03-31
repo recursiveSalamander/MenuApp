@@ -11,7 +11,6 @@ module.exports = {
     User.where({'id': userID}).fetch()
     .then(function (data) {
       var userInfo = data.toJSON();
-      console.log(userInfo);
       res.send(userInfo);
     });
   },

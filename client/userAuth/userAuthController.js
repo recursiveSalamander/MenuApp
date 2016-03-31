@@ -4,8 +4,6 @@ angular
 
     $scope.signUp = function() {
       var validate = ValidationFactory.validatePasswordAndEmail($scope.user.email, $scope.user.password, $scope.user.confirmpassword);
-      console.log($scope.user.password === $scope.user.confirmpassword);
-      console.log(validate);
       if(validate.passwordFormFlag === false && validate.emailFormFlag === false) {
         swal({
           title: '',
