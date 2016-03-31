@@ -3,6 +3,53 @@ angular
   .factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
 
     var currentToken = Auth.getToken();
+.factory('ValidationFactory', function() {
+
+  var validatePasswordAndEmail = function(email, password, secondEntryPassword) {
+    var resultsObj = {};
+    resultsObj.passwordFormFlag = false;
+    resultsObj.emailFormFlag = false;
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if(re.test(email)){
+        resultsObj.emailFormFlag = true;
+      } else {
+        resultsObj.emailFormFlag = false;
+      }
+
+    if(password === secondEntryPassword){
+      resultsObj.passwordFormFlag = true;
+      } else {
+      resultsObj.passwordFormFlag = false;
+      }
+
+    return resultsObj;
+
+  };
+
+  return validatePasswordAndEmail = {
+    validatePasswordAndEmail: validatePasswordAndEmail
+  };
+})
+
+.factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
+
+  var currentToken = Auth.getToken();
+
+  var getRestaurantList = function(coordinates) {
+    console.log('++line 8 in getRestaurantList() in factories coordinates: ',coordinates);
+    return $http({
+      method: 'POST',
+      url: '/api/restaurants',
+      data: coordinates
+    })
+    .then(function(resp) {
+      console.log('++line 15 inside getRestaurantList in factories',resp);
+      return resp.data;
+    }, function(error) {
+      console.log(error);
+    });
+  };
 
     var getRestaurantList = function(coordinates) {
       console.log('++line 8 in getRestaurantList() in factories coordinates: ',coordinates);
@@ -363,6 +410,4 @@ angular
     return {
       showTabDialog: showTabDialog
     };
-
-
   }]);
