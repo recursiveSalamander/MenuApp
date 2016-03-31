@@ -25,9 +25,22 @@ module.exports = {
     var firstname = request.body.firstname;
     var email = request.body.email;
 
+    var obj = {};
+    if(username){
+      obj.username = username;
+    }
+    if(lastname) {
+      obj.last_name = lastname;
+    }
+    if(firstname) {
+      obj.first_name = firstname;
+    }
+    if(email) {
+      obj.email = email;
+    }
     User.where({id: userID}).fetch()
     .then(function(data) {
-      data.set({id: userID, username: username, email: email, first_name: firstname, last_name: lastname});
+      data.set(obj);
       return data.save();
     })
     .then(function(updatedProfile) {

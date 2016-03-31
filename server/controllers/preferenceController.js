@@ -14,7 +14,6 @@ module.exports = {
     var userDiet = req.body.dietaryRestrictions;
     var cuisines = req.body.cuisinePreference;
     var nutrients = req.body.nutritionPreference;
-
     var flavors = _.map(req.body.tastePreference, function(flavor) {
       return flavor;
     });
@@ -43,13 +42,14 @@ module.exports = {
       });
     });
 
-    _.forEach(cuisines, function(preferenceLevel, cuisine) {
-      asyncTasks.push(function(callback) {
-        insertCuisinePreference(cuisine, preferenceLevel, userID, function() {
-          callback();
+
+    _.forEach(cuisines, (function(data, key) {
+      asyncTasks.push(function(callback){
+        insertCuisinePreference(key, data.eval, userID, function(data){
+          callback(data);
         });
       });
-    });
+    }));
 
     _.forEach(nutrients, function(max, nutrient) {
       asyncTasks.push(function(callback) {
@@ -88,39 +88,87 @@ var combineIngredients = function(data) {
 
 
 var insertIngredientPreference = function(ingredient, relation, userID, callback) {
-  new User_Preference({user_id: userID})
-  .save({ingredient: ingredient, relation: relation})
-  .then(function(data) {
-    callback(data);
+  User_Preference.where({'user_id': userID}).destroy()
+  .then(function(myPreference) {
+    var newPreference = new User_Preference({
+      user_id: userID,
+      ingredient: ingredient,
+      relation: relation
+    });
+    return newPreference.save()
+  }).then(function(savedPreference) {
+    utils.hasCallBack(savedPreference, callback);
   });
 };
 
 var insertTastePreference = function(tastePreferences, userID, callback) {
-  new User_Taste({user_id: userID})
-  .save({spicy:  tastePreferences[0],
-         meaty:  tastePreferences[1],
-         sour:   tastePreferences[2],
-         sweet:  tastePreferences[3],
-         salty:  tastePreferences[4],
-         bitter: tastePreferences[5]
-        })
-  .then(function(data) {
-    callback(data);
-  });
+  User_Taste.where({user_id: userID}).fetch()
+  .then(function(myUsertaste) {
+    if(myUsertaste !== null) {
+      return myUsertaste;
+    }
+  var newUserTaste = new User_Taste({
+      user_id: userID,
+      spicy:  tastePreferences[0],
+      meaty:  tastePreferences[1],
+      sour:   tastePreferences[2],
+      sweet:  tastePreferences[3],
+      salty:  tastePreferences[4],
+      bitter: tastePreferences[5]
+      })
+      return newUserTaste
+    }).then(function (usertaste) {
+      usertaste.set({
+        user_id: userID,
+        spicy:  tastePreferences[0],
+        meaty:  tastePreferences[1],
+        sour:   tastePreferences[2],
+        sweet:  tastePreferences[3],
+        salty:  tastePreferences[4],
+        bitter: tastePreferences[5]
+      })
+      return usertaste.save();
+    }).then(function(savedUsertaste) {
+      utils.hasCallBack(savedUsertaste, callback);
+    });
 };
 
 var insertCuisinePreference = function(cuisine, preferenceLevel, userID, callback) {
-  new Cuisine_Preference({user_id: userID})
-  .save({origin: cuisine, preference_level: preferenceLevel})
-  .then(function(data) {
-    callback(data);
+  Cuisine_Preference.where({user_id: userID}).destroy()
+  .then(function(myCuisine) {
+    var newCuisine = new Cuisine_Preference({
+      user_id: userID,
+      preference_level: preferenceLevel,
+      origin: cuisine
+    });
+    return newCuisine.save()
+  }).then(function(savedCuisine){
+    utils.hasCallBack(savedCuisine, callback);
   });
 };
 
 var insertNutritionRestriction = function(type, min, max, userID, callback) {
-  new Nutrition_Restriction({user_id: userID})
-  .save({type: type, min: min, max: max})
-  .then(function(data) {
-    callback(data);
+  Nutrition_Restriction.where({user_id: userID}).fetch()
+  .then(function(myRestriction) {
+    if(myRestriction !== null){
+      return myRestriction
+    }
+    var newRestriction = new Nutrition_Restriction({
+      user_id: userID,
+      type: type,
+      min: min,
+      max: max
+    })
+    return newRestriction;
+  }).then(function(restriction) {
+    restriction.set({
+      user_id: userID,
+      type: type,
+      min: min,
+      max:max
+    })
+    return restriction.save();
+  }).then(function(savedRestriction) {
+    utils.hasCallBack(savedRestriction);
   });
 };

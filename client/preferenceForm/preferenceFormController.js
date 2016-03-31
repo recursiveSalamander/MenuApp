@@ -90,21 +90,13 @@ angular.module('menuApp')
 
 
   $scope.sendPreferenceData = function () {
-    var preferenceData = {
-      tastePreference: $scope.tastePreference,
-      dietaryRestrictions: $scope.dietaryRestrictions,
-      userAllergies: $scope.userAllergies,
-      cuisinePreference: $scope.cuisinePreference,
-      nutritionPreference: $scope.nutritionPreference,
-      preferredIngredients: $scope.preferredIngredients,
-      rejectedIngredients: $scope.rejectedIngredients
-    };
+    var preferencesData = Survey.preferencesForm;
+
     // console.log('++line 115 pre postUserPreference in preferenceFormController preferenceData: ',preferenceData);
-    menuAppFactory.postUserPreference(preferenceData)
+    menuAppFactory.postUserPreference(preferencesData)
     .then(function(data) {
       // console.log('++line 117 post postUserPreference in preferenceFormController data: ',data);
       // $state.go('menuView', {menuData: data});
     });
-
-  };
+  }
 }]);
