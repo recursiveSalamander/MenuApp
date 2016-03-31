@@ -123,14 +123,14 @@ module.exports = {
             var trimmedKey = key.slice(4);
             // dietRestrictionIndex[trimmedKey] = -1; ----- ASYNCHRONOUSLY BEING CALLED I NEED HELP
             var percentage = data.facetCounts.diet[key] / totalRecipeNumber;
-            if(key === diet && totalRecipeNumber > 30){
-              if(percentage >= 0.75){
+            if (key === diet && totalRecipeNumber > 30) {
+              if (percentage >= 0.75) {
                 dietRestrictionIndex[trimmedKey] = 1;
               }
-              if(percentage < 0.75 && percentage >= 0.5){
+              if (percentage < 0.75 && percentage >= 0.5) {
                 dietRestrictionIndex[trimmedKey] = 2;
               }
-              if(percentage < 0.5 && percentage >= 0.25){
+              if (percentage < 0.5 && percentage >= 0.25) {
                 dietRestrictionIndex[trimmedKey] = 3;
               }
             }
@@ -141,15 +141,15 @@ module.exports = {
               var percentage = data.facetCounts.diet[key] / totalRecipeNumber;
               for(var i=0; i<allergies.length; i++){
               // allergyRestrictionIndex[trimmedKey] = -1; ----- ASYNCHRONOUSLY BEING CALLED I NEED HELP
-              if(allergies[i] === key && totalRecipeNumber > 30){
+              if (allergies[i] === key && totalRecipeNumber > 30) {
 
-                if(percentage >= 0.75){
+                if (percentage >= 0.75) {
                   allergyRestrictionIndex[trimmedKey] = 1;
                 }
-                if(percentage < 0.75 && percentage >= 0.5){
+                if (percentage < 0.75 && percentage >= 0.5) {
                   allergyRestrictionIndex[trimmedKey] = 2;
                 }
-                if(percentage < 0.5 && percentage >= 0.25){
+                if (percentage < 0.5 && percentage >= 0.25) {
                   allergyRestrictionIndex[trimmedKey] = 3;
                 }
               }

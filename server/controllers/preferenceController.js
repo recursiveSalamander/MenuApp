@@ -44,8 +44,8 @@ module.exports = {
 
 
     _.forEach(cuisines, (function(data, key) {
-      asyncTasks.push(function(callback){
-        insertCuisinePreference(key, data.eval, userID, function(data){
+      asyncTasks.push(function(callback) {
+        insertCuisinePreference(key, data.eval, userID, function(data) {
           callback(data);
         });
       });
@@ -104,7 +104,7 @@ var insertIngredientPreference = function(ingredient, relation, userID, callback
 var insertTastePreference = function(tastePreferences, userID, callback) {
   User_Taste.where({user_id: userID}).fetch()
   .then(function(myUsertaste) {
-    if(myUsertaste !== null) {
+    if (myUsertaste !== null) {
       return myUsertaste;
     }
   var newUserTaste = new User_Taste({
@@ -142,7 +142,7 @@ var insertCuisinePreference = function(cuisine, preferenceLevel, userID, callbac
       origin: cuisine
     });
     return newCuisine.save();
-  }).then(function(savedCuisine){
+  }).then(function(savedCuisine) {
     utils.hasCallBack(savedCuisine, callback);
   });
 };
@@ -150,7 +150,7 @@ var insertCuisinePreference = function(cuisine, preferenceLevel, userID, callbac
 var insertNutritionRestriction = function(type, min, max, userID, callback) {
   Nutrition_Restriction.where({user_id: userID}).fetch()
   .then(function(myRestriction) {
-    if(myRestriction !== null){
+    if (myRestriction !== null) {
       return myRestriction;
     }
     var newRestriction = new Nutrition_Restriction({
