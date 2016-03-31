@@ -127,7 +127,7 @@ function toggleBounce() {
     console.log('++line 135 inside restaurantMenu() in restListCtrl restaurantId: ',restaurantId);
     console.log('++line 136 inside restaurantMenu() in restListCtrl restaurantName: ',restaurantName);
     $scope.restaurantId = restaurantId;
-    menuAppFactory.getMenu(restaurantId, restaurantName)
+    menuAppFactory.getMenu(restaurantId)
     .then(function(data) {
       console.log('++line 140 inside restaurantMenu() in restListCtrl restaurantId:', restaurantId);
       console.log('++line 141 inside restaurantMenu() in restListCtrl data:', data);
@@ -150,7 +150,7 @@ function toggleBounce() {
               }
             }
           }
-          $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId, restaurantName: data[0].entries.items.restaurantName});
+          $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId, restaurantName: restaurantName});
         } else {
          $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId});
        }
