@@ -1,5 +1,5 @@
 #main {
-  background: url('../assets/mainbackground.jpg') no-repeat fixed;
+  background: url('../assets/Elegant_Background-7.jpg') no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -62,8 +62,8 @@
 }
 
 #sidenav {
-  padding-bottom: 10px;
-  height: 100vh;
+  padding-bottom: 2px;
+  height: 57vh;
 }
 
 .list md-list {
@@ -246,7 +246,7 @@ ul[dnd-list] li.selected {
 #navbar .searchbox input {
   /*width: 300px;*/
   width: 100%;
-  height: 50px;
+  height: 52px;
   background: white;
   border: none;
   font-size: 10pt;
