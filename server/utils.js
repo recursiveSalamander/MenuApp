@@ -45,6 +45,7 @@ module.exports = {
     // console.log('inside getRestaurantID');
     Restaurant.where({'restaurant_id': restaurant}).fetch()
     .then(function(data) {
+      console.log('data from line 48: ', data);
       if (!data) {
         module.exports.insertRestaurant(restaurant)
         .then(function(data) {
