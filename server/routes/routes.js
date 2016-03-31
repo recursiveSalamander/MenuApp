@@ -4,6 +4,7 @@ var userAuthController = require('../controllers/userAuthController.js');
 var profileController = require('../controllers/profileController.js');
 var preferenceController = require('../controllers/preferenceController.js');
 var ratingsController = require('../controllers/ratingsController.js');
+var recommendationsController = require('../controllers/recommendationsController.js');
 
 
 var bodyParser = require('body-parser').json();
@@ -23,4 +24,5 @@ module.exports = function(app, express) {
   app.post('/api/rating', ratingsController.postRatingToTable);
   app.post('/api/getRating', bodyParser, ratingsController.getRating);
   app.post('/api/ratingsAverage', bodyParser, ratingsController.averageRatings);
+  app.post('/api/restrictions', bodyParser, recommendationsController.restrictionsRecommendation);
 };
