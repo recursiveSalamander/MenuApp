@@ -15,7 +15,7 @@ module.exports = {
     new User({username: username})
     .fetch()
     .then(function(user) {
-      if(!user) {
+      if (!user) {
         var newUser = new User({
           first_name: firstName,
           last_name: lastName,
@@ -40,11 +40,11 @@ module.exports = {
     new User({username: username})
     .fetch()
     .then(function(user) {
-      if(!user) {
+      if (!user) {
         response.redirect('/#/signIn');
       } else {
         user.comparePassword(password, function(err, match) {
-          if(match) {
+          if (match) {
             console.log("YOU ARE LOGGED IN. CONGRATULATIONS. I'M SO HAPPY FOR YOU.");
             var token = jwt.encode(user, 'secret');
             response.json({token: token});

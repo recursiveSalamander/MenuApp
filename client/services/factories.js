@@ -37,7 +37,7 @@ angular.module('menuApp')
     });
   };
 
-  var postUserPreference = function (preferences) {
+  var postUserPreference = function(preferences) {
     preferences.token = currentToken;
 
     return $http({
@@ -258,11 +258,11 @@ angular.module('menuApp')
       return element[0];
     });
 
-    var filteredArr1 = _.reject(newArr1, function (element) {
+    var filteredArr1 = _.reject(newArr1, function(element) {
       return _.includes(element, newArr2);
     });
 
-    var filteredArr2 = _.reject(newArr2, function (element) {
+    var filteredArr2 = _.reject(newArr2, function(element) {
       return _.includes(element, newArr1);
     });
 

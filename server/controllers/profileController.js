@@ -26,16 +26,16 @@ module.exports = {
     var email = request.body.email;
 
     var obj = {};
-    if(username){
+    if (username) {
       obj.username = username;
     }
-    if(lastname) {
+    if (lastname) {
       obj.last_name = lastname;
     }
-    if(firstname) {
+    if (firstname) {
       obj.first_name = firstname;
     }
-    if(email) {
+    if (email) {
       obj.email = email;
     }
     User.where({id: userID}).fetch()

@@ -1,6 +1,6 @@
 angular.module('menuApp')
 
-.factory('ValidationFactory', function(){
+.factory('ValidationFactory', function() {
 
   var validatePasswordAndEmail = function(email, password, secondEntryPassword) {
     var resultsObj = {};

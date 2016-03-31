@@ -14,7 +14,7 @@ angular.module('menuApp')
   });
 
     var choicesCount = 1;
-    $scope.submitThreePictures = function(){
+    $scope.submitThreePictures = function() {
     //make pictures disappear
     if($scope.foodPics.first.length === choicesCount &&
        $scope.foodPics.second.length === choicesCount &&
@@ -58,7 +58,7 @@ angular.module('menuApp')
     var sweet_total = 0;
     var spicy_total = 0;
     var numberOfPics = $scope.foodPics.first.length;
-    var verifyRankOrder = function(first, second, third){
+    var verifyRankOrder = function(first, second, third) {
       if(first >= second && second >= third) return true;
       if(first <= second && second <= third) return true;
       return false;
@@ -161,7 +161,7 @@ angular.module('menuApp')
   };
 
 var surveyFinished = $scope.foodPics.storage.length === 0 && $scope.foodPics.choices.length === 0;
-$scope.finishSurvey = function(){
+$scope.finishSurvey = function() {
   initTastePreferences();
   initCuisinePreferences();
   initIngredientPreferences();

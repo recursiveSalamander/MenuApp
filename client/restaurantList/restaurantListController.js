@@ -4,7 +4,7 @@ angular.module('menuApp')
   $scope.data = [];
   $scope.map;
 
-  $scope.checkToken = function(){
+  $scope.checkToken = function() {
     return Auth.isAuth();
   };
 
@@ -27,7 +27,7 @@ angular.module('menuApp')
     }));
   };
 
-  var clearMarkers = function (callback) {
+  var clearMarkers = function(callback) {
     console.log('inside clearmarkers MARKERS', markers);
     for (var i = 0; i < markers.length; i++) {
       if(markers[i].Pb)
@@ -37,7 +37,7 @@ angular.module('menuApp')
     markers = [];
   };
 
-  var refocusMapBounds = function () {
+  var refocusMapBounds = function() {
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < markers.length; i++) {
      bounds.extend(markers[i].getPosition());
@@ -46,7 +46,7 @@ angular.module('menuApp')
    $scope.map.fitBounds(bounds);
  };
 
- var makeInfoWindow = function (marker, restaurantName) {
+ var makeInfoWindow = function(marker, restaurantName) {
   marker.addListener('click', function(){
     if(infoWindow){
       infoWindow.close();
@@ -127,7 +127,7 @@ function toggleBounce() {
     console.log('++line 135 inside restaurantMenu() in restListCtrl restaurantId: ',restaurantId);
     console.log('++line 136 inside restaurantMenu() in restListCtrl restaurantName: ',restaurantName);
     $scope.restaurantId = restaurantId;
-    menuAppFactory.getMenu(restaurantId, restaurantName)
+    menuAppFactory.getMenu(restaurantId)
     .then(function(data) {
       console.log('++line 140 inside restaurantMenu() in restListCtrl restaurantId:', restaurantId);
       console.log('++line 141 inside restaurantMenu() in restListCtrl data:', data);
@@ -150,7 +150,7 @@ function toggleBounce() {
               }
             }
           }
-          $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId, restaurantName: data[0].entries.items.restaurantName});
+          $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId, restaurantName: restaurantName});
         } else {
          $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId});
        }
