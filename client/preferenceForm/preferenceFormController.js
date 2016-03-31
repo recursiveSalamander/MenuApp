@@ -92,12 +92,8 @@ angular
 
     $scope.sendPreferenceData = function () {
       var preferencesData = Survey.preferencesForm;
-
-    // console.log('++line 115 pre postUserPreference in preferenceFormController preferenceData: ',preferenceData);
-    menuAppFactory.postUserPreference(preferencesData)
-    .then(function(data) {
-      // console.log('++line 117 post postUserPreference in preferenceFormController data: ',data);
-      // $state.go('menuView', {menuData: data});
-    });
-  };
-}]);
+      menuAppFactory.postUserPreference(preferencesData)
+      .then(function(data) {
+      });
+    };
+  }]);

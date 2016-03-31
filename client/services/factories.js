@@ -1,8 +1,6 @@
 angular
   .module('menuApp')
-  .factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
 
-    var currentToken = Auth.getToken();
   .factory('ValidationFactory', function() {
 
   var validatePasswordAndEmail = function(email, password, secondEntryPassword) {
@@ -37,14 +35,12 @@ angular
   var currentToken = Auth.getToken();
 
   var getRestaurantList = function(coordinates) {
-    console.log('++line 8 in getRestaurantList() in factories coordinates: ',coordinates);
     return $http({
       method: 'POST',
       url: '/api/restaurants',
       data: coordinates
     })
     .then(function(resp) {
-      console.log('++line 15 inside getRestaurantList in factories',resp);
       return resp.data;
     }, function(error) {
       console.log(error);
@@ -52,14 +48,12 @@ angular
   };
 
     var getRestaurantList = function(coordinates) {
-      console.log('++line 8 in getRestaurantList() in factories coordinates: ',coordinates);
       return $http({
         method: 'POST',
         url: '/api/restaurants',
         data: coordinates
       })
       .then(function(resp) {
-        console.log('++line 15 inside getRestaurantList in factories',resp);
         return resp.data;
       }, function(error) {
         console.log(error);
@@ -68,16 +62,13 @@ angular
 
     var getMenu = function(restaurantId, restaurantName) {
       restaurantId = {restaurantId: restaurantId};
-      console.log('++line 24 inside getMenu in factories.js',restaurantId);
       return $http({
         method: 'POST',
         url: '/api/menu',
         data: restaurantId
       })
       .then(function(resp) {
-        console.log('++line 31 in post getMenu() inside factories resp.data: ',resp.data);
         resp.data[0].entries.items.restaurantName = restaurantName;
-        console.log('++line 33 inside getMenu() in factories resp.data[0].entries.items.restaurantName: ',resp.data[0].entries.items.restaurantName);
         return resp.data;
       }, function(error) {
         console.log(error);
@@ -137,29 +128,21 @@ angular
 
   .factory('userInfo', ['$http', '$location', '$state', '$window', 'Auth', function($http, $location, $state, $window, Auth) {
     var getUserInfo = function() {
-    // console.log('++line 90 inside userInfo() in factories user:', user);
     var currentToken = Auth.getToken();
-    // console.log('++ line 92 inside ratingInfo() in factories token', currentToken);
     return $http({
       method: 'POST',
       url: '/api/profile',
       data: {currentToken: currentToken}
     })
     .then(function(res) {
-    // console.log('++line 104 in getUserInfo() in factories res.data: ',res.data);
     return res.data;
   }, function(err) {
-    // console.log('++line 107 in getUserInfo in factories res.data err: ',err);
   });
   };
 
   var ratingInfo = function(rating, entryId, restaurantId) {
-    // console.log('++line 107 inside ratingInfo() in factories rating: ', rating);
-    // console.log('++line 108 inside ratingInfo() in factories entryId: ', entryId);
-    // console.log('++line 109 inside ratingInfo() in factories restaurantId: ', restaurantId );
 
     var currentToken = Auth.getToken();
-    console.log('++ line 115 inside ratingInfo() in factories token',currentToken);
 
     return $http({
       method: 'POST',
@@ -174,9 +157,7 @@ angular
   };
 
   var getRating = function(restaurantId) {
-    // console.log('++line 127 in getRating() in factories restaurantId: ',restaurantId);
     var currentToken = Auth.getToken();
-    console.log('++ line 132 inside ratingInfo() in factories restaurantId',restaurantId);
 
     return $http({
       method: 'POST',
@@ -184,13 +165,11 @@ angular
       data: {currentToken: currentToken, restaurantId: restaurantId}
     })
     .then(function(res) {
-      console.log('++line 140 post getRating in factories', res);
       return res.data;
     });
   };
 
   var getAvgRating = function(restaurantId) {
-    console.log('++line 146 in getAvgRating() in factories restaurantId: ',restaurantId);
 
     return $http({
       method: 'POST',
@@ -198,7 +177,6 @@ angular
       data: {restaurantId:restaurantId}
     })
     .then(function(response) {
-      console.log('++line 154 post getRating in factories response.data: ', response.data);
       return response.data;
     });
   };

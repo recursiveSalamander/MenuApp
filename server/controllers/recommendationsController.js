@@ -117,7 +117,6 @@ module.exports = {
         if (!err && resp.statusCode === 200) {
           var data = JSON.parse(body);
           var totalRecipeNumber = data.totalMatchCount;
-          //console.log(data);
 
           for(var key in data.facetCounts.diet){
             var trimmedKey = key.slice(4);

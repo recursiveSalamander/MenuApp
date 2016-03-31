@@ -17,17 +17,14 @@ var Item_Ratings = require('./db/collections/Item_Ratings.js');
 module.exports = {
   hasCallBack: function(data, callback){
     if(callback){
-      console.log('running callback');
       callback(data);
     } else {
-      console.log('returning data: ', data);
       return data;
     }
   },
 
   getUserID: function(token) {
     var currentUser = jwt.decode(token, 'secret');
-    console.log(currentUser.id);
     return currentUser.id;
   },
 
@@ -42,10 +39,8 @@ module.exports = {
 
 
   getRestaurantID: function(restaurant, callback){
-    // console.log('inside getRestaurantID');
     Restaurant.where({'restaurant_id': restaurant}).fetch()
     .then(function(data) {
-      console.log('data from line 48: ', data);
       if (!data) {
         module.exports.insertRestaurant(restaurant)
         .then(function(data) {
@@ -131,29 +126,22 @@ module.exports = {
       var formattedItemData = data.toJSON();
       var ratingsArray = [];
       for(var i = 0; i < formattedItemData.length; i++) {
-        console.log(formattedItemData[i].menu_items);
         ratingsArray.push({rating: formattedItemData[i].rating, entryId: formattedItemData[i].menu_items.item});
       }
-      // console.log('++line 135 inside createRatingsArray() in Utils ratingsArray: ',ratingsArray);
       module.exports.hasCallBack(ratingsArray, callback);
     });
   },
 
   averageRatings: function(restaurantID, callback) {
-    // console.log('++line 141 in ratingsMenuAverage() inside utils restaurantId: ',restaurantID);
     Menu_Item.where({restaurant: restaurantID}).fetchAll({withRelated: ['ratings']})
     .then(function(data) {
-      // console.log('++line 144 inside ratingsMenuAverage() inside utils data: ',data);
       var formattedData = data.toJSON();
-      // console.log('++line 146 inside ratingsMenuAverage() inside utils formattedData: ',formattedData);
-      // var idArr = [];
       var arr = [];
       for(var i = 0; i < formattedData.length; i++){
         for(var j = 0; j < formattedData[i].ratings.length; j++){
           arr.push({entryId: formattedData[i].item, rating: formattedData[i].ratings[j].rating});
         }
       }
-      console.log('++line 154 in averageRatings in Utils arr: ',arr);
       var array = {};
       var sum = 0;
       var counter = 0;
@@ -179,7 +167,6 @@ module.exports = {
           }
         }
       }
-      // console.log('++line 175 in ratingsMenuAverage() in utils array: ',array);
       module.exports.hasCallBack(array, callback);
     });
   },
