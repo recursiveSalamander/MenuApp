@@ -32,6 +32,9 @@ module.exports = {
 
         res.send(data);
       }
+      else {
+        res.send(err);
+      }
     });
   }
 };

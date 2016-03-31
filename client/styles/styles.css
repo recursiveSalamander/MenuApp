@@ -6,7 +6,14 @@
   background-size: cover;
 }
 
+@font-face {
+  font-family: mainfont;
+  src: url(monoment.ttf);
+}
 
+.textcenter {
+  text-align: center;
+}
 /*----------------------------Sign-in/Sign-up styling-------------------------------------------------*/
 .signup, .signin {
   height: 100vh;
@@ -36,20 +43,29 @@
   border-radius: 3px;
 }
 
-#signinheader, #signupheader {
-  display:flex;
-  justify-content:center;
-  align-items:center;
+#signinslogan {
+
 }
 
-#signinlogo, #signuplogo {
+#signinheader, #signupheader {
+  text-align: center;
+}
+
+#signinlogo {
+  font-size: 100px;
+}
+
+.logostyle {
   /*-webkit-text-stroke-width: 3px;
   -webkit-text-stroke-color: black;*/
+  margin: none;
   text-shadow: 0 0 30px #000;
   -moz-text-shadow: 0 0 30px #000;
   -webkit-text-shadow: 0 0 30px #000;
   color: white;
-  font-size: 100px;
+
+  font-family: mainfont;
+
 }
 
 /*----------------------------RestaurantList styling-------------------------------------------------*/
@@ -388,6 +404,19 @@ md-checkbox.md-checked .md-icon {
 
 
 /*----------------------------MenuView----------------------------------------------------------------*/
+.menuentry li {
+  font-size: 20px;
+  list-style: none;
+}
+
+md-tooltip .md-content{
+  height: auto;
+  font-size: 15px;
+}
+
+md-tooltip .restrictionwarning {
+  color: red;
+}
 
 .tabsdemoDynamicHeight md-content {
   background-color: transparent !important;
