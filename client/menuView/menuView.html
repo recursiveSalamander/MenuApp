@@ -1,22 +1,48 @@
-<div ng-cloak="" class="tabsdemoDynamicHeight menuview" ng-controller="menuViewController">
+<div class="tabsdemoDynamicHeight menuview" ng-controller="menuViewController">
+  <div style="height: 80px">
+    <h1 class="md-display-1 md-margin md-padding">{{restaurantName}}</h1>
+  </div>
   <md-content>
     <md-tabs md-dynamic-height="" md-border-bottom="">
-      <md-tab label="Tab" ng-repeat=" submenu in data">
-        <md-content class="md-padding">
-        <h1 class="md-display-1">{{restaurantName}}</h1>
-          <h1 class="md-headline">{{submenu.name}}</h1>
-          <ul ng-repeat="item in submenu.entries.items">
-            <li> Name: {{item.name}}</li>
-            <dl> Description: {{item.description}}</dl>
-            <dl> Price: {{item.price}}</dl>
-            <jk-rating-stars max-rating="5" rating="item.ratingInfo" read-only="" on-rating="onRating(rating,item.entryId, restaurantId)" >
-            </jk-rating-stars>
-            <dl> Average rating: {{item.avgRating}}</dl>
-            <dl ng-if="prices.length > 1">NOTE: THERE ARE MORE THAN ONE PRICE IN PRICES ARRAY</dl>
-            <dl ng-if="options.length">NOTE: OPTIONS EXIST</dl>
-            <dl ng-if="additions.length">NOTE: ADDITIONS EXIST</dl>
+      <md-tab label="{{submenu.name}}" ng-repeat=" submenu in data">
+        <md-tab-body class="md-padding">
+          <ul layout="row" ng-repeat="item in submenu.entries.items">
+            <div flex="5">
+
+              <!-- <i class="fa fa-square-o"></i> -->
+
+            </div>
+            <div flex class="menuentry">
+              <li> <i class="fa fa-square" style="color:red; margin-left: -10px"></i><strong id="menuentryname">{{item.name}}</strong> &nbsp&nbsp
+                <md-button ng-if="item.dietRestriction" md-no-ink class="md-primary">
+                  Diet Warning
+                  <md-tooltip md-direction="top">
+                    This menu entry is {{item.dietRestriction.message}} not for {{item.dietRestriction.diet}}s</span><br>
+                    <span class="restrictionwarning">will most likely contain {{item.allergyRestriction.mostlikely.join(', ')}}</span><br>
+                  </md-tooltip>
+                </md-button>
+                <md-button ng-if="item.allergyRestriction.may.length > 0 && item.allergyRestriction.mostlikely.length > 0" class="md-warn">
+                  Allergy Warning
+                  <md-tooltip md-direction="top">
+
+                    This menu entry<br>
+                    <span>may contain </span><span>{{item.allergyRestriction.may.join(', ')}}</span><br>
+                    <span class="restrictionwarning">will most likely contain {{item.allergyRestriction.mostlikely.join(', ')}}</span><br>
+                  </md-tooltip>
+                </md-button>
+              </li>
+              <dl> Description: {{item.description}}</dl>
+              <dl> Price: {{item.price}}</dl>
+              <jk-rating-stars max-rating="5" rating="item.ratingInfo" read-only="" on-rating="onRating(rating,item.entryId, restaurantId)" >
+              </jk-rating-stars>
+              <dl> Average rating: {{item.avgRating}}</dl>
+              <!-- <dl ng-if="prices.length > 1">NOTE: THERE ARE MORE THAN ONE PRICE IN PRICES ARRAY</dl>
+              <dl ng-if="options.length">NOTE: OPTIONS EXIST</dl>
+              <dl ng-if="additions.length">NOTE: ADDITIONS EXIST</dl> -->
+              <md-divider></md-divider>
+            </div>
           </ul>
-        </md-content>
+        </md-tab-body>
       </md-tab>
     </md-tabs>
   </md-content>

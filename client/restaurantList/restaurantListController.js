@@ -115,25 +115,31 @@ angular
       .then(function(ratingData) {
         userInfo.getRestrictions(data[0].entries.items)
         .then(function(restrictionData) {
-          if (ratingData !== undefined) {
-            for (var k = 0; k < data[0].entries.items.length; k++) {
-              var menuItems = data[0].entries.items[k].entries.items;
-              for (var i = 0; i < ratingData.length; i++) {
-                for (var j = 0; j < menuItems.length; j++) {
-                  if (ratingData[i].entryId === menuItems[j].entryId) {
-                    menuItems[j].ratingInfo = ratingData[i].rating;
-                    menuItems[j].avgRating = ratingData[i].avgRating;
-                  }
+          data[0].entries.items = restrictionData;
+          console.log('THIS IS DATA', data[0]);
+          console.log('THIS IS RESTRICTIonDATA', restrictionData);
+        console.log('++line 144 post getRating() in restListCtrl ratingData: ',ratingData);
+        console.log('++line 145 post getRating() in restListCtrl data[0].entries.items: ',data[0].entries.items);
+        if (ratingData !== undefined) {
+          for (var k = 0; k < data[0].entries.items.length; k++) {
+            var menuItems = data[0].entries.items[k].entries.items;
+            for (var i = 0; i < ratingData.length; i++) {
+              for (var j = 0; j < menuItems.length; j++) {
+                if (ratingData[i].entryId === menuItems[j].entryId) {
+                  menuItems[j].ratingInfo = ratingData[i].rating;
+                  menuItems[j].avgRating = ratingData[i].avgRating;
                 }
               }
             }
-            $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId, restaurantName: restaurantName});
-          } else {
-           $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId});
-         }
-       });
-      });
-    });
+          }
+
+          $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId, restaurantName: restaurantName});
+        } else {
+         $state.go('menuView', {menuData: data[0].entries.items, restaurantId: restaurantId});
+       }
+     });
+     });
+     });
   };
 
   var autocomplete = new google.maps.places.Autocomplete(
