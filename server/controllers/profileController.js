@@ -8,14 +8,43 @@ var Utils = require('../utils.js');
 module.exports = {
   getProfile: function(req, res) {
     var token = req.body.currentToken;
-    console.log('++line 11 in getProfile() in profileCtrl token: ',token);
     var userID = Utils.getUserID(token);
-    console.log('++line 13 in getProfile() in profileController userID: ', userID);
     User.where({'id': userID}).fetch()
     .then(function (data) {
       var userInfo = data.toJSON();
       console.log(userInfo);
       res.send(userInfo);
+    });
+  },
+
+  updateProfile: function(request, response) {
+    var token = request.body.currentToken;
+    var userID = Utils.getUserID(token);
+    var username = request.body.username;
+    var lastname = request.body.lastname;
+    var firstname = request.body.firstname;
+    var email = request.body.email;
+
+    var obj = {};
+    if(username){
+      obj.username = username;
+    }
+    if(lastname) {
+      obj.last_name = lastname;
+    }
+    if(firstname) {
+      obj.first_name = firstname;
+    }
+    if(email) {
+      obj.email = email;
+    }
+    User.where({id: userID}).fetch()
+    .then(function(data) {
+      data.set(obj);
+      return data.save();
+    })
+    .then(function(updatedProfile) {
+      Utils.hasCallBack(updatedProfile);
     });
   }
 };

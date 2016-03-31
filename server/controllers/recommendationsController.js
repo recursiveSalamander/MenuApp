@@ -116,7 +116,7 @@ module.exports = {
       request(query, function(err, resp, body) {
         if (!err && resp.statusCode === 200) {
           var data = JSON.parse(body);
-          var totalRecipeNumber = data.totalMatchCount
+          var totalRecipeNumber = data.totalMatchCount;
           //console.log(data);
 
           for(var key in data.facetCounts.diet){
@@ -164,7 +164,7 @@ module.exports = {
 
     // }
         // }
-      })
+      });
 
-    }
+    };
 };

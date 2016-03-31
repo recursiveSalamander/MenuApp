@@ -14,6 +14,7 @@ var Utils = require('./utils.js');
 var ratingsController = require('./controllers/ratingsController.js');
 var recommendationsController = require('./controllers/recommendationsController.js');
 var Item_Rating = './db/models/Item_Rating.js';
+var profileController = require('./controllers/profileController.js');
 
 var app = express();
 
@@ -30,7 +31,7 @@ var server = app.listen(port, function() {
 });
 
 // var test = function() {
-//   ratingsController.averageRatings()
+//   profileController.updateProfile();
 // };
 //
 // test();
