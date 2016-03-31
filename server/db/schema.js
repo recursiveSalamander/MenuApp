@@ -1,6 +1,8 @@
 var path = require('path');
 if(!process.env.DOMAIN) {
+  console.log('inside line 3 if statement schema.js');
   var config = require('./config/config.js');
+  console.log(config);
 }
 var knex = require('knex')({
   client: 'mysql',
