@@ -30,7 +30,7 @@ angular
   };
 })
 
-  .factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
+.factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
 
   var currentToken = Auth.getToken();
 
