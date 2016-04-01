@@ -14,20 +14,19 @@
             </div>
             <div flex class="menuentry">
               <li> <i class="fa fa-square" style="color:red; margin-left: -10px"></i><strong id="menuentryname">{{item.name}}</strong> &nbsp&nbsp
-                <md-button ng-if="item.dietRestriction" md-no-ink class="md-primary">
+                <md-button ng-if="item.dietRestriction.diet" md-no-ink class="md-primary">
                   Diet Warning
                   <md-tooltip md-direction="top">
-                    This menu entry is {{item.dietRestriction.message}} not for {{item.dietRestriction.diet}}s</span><br>
-                    <span class="restrictionwarning">will most likely contain {{item.allergyRestriction.mostlikely.join(', ')}}</span><br>
+                    <span ng-class="{restrictionwarning: item.dietRestriction.message === 'most likely'}">This menu entry is <strong>{{item.dietRestriction.message}}</strong> not for {{item.dietRestriction.diet}}s</span><br>
                   </md-tooltip>
                 </md-button>
-                <md-button ng-if="item.allergyRestriction.may.length > 0 && item.allergyRestriction.mostlikely.length > 0" class="md-warn">
+                <md-button ng-if="item.allergyRestriction.may.length > 0 || item.allergyRestriction.mostlikely.length > 0" class="md-warn">
                   Allergy Warning
                   <md-tooltip md-direction="top">
 
-                    This menu entry<br>
-                    <span>may contain </span><span>{{item.allergyRestriction.may.join(', ')}}</span><br>
-                    <span class="restrictionwarning">will most likely contain {{item.allergyRestriction.mostlikely.join(', ')}}</span><br>
+                    This menu entry:<br>
+                    <span ng-if="item.allergyRestriction.may.length > 0">may contain {{item.allergyRestriction.may.join(', ')}}<br></span>
+                    <span class="restrictionwarning" ng-if="item.allergyRestriction.mostlikely.length > 0">will most likely contain {{item.allergyRestriction.mostlikely.join(', ')}}</span>
                   </md-tooltip>
                 </md-button>
               </li>
