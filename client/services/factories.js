@@ -353,6 +353,7 @@ angular
     };
 
     var signout = function() {
+      console.log(token);
       $window.localStorage.removeItem('authentication');
     };
 
