@@ -1,37 +1,61 @@
-<div class='signin' layout="column" layout-fill ng-controller="userAuthController">
-  <div class="textcenter" flex="32">
-    <h1 class="logostyle" id="signinlogo" style="margin-bottom: 0px">WUGG</h1>
+<div class='signin' layout="column" ng-controller="userAuthController">
+    <md-button ng-click="signinModal()" class="md-primary md-fab md-fab-top-right">
+          login
+        </md-button>
+  <div flex="15">
+    <h1 class="logostyle" id="signinlogo">WUGG</h1>
   </div>
-  <div class="textcenter" flex="8" layout="row">
-    <div flex="30"></div>
-    <h3 class="logostyle" id="signinslogan" flex="40">What you gon' get?</h4>
-      <div flex="30"></div>
+  <div id="sloganstrip" flex="8">
+      <h1 id="signinslogan">What you gon' get?</h1>
   </div>
-  <div flex="50" layout="row">
-    <div flex="60"></div>
-    <form  id="signinbox" name="signin" class="md-whiteframe-z2 md-padding" flex="30" ng-submit="validate()">
-      <h2>Please Sign In</h2>
-      <div id="signinformfields" layout="row">
-        <div flex="60">
-          <md-input-container>
-            <label>Username</label>
-            <input type='text' ng-model="user.loginUsername" required maxlength = "20" autofocus>
-          </md-input-container>
-          <br>
-          <md-input-container>
-            <label>Password</label>
-            <input type="password" ng-model="user.loginPassword" maxlength = "20" required>
-          </md-input-container>
-          <br>
-          <md-button id="signIn" type="submit" class="md-raised">Sign in</md-button>
-        </div>
-        <div flex="40">
-          <a href="/#/signUp">Don't have an account? <strong>Signup</strong> ...</a>
-        </div>
-      </div>
-    </form>
-    <div flex="10"></div>
+
+
+    <div flex="60">
+        <form id="signupbox" class="md-whiteframe-z2 md-padding" ng-submit="signUp()">
+          <h2>Please Sign Up</h2>
+          <div id="signupformfields">
+            <div>
+              <md-input-container>
+                <label>First Name</label>
+                <input type='text' ng-model="user.first_name" maxlength = "20" required autofocus>
+              </md-input-container>
+              <br>
+              <md-input-container>
+                <label>Last Name</label>
+                <input type="text" ng-model="user.last_name" maxlength = "30" required>
+              </md-input-container>
+              <br>
+              <md-input-container>
+                <label>E-mail</label>
+                <input type="text" ng-model="user.email" maxlength = "30" required>
+              </md-input-container>
+              <br>
+
+            </div>
+            <div>
+              <md-input-container>
+                <label>Username</label>
+                <input type="text" ng-model="user.username" maxlength = "20" required>
+              </md-input-container>
+              <br>
+              <md-input-container>
+                <label>Password</label>
+                <input type="password" ng-model="user.password" maxlength = "20" required>
+              </md-input-container>
+              <br>
+              <md-input-container>
+                <label>Confirm Password</label>
+                <input type="password" ng-model="user.confirmpassword" maxlength = "20" required>
+              </md-input-container>
+              <br>
+              <md-button id="signout_button" type="submit" class="md-raised">Sign Up</md-button>
+            </div>
+            </div>
+          </form>
+    </div>
+
+
+  <div flex="17">
   </div>
-  <div flex="20">
-  </div>
+
 </div>

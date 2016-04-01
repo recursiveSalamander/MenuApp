@@ -11,14 +11,17 @@
   src: url(monoment.ttf);
 }
 
+@font-face {
+  font-family: secondaryfont;
+  src: url(anabelle.ttf)
+}
+
 .textcenter {
   text-align: center;
 }
 /*----------------------------Sign-in/Sign-up styling-------------------------------------------------*/
 .signup, .signin {
   height: 100vh;
-
-
 }
 
 .signin {
@@ -31,19 +34,25 @@
 }
 
 .signup {
-  background: url('../assets/signin_background1.jpg') no-repeat fixed;
+  /*background: url('../assets/signin_background1.jpg') no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size: cover;*/
 }
 
 #signinbox, #signupbox {
   background-color: rgba(255,255,255, 0.7);
-  border-radius: 3px;
+  border-radius: 10px;
 }
 
 #signinslogan {
+  text-shadow: 0 0 60px white;
+  -moz-text-shadow: 0 0 60px white;
+  -webkit-text-shadow: 0 0 60px white;
+  color: black;
+  font-family: secondaryfont;
+  font-size: 60px;
 
 }
 

@@ -300,7 +300,16 @@ angular
     };
   }])
 
-  .factory('Auth', ['$http', '$location', '$state', '$window', function($http, $location, $state, $window) {
+  .factory('Auth', ['$http', '$location', '$state', '$window', '$mdDialog', function($http, $location, $state, $window, $mdDialog) {
+    var showSignInDialog = function() {
+      $mdDialog.show({
+        controller: 'userAuthController',
+        templateUrl: '../userAuth/hello.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: true
+      });
+    }
+
     var signin = function(user) {
       return $http({
         method: 'POST',
@@ -346,7 +355,8 @@ angular
       signup: signup,
       isAuth: isAuth,
       isSignedIn: isSignedIn,
-      signout: signout
+      signout: signout,
+      showSignInDialog: showSignInDialog
     };
   }])
 
@@ -376,12 +386,9 @@ angular
         targetEvent: ev,
         clickOutsideToClose: false
       });
-      // .then(function(answer) {
-      //   $scope.status = 'You said the information was "' + answer + '".';
-      // }, function() {
-      //   $scope.status = 'You cancelled the dialog.';
-      // });
     };
+
+
 
     return {
       showTabDialog: showTabDialog
