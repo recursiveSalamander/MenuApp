@@ -12,7 +12,6 @@ var bodyParser = require('body-parser').json();
 module.exports = function(app, express) {
 
   app.use('/', express.static(__dirname + '/../../client'));
-
   app.use('/', express.static(__dirname + '/../../'));
 
   app.post('/api/restaurants', bodyParser, restaurantController.getRestaurants);
@@ -23,7 +22,7 @@ module.exports = function(app, express) {
   app.post('/api/profile', bodyParser, profileController.getProfile);
   app.post('/api/rating', ratingsController.postRatingToTable);
   app.post('/api/getRating', bodyParser, ratingsController.getRating);
-  app.post('/api/ratingsAverage', bodyParser, ratingsController.averageRatings);
+  app.post('/api/ratingsAverage', bodyParser, ratingsController.retrieveAverageRatings);
   app.post('/api/restrictions', bodyParser, recommendationsController.restrictionsRecommendation);
   app.post('/api/updateProfile', bodyParser, profileController.updateProfile);
 };

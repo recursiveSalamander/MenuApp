@@ -23,7 +23,7 @@ angular
         }
       }
     return bool;
-  }
+  };
 
 
   $scope.checkAllergyRestrictions = function(allergyObj) {
@@ -43,7 +43,7 @@ angular
         }
       }
     return bool;
-  }
+  };
 
 
   $scope.onRating = function(rating, entryId, restaurantId) {

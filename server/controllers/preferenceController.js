@@ -11,13 +11,14 @@ module.exports = {
 
   postPreferences: function(req, res) {
     var userID = utils.getUserID(req.body.token);
-    var userDiet = req.body.dietaryRestrictions;
+    var userDiet = req.body.diet;
     var cuisines = req.body.cuisinePreference;
     var nutrients = req.body.nutritionPreference;
     var flavors = _.map(req.body.tastePreference, function(flavor) {
       return flavor;
     });
 
+    console.log(req.body);
     var ingredientRelations = combineIngredients(req.body);
 
     var asyncTasks = [];
@@ -71,7 +72,7 @@ module.exports = {
 var combineIngredients = function(data) {
   var ingredientRelations = [];
 
-  _.forEach(data.userAllergies, function(allergy) {
+  _.forEach(data.allergies, function(allergy) {
     ingredientRelations.push([allergy, 'allergy']);
   });
 
@@ -95,18 +96,15 @@ var insertIngredientPreference = function(ingredient, relation, userID, callback
       ingredient: ingredient,
       relation: relation
     });
-    return newPreference.save();
-  }).then(function(savedPreference) {
-    utils.hasCallBack(savedPreference, callback);
+    return newPreference.save().then(function(savedPreference) {
+      utils.hasCallBack(savedPreference, callback);
+    });
   });
 };
 
 var insertTastePreference = function(tastePreferences, userID, callback) {
-  User_Taste.where({user_id: userID}).fetch()
+  User_Taste.where({user_id: userID}).destroy()
   .then(function(myUsertaste) {
-    if (myUsertaste !== null) {
-      return myUsertaste;
-    }
   var newUserTaste = new User_Taste({
       user_id: userID,
       spicy:  tastePreferences[0],
@@ -116,20 +114,9 @@ var insertTastePreference = function(tastePreferences, userID, callback) {
       salty:  tastePreferences[4],
       bitter: tastePreferences[5]
     });
-      return newUserTaste;
-    }).then(function (usertaste) {
-      usertaste.set({
-        user_id: userID,
-        spicy:  tastePreferences[0],
-        meaty:  tastePreferences[1],
-        sour:   tastePreferences[2],
-        sweet:  tastePreferences[3],
-        salty:  tastePreferences[4],
-        bitter: tastePreferences[5]
+      newUserTaste.save().then(function(savedUsertaste) {
+        utils.hasCallBack(savedUsertaste, callback);
       });
-      return usertaste.save();
-    }).then(function(savedUsertaste) {
-      utils.hasCallBack(savedUsertaste, callback);
     });
 };
 
@@ -141,34 +128,8 @@ var insertCuisinePreference = function(cuisine, preferenceLevel, userID, callbac
       preference_level: preferenceLevel,
       origin: cuisine
     });
-    return newCuisine.save();
-  }).then(function(savedCuisine) {
-    utils.hasCallBack(savedCuisine, callback);
-  });
-};
-
-var insertNutritionRestriction = function(type, min, max, userID, callback) {
-  Nutrition_Restriction.where({user_id: userID}).fetch()
-  .then(function(myRestriction) {
-    if (myRestriction !== null) {
-      return myRestriction;
-    }
-    var newRestriction = new Nutrition_Restriction({
-      user_id: userID,
-      type: type,
-      min: min,
-      max: max
+    return newCuisine.save().then(function(savedCuisine) {
+      utils.hasCallBack(savedCuisine, callback);
     });
-    return newRestriction;
-  }).then(function(restriction) {
-    restriction.set({
-      user_id: userID,
-      type: type,
-      min: min,
-      max:max
-    });
-    return restriction.save();
-  }).then(function(savedRestriction) {
-    utils.hasCallBack(savedRestriction);
   });
 };
