@@ -24,15 +24,12 @@ angular
     return resultsObj;
 
   };
-
-  return validatePasswordAndEmail = {
+  return {
     validatePasswordAndEmail: validatePasswordAndEmail
   };
 })
 
   .factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
-
-  var currentToken = Auth.getToken();
 
   var getRestaurantList = function(coordinates) {
     return $http({
@@ -76,8 +73,6 @@ angular
     };
 
     var postUserPreference = function(preferences) {
-      preferences.token = currentToken;
-
       return $http({
         method: 'POST',
         url: '/api/preference',
@@ -203,48 +198,51 @@ angular
   };
 }])
 
-  .factory('Survey', ['$http', function($http) {
+  .factory('Survey', ['$http', 'Auth', function($http, Auth) {
     var retrieveSurvey = function(callback) {
       $http.get('../assets/dishes.json').success(function(data) {
         callback(data);
       });
     };
 
-    var preferencesForm = {tastePreference: {
-      spicy: 1,
-      meaty: 1,
-      sour: 1,
-      sweet: 1,
-      salty: 1,
-      bitter: 1
-    },
-    cuisinePreference: {
-      american: {score: 0, eval: 1},
-      italian: {score: 0, eval: 1},
-      mexican: {score: 0, eval: 1},
-      southern_soulfood: {score: 0, eval: 1},
-      french: {score: 0, eval: 1},
-      southwestern: {score: 0, eval: 1},
-      indian: {score: 0, eval: 1},
-      chinese: {score: 0, eval: 1},
-      cajun_creole: {score: 0, eval: 1},
-      english: {score: 0, eval: 1},
-      mediterranean: {score: 0, eval: 1},
-      greek: {score: 0, eval: 1},
-      spanish: {score: 0, eval: 1},
-      german: {score: 0, eval: 1},
-      thai: {score: 0, eval: 1},
-      moroccan: {score: 0, eval: 1},
-      irish: {score: 0, eval: 1},
-      japanese: {score: 0, eval: 1},
-      cuban: {score: 0, eval: 1},
-      hawaiian: {score: 0, eval: 1},
-      swedish: {score: 0, eval: 1},
-      hungarian: {score: 0, eval: 1},
-      portugese: {score: 0, eval: 1}
-    },
-    preferredIngredients: [],
-    rejectedIngredients: []
+    var preferencesForm = {
+      tastePreference: {
+        spicy: 1,
+        meaty: 1,
+        sour: 1,
+        sweet: 1,
+        salty: 1,
+        bitter: 1
+      },
+      cuisinePreference: {
+        american: {score: 0, eval: 1},
+        italian: {score: 0, eval: 1},
+        mexican: {score: 0, eval: 1},
+        southern_soulfood: {score: 0, eval: 1},
+        french: {score: 0, eval: 1},
+        southwestern: {score: 0, eval: 1},
+        indian: {score: 0, eval: 1},
+        chinese: {score: 0, eval: 1},
+        cajun_creole: {score: 0, eval: 1},
+        english: {score: 0, eval: 1},
+        mediterranean: {score: 0, eval: 1},
+        greek: {score: 0, eval: 1},
+        spanish: {score: 0, eval: 1},
+        german: {score: 0, eval: 1},
+        thai: {score: 0, eval: 1},
+        moroccan: {score: 0, eval: 1},
+        irish: {score: 0, eval: 1},
+        japanese: {score: 0, eval: 1},
+        cuban: {score: 0, eval: 1},
+        hawaiian: {score: 0, eval: 1},
+        swedish: {score: 0, eval: 1},
+        hungarian: {score: 0, eval: 1},
+        portugese: {score: 0, eval: 1}
+      },
+      preferredIngredients: [],
+      rejectedIngredients: [],
+      allergies: [],
+      diet: 'none'
   };
 
   return {
@@ -310,7 +308,7 @@ angular
         data: user
       })
       .then(function(res) {
-        token = res.data.token;
+        var token = res.data.token;
         return res.data.token;
       });
     };

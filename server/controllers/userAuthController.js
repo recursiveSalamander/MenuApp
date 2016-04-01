@@ -1,5 +1,5 @@
 var request = require('request');
-var _=require('lodash');
+var _ =require('lodash');
 var jwt = require('jwt-simple');
 var User = require('../db/models/User.js');
 

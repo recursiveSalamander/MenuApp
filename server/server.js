@@ -30,10 +30,5 @@ var server = app.listen(port, function() {
   console.log('http://localhost:' + port);
 });
 
-// var test = function() {
-//   profileController.updateProfile();
-// };
-//
-// test();
 
 module.exports = app;

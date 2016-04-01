@@ -11,19 +11,19 @@ var User = bookshelf.Model.extend({
   tableName: 'users',
 
   ratings: function() {
-    return this.hasMany(Item_Rating);
+    return this.hasMany('Item_Rating');
   },
 
   preferences: function() {
-    return this.hasMany(User_Preference);
+    return this.hasMany('User_Preference');
   },
 
   tastes: function() {
-    return this.hasMany(User_Taste);
+    return this.hasMany('User_Taste');
   },
 
   cuisinePreferences: function() {
-    return this.hasMany(Cuisine_Preference);
+    return this.hasMany('Cuisine_Preference');
   },
 
   initialize: function() {
