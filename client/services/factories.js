@@ -72,7 +72,7 @@ angular
       });
     };
 
-    var postUserPreference = function(preferences) {}
+    var postUserPreference = function(preferences) {
       return $http({
         method: 'POST',
         url: '/api/preference',

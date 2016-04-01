@@ -27,7 +27,7 @@ angular
     $scope.sendPreferenceData = function () {
       Survey.preferencesForm.token = Auth.getToken();
 
-      menuAppFactory.postUserPreference(Survey.preferencesForm);
+      menuAppFactory.postUserPreference(Survey.preferencesForm)
       .then(function(data) {});
     };
   }]);
