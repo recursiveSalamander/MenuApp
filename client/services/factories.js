@@ -90,11 +90,25 @@ angular
       });
     };
 
+    var getUserPreference = function(userID) {
+      return $http({
+        method: 'POST',
+        url: '/api/getPreferences',
+        data: userID
+      })
+      .then(function(resp) {
+        return resp.data;
+      }, function (error) {
+        console.log(error);
+      }
+    }
+
 
     return {
       getRestaurantList: getRestaurantList,
       getMenu: getMenu,
-      postUserPreference: postUserPreference
+      postUserPreference: postUserPreference,
+      getUserPreference: getUserPreference
     };
   }])
 
