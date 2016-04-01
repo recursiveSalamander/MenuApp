@@ -5,11 +5,11 @@ if(!process.env.DOMAIN) {
 var knex = require('knex')({
   client: 'mysql',
   connection: {
-    host: config.database.domain,
-    user: config.database.username,
-    password: config.database.password,
-    database: config.database.database,
-    charset: config.database.charset
+    host: process.env.DOMAIN || config.database.domain,
+    user: process.env.USER || config.database.username,
+    password: process.env.PASSWORD || config.database.password,
+    database: process.env.DATABASE || config.database.database,
+    charset: process.env.CHARSET || config.database.charset
   }
 });
 
