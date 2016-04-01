@@ -76,7 +76,6 @@ angular
     };
 
     var postUserPreference = function(preferences) {
-      preferences.token = currentToken;
 
       return $http({
         method: 'POST',
@@ -94,7 +93,8 @@ angular
     return {
       getRestaurantList: getRestaurantList,
       getMenu: getMenu,
-      postUserPreference: postUserPreference
+      postUserPreference: postUserPreference,
+      currentToken: currentToken
     };
   }])
 

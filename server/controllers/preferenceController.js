@@ -11,6 +11,7 @@ module.exports = {
 
   postPreferences: function(req, res) {
     var userID = utils.getUserID(req.body.token);
+    console.log(userID);
     var userDiet = req.body.diet;
     var cuisines = req.body.cuisinePreference;
     var nutrients = req.body.nutritionPreference;
@@ -96,7 +97,7 @@ var insertIngredientPreference = function(ingredient, relation, userID, callback
       ingredient: ingredient,
       relation: relation
     });
-    return newPreference.save().then(function(savedPreference) {
+    newPreference.save().then(function(savedPreference) {
       utils.hasCallBack(savedPreference, callback);
     });
   });
@@ -114,7 +115,7 @@ var insertTastePreference = function(tastePreferences, userID, callback) {
       salty:  tastePreferences[4],
       bitter: tastePreferences[5]
     });
-      newUserTaste.save().then(function(savedUsertaste) {
+    newUserTaste.save().then(function(savedUsertaste) {
         utils.hasCallBack(savedUsertaste, callback);
       });
     });
@@ -128,7 +129,7 @@ var insertCuisinePreference = function(cuisine, preferenceLevel, userID, callbac
       preference_level: preferenceLevel,
       origin: cuisine
     });
-    return newCuisine.save().then(function(savedCuisine) {
+    newCuisine.save().then(function(savedCuisine) {
       utils.hasCallBack(savedCuisine, callback);
     });
   });
