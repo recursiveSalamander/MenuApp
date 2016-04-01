@@ -1,5 +1,6 @@
 var Async = require('async');
 var _ = require('lodash');
+var jwt = require('jwt-simple');
 var utils = require('../utils.js');
 var User = require('../db/models/User.js');
 var User_Preference = require('../db/models/User_Preference.js');
@@ -11,7 +12,6 @@ module.exports = {
 
   postPreferences: function(req, res) {
     var userID = utils.getUserID(req.body.token);
-    console.log(userID);
     var userDiet = req.body.diet;
     var cuisines = req.body.cuisinePreference;
     var nutrients = req.body.nutritionPreference;
@@ -19,7 +19,6 @@ module.exports = {
       return flavor;
     });
 
-    console.log(req.body);
     var ingredientRelations = combineIngredients(req.body);
 
     var asyncTasks = [];
@@ -65,6 +64,7 @@ module.exports = {
       if (err) {
         console.log(err);
       }
+      res.send('Successfully saved preferences');
     });
 
    }
