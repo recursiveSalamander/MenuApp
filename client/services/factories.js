@@ -244,7 +244,9 @@ angular
       portugese: {score: 0, eval: 1}
     },
     preferredIngredients: [],
-    rejectedIngredients: []
+    rejectedIngredients: [],
+    allergies: [],
+    diet: 'none'
   };
 
   return {

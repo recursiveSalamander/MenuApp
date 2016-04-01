@@ -13,12 +13,12 @@ angular
 
     $scope.dietaryRestrictions = '';
 
-    $scope.userAllergies = [];
+    //$scope.userAllergies = [];
 
-    $scope.toggleAllergyCheckbox = function (item) {
-      var idx = $scope.userAllergies.indexOf(item);
-      if (idx > -1) $scope.userAllergies.splice(idx, 1);
-      else $scope.userAllergies.push(item);
+    $scope.toggleAllergyCheckbox = function(item) {
+      var idx = $scope.preferencesForm.allergies.indexOf(item);
+      if (idx > -1) $scope.preferencesForm.allergies.splice(idx, 1);
+      else $scope.preferencesForm.allergies.push(item);
     };
 
     $scope.allergyList = [
