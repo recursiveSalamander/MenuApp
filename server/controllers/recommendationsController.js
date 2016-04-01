@@ -101,8 +101,6 @@ module.exports = {
       callback();
     }
 
-
-
     var yummlyAPIcalls = function(callback2){
       //TEMPORARY
       var diet = '387^Lacto-ovo vegetarian';
@@ -112,124 +110,109 @@ module.exports = {
       var freakingdone = false;
       // var dietRestriction;
 
-//INSTEAD OF 1, REAL ONE IS menuData.length
-//INSTEAD OF 1, REAL ONE IS menuData[x].en++++++++++++++tries.items.length
 
 
-          for(var x=0; x< 1; x++){
+          for(var x=0; x< menuData.length; x++){
             (function(x){
-
-
-
-              for(var y=0; y < 3; y++){
+              for(var y=0; y < menuData[x].entries.items.length; y++){
                 (function(y){
+                  console.log('start of inside for loop------------------------------------------------------')
+                  var key_words = menuData[x].entries.items[y].name.split(' ');
+                  console.log('KREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE_words', key_words);
+                  var searchquery = key_words.join('+');
+                  var query = `http://api.yummly.com/v1/api/recipes?_app_id=0a1658f1&_app_key=26fcc7b19149942523604cf763d9321d&q=` + searchquery +
+                  `&facetField[]=diet`;
 
-                    console.log('start of inside for loop------------------------------------------------------')
-                    var key_words = menuData[x].entries.items[y].name.split(' ');
-                    console.log('KREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE_words', key_words);
-                    var searchquery = key_words.join('+');
-                    var query = `http://api.yummly.com/v1/api/recipes?_app_id=0a1658f1&_app_key=26fcc7b19149942523604cf763d9321d&q=` + searchquery +
-                    `&facetField[]=diet`;
+                  //variables diet, disliked, liked, and allergies are ready for processing
 
-                    //variables diet, disliked, liked, and allergies are ready for processing
+                  request(query, function(err, resp, body) {
+                    console.log('REQUEST START FOR KEYOWRD', searchquery)
+                    var allergyRestriction = {mostlikely: [], may: []};
+                    var dietRestriction = {};
+                    if (!err && resp.statusCode === 200) {
+                      var data = JSON.parse(body);
+                      var totalRecipeNumber = data.totalMatchCount;
 
-                    request(query, function(err, resp, body) {
-                      console.log('REQUEST START FOR KEYOWRD', searchquery)
-                      var allergyRestriction = {mostlikely: [], may: []};
-                      var dietRestriction = {};
-                      if (!err && resp.statusCode === 200) {
-                        var data = JSON.parse(body);
-                        var totalRecipeNumber = data.totalMatchCount;
+                      if(totalRecipeNumber >= 5){
+                        for(var key in data.facetCounts.diet){
+                          var trimmedKey = key.slice(4);
+                          var percentage = data.facetCounts.diet[key] / totalRecipeNumber;
+                          console.log('KEYY for diet', key);
+                          console.log('diet for diet', diet);
+                          if(key === diet){
+                            console.log('INSIDEEEEEEEEEEEEEE diet cOMPARISON and this is trimmedkey', trimmedKey);
+                            if(percentage >= 0.66){
+                              console.log('percentage is > .66, object doesnt have anything in it');
+                            }
+                            if(percentage < 0.66 && percentage >= 0.33){
+                              console.log('percentage is < .66 and > .33');
+                              dietRestriction.diet = trimmedKey;
+                              dietRestriction.message = 'possibly';
+                            }
+                            if(percentage < 0.33){
+                              console.log('percentage is < .33');
+                              dietRestriction.diet = trimmedKey;
+                              dietRestriction.message = 'most likely';
+                            }
+                            console.log('here is your dietrestriction object', dietRestriction);
+                          }
+                        }
 
-                        if(totalRecipeNumber >= 5){
-                          for(var key in data.facetCounts.diet){
-                            var trimmedKey = key.slice(4);
-                            var percentage = data.facetCounts.diet[key] / totalRecipeNumber;
-                            console.log('KEYY for diet', key);
-                            console.log('diet for diet', diet);
-                            if(key === diet){
-                              console.log('INSIDEEEEEEEEEEEEEE diet cOMPARISON and this is trimmedkey', trimmedKey);
+                        for(var key in data.facetCounts.diet){
+                          var trimmedKey = key.slice(4, -5);
+                          var percentage = data.facetCounts.diet[key] / totalRecipeNumber;
+                          console.log('KEYY for allergies', key);
+                          console.log('diet for allergies', diet);
+                          for(var i=0; i<allergies.length; i++){
+                            if(allergies[i] === key){
+                              console.log('INSIDEEEEEEEEEEEEEE allergies cOMPARISON');
                               if(percentage >= 0.66){
-                                console.log('percentage is > .66, object doesnt have anything in it');
+                                console.log('percentage is > .66, object not created');
                               }
                               if(percentage < 0.66 && percentage >= 0.33){
                                 console.log('percentage is < .66 and > .33');
-                                dietRestriction.diet = trimmedKey;
-                                dietRestriction.message = 'possibly';
+                                allergyRestriction.may.push(trimmedKey);
                               }
                               if(percentage < 0.33){
                                 console.log('percentage is < .33');
-                                dietRestriction.diet = trimmedKey;
-                                dietRestriction.message = 'most likely';
+                                allergyRestriction.mostlikely.push(trimmedKey);
                               }
-                              console.log('here is your dietrestriction object', dietRestriction);
+                              console.log('here is your allergyrestriction object', allergyRestriction);
                             }
                           }
-
-                          for(var key in data.facetCounts.diet){
-                            var trimmedKey = key.slice(4, -5);
-                            var percentage = data.facetCounts.diet[key] / totalRecipeNumber;
-                            console.log('KEYY for allergies', key);
-                            console.log('diet for allergies', diet);
-                            for(var i=0; i<allergies.length; i++){
-                              if(allergies[i] === key){
-                                console.log('INSIDEEEEEEEEEEEEEE allergies cOMPARISON');
-                                if(percentage >= 0.66){
-                                  console.log('percentage is > .66, object not created');
-                                }
-                                if(percentage < 0.66 && percentage >= 0.33){
-                                  console.log('percentage is < .66 and > .33');
-                                  allergyRestriction.may.push(trimmedKey);
-                                }
-                                if(percentage < 0.33){
-                                  console.log('percentage is < .33');
-                                  allergyRestriction.mostlikely.push(trimmedKey);
-                                }
-                                console.log('here is your allergyrestriction object', allergyRestriction);
-                              }
-                            }
-                          }
-
                         }
-                        else {
-                          console.log('AHHHHHHHHHHHHHHHHHHHHHHHHHHHH TOTAL RECIPE NUMBER IS LESS THAN 5')
-                        }
+
                       }
-                      menuData[x].entries.items[y].allergyRestriction = allergyRestriction;
-                      menuData[x].entries.items[y].dietRestriction = dietRestriction;
-                      console.log('++line 166 in recommendationsController menudata: ',menuData[x].entries.items[y]);
-                      console.log('allergyRestriction', allergyRestriction);
-                      console.log('dietRestriction', dietRestriction);
-
-                    });
-
+                      else {
+                        console.log('AHHHHHHHHHHHHHHHHHHHHHHHHHHHH TOTAL RECIPE NUMBER IS LESS THAN 5')
+                      }
+                    }
+                    menuData[x].entries.items[y].allergyRestriction = allergyRestriction;
+                    menuData[x].entries.items[y].dietRestriction = dietRestriction;
+                    console.log('++line 166 in recommendationsController menudata: ',menuData[x].entries.items[y]);
+                    console.log('allergyRestriction', allergyRestriction);
+                    console.log('dietRestriction', dietRestriction);
+                  });
 
                 })(y);
-
-
               }
 
             })(x);
           }
-          if(freakingdone){
-            callback2();
-          }
-
+          setTimeout(callback2, 5000);
     }
 
-    var sendRestrictionData = function(data, callback){
+    var sendRestrictionData = function(){
       console.log('ITS THE FINAL COUNTDOWN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1');
-      callback(data);
+      response_Ultimate.send(req.body.menuData);
     }
 
-    var send = function(data){
-      response_Ultimate.send(data);
-    }
     getUserRestrictionInfo(function(){
       yummlyAPIcalls(function(){
-        sendRestrictionData(req.body.menuData, send)
+
+          sendRestrictionData();
+        });
       });
-    });
 
 }
 }
