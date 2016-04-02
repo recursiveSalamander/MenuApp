@@ -3,7 +3,7 @@ angular
   .controller('userAuthController', ['$window', '$scope', 'Auth', 'ValidationFactory', '$location', '$state', 'Preferences', '$mdDialog', function($window, $scope, Auth, ValidationFactory, $location, $state, Preferences, $mdDialog) {
     $scope.signinModal = function() {
       Auth.showSignInDialog();
-    }
+    };
 
 
     $scope.signUp = function() {
@@ -48,7 +48,6 @@ angular
     };
 
     $scope.validate = function() {
-      console.log('WHATS UP')
       Auth.signin($scope.user)
       .then(function(token) {
         if(token === undefined) {

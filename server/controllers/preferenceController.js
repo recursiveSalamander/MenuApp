@@ -94,9 +94,9 @@ var getPreferences = function(userID, callback) {
     var mapped = [];
     _.each(preferences.models, function(data) {
       mapped.push(data.attributes);
-      })
+    });
       utils.hasCallBack(mapped, callback);
-    })
+    });
 };
 
 var getUserPreferences = function(userID, callback) {
@@ -105,9 +105,9 @@ var getUserPreferences = function(userID, callback) {
     var mapped = [];
     _.each(prefs.models, function(data) {
       mapped.push(data.attributes);
-    })
+    });
     utils.hasCallBack(mapped, callback);
-  })
+  });
 };
 
 var getUserTastes = function(userID, callback) {
@@ -116,10 +116,10 @@ var getUserTastes = function(userID, callback) {
   var mapped = [];
   _.each(tastes.models, function(data) {
     mapped.push(data.attributes);
-  })
+  });
     utils.hasCallBack(mapped, callback);
-  })
-}
+  });
+};
 
 
 var combineIngredients = function(data) {

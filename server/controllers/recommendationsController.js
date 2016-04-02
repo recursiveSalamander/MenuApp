@@ -1,7 +1,5 @@
 var request = require('request');
 var _ = require('lodash');
-var Async = require('async');
-var Bluebird = require('bluebird');
 var User = require('../db/models/User.js');
 var Utils = require('../utils.js');
 var User_Preference = require('../db/models/User_Preference.js');
@@ -45,7 +43,7 @@ var injectDietRestrictions = function(menu, diet, allergies, callback) {
       });
     });
   });
-}
+};
 
 var generateQuery = function(item, callback) {
   var searchTerms = item.name.split(' ');
@@ -55,7 +53,7 @@ var generateQuery = function(item, callback) {
   `&_app_key=${config.yummly.appKey}&q=${searchquery}&facetField[]=diet`;
 
   callback(query);
-}
+};
 
 
 var queryRecipes = function(query, diet, allergies, callback) {
@@ -93,7 +91,7 @@ var queryRecipes = function(query, diet, allergies, callback) {
                 allergyRestriction.mostlikely.push(trimmedAllergyKey);
               }
             }
-          })
+          });
         });
       }
       callback(dietRestriction, allergyRestriction);
@@ -103,14 +101,14 @@ var queryRecipes = function(query, diet, allergies, callback) {
 
 var getUserRestrictionInfo = function(userID, callback) {
   User.where({id: userID}).fetchAll({withRelated: ['preferences']})
-  .then(function(data){
-    var data = data.toJSON()[0];
+  .then(function(preferenceData){
+    var data = preferenceData.toJSON()[0];
     var diet = dietCodes[data.diet];
     var allergies = [];
 
     _.forEach(data.preferences, function(preference) {
       if (preference.relation === 'allergy') {
-        allergies.push(allergyCodes[preference.ingredient])
+        allergies.push(allergyCodes[preference.ingredient]);
       }
     });
     callback(diet, allergies);

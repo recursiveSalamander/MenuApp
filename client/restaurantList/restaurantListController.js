@@ -21,7 +21,7 @@ angular
       }
       var infoWindowInformation = '';
       if(restaurant.photos) infoWindowInformation += '<br>' + restaurant.photos;
-      if(restaurant.categories[0].icon) infoWindowInformation += "<br><img src='" + restaurant.categories[0].icon.prefix + "bg_32" + restaurant.categories[0].icon.suffix + "' height='16' width='16'>"
+      if(restaurant.categories[0].icon) infoWindowInformation += "<br><img src='" + restaurant.categories[0].icon.prefix + "bg_32" + restaurant.categories[0].icon.suffix + "' height='16' width='16'>";
       if(restaurant.categories[0].shortName) infoWindowInformation += ' ' + restaurant.categories[0].shortName;
       if(restaurant.location.distance) infoWindowInformation += '<br>Distance: ' + (restaurant.location.distance*0.000621371).toFixed(2) + 'miles';
       if(restaurant.delivery) infoWindowInformation += '<br>Delivery: ' + restaurant.delivery.url;
@@ -32,13 +32,13 @@ angular
        content: '<strong>' + restaurant.name + '</strong>' + infoWindowInformation
      });
       infoWindow.open($scope.map, markers[index]);
-    }
+    };
 
     $scope.unhighlightMarkers = function(index) {
       markers[index].setAnimation(null);
       infoWindow.close();
 
-    }
+    };
 
 
     var makeMap = function(current_coords) {
@@ -78,7 +78,7 @@ angular
     console.log('++line 78 in restListCtrl', data);
 
     if(data.photos) infoWindowInformation += '<br>' + data.photos;
-    if(data.categoryicon) infoWindowInformation += "<br><img src='" + data.categoryicon + "' height='16' width='16'>"
+    if(data.categoryicon) infoWindowInformation += "<br><img src='" + data.categoryicon + "' height='16' width='16'>";
     if(data.category) infoWindowInformation += ' ' + data.category;
     if(data.distance) infoWindowInformation += '<br>Distance: ' + (data.distance*0.000621371).toFixed(2) + 'miles';
     if(data.delivery_url) infoWindowInformation += '<br>Delivery: ' + data.delivery_url;
@@ -104,10 +104,9 @@ angular
         markers[i].setAnimation(null);
       }
     }
-    console.log('HEYYYYYYYYYYYYYYYYYYY')
     this.setAnimation(google.maps.Animation.BOUNCE);
 
-  }
+  };
 $scope.contentLoading = false;
 
 
