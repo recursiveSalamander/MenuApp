@@ -17,8 +17,10 @@ var Item_Ratings = require('./db/collections/Item_Ratings.js');
 module.exports = {
   hasCallBack: function(data, callback){
     if(callback){
+      console.log('running callback');
       callback(data);
     } else {
+      console.log('returning data');
       return data;
     }
   },

@@ -90,18 +90,20 @@ angular
       });
     };
 
-    var getUserPreference = function(userID) {
+    var getUserPreference = function() {
+      var token = Auth.getToken();
       return $http({
         method: 'POST',
         url: '/api/getPreferences',
-        data: userID
+        data: {token: token}
       })
       .then(function(resp) {
+        console.log(resp.data);
         return resp.data;
       }, function (error) {
         console.log(error);
-      }
-    }
+      })
+    };
 
 
     return {

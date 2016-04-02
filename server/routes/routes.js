@@ -25,5 +25,5 @@ module.exports = function(app, express) {
   app.post('/api/ratingsAverage', bodyParser, ratingsController.retrieveAverageRatings);
   app.post('/api/restrictions', bodyParser, recommendationsController.restrictionsRecommendation);
   app.post('/api/updateProfile', bodyParser, profileController.updateProfile);
-  app.post('/api/getPreferences', bodyParser, preferenceController.getPreferences);
+  app.post('/api/getPreferences', bodyParser, preferenceController.getAllPreferences);
 };

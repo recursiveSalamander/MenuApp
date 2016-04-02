@@ -15,6 +15,7 @@ var ratingsController = require('./controllers/ratingsController.js');
 var recommendationsController = require('./controllers/recommendationsController.js');
 var Item_Rating = './db/models/Item_Rating.js';
 var profileController = require('./controllers/profileController.js');
+var preferenceController = require('./controllers/preferenceController.js');
 
 var app = express();
 
@@ -25,6 +26,9 @@ app.use(bodyParser.json());
 require('./routes/routes.js')(app, express);
 
 var port = process.env.PORT || 8000;
+
+
+// test();
 
 var server = app.listen(port, function() {
   console.log('http://localhost:' + port);
