@@ -25,7 +25,7 @@ angular
 
   };
 
-  return validatePasswordAndEmail = {
+  return {
     validatePasswordAndEmail: validatePasswordAndEmail
   };
 })
@@ -102,7 +102,7 @@ angular
         return resp.data;
       }, function (error) {
         console.log(error);
-      })
+      });
     };
 
 
@@ -327,7 +327,7 @@ angular
         parent: angular.element(document.body),
         clickOutsideToClose: true
       });
-    }
+    };
 
     var signin = function(user) {
       return $http({
