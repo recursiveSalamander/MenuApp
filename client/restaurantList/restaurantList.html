@@ -6,14 +6,14 @@
 <div class="list" flex="70">
   <h2>&nbsp; Restaurant Listings</h2>
   <div style="overflow: height:30%;">
-    <md-list layout="column" ng-class="{listhighlight: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" class="restaurantquery" ng-repeat="displayRestaurants in data">
+    <md-list layout="column" class="restaurantquery" ng-repeat="restaurant in data" ng-class="{listhighlight: hover}" ng-mouseenter="hover = true; highlightMarkers(restaurant.index - 1, restaurant)" ng-mouseleave="hover = false; unhighlightMarkers(restaurant.index - 1, restaurant)" >
     <div layout="row">
       <div id="restaurantlistindex">
-        <h2>{{displayRestaurants.index}}</h2>
+        <h2>{{restaurant.index}}</h2>
       </div>
       <div>
-        <span ng-click="restaurantMenu(displayRestaurants.id, displayRestaurants.name)">&nbsp; &nbsp;<strong>{{displayRestaurants.name}}</strong> <br> &nbsp; &nbsp; {{displayRestaurants.formatted}}<br> &nbsp; &nbsp;
-          {{displayRestaurants.contact.formattedPhone}}</span>
+        <span ng-click="restaurantMenu(restaurant.id, restaurant.name)">&nbsp; &nbsp;<strong>{{restaurant.name}}</strong> <br> &nbsp; &nbsp; {{restaurant.formatted}}<br> &nbsp; &nbsp;
+          {{restaurant.contact.formattedPhone}}</span>
         </div>
       </div>
       <md-divider></md-divider>

@@ -10,11 +10,11 @@
   </div>
 
 
-    <div flex="60">
-        <form id="signupbox" class="md-whiteframe-z2 md-padding" ng-submit="signUp()">
+    <div flex="40">
+        <form id="signupbox" class="md-whiteframe-z2 md-padding" ng-submit="signUp()" layout="column">
           <h2>Please Sign Up</h2>
-          <div id="signupformfields">
-            <div>
+          <div flex="80" id="signupformfields" layout="row">
+            <div flex="50">
               <md-input-container>
                 <label>First Name</label>
                 <input type='text' ng-model="user.first_name" maxlength = "20" required autofocus>
@@ -32,7 +32,7 @@
               <br>
 
             </div>
-            <div>
+            <div flex="50">
               <md-input-container>
                 <label>Username</label>
                 <input type="text" ng-model="user.username" maxlength = "20" required>
@@ -55,7 +55,7 @@
     </div>
 
 
-  <div flex="17">
+  <div flex="37">
   </div>
 
 </div>
