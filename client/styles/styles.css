@@ -1,10 +1,11 @@
 #main {
-
   /*background: url('../assets/Elegant_Background-7.jpg') no-repeat fixed;*/
+  /*background-color: #cceae7;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size: 100%;
+
 }
 
 @font-face {
@@ -38,6 +39,7 @@ md-input-container label,
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  font-family: font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 
 }
 
@@ -47,6 +49,7 @@ md-input-container label,
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;*/
+  /*font-family: font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;*/
 }
 
 #signinbox, #signupbox {
@@ -63,7 +66,6 @@ md-input-container label,
   font-size: 60px;
   text-align: center;
   margin-top: 70px;
-
 }
 
 #signinheader, #signupheader {
@@ -121,7 +123,15 @@ md-input-container label,
 
 }
 
+.restaurantquery {
+  font-size: 15px;
+  list-style: none;
+  padding: 0px;
+}
 
+#restaurantlistfont {
+  font-size:16px;
+}
 
 /*----------------------------------map styling--------------------------------------*/
 #map {
@@ -254,10 +264,11 @@ ul[dnd-list] li.selected {
 
 #navbar {
   /*position: fixed;*/
-  background-color: #A1DBB2;
+  background-color: #5262bc;
   /*#4caf50/#A1DBB2*/
   /*background: url('../assets/happyDays.png') no-repeat fixed;*/
-
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 24px;
 }
 
 #navbar ul{
@@ -324,7 +335,7 @@ ul[dnd-list] li.selected {
   width: 50px;
   /*color: #4f5b66;*/
   opacity: 0;
-  font-size: 10pt;
+  /*font-size: 25px;*/
 
   -webkit-transition: all .55s ease;
   -moz-transition: all .55s ease;
@@ -347,7 +358,6 @@ ul[dnd-list] li.selected {
   text-align: right;
   padding-right: 20px;
 }
-
 
 /*?????*/
 .googleLocation {
@@ -423,11 +433,20 @@ body {
 }*/
 /*----------------------------PreferenceForm styling-------------------------------------------------*/
 md-checkbox.md-checked .md-icon {
- background-color: #4caf50;
+  background-color: #4caf50;
+}
+
+.preferenceform {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+
 }
 
 
 /*----------------------------MenuView----------------------------------------------------------------*/
+.menuview {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
 .menuentry li {
   font-size: 20px;
   list-style: none;
@@ -460,8 +479,13 @@ md-tooltip .restrictionwarning {
 
 .profileview {
   text-align: center;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+
 }
 
+.profileview ul {
+  list-style-type: none;
+}
 
 md-input-container.md-default-theme label,
  md-input-container.md-default-theme .md-placeholder{

@@ -75,7 +75,7 @@ angular
 
    var makeInfoWindow = function(marker, data) {
     var infoWindowInformation = '';
-    console.log('INFOWINDOW SHIT', data);
+    console.log('++line 78 in restListCtrl', data);
 
     if(data.photos) infoWindowInformation += '<br>' + data.photos;
     if(data.categoryicon) infoWindowInformation += "<br><img src='" + data.categoryicon + "' height='16' width='16'>"

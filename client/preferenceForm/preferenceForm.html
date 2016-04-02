@@ -1,6 +1,4 @@
 <div class="preferenceform">
-
-
 <div layout="row">
   <div flex="10">
   </div>
@@ -52,7 +50,7 @@
        </div>
      </md-card>
 
-<md-card id="ingredientpreferencecard" flex="25" class="md-padding">
+  <md-card id="ingredientpreferencecard" flex="25" class="md-padding">
      <h2 class="md-padding md-margin">Ingredient Preferences</h2>
      <div class="md-padding">
      <md-input-container>
@@ -65,74 +63,62 @@
      </md-input-container>
      </div>
 
-
   </md-card>
 
-<div flex="10">
+  <div flex="10">
+  </div>
 </div>
 
+<div layout="row">
+
+<div flex="10">
   </div>
 
-
-
-
+<md-card flex="40" class="md-padding">
   <h2>Diet Restrictions</h2>
 
-  <div layout="row" layout-wrap>
-    <div flex="100" flex-gt-sm="50" layout="column">
+  <!-- <div layout="row" layout-wrap> -->
+    <div flex>
       <div>
         <fieldset class="standard">
           <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend>
-
-
           <md-radio-group ng-init="preferencesForm.diet" ng-model="preferencesForm.diet">
             <div layout="row" layout-wrap flex>
-              <div flex="50">
-                <md-radio-button flex="50" value="lacto vegetarian" class="md-primary">Lacto Vegetarian</md-radio-button>
-              </div>
-              <div flex="50">
-                <md-radio-button flex="50" value="ovo vegetarian" class="md-primary">Ovo Vegetarian</md-radio-button>
-              </div>
-              <div flex="50">
-                <md-radio-button flex="50" value="pescetarian" class="md-primary">Pescetarian</md-radio-button>
-              </div>
-              <div flex="50">
-                <md-radio-button flex="50" value="vegan" class="md-primary">Vegan</md-radio-button>
-              </div>
-              <div flex="50">
-                <md-radio-button flex="50" value="vegetarian" class="md-primary">Vegetarian</md-radio-button>
-              </div>
-              <div flex="50">
-                <md-radio-button flex="50" value="paleo" class="md-primary">Paleo</md-radio-button>
-              </div>
+              <div flex="50"><md-radio-button flex="50" value="lacto vegetarian" class="md-primary">Lacto Vegetarian</md-radio-button></div>
+              <div flex="50"><md-radio-button flex="50" value="ovo vegetarian" class="md-primary">Ovo Vegetarian</md-radio-button></div>
+              <div flex="50"><md-radio-button flex="50" value="pescetarian" class="md-primary">Pescetarian</md-radio-button></div>
+              <div flex="50"><md-radio-button flex="50" value="vegan" class="md-primary">Vegan</md-radio-button></div>
+              <div flex="50"><md-radio-button flex="50" value="vegetarian" class="md-primary">Vegetarian</md-radio-button></div>
+              <div flex="50"><md-radio-button flex="50" value="paleo" class="md-primary">Paleo</md-radio-button></div>
             </div>
-        </md-radio-group>
+          </md-radio-group>
       </fieldset>
     </div>
   </div>
-</div>
+  <!-- </div> -->
+</md-card>
 
-
+<md-card flex="40" class="md-padding">
   <h2>Allergies</h2>
-  <div layout="row" layout-wrap>
-      <div flex="100" flex-gt-sm="50" layout="column">
+  <!-- <div layout="row"> -->
+      <div flex>
         <div>
           <fieldset class="standard">
-            <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend>
+            <!-- <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend> -->
             <div layout="row" layout-wrap flex>
               <div flex="33" ng-repeat="allergy in allergyList">
-                <md-checkbox ng-click="toggleAllergyCheckbox(allergy)">
-                  {{allergy}}
-                </md-checkbox>
+                <md-checkbox ng-click="toggleAllergyCheckbox(allergy)">{{allergy}}</md-checkbox>
               </div>
+            </div>
           </fieldset>
-        </div>
       </div>
     </div>
+  <!-- </div> -->
+</md-card>
+
+  <div flex="10">
   </div>
-
-
-
+</div>
   <!-- <h2>Nutrition Restrictions</h2>
   <div layout="row" layout-wrap>
       <md-input-container>
@@ -334,7 +320,7 @@
        </div>
 </div>
        <div style="text-align: center">
-         <md-button class="md-raised" ng-click="sendPreferenceData()">Submit</md-button>
+         <md-button ng-click="sendPreferenceData()" class="md-primary md-fab md-fab-top-right" style="position: fixed; margin-top: 100px" >Save</md-button>
        </div>
 
 </div>
