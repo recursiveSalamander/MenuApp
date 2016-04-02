@@ -68,7 +68,6 @@ var queryRecipes = function(query, diet, allergies, callback) {
       if (totalRecipeNumber >= 5) {
         _.forEach(data.facetCounts.diet, function(value, key) {
           var trimmedDietKey = diet.slice(4);
-          var trimmedAllergyKey = diet.slice(4, -5);
           var percentage = data.facetCounts.diet[key] / totalRecipeNumber;
 
           if (key === diet) {
@@ -83,6 +82,7 @@ var queryRecipes = function(query, diet, allergies, callback) {
           }
 
           _.forEach(allergies, function(allergy) {
+            var trimmedAllergyKey = allergy.slice(4, -5);
             if (key === allergy) {
               if(percentage < 0.66 && percentage >= 0.33) {
                 allergyRestriction.may.push(trimmedAllergyKey);
