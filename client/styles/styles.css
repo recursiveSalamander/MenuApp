@@ -287,9 +287,10 @@ ul[dnd-list] li.selected {
   vertical-align: middle;
 }
 
-#navbar ul li a {
+#navbar ul a {
   color: white;
   text-decoration: none;
+  text-align: center;
 }
 
 #navbar .searchbox {

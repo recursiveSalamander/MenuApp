@@ -7,6 +7,11 @@ angular
     var infoWindows = [];
     var markers = [];
 
+    var autocomplete = new google.maps.places.Autocomplete(
+      (document.getElementById("autocomplete")),
+      {types: ["geocode"]});
+
+
     $scope.checkToken = function() {
       return Auth.isAuth();
     };
@@ -105,11 +110,7 @@ angular
       }
     }
     this.setAnimation(google.maps.Animation.BOUNCE);
-
-  };
-$scope.contentLoading = false;
-
-
+  }
 
   $scope.displayRestaurants = function() {
     clearMarkers();
@@ -191,9 +192,7 @@ $scope.contentLoading = false;
      });
   };
 
-  var autocomplete = new google.maps.places.Autocomplete(
-    (document.getElementById("autocomplete")),
-    {types: ["geocode"]});
+
 
 
   autocomplete.addListener('place_changed', function() {
@@ -214,7 +213,7 @@ $scope.contentLoading = false;
 
   function initMap() {
 // Create a map object and specify the DOM element for display.
-
+$scope.contentLoading = true;
 if (navigator.geolocation) {
   var thislat;
   var thislng;
@@ -226,10 +225,12 @@ if (navigator.geolocation) {
     var current_coords = {lat: thislat, lng: thislng};
 
     makeMap(current_coords);
+
   });
 }
+$scope.contentLoading = false;
 }
 
 initMap();
-$scope.contentLoading = true;
+
 }]);
