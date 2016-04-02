@@ -11,7 +11,7 @@ var Nutrition_Restriction = require('../db/models/Nutrition_Restriction.js');
 module.exports = {
 
   postPreferences: function(req, res) {
-    var userID = utils.getUserID(req.body.token);
+    var userID = utils.getUserID(request.body.userID);
     var userDiet = req.body.diet;
     var cuisines = req.body.cuisinePreference;
     var nutrients = req.body.nutritionPreference;
@@ -67,8 +67,59 @@ module.exports = {
       res.send('Successfully saved preferences');
     });
 
-   }
+  },
+
+  getAllPreferences: function(request, response) {
+    var token = request.body.token;
+    var userID = utils.getUserID(token);
+    getUserPreferences(userID, function(data1) {
+      getPreferences(userID, function(data2) {
+        getUserTastes(userID, function(data3) {
+          console.log('data from line 75: ', data1);
+          console.log('data from line 76: ', data2);
+          console.log('data from line 77: ', data3);
+          var concattedData = data1.concat(data2);
+          var moreConcattedData = concattedData.concat(data3);
+          console.log('moreCOncattedData: ',moreConcattedData);
+        })
+      })
+    })
+  }
 };
+
+var getPreferences = function(userID, callback) {
+  Cuisine_Preference.where({user_id: userID}).fetchAll()
+  .then(function (preferences) {
+    var mapped = [];
+    _.each(preferences.models, function(data) {
+      mapped.push(data.attributes);
+      })
+      utils.hasCallBack(mapped, callback);
+    })
+};
+
+var getUserPreferences = function(userID, callback) {
+  User_Preference.where({user_id: userID}).fetchAll()
+  .then(function(prefs) {
+    var mapped = [];
+    _.each(prefs.models, function(data) {
+      mapped.push(data.attributes);
+    })
+    utils.hasCallBack(mapped, callback);
+  })
+};
+
+var getUserTastes = function(userID, callback) {
+  User_Taste.where({user_id: userID}).fetchAll()
+  .then(function(tastes) {
+  var mapped = [];
+  _.each(tastes.models, function(data) {
+    mapped.push(data.attributes);
+  })
+    utils.hasCallBack(mapped, callback);
+  })
+}
+
 
 var combineIngredients = function(data) {
   var ingredientRelations = [];

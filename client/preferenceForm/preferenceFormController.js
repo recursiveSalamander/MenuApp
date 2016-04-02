@@ -30,4 +30,14 @@ angular
       menuAppFactory.postUserPreference(Survey.preferencesForm)
       .then(function(data) {});
     };
+
+    var getPrefs = function() {
+      menuAppFactory.getUserPreference()
+      .then(function(prefs) {
+        console.log('line 37: ',prefs);
+        $scope.userPrefs = prefs;
+      })
+    };
+    getPrefs();
+
   }]);

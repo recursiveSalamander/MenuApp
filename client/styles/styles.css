@@ -265,6 +265,7 @@ ul[dnd-list] li.selected {
 #navbar {
   /*position: fixed;*/
   background-color: #5262bc;
+  /*background-color: #A1DBB2;*/
   /*#4caf50/#A1DBB2*/
   /*background: url('../assets/happyDays.png') no-repeat fixed;*/
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;

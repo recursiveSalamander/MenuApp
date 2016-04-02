@@ -30,7 +30,7 @@ angular
   };
 })
 
-  .factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
+.factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
 
   var currentToken = Auth.getToken();
 
@@ -90,11 +90,27 @@ angular
       });
     };
 
+    var getUserPreference = function() {
+      var token = Auth.getToken();
+      return $http({
+        method: 'POST',
+        url: '/api/getPreferences',
+        data: {token: token}
+      })
+      .then(function(resp) {
+        console.log(resp.data);
+        return resp.data;
+      }, function (error) {
+        console.log(error);
+      })
+    };
+
 
     return {
       getRestaurantList: getRestaurantList,
       getMenu: getMenu,
-      postUserPreference: postUserPreference
+      postUserPreference: postUserPreference,
+      getUserPreference: getUserPreference
     };
   }])
 
@@ -353,6 +369,7 @@ angular
     };
 
     var signout = function() {
+      console.log(token);
       $window.localStorage.removeItem('authentication');
     };
 
