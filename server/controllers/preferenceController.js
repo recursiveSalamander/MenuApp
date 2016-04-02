@@ -11,7 +11,7 @@ var Nutrition_Restriction = require('../db/models/Nutrition_Restriction.js');
 module.exports = {
 
   postPreferences: function(req, res) {
-    var userID = utils.getUserID(request.body.userID);
+    var userID = utils.getUserID(req.body.userID);
     var userDiet = req.body.diet;
     var cuisines = req.body.cuisinePreference;
     var nutrients = req.body.nutritionPreference;
@@ -80,7 +80,8 @@ module.exports = {
           console.log('data from line 77: ', data3);
           var concattedData = data1.concat(data2);
           var moreConcattedData = concattedData.concat(data3);
-          console.log('moreCOncattedData: ',moreConcattedData);
+          console.log('++line 83 in getAllPreferences in preferenceCtrl moreConcattedData: ',moreConcattedData);
+          response.send(moreConcattedData);
         })
       })
     })

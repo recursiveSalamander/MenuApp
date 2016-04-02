@@ -98,7 +98,7 @@ angular
         data: {token: token}
       })
       .then(function(resp) {
-        console.log(resp.data);
+        // console.log(resp.data);
         return resp.data;
       }, function (error) {
         console.log(error);
@@ -260,7 +260,8 @@ angular
       portugese: {score: 0, eval: 1}
     },
     preferredIngredients: [],
-    rejectedIngredients: []
+    rejectedIngredients: [],
+    allergies: []
   };
 
   return {
@@ -369,7 +370,6 @@ angular
     };
 
     var signout = function() {
-      console.log(token);
       $window.localStorage.removeItem('authentication');
     };
 
