@@ -1,6 +1,6 @@
 angular
   .module('menuApp')
-  .controller('restaurantListController', ['$window', '$scope', '$state', 'Geolocation', 'Auth', 'userInfo', 'Preferences', function($window, $scope, $state, Geolocation, Auth, userInfo, Preferences) {
+  .controller('restaurantListController', ['$window', '$scope', '$state', 'Geolocation', 'Auth', 'userInfo', 'menuAppFactory', 'Preferences', function($window, $scope, $state, Geolocation, Auth, userInfo, menuAppFactory, Preferences) {
     $scope.data = [];
     $scope.map;
     var infoWindow;
