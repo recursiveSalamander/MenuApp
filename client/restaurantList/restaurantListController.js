@@ -1,8 +1,11 @@
 angular
   .module('menuApp')
-  .controller('restaurantListController', ['$window', '$scope', '$state', 'menuAppFactory', 'Geolocation', 'Auth', 'userInfo', 'Preferences', function($window, $scope, $state, menuAppFactory, Geolocation, Auth, userInfo, Preferences) {
+  .controller('restaurantListController', ['$window', '$scope', '$state', 'Geolocation', 'Auth', 'userInfo', 'Preferences', 'menuAppFactory', function($window, $scope, $state, Geolocation, Auth, userInfo, Preferences, menuAppFactory) {
     $scope.data = [];
     $scope.map;
+    var infoWindow;
+    var infoWindows = [];
+    var markers = [];
 
     $scope.checkToken = function() {
       return Auth.isAuth();
@@ -12,8 +15,32 @@ angular
       Auth.signout();
     };
 
-    var infoWindow;
-    var markers = [];
+    $scope.highlightMarkers = function(index, restaurant) {
+      if(infoWindow){
+        infoWindow.close();
+      }
+      var infoWindowInformation = '';
+      if(restaurant.photos) infoWindowInformation += '<br>' + restaurant.photos;
+      if(restaurant.categories[0].icon) infoWindowInformation += "<br><img src='" + restaurant.categories[0].icon.prefix + "bg_32" + restaurant.categories[0].icon.suffix + "' height='16' width='16'>"
+      if(restaurant.categories[0].shortName) infoWindowInformation += ' ' + restaurant.categories[0].shortName;
+      if(restaurant.location.distance) infoWindowInformation += '<br>Distance: ' + (restaurant.location.distance*0.000621371).toFixed(2) + 'miles';
+      if(restaurant.delivery) infoWindowInformation += '<br>Delivery: ' + restaurant.delivery.url;
+      if(restaurant.hours) infoWindowInformation += '<br>Hours: ' + restaurant.hours;
+
+      markers[index].setAnimation(google.maps.Animation.BOUNCE);
+      infoWindow = new google.maps.InfoWindow({
+       content: '<strong>' + restaurant.name + '</strong>' + infoWindowInformation
+     });
+      infoWindow.open($scope.map, markers[index]);
+    }
+
+    $scope.unhighlightMarkers = function(index) {
+      markers[index].setAnimation(null);
+      infoWindow.close();
+
+    }
+
+
     var makeMap = function(current_coords) {
       $scope.map = new google.maps.Map(document.getElementById('map'), {
         center: current_coords,
@@ -45,27 +72,45 @@ angular
      $scope.map.fitBounds(bounds);
    };
 
-   var makeInfoWindow = function(marker, restaurantName) {
+
+   var makeInfoWindow = function(marker, data) {
+    var infoWindowInformation = '';
+    console.log('INFOWINDOW SHIT', data);
+
+    if(data.photos) infoWindowInformation += '<br>' + data.photos;
+    if(data.categoryicon) infoWindowInformation += "<br><img src='" + data.categoryicon + "' height='16' width='16'>"
+    if(data.category) infoWindowInformation += ' ' + data.category;
+    if(data.distance) infoWindowInformation += '<br>Distance: ' + (data.distance*0.000621371).toFixed(2) + 'miles';
+    if(data.delivery_url) infoWindowInformation += '<br>Delivery: ' + data.delivery_url;
+    if(data.hours) infoWindowInformation += '<br>Hours: ' + data.hours;
+
+
     marker.addListener('click', function(){
       if(infoWindow){
         infoWindow.close();
+
       }
       infoWindow = new google.maps.InfoWindow({
-       content: restaurantName
+       content: '<strong>' + data.restaurantName + '</strong>' + infoWindowInformation
+
      });
       infoWindow.open($scope.map, this);
     });
   };
 
-  function toggleBounce() {
+  var toggleBounce = function() {
     for(var i=0; i<markers.length; i++){
       if (markers[i].getAnimation() !== null) {
         markers[i].setAnimation(null);
       }
     }
+    console.log('HEYYYYYYYYYYYYYYYYYYY')
     this.setAnimation(google.maps.Animation.BOUNCE);
-    $scope.contentLoading = false;
+
   }
+$scope.contentLoading = false;
+
+
 
   $scope.displayRestaurants = function() {
     clearMarkers();
@@ -74,29 +119,34 @@ angular
         menuAppFactory.getRestaurantList(coords)
         .then(function(data) {
           for(var i=0; i< data.length; i++){
-            data[i].formatted = data[i].location.formattedAddress.join();
+            data[i].formatted = data[i].location.formattedAddress.join(' ');
             var markerlabel = (i+1).toString();
             data[i].index = (i+1).toString();
             markerlabel.length === 2 ? markerlabel = markerlabel : markerlabel = '0' + markerlabel;
-            var restaurantName = data[i].name;
             var LatLng = {lat: data[i].location.lat, lng: data[i].location.lng};
             var marker = new google.maps.Marker({
               position: LatLng,
               map: $scope.map,
-              // label: markerlabel.toString(),
-              // icon: "http://maps.google.com/mapfiles/marker" + 'A' + ".png",
               icon: 'http://google-maps-icons.googlecode.com/files/red' + markerlabel + '.png',
               animation: google.maps.Animation.DROP
             });
+            var infoWindowData = {};
+            infoWindowData.restaurantName = data[i].name;
+            if(data[i].categories[0].shortName) infoWindowData.category = data[i].categories[0].shortName;
+             if(data[i].categories[0].icon) infoWindowData.categoryicon = data[i].categories[0].icon.prefix + "bg_32" + data[i].categories[0].icon.suffix;
+             if(data[i].location.distance) infoWindowData.distance = data[i].location.distance;
+             if(data[i].delivery) infoWindowData.delivery_url = data[i].delivery.url;
+             if(data[i].hours) infoWindowData.hours = data[i].hours;
+             if(data[i].photos) infoWindowData.photos = data[i].photos;
             marker.addListener('click', toggleBounce);
-            makeInfoWindow(marker, restaurantName);
+            makeInfoWindow(marker, infoWindowData);
             markers.push(marker);
             //SETTIMEOUT HELP PLS
           }
-
           $scope.data = data;
-          window.setTimeout(refocusMapBounds(),200);
+          window.setTimeout(refocusMapBounds(),1000);
           //FIX THIS TOO
+
 
         })
         .catch(function(err) {

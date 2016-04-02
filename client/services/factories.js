@@ -24,12 +24,15 @@ angular
     return resultsObj;
 
   };
-  return {
+
+  return validatePasswordAndEmail = {
     validatePasswordAndEmail: validatePasswordAndEmail
   };
 })
 
   .factory('menuAppFactory', ['$http', '$location', '$state', 'Auth', function($http, $location, $state, Auth) {
+
+  var currentToken = Auth.getToken();
 
   var getRestaurantList = function(coordinates) {
     return $http({
@@ -73,6 +76,8 @@ angular
     };
 
     var postUserPreference = function(preferences) {
+      preferences.token = currentToken;
+
       return $http({
         method: 'POST',
         url: '/api/preference',
@@ -198,51 +203,48 @@ angular
   };
 }])
 
-  .factory('Survey', ['$http', 'Auth', function($http, Auth) {
+  .factory('Survey', ['$http', function($http) {
     var retrieveSurvey = function(callback) {
       $http.get('../assets/dishes.json').success(function(data) {
         callback(data);
       });
     };
 
-    var preferencesForm = {
-      tastePreference: {
-        spicy: 1,
-        meaty: 1,
-        sour: 1,
-        sweet: 1,
-        salty: 1,
-        bitter: 1
-      },
-      cuisinePreference: {
-        american: {score: 0, eval: 1},
-        italian: {score: 0, eval: 1},
-        mexican: {score: 0, eval: 1},
-        southern_soulfood: {score: 0, eval: 1},
-        french: {score: 0, eval: 1},
-        southwestern: {score: 0, eval: 1},
-        indian: {score: 0, eval: 1},
-        chinese: {score: 0, eval: 1},
-        cajun_creole: {score: 0, eval: 1},
-        english: {score: 0, eval: 1},
-        mediterranean: {score: 0, eval: 1},
-        greek: {score: 0, eval: 1},
-        spanish: {score: 0, eval: 1},
-        german: {score: 0, eval: 1},
-        thai: {score: 0, eval: 1},
-        moroccan: {score: 0, eval: 1},
-        irish: {score: 0, eval: 1},
-        japanese: {score: 0, eval: 1},
-        cuban: {score: 0, eval: 1},
-        hawaiian: {score: 0, eval: 1},
-        swedish: {score: 0, eval: 1},
-        hungarian: {score: 0, eval: 1},
-        portugese: {score: 0, eval: 1}
-      },
-      preferredIngredients: [],
-      rejectedIngredients: [],
-      allergies: [],
-      diet: 'none'
+    var preferencesForm = {tastePreference: {
+      spicy: 1,
+      meaty: 1,
+      sour: 1,
+      sweet: 1,
+      salty: 1,
+      bitter: 1
+    },
+    cuisinePreference: {
+      american: {score: 0, eval: 1},
+      italian: {score: 0, eval: 1},
+      mexican: {score: 0, eval: 1},
+      southern_soulfood: {score: 0, eval: 1},
+      french: {score: 0, eval: 1},
+      southwestern: {score: 0, eval: 1},
+      indian: {score: 0, eval: 1},
+      chinese: {score: 0, eval: 1},
+      cajun_creole: {score: 0, eval: 1},
+      english: {score: 0, eval: 1},
+      mediterranean: {score: 0, eval: 1},
+      greek: {score: 0, eval: 1},
+      spanish: {score: 0, eval: 1},
+      german: {score: 0, eval: 1},
+      thai: {score: 0, eval: 1},
+      moroccan: {score: 0, eval: 1},
+      irish: {score: 0, eval: 1},
+      japanese: {score: 0, eval: 1},
+      cuban: {score: 0, eval: 1},
+      hawaiian: {score: 0, eval: 1},
+      swedish: {score: 0, eval: 1},
+      hungarian: {score: 0, eval: 1},
+      portugese: {score: 0, eval: 1}
+    },
+    preferredIngredients: [],
+    rejectedIngredients: []
   };
 
   return {
@@ -300,7 +302,16 @@ angular
     };
   }])
 
-  .factory('Auth', ['$http', '$location', '$state', '$window', function($http, $location, $state, $window) {
+  .factory('Auth', ['$http', '$location', '$state', '$window', '$mdDialog', function($http, $location, $state, $window, $mdDialog) {
+    var showSignInDialog = function() {
+      $mdDialog.show({
+        controller: 'userAuthController',
+        templateUrl: '../userAuth/hello.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: true
+      });
+    }
+
     var signin = function(user) {
       return $http({
         method: 'POST',
@@ -308,7 +319,7 @@ angular
         data: user
       })
       .then(function(res) {
-        var token = res.data.token;
+        token = res.data.token;
         return res.data.token;
       });
     };
@@ -346,7 +357,8 @@ angular
       signup: signup,
       isAuth: isAuth,
       isSignedIn: isSignedIn,
-      signout: signout
+      signout: signout,
+      showSignInDialog: showSignInDialog
     };
   }])
 
@@ -376,12 +388,9 @@ angular
         targetEvent: ev,
         clickOutsideToClose: false
       });
-      // .then(function(answer) {
-      //   $scope.status = 'You said the information was "' + answer + '".';
-      // }, function() {
-      //   $scope.status = 'You cancelled the dialog.';
-      // });
     };
+
+
 
     return {
       showTabDialog: showTabDialog

@@ -1,6 +1,10 @@
 angular
   .module('menuApp')
-  .controller('userAuthController', ['$window', '$scope', 'Auth', 'ValidationFactory', '$location', '$state', 'Preferences',function($window, $scope, Auth, ValidationFactory, $location, $state, Preferences) {
+  .controller('userAuthController', ['$window', '$scope', 'Auth', 'ValidationFactory', '$location', '$state', 'Preferences', '$mdDialog', function($window, $scope, Auth, ValidationFactory, $location, $state, Preferences, $mdDialog) {
+    $scope.signinModal = function() {
+      Auth.showSignInDialog();
+    }
+
 
     $scope.signUp = function() {
       var validate = ValidationFactory.validatePasswordAndEmail($scope.user.email, $scope.user.password, $scope.user.confirmpassword);
@@ -44,6 +48,7 @@ angular
     };
 
     $scope.validate = function() {
+      console.log('WHATS UP')
       Auth.signin($scope.user)
       .then(function(token) {
         if(token === undefined) {
@@ -55,8 +60,10 @@ angular
           });
           $location.path('/signIn');
         } else {
+          $mdDialog.hide();
           $window.localStorage.setItem('authentication', token);
           $state.go('restaurantList');
+
         }
       });
     };
