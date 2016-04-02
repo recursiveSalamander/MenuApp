@@ -1,6 +1,6 @@
 angular
   .module('menuApp')
-  .controller('restaurantListController', ['$window', '$scope', '$state', 'Geolocation', 'Auth', 'userInfo', 'menuAppFactory', 'Preferences', function($window, $scope, $state, Geolocation, Auth, userInfo, menuAppFactory, Preferences) {
+  .controller('restaurantListController', ['$window', '$scope', '$state', 'Geolocation', 'Auth', 'userInfo', 'Preferences', 'menuAppFactory', function($window, $scope, $state, Geolocation, Auth, userInfo, Preferences, menuAppFactory) {
     $scope.data = [];
     $scope.map;
     var infoWindow;
@@ -88,11 +88,7 @@ angular
     marker.addListener('click', function(){
       if(infoWindow){
         infoWindow.close();
-        for(var i=0; i<markers.length; i++){
-          if (markers[i].getAnimation() !== null) {
-            markers[i].setAnimation(null);
-          }
-        }
+
       }
       infoWindow = new google.maps.InfoWindow({
        content: '<strong>' + data.restaurantName + '</strong>' + infoWindowInformation
@@ -108,9 +104,13 @@ angular
         markers[i].setAnimation(null);
       }
     }
+    console.log('HEYYYYYYYYYYYYYYYYYYY')
     this.setAnimation(google.maps.Animation.BOUNCE);
-    $scope.contentLoading = false;
+
   }
+$scope.contentLoading = false;
+
+
 
   $scope.displayRestaurants = function() {
     clearMarkers();

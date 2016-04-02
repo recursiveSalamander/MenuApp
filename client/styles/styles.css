@@ -1,5 +1,6 @@
 #main {
-  background: url('../assets/Elegant_Background-7.jpg') no-repeat fixed;
+
+  /*background: url('../assets/Elegant_Background-7.jpg') no-repeat fixed;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -19,6 +20,13 @@
 .textcenter {
   text-align: center;
 }
+
+md-input-container label,
+ md-input-container .md-placeholder{
+    color:black !important;
+}
+
+
 /*----------------------------Sign-in/Sign-up styling-------------------------------------------------*/
 .signup, .signin {
   height: 100vh;
@@ -53,6 +61,8 @@
   color: black;
   font-family: secondaryfont;
   font-size: 60px;
+  text-align: center;
+  margin-top: 70px;
 
 }
 
@@ -62,6 +72,7 @@
 
 #signinlogo {
   font-size: 100px;
+  text-align: center;
 }
 
 .logostyle {
@@ -82,18 +93,25 @@
   padding-left: 20px;
 }
 
-.listhighlight {
-  background-color: #93cf96;
+.restaurantquery {
+  font-size: 15px;
+  list-style: none;
 }
+
+
 
 #sidenav {
   padding-bottom: 2px;
   height: 57vh;
 }
 
-.list md-list {
+/*.list md-list {
   background-color: white;
   background-color:rgba(255,255,255, 0.5);
+}*/
+
+.listhighlight {
+  background-color: #dff0d8;
 }
 
 .restaurantlist .sidenav {
@@ -102,10 +120,7 @@
 .restaurantlist .list {
 
 }
-.restaurantquery {
-  font-size: 15px;
-  list-style: none;
-}
+
 
 
 /*----------------------------------map styling--------------------------------------*/
@@ -445,4 +460,10 @@ md-tooltip .restrictionwarning {
 
 .profileview {
   text-align: center;
+}
+
+
+md-input-container.md-default-theme label,
+ md-input-container.md-default-theme .md-placeholder{
+    color:black !important;
 }
