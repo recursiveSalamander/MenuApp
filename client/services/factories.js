@@ -331,7 +331,12 @@ angular
         data: user
       })
       .then(function(res) {
-        return res.data.token;
+        if (res) {
+          return res.data.token;
+        } else {
+          console.log('error');
+          $state.go('signup');
+        }
       });
     };
 
