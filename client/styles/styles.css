@@ -1,6 +1,5 @@
 #main {
-
-  /*background: url('../assets/Elegant_Background-7.jpg') no-repeat fixed;*/
+  background: url('../assets/Elegant_Background-7.jpg') no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -54,7 +53,6 @@
   color: black;
   font-family: secondaryfont;
   font-size: 60px;
-  text-align: center;
 
 }
 
@@ -64,7 +62,6 @@
 
 #signinlogo {
   font-size: 100px;
-  text-align: center;
 }
 
 .logostyle {
@@ -85,25 +82,18 @@
   padding-left: 20px;
 }
 
-.restaurantquery {
-  font-size: 15px;
-  list-style: none;
+.listhighlight {
+  background-color: #93cf96;
 }
-
-
 
 #sidenav {
   padding-bottom: 2px;
   height: 57vh;
 }
 
-/*.list md-list {
+.list md-list {
   background-color: white;
   background-color:rgba(255,255,255, 0.5);
-}*/
-
-.listhighlight {
-  background-color: #dff0d8;
 }
 
 .restaurantlist .sidenav {
@@ -112,7 +102,10 @@
 .restaurantlist .list {
 
 }
-
+.restaurantquery {
+  font-size: 15px;
+  list-style: none;
+}
 
 
 /*----------------------------------map styling--------------------------------------*/
