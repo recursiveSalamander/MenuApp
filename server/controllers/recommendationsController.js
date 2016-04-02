@@ -15,9 +15,10 @@ module.exports = {
     var menu = req.body.menuData;
 
     getUserRestrictionInfo(userID, function(diet, allergies) {
-      injectDietRestrictions()
+      injectDietRestrictions(menu, diet, allergies, function(newMenu) {
+        res.send(newMenu);
+      });
     });
-
   },
 
   restrictionsRecommendation: function(req, res) {
@@ -231,29 +232,42 @@ module.exports = {
 }
 
 var injectDietRestrictions = function(menu, diet, allergies, callback) {
+  var totalEntries = 0;
   var counter = 0;
 
-  _.forEach(menu, function(submenu, index) {
-    _.forEach(submenu, function(entry, subindex) {
-      var query = generateQuery(entry);
+  _.forEach(menu, function(section) {
+    totalEntries += section.entries.count;
+  });
 
-      queryRecipes(query, function() {})
-    })
+  _.forEach(menu, function(submenu, index) {
+    _.forEach(submenu.entries.items, function(entry, subindex) {
+      generateQuery(entry, function(query) {
+        queryRecipes(query, diet, allergies, function(dietRestriction, allergyRestriction) {
+          entry.dietRestriction = dietRestriction;
+          entry.allergyRestriction = allergyRestriction;
+
+          counter++;
+          if (counter === totalEntries) {
+            callback(menu);
+          }
+        });
+      });
+    });
   });
 }
 
-var generateQuery = function(item) {
+var generateQuery = function(item, callback) {
   var searchTerms = item.name.split(' ');
   var searchquery = searchTerms.join('+');
 
   var query = `http://api.yummly.com/v1/api/recipes?_app_id=${config.yummly.appId}` +
   `&_app_key=${config.yummly.appKey}&q=${searchquery}&facetField[]=diet`;
 
-  return query;
+  callback(query);
 }
 
 
-var queryRecipes = function(query, callback) {
+var queryRecipes = function(query, diet, allergies, callback) {
   request(query, function(err, resp, body) {
     var allergyRestriction = {mostlikely: [], may: []};
     var dietRestriction = {};
