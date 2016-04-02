@@ -4,7 +4,7 @@
   </div>
   <md-content>
     <md-tabs md-dynamic-height="" md-border-bottom="">
-      <md-tab label="{{submenu.name}}" ng-repeat=" submenu in data">
+      <md-tab ng-init="submenuName(submenu.name)" label="{{submenuNameDisplay}}" ng-repeat="submenu in data">
         <md-tab-body class="md-padding">
           <ul layout="row" ng-repeat="item in submenu.entries.items">
             <div flex="5">

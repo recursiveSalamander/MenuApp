@@ -41,6 +41,7 @@ var injectDietRestrictions = function(menu, diet, allergies, callback) {
           }
         });
       });
+
     });
   });
 };
