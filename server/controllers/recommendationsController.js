@@ -9,7 +9,7 @@ var config = require('../db/config/config.js');
 
 
 module.exports = {
-  restrictionsRecommendationRewrite: function(req, res) {
+  restrictionsRecommendation: function(req, res) {
     var token = req.body.currentToken;
     var userID = Utils.getUserID(token);
     var menu = req.body.menuData;

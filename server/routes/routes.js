@@ -23,7 +23,7 @@ module.exports = function(app, express) {
   app.post('/api/rating', ratingsController.postRatingToTable);
   app.post('/api/getRating', bodyParser, ratingsController.getRating);
   app.post('/api/ratingsAverage', bodyParser, ratingsController.retrieveAverageRatings);
-  app.post('/api/restrictions', bodyParser, recommendationsController.restrictionsRecommendationRewrite);
+  app.post('/api/restrictions', bodyParser, recommendationsController.restrictionsRecommendation);
   app.post('/api/updateProfile', bodyParser, profileController.updateProfile);
   app.post('/api/getPreferences', bodyParser, preferenceController.getAllPreferences);
 };
