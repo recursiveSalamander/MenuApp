@@ -104,7 +104,7 @@ var getUserRestrictionInfo = function(userID, callback) {
   User.where({id: userID}).fetchAll({withRelated: ['preferences']})
   .then(function(preferenceData){
     var data = preferenceData.toJSON()[0];
-    var diet = dietCodes[data.diet];
+    var diet = dietCodes[data.diet] || 'none';
     var allergies = [];
 
     _.forEach(data.preferences, function(preference) {
