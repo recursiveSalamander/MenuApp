@@ -7,19 +7,20 @@ var User_Preference = require('../db/models/User_Preference.js');
 var User_Taste = require('../db/models/User_Taste.js');
 var Cuisine_Preference = require('../db/models/Cuisine_Preference.js');
 var Nutrition_Restriction = require('../db/models/Nutrition_Restriction.js');
-var knex = require('../db/schema.js');
+var knex = require('../db/schema.js').knex;
 
 module.exports = {
 
   postPreferences: function(req, res) {
-    var userID = utils.getUserID(req.body.userID);
+    var userID = utils.getUserID(req.body.token);
     var userDiet = req.body.diet;
-    var cuisines = req.body.cuisinePreference;
+    var cuisines = _.map(req.body.cuisinePreference, function(value, cuisine) {
+      return {origin: cuisine, 'preference_level': value, 'user_id': userID};
+    });
     var nutrients = req.body.nutritionPreference;
     var flavors = _.map(req.body.tastePreference, function(flavor) {
       return flavor;
     });
-
     var ingredientRelations = combineIngredients(req.body, userID);
 
     var asyncTasks = [];
@@ -36,23 +37,18 @@ module.exports = {
       });
     });
 
-
-    _.forEach(ingredientRelations, function(relationship) {
-      asyncTasks.push(function(callback) {
-        insertIngredientPreference(relationship[0], relationship[1], userID, function() {
-          callback();
-        });
+    asyncTasks.push(function(callback) {
+      insertIngredientPreference(ingredientRelations, userID, function() {
+        callback();
       });
     });
 
-
-    _.forEach(cuisines, (function(data, key) {
-      asyncTasks.push(function(callback) {
-        insertCuisinePreference(key, data.eval, userID, function(data) {
-          callback(data);
-        });
+    asyncTasks.push(function(callback) {
+      insertCuisinePreference(cuisines, userID, function() {
+        callback();
       });
-    }));
+    });
+
 
     Async.parallel(asyncTasks, function(err) {
       if (err) {
@@ -135,16 +131,11 @@ var combineIngredients = function(data, user) {
 };
 
 
-var insertIngredientPreference = function(ingredient, relation, userID, callback) {
+var insertIngredientPreference = function(preferences, userID, callback) {
   User_Preference.where({'user_id': userID}).destroy()
-  .then(function(myPreference) {
-    var newPreference = new User_Preference({
-      user_id: userID,
-      ingredient: ingredient,
-      relation: relation
-    });
-    newPreference.save().then(function(savedPreference) {
-      utils.hasCallBack(savedPreference, callback);
+  .then(function() {
+    return knex('user_preferences').insert(preferences).then(function() {
+      callback();
     });
   });
 };
@@ -167,16 +158,11 @@ var insertTastePreference = function(tastePreferences, userID, callback) {
     });
 };
 
-var insertCuisinePreference = function(cuisine, preferenceLevel, userID, callback) {
+var insertCuisinePreference = function(cuisines, userID, callback) {
   Cuisine_Preference.where({user_id: userID}).destroy()
-  .then(function(myCuisine) {
-    var newCuisine = new Cuisine_Preference({
-      user_id: userID,
-      preference_level: preferenceLevel,
-      origin: cuisine
-    });
-    newCuisine.save().then(function(savedCuisine) {
-      utils.hasCallBack(savedCuisine, callback);
+  .then(function() {
+    return knex('cuisine_preferences').insert(cuisines).then(function() {
+      callback();
     });
   });
 };
