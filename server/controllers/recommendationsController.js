@@ -13,9 +13,13 @@ module.exports = {
     var menu = req.body.menuData;
 
     getUserRestrictionInfo(userID, function(diet, allergies) {
-      injectDietRestrictions(menu, diet, allergies, function(newMenu) {
-        res.send(newMenu);
-      });
+      if (diet === 'none' && allergies.length === 0) {
+        res.send(menu);
+      } else {
+        injectDietRestrictions(menu, diet, allergies, function(newMenu) {
+          res.send(newMenu);
+        });
+      }
     });
   }
 };

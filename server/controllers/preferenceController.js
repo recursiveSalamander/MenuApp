@@ -7,6 +7,7 @@ var User_Preference = require('../db/models/User_Preference.js');
 var User_Taste = require('../db/models/User_Taste.js');
 var Cuisine_Preference = require('../db/models/Cuisine_Preference.js');
 var Nutrition_Restriction = require('../db/models/Nutrition_Restriction.js');
+var knex = require('../db/schema.js');
 
 module.exports = {
 
@@ -19,7 +20,7 @@ module.exports = {
       return flavor;
     });
 
-    var ingredientRelations = combineIngredients(req.body);
+    var ingredientRelations = combineIngredients(req.body, userID);
 
     var asyncTasks = [];
 
@@ -34,6 +35,7 @@ module.exports = {
         callback();
       });
     });
+
 
     _.forEach(ingredientRelations, function(relationship) {
       asyncTasks.push(function(callback) {
@@ -52,14 +54,6 @@ module.exports = {
       });
     }));
 
-    _.forEach(nutrients, function(max, nutrient) {
-      asyncTasks.push(function(callback) {
-        insertNutritionRestriction(nutrient, 0, max, userID, function() {
-          callback();
-        });
-      });
-    });
-
     Async.parallel(asyncTasks, function(err) {
       if (err) {
         console.log(err);
@@ -73,7 +67,7 @@ module.exports = {
     var token = request.body.token;
     var userID = utils.getUserID(token);
     getUserPreferences(userID, function(data1) {
-      getPreferences(userID, function(data2) {
+      getCuisinePreferences(userID, function(data2) {
         getUserTastes(userID, function(data3) {
           console.log('data from line 75: ', data1);
           console.log('data from line 76: ', data2);
@@ -88,7 +82,7 @@ module.exports = {
   }
 };
 
-var getPreferences = function(userID, callback) {
+var getCuisinePreferences = function(userID, callback) {
   Cuisine_Preference.where({user_id: userID}).fetchAll()
   .then(function (preferences) {
     var mapped = [];
@@ -122,19 +116,19 @@ var getUserTastes = function(userID, callback) {
 };
 
 
-var combineIngredients = function(data) {
+var combineIngredients = function(data, user) {
   var ingredientRelations = [];
 
   _.forEach(data.allergies, function(allergy) {
-    ingredientRelations.push([allergy, 'allergy']);
+    ingredientRelations.push({ingredient: allergy, relation: 'allergy', 'user_id': user});
   });
 
-  _.forEach(data.preferredIngredients, function(preference) {
-    ingredientRelations.push([preference, 'liked']);
+  _.forEach(data.preferredIngredients, function(like) {
+    ingredientRelations.push({ingredient: like, relation: 'liked', 'user_id': user});
   });
 
   _.forEach(data.rejectedIngredients, function(dislike) {
-    ingredientRelations.push([dislike, 'disliked']);
+    ingredientRelations.push({ingredient: dislike, relation: 'disliked', 'user_id': user});
   });
 
   return ingredientRelations;

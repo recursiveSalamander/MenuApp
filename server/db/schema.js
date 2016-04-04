@@ -165,4 +165,7 @@ restaurants();
 menuItems();
 itemRatings();
 
-module.exports.bookshelf = bookshelf;
+module.exports = {
+  bookshelf: bookshelf,
+  knex: knex
+};
