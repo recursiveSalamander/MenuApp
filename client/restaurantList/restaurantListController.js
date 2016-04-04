@@ -80,7 +80,6 @@ angular
 
    var makeInfoWindow = function(marker, data) {
     var infoWindowInformation = '';
-    console.log('++line 78 in restListCtrl', data);
 
     if(data.photos) infoWindowInformation += '<br>' + data.photos;
     if(data.categoryicon) infoWindowInformation += "<br><img src='" + data.categoryicon + "' height='16' width='16'>";
@@ -166,10 +165,6 @@ angular
         userInfo.getRestrictions(data[0].entries.items)
         .then(function(restrictionData) {
           data[0].entries.items = restrictionData;
-          console.log('THIS IS DATA', data[0]);
-          console.log('THIS IS RESTRICTIonDATA', restrictionData);
-        console.log('++line 144 post getRating() in restListCtrl ratingData: ',ratingData);
-        console.log('++line 145 post getRating() in restListCtrl data[0].entries.items: ',data[0].entries.items);
         if (ratingData !== undefined) {
           for (var k = 0; k < data[0].entries.items.length; k++) {
             var menuItems = data[0].entries.items[k].entries.items;

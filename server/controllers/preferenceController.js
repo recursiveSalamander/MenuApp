@@ -65,12 +65,8 @@ module.exports = {
     getUserPreferences(userID, function(data1) {
       getCuisinePreferences(userID, function(data2) {
         getUserTastes(userID, function(data3) {
-          console.log('data from line 75: ', data1);
-          console.log('data from line 76: ', data2);
-          console.log('data from line 77: ', data3);
           var concattedData = data1.concat(data2);
           var moreConcattedData = concattedData.concat(data3);
-          console.log('++line 83 in getAllPreferences in preferenceCtrl moreConcattedData: ',moreConcattedData);
           response.send(moreConcattedData);
         })
       })

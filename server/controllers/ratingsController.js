@@ -34,10 +34,7 @@ module.exports = {
 
     createRatingsArray(userID, function(ratingsArray) {
       Utils.getRestaurantID(restaurantId, function(restaurant) {
-        // console.log('++line 38 in getRating() in ratingCtrl restaurant: ',restaurant);
         averageRatings(restaurant, function(avgRatings) {
-          console.log('++line 40 in getRating() in ratingCtrl avgRatings: ',avgRatings);
-          console.log('++line 41 in getRating() in ratingCtrl ratingsArray: ',ratingsArray);
           ratingsArray.forEach(function(value) {
             for(var key in avgRatings) {
               if (value.entryId === key) {
@@ -53,10 +50,8 @@ module.exports = {
 
 
   retrieveAverageRatings: function(request, response) {
-    console.log('++line 42 inside averageRatings() in ratingsController');
     var restaurantID = request.body.restaurantId;
     Utils.getRestaurantID(restaurantID, function(data) {
-      console.log('++line 45 inside averageRatings() in ratingsController data: ',data);
       averageRatings(data, function(data) {
         response.send(data);
       });
@@ -129,29 +124,22 @@ var createRatingsArray = function(userID, callback) {
     var formattedItemData = data.toJSON();
     var ratingsArray = [];
     for(var i = 0; i < formattedItemData.length; i++) {
-      console.log(formattedItemData[i].menu_items);
       ratingsArray.push({rating: formattedItemData[i].rating, entryId: formattedItemData[i].menu_items.item});
     }
-    // console.log('++line 135 inside createRatingsArray() in Utils ratingsArray: ',ratingsArray);
     Utils.hasCallBack(ratingsArray, callback);
   });
 };
 
 var averageRatings = function(restaurantID, callback) {
-  // console.log('++line 141 in ratingsMenuAverage() inside utils restaurantId: ',restaurantID);
   Menu_Item.where({restaurant: restaurantID}).fetchAll({withRelated: ['ratings']})
   .then(function(data) {
-    // console.log('++line 144 inside ratingsMenuAverage() inside utils data: ',data);
     var formattedData = data.toJSON();
-    // console.log('++line 146 inside ratingsMenuAverage() inside utils formattedData: ',formattedData);
-    // var idArr = [];
     var arr = [];
     for(var i = 0; i < formattedData.length; i++){
       for(var j = 0; j < formattedData[i].ratings.length; j++){
         arr.push({entryId: formattedData[i].item, rating: formattedData[i].ratings[j].rating});
       }
     }
-    console.log('++line 154 in averageRatings in Utils arr: ',arr);
     var array = {};
     var sum = 0;
     var counter = 0;
@@ -177,7 +165,6 @@ var averageRatings = function(restaurantID, callback) {
         }
       }
     }
-    // console.log('++line 175 in ratingsMenuAverage() in utils array: ',array);
     Utils.hasCallBack(array, callback);
   });
 };

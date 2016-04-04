@@ -37,7 +37,6 @@ angular
     $scope.getPrefs = function() {
       menuAppFactory.getUserPreference()
       .then(function(prefs) {
-        console.log('line 39: ',prefs);
 
         for (var i = 0; i < prefs.length; i++) {
           if (prefs[i].origin) {
@@ -50,14 +49,9 @@ angular
             $scope.ingredientPrefDislike.push(prefs[i]);
           }
         }
-            console.log('cuisinePref',$scope.cuisinePref);
-            console.log('tastePref: ',$scope.tastePref);
-            console.log('ingredientPrefLike: ',$scope.ingredientPrefLike);
-            console.log('ingredientPrefDislike: ',$scope.ingredientPrefDislike);
       });
 
     };
       $scope.getPrefs();
-      console.log('++line 61 in referenceFormCtrl',$scope.preferencesForm);
 
     }]);
