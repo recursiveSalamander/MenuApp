@@ -15,7 +15,7 @@ module.exports = {
     var userID = utils.getUserID(req.body.token);
     var userDiet = req.body.diet;
     var cuisines = _.map(req.body.cuisinePreference, function(value, cuisine) {
-      return {origin: cuisine, 'preference_level': value, 'user_id': userID};
+      return {origin: cuisine, 'preference_level': value.eval, 'user_id': userID};
     });
     var nutrients = req.body.nutritionPreference;
     var flavors = _.map(req.body.tastePreference, function(flavor) {

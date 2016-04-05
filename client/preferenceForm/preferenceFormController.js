@@ -37,7 +37,7 @@ angular
     $scope.getPrefs = function() {
       menuAppFactory.getUserPreference()
       .then(function(prefs) {
-
+        console.log(prefs);
         for (var i = 0; i < prefs.length; i++) {
           if (prefs[i].origin) {
             $scope.cuisinePref.push(prefs[i]);
