@@ -170,7 +170,7 @@ var initTastePreferences = function() {
     $mdToast.show({
      hideDelay   : 3000,
      position    : 'top right',
-     template : '<span>Your responses have gone through our dank algorithm and your preferences have been initialized!</span>'
+     template : '<span>Your responses have gone through our dark algorithm and your preferences have been initialized!</span>'
    });
   };
 

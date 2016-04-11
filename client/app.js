@@ -31,6 +31,11 @@ angular.module('menuApp', [
     templateUrl: '/profileView/profileView.html',
     authentication: true
     // signedin: true
+  })  .state('surveyProfileView', {
+    url: '/surveyProfileView',
+    templateUrl: '/profileView/surveyProfileView.html',
+    authentication: true
+    // signedin: true
   })
   .state('signIn', {
     url: '/signIn',
@@ -47,6 +52,12 @@ angular.module('menuApp', [
   .state('preferenceForm', {
     url: '/preferenceForm',
     templateUrl: '/preferenceForm/preferenceForm.html',
+    controller: 'preferenceFormController',
+    authentication: true
+    // signedin: true
+  })  .state('surveyPreferenceForm', {
+    url: '/surveyPreferenceForm',
+    templateUrl: '/preferenceForm/surveyPreferenceForm.html',
     controller: 'preferenceFormController',
     authentication: true
     // signedin: true

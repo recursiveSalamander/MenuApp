@@ -1,0 +1,15 @@
+<div class="profileview" ng-controller="profileViewController">
+  <h1>Profile Page</h1>
+  <div ng-cloak ng-init="renderProfile()">
+    <ul>
+      <li>Username: {{userInfo.username}}</li>
+      <li>First Name: {{userInfo.first_name}}</li>
+      <li>Last Name: {{userInfo.last_name}}</li>
+      <li>Email: {{userInfo.email}}</li>
+    </ul>
+  </div>
+</div>
+<!-- preferences -->
+<div ng-controller="preferenceFormController">
+  <div ng-include src="'../preferenceForm/surveyPreferenceForm.html'"></div>
+</div>

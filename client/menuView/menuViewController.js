@@ -7,6 +7,15 @@ angular
   $scope.restaurantId = $stateParams.restaurantId;
   $scope.dietRestrictionMessage = {};
   $scope.allergyRestrictionMessage = [];
+  $scope.submenuNameDisplay;
+
+  $scope.submenuName = function (submenu) {
+    if(submenu.length > 15){
+      submenu = submenu.slice(0, 15) + "...";
+    }
+
+    $scope.submenuNameDisplay = submenu;
+  }
 
   $scope.checkDietRestrictions = function(dietObj) {
     var bool = false;
