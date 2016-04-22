@@ -2,11 +2,11 @@ angular
   .module('menuApp')
   .controller('preferenceFormController', ['$scope', 'menuAppFactory', 'Survey', 'Auth', '$state', function($scope, menuAppFactory, Survey, Auth, $state) {
     $scope.preferencesForm = Survey.preferencesForm;
-    $scope.dietaryRestrictions = '';
     $scope.cuisinePref = [];
     $scope.tastePref = {};
     $scope.preferredIngredients = [];
     $scope.rejectedIngredients = [];
+    $scope.diet = '';
 
     $scope.toggleAllergyCheckbox = function (item) {
       var idx = $scope.preferencesForm.allergies.indexOf(item);
@@ -29,12 +29,16 @@ angular
 
     $scope.sendPreferenceData = function () {
       var token = Auth.getToken();
+      console.log("diet", $scope.diet);
       var preferenceObject = {
         tastePreference: $scope.tastePref,
         preferredIngredients: $scope.preferredIngredients,
         rejectedIngredients: $scope.rejectedIngredients,
+        diet: $scope.diet,
         token: token
       }
+
+      console.log('PREFERENCEOBJECt', preferenceObject);
       menuAppFactory.postUserPreference(preferenceObject)
       .then(function(data) {
 
@@ -55,16 +59,13 @@ angular
             $scope.preferredIngredients.push(prefs[i].ingredient);
           } else if (prefs[i].relation === 'disliked') {
             $scope.rejectedIngredients.push(prefs[i].ingredient);
+          } else if (prefs[i].diet) {
+            $scope.diet = prefs[i].diet;
           }
         }
-            console.log('cuisinePref',$scope.cuisinePref);
-            console.log('tastePref: ',$scope.tastePref);
-            console.log('ingredientPrefLike: ',$scope.ingredientPrefLike);
-            console.log('ingredientPrefDislike: ',$scope.ingredientPrefDislike);
       });
 
     };
       $scope.getPrefs();
-      console.log('++line 61 in referenceFormCtrl',$scope.preferencesForm);
 
     }]);

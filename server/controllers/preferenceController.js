@@ -19,7 +19,7 @@ module.exports = {
     var flavors = _.map(req.body.tastePreference, function(flavor) {
       return flavor;
     });
-    console.log('flavors', flavors);
+    console.log('diet-----------------------', userDiet);
     var ingredientRelations = combineIngredients(req.body);
 
     var asyncTasks = [];
@@ -76,13 +76,18 @@ module.exports = {
     getUserPreferences(userID, function(data1) {
       getPreferences(userID, function(data2) {
         getUserTastes(userID, function(data3) {
+          getUserDiet(userID, function(data4) {
+
+
           console.log('data from line 75: ', data1);
           console.log('data from line 76: ', data2);
           console.log('data from line 77: ', data3);
-          var concattedData = data1.concat(data2);
-          var moreConcattedData = concattedData.concat(data3);
-          console.log('++line 83 in getAllPreferences in preferenceCtrl moreConcattedData: ',moreConcattedData);
-          response.send(moreConcattedData);
+          console.log('data from line 78: ', data4);
+          data4 = [{diet: data4[0].diet}];
+          var concattedData = data1.concat(data2).concat(data3).concat(data4);
+          console.log('++line 83 in getAllPreferences in preferenceCtrl moreConcattedData: ', concattedData);
+          response.send(concattedData);
+          })
         })
       })
     })
@@ -99,6 +104,17 @@ var getPreferences = function(userID, callback) {
       utils.hasCallBack(mapped, callback);
     })
 };
+
+var getUserDiet = function(userID, callback) {
+  User.where({id: userID}).fetchAll()
+  .then(function(prefs) {
+    var mapped = [];
+    _.each(prefs.models, function(data) {
+      mapped.push(data.attributes);
+    })
+    utils.hasCallBack(mapped, callback);
+  })
+}
 
 var getUserPreferences = function(userID, callback) {
   User_Preference.where({user_id: userID}).fetchAll()
