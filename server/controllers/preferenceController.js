@@ -15,6 +15,7 @@ module.exports = {
     var userDiet = req.body.diet;
     var cuisines = req.body.cuisinePreference;
     var nutrients = req.body.nutritionPreference;
+    console.log('HERE IS THE BODY', req.body);
     var flavors = _.map(req.body.tastePreference, function(flavor) {
       return flavor;
     });

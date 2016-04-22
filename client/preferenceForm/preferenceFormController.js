@@ -52,9 +52,9 @@ angular
           } else if (prefs[i].bitter) {
             $scope.tastePref = prefs[i];
           } else if (prefs[i].relation === 'liked') {
-            $scope.preferredIngredients.push(prefs[i]);
+            $scope.preferredIngredients.push(prefs[i].ingredient);
           } else if (prefs[i].relation === 'disliked') {
-            $scope.rejectedIngredients.push(prefs[i]);
+            $scope.rejectedIngredients.push(prefs[i].ingredient);
           }
         }
             console.log('cuisinePref',$scope.cuisinePref);
