@@ -9,42 +9,42 @@
            <div flex="10" layout layout-align="center center">
              <span class="md-body-1">Spicy</span>&nbsp&nbsp
            </div>
-           <md-slider class="md-primary" flex md-discrete ng-init="preferencesForm.tastePreference.spicy" ng-model="tastePref[0].spicy" step="1" min="1" max="5" aria-label="rating">
+           <md-slider class="md-primary" flex md-discrete ng-init="preferencesForm.tastePreference.spicy" ng-model="tastePref.spicy" step="1" min="1" max="5" aria-label="rating">
            </md-slider>
          </div>
          <div layout md-theme="orange">
            <div flex="10" layout layout-align="center center">
              <span class="md-body-1">Meaty</span>&nbsp&nbsp
            </div>
-           <md-slider class="md-primary" flex class="md-warn" md-discrete ng-init="preferencesForm.tastePreference.meaty" ng-model="tastePref[0].meaty" step="1" min="1" max="5" aria-label="rating">
+           <md-slider class="md-primary" flex class="md-warn" md-discrete ng-init="preferencesForm.tastePreference.meaty" ng-model="tastePref.meaty" step="1" min="1" max="5" aria-label="rating">
            </md-slider>
          </div>
          <div layout md-theme="yellow">
            <div flex="10" layout layout-align="center center">
              <span class="md-body-1">Sour</span>&nbsp&nbsp
            </div>
-           <md-slider class="md-primary" flex class="md-primary" md-discrete ng-init="preferencesForm.tastePreference.sour" ng-model="tastePref[0].sour" step="1" min="1" max="5" aria-label="rating">
+           <md-slider class="md-primary" flex class="md-primary" md-discrete ng-init="preferencesForm.tastePreference.sour" ng-model="tastePref.sour" step="1" min="1" max="5" aria-label="rating">
            </md-slider>
          </div>
          <div layout md-theme="light-green">
            <div flex="10" layout layout-align="center center">
              <span class="md-body-1">Sweet</span>&nbsp&nbsp
            </div>
-           <md-slider class="md-primary" flex class="md-primary" md-discrete ng-init="preferencesForm.tastePreference.sweet" ng-model="tastePref[0].sweet" step="1" min="1" max="5" aria-label="rating">
+           <md-slider class="md-primary" flex class="md-primary" md-discrete ng-init="preferencesForm.tastePreference.sweet" ng-model="tastePref.sweet" step="1" min="1" max="5" aria-label="rating">
            </md-slider>
          </div>
          <div layout md-theme="indigo">
            <div flex="10" layout layout-align="center center">
              <span class="md-body-1">Salty</span>&nbsp&nbsp
            </div>
-           <md-slider class="md-primary" flex class="md-primary" md-discrete ng-init="preferencesForm.tastePreference.salty" ng-model="tastePref[0].salty" step="1" min="1" max="5" aria-label="rating">
+           <md-slider class="md-primary" flex class="md-primary" md-discrete ng-init="preferencesForm.tastePreference.salty" ng-model="tastePref.salty" step="1" min="1" max="5" aria-label="rating">
            </md-slider>
          </div>
          <div layout md-theme="deep-purple">
            <div flex="10" layout layout-align="center center">
              <span class="md-body-1">Bitter</span>&nbsp&nbsp
            </div>
-           <md-slider class="md-primary" flex class="md-primary" md-discrete ng-init="preferencesForm.tastePreference.bitter" ng-model="tastePref[0].bitter" step="1" min="1" max="5" aria-label="rating">
+           <md-slider class="md-primary" flex class="md-primary" md-discrete ng-init="preferencesForm.tastePreference.bitter" ng-model="tastePref.bitter" step="1" min="1" max="5" aria-label="rating">
            </md-slider>
          </div>
        </div>
@@ -55,13 +55,13 @@
      <div class="md-padding">
      <md-input-container>
        <label>I like...</label>
-       <md-chips ng-model="preferencesForm.preferredIngredients"></md-chips>
+       <md-chips ng-model="preferredIngredients"></md-chips>
        <!-- <ul ng-repeat="ingredients in ingredientPrefLike">
          <li>{{ingredients.ingredient}}</li>
        </ul> -->
      <md-input-container>
        <label>I don't like...</label>
-       <md-chips ng-model="preferencesForm.rejectedIngredients"></md-chips>
+       <md-chips ng-model="rejectedIngredients"></md-chips>
      </md-input-container>
      <!-- <ul ng-repeat="ingredients in ingredientPrefDislike">
          <li>{{ingredients.ingredient}}</li>

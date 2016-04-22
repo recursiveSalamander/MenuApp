@@ -11,14 +11,14 @@ var Nutrition_Restriction = require('../db/models/Nutrition_Restriction.js');
 module.exports = {
 
   postPreferences: function(req, res) {
-    var userID = utils.getUserID(req.body.userID);
+    var userID = utils.getUserID(req.body.token);
     var userDiet = req.body.diet;
     var cuisines = req.body.cuisinePreference;
     var nutrients = req.body.nutritionPreference;
     var flavors = _.map(req.body.tastePreference, function(flavor) {
       return flavor;
     });
-
+    console.log('flavors', flavors);
     var ingredientRelations = combineIngredients(req.body);
 
     var asyncTasks = [];
@@ -160,12 +160,12 @@ var insertTastePreference = function(tastePreferences, userID, callback) {
   .then(function(myUsertaste) {
   var newUserTaste = new User_Taste({
       user_id: userID,
-      spicy:  tastePreferences[0],
-      meaty:  tastePreferences[1],
-      sour:   tastePreferences[2],
-      sweet:  tastePreferences[3],
-      salty:  tastePreferences[4],
-      bitter: tastePreferences[5]
+      spicy:  tastePreferences[1],
+      meaty:  tastePreferences[2],
+      sour:   tastePreferences[3],
+      sweet:  tastePreferences[4],
+      salty:  tastePreferences[5],
+      bitter: tastePreferences[6]
     });
     newUserTaste.save().then(function(savedUsertaste) {
         utils.hasCallBack(savedUsertaste, callback);

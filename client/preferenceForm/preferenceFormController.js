@@ -4,11 +4,11 @@ angular
     $scope.preferencesForm = Survey.preferencesForm;
     $scope.dietaryRestrictions = '';
     $scope.cuisinePref = [];
-    $scope.tastePref = [];
-    $scope.ingredientPrefLike = [];
-    $scope.ingredientPrefDislike = [];
+    $scope.tastePref = {};
+    $scope.preferredIngredients = [];
+    $scope.rejectedIngredients = [];
 
-    $scope.toggleAllergyCheckbox = function(item) {
+    $scope.toggleAllergyCheckbox = function (item) {
       var idx = $scope.preferencesForm.allergies.indexOf(item);
       if (idx > -1) $scope.preferencesForm.allergies.splice(idx, 1);
       else $scope.preferencesForm.allergies.push(item);
@@ -28,10 +28,17 @@ angular
     ];
 
     $scope.sendPreferenceData = function () {
-      Survey.preferencesForm.token = Auth.getToken();
+      var token = Auth.getToken();
+      var preferenceObject = {
+        tastePreference: $scope.tastePref,
+        preferredIngredients: $scope.preferredIngredients,
+        rejectedIngredients: $scope.rejectedIngredients,
+        token: token
+      }
+      menuAppFactory.postUserPreference(preferenceObject)
+      .then(function(data) {
 
-      menuAppFactory.postUserPreference(Survey.preferencesForm)
-      .then(function(data) {});
+      });
     };
 
     $scope.getPrefs = function() {
@@ -43,11 +50,11 @@ angular
           if (prefs[i].origin) {
             $scope.cuisinePref.push(prefs[i]);
           } else if (prefs[i].bitter) {
-            $scope.tastePref.push(prefs[i]);
+            $scope.tastePref = prefs[i];
           } else if (prefs[i].relation === 'liked') {
-            $scope.ingredientPrefLike.push(prefs[i]);
+            $scope.preferredIngredients.push(prefs[i]);
           } else if (prefs[i].relation === 'disliked') {
-            $scope.ingredientPrefDislike.push(prefs[i]);
+            $scope.rejectedIngredients.push(prefs[i]);
           }
         }
             console.log('cuisinePref',$scope.cuisinePref);
