@@ -110,7 +110,7 @@
           <!-- <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend> -->
           <div layout="row" layout-wrap flex>
             <div flex="33" ng-repeat="allergy in allergyList">
-              <md-checkbox ng-click="toggleAllergyCheckbox(allergy)">{{allergy}}</md-checkbox>
+              <md-checkbox ng-checked="exists(allergy, allergies)" ng-click="toggleAllergyCheckbox(allergy)">{{allergy}}</md-checkbox>
             </div>
           </div>
         </fieldset>

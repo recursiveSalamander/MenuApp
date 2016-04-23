@@ -9,7 +9,9 @@ angular
     $scope.diet = '';
     $scope.allergies = [];
 
-
+    $scope.exists = function (item, list) {
+      return list.indexOf(item) > -1;
+    }
     $scope.toggleAllergyCheckbox = function (item) {
       var idx = $scope.allergies.indexOf(item);
       if (idx > -1) $scope.allergies.splice(idx, 1);
@@ -61,6 +63,8 @@ angular
             $scope.preferredIngredients.push(prefs[i].ingredient);
           } else if (prefs[i].relation === 'disliked') {
             $scope.rejectedIngredients.push(prefs[i].ingredient);
+          } else if (prefs[i].relation === 'allergy') {
+            $scope.allergies.push(prefs[i].ingredient);
           } else if (prefs[i].diet) {
             $scope.diet = prefs[i].diet;
           }
