@@ -81,33 +81,26 @@
 
 <md-card flex="40" class="md-padding">
   <h2>Diet Restrictions</h2>
-
-  <!-- <div layout="row" layout-wrap> -->
     <div flex>
-
-        <fieldset class="standard">
-          <!-- <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend> -->
-          <md-radio-group  ng-model="$parent.diet">
-            <div layout="row" layout-wrap flex>
-              <div flex="50"><md-radio-button flex="50" value="lacto vegetarian" class="md-primary">Lacto Vegetarian</md-radio-button></div>
-              <div flex="50"><md-radio-button flex="50" value="ovo vegetarian" class="md-primary">Ovo Vegetarian</md-radio-button></div>
-              <div flex="50"><md-radio-button flex="50" value="pescetarian" class="md-primary">Pescetarian</md-radio-button></div>
-              <div flex="50"><md-radio-button flex="50" value="vegan" class="md-primary">Vegan</md-radio-button></div>
-              <div flex="50"><md-radio-button flex="50" value="vegetarian" class="md-primary">Vegetarian</md-radio-button></div>
-              <div flex="50"><md-radio-button flex="50" value="paleo" class="md-primary">Paleo</md-radio-button></div>
-            </div>
-          </md-radio-group>
-      </fieldset>
-
+      <fieldset class="standard">
+        <md-radio-group  ng-model="$parent.diet">
+          <div layout="row" layout-wrap flex>
+            <div flex="50"><md-radio-button flex="50" value="lacto vegetarian" class="md-primary">Lacto Vegetarian</md-radio-button></div>
+            <div flex="50"><md-radio-button flex="50" value="ovo vegetarian" class="md-primary">Ovo Vegetarian</md-radio-button></div>
+            <div flex="50"><md-radio-button flex="50" value="pescetarian" class="md-primary">Pescetarian</md-radio-button></div>
+            <div flex="50"><md-radio-button flex="50" value="vegan" class="md-primary">Vegan</md-radio-button></div>
+            <div flex="50"><md-radio-button flex="50" value="vegetarian" class="md-primary">Vegetarian</md-radio-button></div>
+            <div flex="50"><md-radio-button flex="50" value="paleo" class="md-primary">Paleo</md-radio-button></div>
+          </div>
+        </md-radio-group>
+    </fieldset>
   </div>
-  <!-- </div> -->
 </md-card>
 
 <md-card flex="40" class="md-padding">
   <h2>Allergies</h2>
       <div flex>
         <fieldset class="standard">
-          <!-- <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend> -->
           <div layout="row" layout-wrap flex>
             <div flex="33" ng-repeat="allergy in allergyList">
               <md-checkbox ng-checked="exists(allergy, allergies)" ng-click="toggleAllergyCheckbox(allergy)">{{allergy}}</md-checkbox>
@@ -115,7 +108,6 @@
           </div>
         </fieldset>
     </div>
-  {{allergies}}
 </md-card>
 
   <div flex="10">
