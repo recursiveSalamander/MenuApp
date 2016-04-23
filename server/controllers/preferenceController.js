@@ -15,12 +15,12 @@ module.exports = {
     var userDiet = req.body.diet;
     var cuisines = req.body.cuisinePreference;
     var nutrients = req.body.nutritionPreference;
-    console.log('HERE IS THE BODY', req.body);
     var flavors = _.map(req.body.tastePreference, function(flavor) {
       return flavor;
     });
-    console.log('diet-----------------------', userDiet);
+    // var allergies = req.body.alelrgies;
     var ingredientRelations = combineIngredients(req.body);
+    console.log('ingredientRElations-----------------------++++++', ingredientRelations);
 
     var asyncTasks = [];
 
@@ -61,13 +61,20 @@ module.exports = {
       });
     });
 
+    // _.forEach(allergies, function(max, nutrient) {
+    //   asyncTasks.push(function(callback) {
+    //     insertNutritionRestriction(nutrient, 0, max, userID, function() {
+    //       callback();
+    //     });
+    //   });
+    // });
+
     Async.parallel(asyncTasks, function(err) {
       if (err) {
         console.log(err);
       }
       res.send('Successfully saved preferences');
     });
-
   },
 
   getAllPreferences: function(request, response) {
@@ -77,8 +84,6 @@ module.exports = {
       getPreferences(userID, function(data2) {
         getUserTastes(userID, function(data3) {
           getUserDiet(userID, function(data4) {
-
-
           console.log('data from line 75: ', data1);
           console.log('data from line 76: ', data2);
           console.log('data from line 77: ', data3);
@@ -165,6 +170,20 @@ var insertIngredientPreference = function(ingredient, relation, userID, callback
       user_id: userID,
       ingredient: ingredient,
       relation: relation
+    });
+    newPreference.save().then(function(savedPreference) {
+      utils.hasCallBack(savedPreference, callback);
+    });
+  });
+};
+
+var insertAllergies = function(allergies, userID, callback) {
+  User_Preference.where({'user_id': userID}).destroy()
+  .then(function() {
+    var newPreference = new User_Preference({
+      user_id: userID,
+      ingredient: ingredient,
+      relation: allergy
     });
     newPreference.save().then(function(savedPreference) {
       utils.hasCallBack(savedPreference, callback);

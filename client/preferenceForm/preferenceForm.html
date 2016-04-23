@@ -105,20 +105,17 @@
 
 <md-card flex="40" class="md-padding">
   <h2>Allergies</h2>
-  <!-- <div layout="row"> -->
       <div flex>
-        <div>
-          <fieldset class="standard">
-            <!-- <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend> -->
-            <div layout="row" layout-wrap flex>
-              <div flex="33" ng-repeat="allergy in allergyList">
-                <md-checkbox ng-click="toggleAllergyCheckbox(allergy)">{{allergy}}</md-checkbox>
-              </div>
+        <fieldset class="standard">
+          <!-- <legend>Using &lt;md-checkbox&gt; with &lt;ng-checked&gt; </legend> -->
+          <div layout="row" layout-wrap flex>
+            <div flex="33" ng-repeat="allergy in allergyList">
+              <md-checkbox ng-click="toggleAllergyCheckbox(allergy)">{{allergy}}</md-checkbox>
             </div>
-          </fieldset>
-      </div>
+          </div>
+        </fieldset>
     </div>
-  <!-- </div> -->
+  {{allergies}}
 </md-card>
 
   <div flex="10">

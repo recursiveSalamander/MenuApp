@@ -1,17 +1,19 @@
 angular
   .module('menuApp')
   .controller('preferenceFormController', ['$scope', 'menuAppFactory', 'Survey', 'Auth', '$state', function($scope, menuAppFactory, Survey, Auth, $state) {
-    $scope.preferencesForm = Survey.preferencesForm;
+    // $scope.preferencesForm = Survey.preferencesForm;
     $scope.cuisinePref = [];
     $scope.tastePref = {};
     $scope.preferredIngredients = [];
     $scope.rejectedIngredients = [];
     $scope.diet = '';
+    $scope.allergies = [];
+
 
     $scope.toggleAllergyCheckbox = function (item) {
-      var idx = $scope.preferencesForm.allergies.indexOf(item);
-      if (idx > -1) $scope.preferencesForm.allergies.splice(idx, 1);
-      else $scope.preferencesForm.allergies.push(item);
+      var idx = $scope.allergies.indexOf(item);
+      if (idx > -1) $scope.allergies.splice(idx, 1);
+      else $scope.allergies.push(item);
     };
 
     $scope.allergyList = [
@@ -35,10 +37,10 @@ angular
         preferredIngredients: $scope.preferredIngredients,
         rejectedIngredients: $scope.rejectedIngredients,
         diet: $scope.diet,
+        allergies: $scope.allergies,
         token: token
       }
 
-      console.log('PREFERENCEOBJECt', preferenceObject);
       menuAppFactory.postUserPreference(preferenceObject)
       .then(function(data) {
 
