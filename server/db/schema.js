@@ -99,8 +99,29 @@ var cuisinePreferences = function() {
     if (!exists) {
       knex.schema.createTable('cuisine_preferences', function(preference) {
         preference.increments('id').primary();
-        preference.string('origin', 50);
-        preference.integer('preference_level');
+        preference.integer('american', 20);
+        preference.integer('italian', 20);
+        preference.integer('mexican', 20);
+        preference.integer('southern_soulfood', 20);
+        preference.integer('southwestern', 20);
+        preference.integer('french', 20);
+        preference.integer('indian', 20);
+        preference.integer('chinese', 20);
+        preference.integer('cajun_creole', 20);
+        preference.integer('english', 20);
+        preference.integer('mediterranean', 20);
+        preference.integer('greek', 20);
+        preference.integer('spanish', 20);
+        preference.integer('thai', 20);
+        preference.integer('german', 20);
+        preference.integer('moroccan', 20);
+        preference.integer('irish', 20);
+        preference.integer('cuban', 20);
+        preference.integer('japanese', 20);
+        preference.integer('swedish', 20);
+        preference.integer('hawaiian', 20);
+        preference.integer('hungarian', 20);
+        preference.integer('portugese', 20);
         preference.integer('user_id').unsigned();
         preference.foreign('user_id').references('id').inTable('users');
       }).then(function() {

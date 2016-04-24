@@ -59,6 +59,7 @@
        <!-- <ul ng-repeat="ingredients in ingredientPrefLike">
          <li>{{ingredients.ingredient}}</li>
        </ul> -->
+       </md-input-container>
      <md-input-container>
        <label>I don't like...</label>
        <md-chips ng-model="rejectedIngredients"></md-chips>
@@ -67,6 +68,8 @@
          <li>{{ingredients.ingredient}}</li>
        </ul> -->
      </div>
+     {{rejectedIngredients}}
+     {{preferredIngredients}}
 
   </md-card>
 
@@ -138,15 +141,15 @@
     <div class="md-padding" md-theme="green" layout="column">
       <div layout="row" layout-padding layout-margin>
         <div flex layout="column" >
-<!-- <div ng-repeat="cuisine in cuisinePref"> -->
-          <div flex="40" layout layout-align="center center" >
-            <span class="md-body-1">{{cuisinePref[0].origin}}</span>
+<div ng-repeat="(cuisine,score) in cuisines" ng-repeat="scores in cuisineScores">
+          <div flex="40" layout layout-align="center center">
+            <span class="md-body-1">{{cuisine}}</span>
           </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisinePref[0].preference_level" step="1" min="1" max="3" aria-label="rating">
+          <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisines[cuisine]" step="1" min="1" max="3" aria-label="rating">
           </md-slider>
-<!-- </div> -->
+</div>
         </div>
-        <div flex layout="column">
+        <!-- <div flex layout="column">
           <div flex="40" layout layout-align="center center">
             <span class="md-body-1">{{cuisinePref[1].origin}}</span>
           </div>
@@ -302,18 +305,18 @@
         <div flex layout="column">
           <div flex="40" layout layout-align="center center">
             <span class="md-body-1">{{cuisinePref[22].origin}}</span>
-          </div>
+          </div> -->
 <!--           <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.portugese.eval" ng-model="cuisinePref[0].preference_level" step="1" min="1" max="3" aria-label="rating">
           </md-slider> -->
         </div>
-        <div flex layout="column">
-        </div>
       </div>
-    </div>
+
        </md-card>
        <div flex="11">
        </div>
+       {{cuisines}}
 </div>
+
        <div style="text-align: center">
          <md-button ng-click="sendPreferenceData()" class="md-primary md-fab md-fab-top-right" style="position: fixed; margin-top: 100px" >Save</md-button>
        </div>

@@ -47,19 +47,6 @@ angular
     });
   };
 
-    var getRestaurantList = function(coordinates) {
-      return $http({
-        method: 'POST',
-        url: '/api/restaurants',
-        data: coordinates
-      })
-      .then(function(resp) {
-        return resp.data;
-      }, function(error) {
-        console.log(error);
-      });
-    };
-
     var getMenu = function(restaurantId, restaurantName) {
       restaurantId = {restaurantId: restaurantId};
       return $http({

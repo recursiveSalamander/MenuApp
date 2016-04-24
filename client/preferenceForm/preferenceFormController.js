@@ -18,6 +18,35 @@ angular
       else $scope.allergies.push(item);
     };
 
+    $scope.cuisines = {
+
+      'Italian': 1,
+      'Mexican': 1,
+      'Southern_Soulfood': 1,
+      'Southwestern': 1,
+      'French': 1,
+      'Indian': 1,
+      'Chinese': 1,
+      'Cajun_Creole': 1,
+      'English': 1,
+      'Mediterranean': 1,
+      'Greek': 1,
+      'Spanish': 1,
+      'Thai': 1,
+      'German': 1,
+      'Moroccan': 1,
+      'Irish': 1,
+      'Cuban': 1,
+      'Japanese': 1,
+      'Swedish': 1,
+      'Hawaiian': 1,
+      'Hungarian': 1,
+      'Portugese': 1,
+      'American': 1
+    };
+
+    $scope.cuisineScores = [];
+
     $scope.allergyList = [
     'Dairy',
     'Egg',
@@ -39,6 +68,7 @@ angular
         preferredIngredients: $scope.preferredIngredients,
         rejectedIngredients: $scope.rejectedIngredients,
         diet: $scope.diet,
+        cuisinePreference: $scope.cuisines,
         allergies: $scope.allergies,
         token: token
       }
@@ -55,8 +85,11 @@ angular
         console.log('line 39: ',prefs);
 
         for (var i = 0; i < prefs.length; i++) {
-          if (prefs[i].origin) {
-            $scope.cuisinePref.push(prefs[i]);
+          if (prefs[i].Italian) {
+            console.log(prefs[i])
+            delete prefs[i].id;
+            delete prefs[i].user_id;
+            $scope.cuisines = prefs[i];
           } else if (prefs[i].bitter) {
             $scope.tastePref = prefs[i];
           } else if (prefs[i].relation === 'liked') {

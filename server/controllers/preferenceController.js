@@ -13,14 +13,16 @@ module.exports = {
   postPreferences: function(req, res) {
     var userID = utils.getUserID(req.body.token);
     var userDiet = req.body.diet;
-    var cuisines = req.body.cuisinePreference;
+    var cuisines = _.map(req.body.cuisinePreference, function(cuisine) {
+      return cuisine;
+    });
     var nutrients = req.body.nutritionPreference;
     var flavors = _.map(req.body.tastePreference, function(flavor) {
       return flavor;
     });
     // var allergies = req.body.alelrgies;
     var ingredientRelations = combineIngredients(req.body);
-    console.log('ingredientRElations-----------------------++++++', ingredientRelations);
+    console.log('tastes', flavors);
 
     var asyncTasks = [];
 
@@ -44,14 +46,14 @@ module.exports = {
       });
     });
 
-
-    _.forEach(cuisines, (function(data, key) {
-      asyncTasks.push(function(callback) {
-        insertCuisinePreference(key, data.eval, userID, function(data) {
-          callback(data);
-        });
+    asyncTasks.push(function(callback) {
+      insertCuisinePreference(cuisines, userID, function() {
+        callback();
       });
-    }));
+    });
+
+
+
 
     _.forEach(nutrients, function(max, nutrient) {
       asyncTasks.push(function(callback) {
@@ -86,6 +88,10 @@ module.exports = {
           getUserDiet(userID, function(data4) {
           console.log('data from line 75: ', data1);
           console.log('data from line 76: ', data2);
+
+          // _.each(data2, function(cuisinePreference){
+          //   cuisineData[cuisinePreference.origin]
+          // })
           console.log('data from line 77: ', data3);
           console.log('data from line 78: ', data4);
           data4 = [{diet: data4[0].diet}];
@@ -209,16 +215,53 @@ var insertTastePreference = function(tastePreferences, userID, callback) {
     });
 };
 
-var insertCuisinePreference = function(cuisine, preferenceLevel, userID, callback) {
+var insertCuisinePreference = function(cuisinePreferences, userID, callback) {
   Cuisine_Preference.where({user_id: userID}).destroy()
   .then(function(myCuisine) {
     var newCuisine = new Cuisine_Preference({
       user_id: userID,
-      preference_level: preferenceLevel,
-      origin: cuisine
+
+      Italian: cuisinePreferences[0],
+      Mexican: cuisinePreferences[1],
+      Southern_Soulfood: cuisinePreferences[2],
+      Southwestern: cuisinePreferences[3],
+      French: cuisinePreferences[4],
+      Indian: cuisinePreferences[5],
+      chinese: cuisinePreferences[6],
+      Cajun_Creole: cuisinePreferences[7],
+      English: cuisinePreferences[8],
+      Mediterranean: cuisinePreferences[9],
+      Greek: cuisinePreferences[10],
+      Spanish: cuisinePreferences[11],
+      Thai: cuisinePreferences[12],
+      German: cuisinePreferences[13],
+      Moroccan: cuisinePreferences[14],
+      Irish: cuisinePreferences[15],
+      Cuban: cuisinePreferences[16],
+      Japanese: cuisinePreferences[17],
+      Swedish: cuisinePreferences[18],
+      Hawaiian: cuisinePreferences[19],
+      Hungarian: cuisinePreferences[20],
+      Portugese: cuisinePreferences[21],
+      American: cuisinePreferences[22]
     });
+    console.log('NEWWWWWWWWWWCUISINE', newCuisine);
     newCuisine.save().then(function(savedCuisine) {
       utils.hasCallBack(savedCuisine, callback);
     });
   });
 };
+
+// var insertCuisinePreference = function(cuisine, preferenceLevel, userID, callback) {
+//   Cuisine_Preference.where({user_id: userID}).destroy()
+//   .then(function(myCuisine) {
+//     var newCuisine = new Cuisine_Preference({
+//       user_id: userID,
+//       preference_level: preferenceLevel,
+//       origin: cuisine
+//     });
+//     newCuisine.save().then(function(savedCuisine) {
+//       utils.hasCallBack(savedCuisine, callback);
+//     });
+//   });
+// };
