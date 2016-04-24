@@ -68,8 +68,6 @@
          <li>{{ingredients.ingredient}}</li>
        </ul> -->
      </div>
-     {{rejectedIngredients}}
-     {{preferredIngredients}}
 
   </md-card>
 
@@ -138,183 +136,20 @@
   </div>
   <md-card id="cuisinepreferencecard" flex="80" class="md-padding" >
     <h2 class="md-padding md-margin">Cuisine Origin</h2>
-    <div class="md-padding" md-theme="green" layout="column">
-      <div layout="row" layout-padding layout-margin>
-        <div flex layout="column" >
-<div ng-repeat="(cuisine,score) in cuisines" ng-repeat="scores in cuisineScores">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisine}}</span>
+    <div class="md-padding" md-theme="green" layout="row" layout-wrap>
+<div class="md-padding" ng-repeat="(cuisine,score) in cuisines" flex="25">
+          <div layout="row" layout-align="center">
+            <span text-align="center center" class="md-body-1">{{cuisine}}</span>
           </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-model="cuisines[cuisine]" step="1" min="1" max="3" aria-label="rating">
+          <md-slider class="md-primary" md-discrete ng-model="cuisines[cuisine]" step="1" min="1" max="3" aria-label="rating">
           </md-slider>
 </div>
-        </div>
-        <!-- <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[1].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.italian.eval" ng-model="cuisinePref[1].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[2].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.mexican.eval" ng-model="cuisinePref[2].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[3].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.southern_soulfood.eval" ng-model="cuisinePref[3].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[4].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.french.eval" ng-model="cuisinePref[4].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[5].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.southwestern.eval" ng-model="cuisinePref[5].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[6].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.indian.eval" ng-model="cuisinePref[6].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[7].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.chinese.eval" ng-model="cuisinePref[7].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-      </div>
 
-      <div layout="row" layout-padding layout-margin>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[8].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.cajun_creole.eval" ng-model="cuisinePref[8].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[9].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.english.eval" ng-model="cuisinePref[9].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[10].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.mediterranean.eval" ng-model="cuisinePref[10].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[11].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.greek.eval" ng-model="cuisinePref[11].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[12].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.spanish.eval" ng-model="cuisinePref[12].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[13].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.german.eval" ng-model="cuisinePref[13].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[14].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.thai.eval" ng-model="cuisinePref[14].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[15].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.moroccan.eval" ng-model="cuisinePref[15].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-      </div>
-
-      <div layout="row" layout-padding layout-margin>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[16].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.irish.eval" ng-model="cuisinePref[16].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[17].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.japanese.eval" ng-model="cuisinePref[17].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[18].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.cuban.eval" ng-model="cuisinePref[18].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[19].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.hawaiian.eval" ng-model="cuisinePref[19].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[20].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.swedish.eval" ng-model="cuisinePref[20].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[21].origin}}</span>
-          </div>
-          <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.hungarian.eval" ng-model="cuisinePref[21].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider>
-        </div>
-        <div flex layout="column">
-          <div flex="40" layout layout-align="center center">
-            <span class="md-body-1">{{cuisinePref[22].origin}}</span>
-          </div> -->
-<!--           <md-slider flex="60" class="md-primary" md-discrete ng-init="preferencesForm.cuisinePreference.portugese.eval" ng-model="cuisinePref[0].preference_level" step="1" min="1" max="3" aria-label="rating">
-          </md-slider> -->
-        </div>
       </div>
 
        </md-card>
        <div flex="11">
        </div>
-       {{cuisines}}
 </div>
 
        <div style="text-align: center">
